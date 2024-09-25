@@ -2,9 +2,11 @@ package com.archers_expansion;
 
 import com.archers_expansion.effect.Effects;
 import com.archers_expansion.items.Group;
+import com.archers_expansion.items.Items;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -29,6 +31,7 @@ public class ArchersExpansionMod implements ModInitializer {
 
 	private void registerItemGroup() {
 		Group.ARCHERS_EXPANSION= FabricItemGroup.builder()
+				.icon(() -> new ItemStack(net.minecraft.item.Items.ARROW))
 				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
 				.build();
 		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);
