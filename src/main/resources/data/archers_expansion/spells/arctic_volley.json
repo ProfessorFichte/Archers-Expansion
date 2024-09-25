@@ -1,0 +1,137 @@
+{
+  "school": "PHYSICAL_RANGED",
+  "range": 24,
+  "learn": {
+    "tier": 2
+  },
+  "cast": {
+    "duration": 0.6,
+    "animation": "spell_engine:archery_pull",
+    "sound": {
+      "id": "archers:bow_pull",
+      "randomness": 0
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:snowflake",
+        "shape": "PIPE",
+        "origin": "CENTER",
+        "count": 0.5,
+        "min_speed": 0.1,
+        "max_speed": 0.2
+      }
+    ]
+  },
+  "release": {
+    "target": {
+      "type": "PROJECTILE",
+      "projectile": {
+        "launch_properties": {
+          "velocity": 1.4,
+          "extra_launch_count": 8,
+          "extra_launch_delay": 0
+        },
+        "projectile": {
+          "divergence": 35,
+          "perks": {
+            "pierce": 0
+          },
+          "client_data": {
+            "travel_particles": [
+              {
+                "particle_id": "spell_engine:frost_hit",
+                "shape": "LINE",
+                "origin": "CENTER",
+                "rotation": "LOOK",
+                "roll": 10,
+                "count": 2,
+                "min_speed": 0.2,
+                "max_speed": 0.22
+              },
+              {
+                "particle_id": "spell_engine:snowflake",
+                "shape": "CIRCLE",
+                "rotation": "LOOK",
+                "origin": "CENTER",
+                "count": 1,
+                "min_speed": 0,
+                "max_speed": 0.05
+              }
+            ],
+            "model": {
+              "model_id": "archers_expansion:projectile/glacial_arrow",
+              "scale": 1.0,
+              "light_level": 10
+            }
+          }
+        }
+      }
+    },
+    "animation": "spell_engine:archery_release",
+    "sound": {
+      "id": "spell_engine:generic_frost_release"
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.3,
+          "knockback": 0.5
+        }
+      }
+    },
+    {
+      "action": {
+        "school": "FROST",
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.25
+        },
+        "particles": [
+          {
+            "particle_id": "spell_engine:frost_shard",
+            "shape": "SPHERE",
+            "origin": "CENTER",
+            "count": 10.0,
+            "min_speed": 0.1,
+            "max_speed": 0.2
+          }
+        ],
+        "sound": {
+          "id": "spell_engine:frost_impact",
+          "randomness": 1
+        }
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "apply_mode": "ADD",
+          "duration": 7,
+          "amplifier": 6,
+          "effect_id": "more_rpg_classes:frosted",
+          "show_particles": false
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:frost_hit",
+          "shape": "CIRCLE",
+          "origin": "CENTER",
+          "count": 5,
+          "min_speed": 0.1,
+          "max_speed": 0.35
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "cooldown_duration": 10,
+    "exhaust" : 0.3,
+    "item_id": "arrow",
+    "consume_item": false
+  }
+}

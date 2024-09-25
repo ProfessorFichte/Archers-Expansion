@@ -1,0 +1,89 @@
+{
+  "school": "PHYSICAL_RANGED",
+  "range": 40,
+  "learn": {
+    "tier": 4
+  },
+  "cast": {
+    "duration": 1.5,
+    "animation": "spell_engine:archery_pull",
+    "sound": {
+      "id": "archers:bow_pull"
+    }
+  },
+  "release": {
+    "target": {
+      "type": "PROJECTILE",
+      "projectile": {
+        "launch_properties": {
+          "velocity": 2.0
+        },
+        "projectile": {
+          "client_data": {
+            "travel_particles": [
+              {
+                "particle_id": "crit",
+                "shape": "LINE",
+                "origin": "CENTER",
+                "rotation": "LOOK",
+                "roll": 1,
+                "count": 5,
+                "min_speed": 0.1,
+                "max_speed": 0.35
+              }
+            ],
+            "model": {
+              "model_id": "archers_expansion:projectile/regular_arrow",
+              "scale": 1.2
+            }
+          }
+        }
+      }
+    },
+    "animation": "spell_engine:archery_release",
+    "sound": {
+      "id": "entity.arrow.shoot"
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 1.2,
+          "knockback": 0
+        },
+        "particles": [
+          {
+            "particle_id": "spell_engine:dripping_blood",
+            "shape": "SPHERE",
+            "origin": "CENTER",
+            "count": 10.0,
+            "min_speed": 0.1,
+            "max_speed": 0.3
+          }
+        ],
+        "sound": {
+          "id": "item.crossbow.hit"
+        }
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "apply_mode": "SET",
+          "duration": 4,
+          "amplifier": 0,
+          "effect_id": "archers_expansion:pin_down",
+          "show_particles": false
+        }
+      }
+    }
+  ],
+  "cost": {
+    "cooldown_duration": 28,
+    "exhaust" : 0.3,
+    "item_id": "arrow"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "school": "PHYSICAL_RANGED",
+  "range": 20,
+  "learn": {
+    "tier": 2
+  },
+  "cast": {
+    "duration": 0.6,
+    "animation": "spell_engine:archery_pull",
+    "sound": {
+      "id": "archers:bow_pull",
+      "randomness": 0
+    }
+  },
+  "release": {
+    "target": {
+      "type": "PROJECTILE",
+      "projectile": {
+        "launch_properties": {
+          "velocity": 1.2
+        },
+        "projectile": {
+          "perks": {
+            "ricochet": 7,
+            "ricochet_range": 18,
+            "bounce": 7,
+            "bounce_ricochet_sync": false
+          },
+          "client_data": {
+            "travel_particles": [
+              {
+                "particle_id": "crit",
+                "shape": "LINE",
+                "origin": "CENTER",
+                "rotation": "LOOK",
+                "roll": 1,
+                "count": 2,
+                "min_speed": 0.2,
+                "max_speed": 0.22
+              }
+            ],
+            "model": {
+              "model_id": "archers_expansion:projectile/regular_arrow",
+              "scale": 1.0
+            }
+          }
+        }
+      }
+    },
+    "animation": "spell_engine:archery_release",
+    "sound": {
+      "id": "entity.arrow.shoot"
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.6,
+          "knockback": 0.5
+        }
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "apply_mode": "ADD",
+          "duration": 7,
+          "amplifier": 1,
+          "effect_id": "more_rpg_classes:bleeding",
+          "show_particles": false
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "crit",
+          "shape": "PILLAR",
+          "origin": "CENTER",
+          "count": 5,
+          "min_speed": 0,
+          "max_speed": 0.1
+        },
+        {
+          "particle_id": "spell_engine:weakness_smoke",
+          "shape": "SPHERE",
+          "origin": "CENTER",
+          "count": 10.0,
+          "min_speed": 0.1,
+          "max_speed": 0.3
+        }
+      ],
+      "sound": {
+        "id": "entity.arrow.hit"
+      }
+    }
+  ],
+  "cost": {
+    "cooldown_duration": 10,
+    "exhaust" : 0.3,
+    "item_id": "arrow",
+    "cooldown_haste_affected": true
+  }
+}

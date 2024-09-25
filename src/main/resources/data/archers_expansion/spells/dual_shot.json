@@ -1,0 +1,38 @@
+{
+  "school": "PHYSICAL_RANGED",
+  "range": 0,
+  "learn": {
+    "tier": 2
+  },
+  "cast": {
+    "duration": 0.35,
+    "animation": "spell_engine:archery_pull",
+    "animates_ranged_weapon": true,
+    "sound": {
+      "id": "archers:bow_pull"
+    }
+  },
+  "release": {
+    "target": {
+      "type": "SHOOT_ARROW",
+      "shoot_arrow": {
+        "divergence": 10.0,
+        "launch_properties": {
+          "velocity": 3.15,
+          "extra_launch_count": 1
+        }
+      }
+    },
+    "animation": "spell_engine:archery_release"
+  },
+  "arrow_perks": {
+    "damage_multiplier": 0.65,
+    "bypass_iframes": true,
+    "knockback": 0.5
+  },
+  "cost": {
+    "item_id": "arrow",
+    "consume_item": false,
+    "cooldown_duration": 8
+  }
+}

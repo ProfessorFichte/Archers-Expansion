@@ -1,0 +1,38 @@
+{
+  "school": "PHYSICAL_RANGED",
+  "range": 0,
+  "group": "primary",
+  "learn": {
+    "tier": 1
+  },
+  "mode": "ITEM_USE",
+  "item_use": { },
+  "arrow_perks": {
+    "bypass_iframes": true
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "apply_mode": "ADD",
+          "duration": 3,
+          "amplifier": 4,
+          "effect_id": "archers_expansion:fast_shot",
+          "show_particles": false
+        },
+        "apply_to_caster": true
+      },
+      "particles": [
+        {
+          "particle_id": "electric_spark",
+          "shape": "SPHERE",
+          "origin": "CENTER",
+          "count": 15,
+          "min_speed": 0.3,
+          "max_speed": 1.5
+        }
+      ]
+    }
+  ]
+}

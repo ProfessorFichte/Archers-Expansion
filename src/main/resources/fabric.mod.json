@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "archers_expansion",
+	"version": "${version}",
+	"name": "Archers Expansion",
+	"description": "",
+	"authors": [
+		"Fichte"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/archers_expansion/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "com.archers_expansion.ArchersExpansionMod"
+		],
+		"client": [
+			"com.archers_expansion.client.ArchersExpansionModClient"
+		],
+		"fabric-datagen": [
+			"com.archers_expansion.ArchersExpansionDataGenerator"
+		]
+	},
+	"mixins": [
+		"archers-expansion.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.5",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"azurelibarmor": "*",
+		"spell_engine": "*",
+		"ranged_weapon_api": "*",
+		"archers": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
