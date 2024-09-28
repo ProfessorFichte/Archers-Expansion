@@ -1,6 +1,6 @@
 {
   "range": 20.0,
-  "school": "FROST",
+  "school": "FROST_RANGED",
   "learn": {
     "tier": 3
   },

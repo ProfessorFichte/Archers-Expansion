@@ -2,6 +2,10 @@
   "itemGroup.archers_expansion.general": "Archers Extension",
 
   "item.archers_expansion.deadeye_spell_book": "Bounty List",
+  "item.archers_expansion.deadeye_chest": "Deadeye Tunic",
+  "item.archers_expansion.deadeye_head": "Deadeye Hood",
+  "item.archers_expansion.deadeye_legs": "Deadeye Leggings",
+  "item.archers_expansion.deadeye_feet": "Deadeye Boots",
 
   "spell.archers_expansion.choking_gas.name": "Choking Gas",
   "spell.archers_expansion.choking_gas.description": "Creates a poisonous gas cloud and deals {damage} damage.",
@@ -24,6 +28,10 @@
   "effect.archers_expansion.disabling_shot.description": "Slows the target and damages it overtime.",
 
   "item.archers_expansion.tundra_hunter_spell_book": "Tundric Hunting",
+  "item.archers_expansion.tundra_hunter_chest": "Tundra Tunic",
+  "item.archers_expansion.tundra_hunter_head": "Tundra Hood",
+  "item.archers_expansion.tundra_hunter_legs": "Tundra Leggings",
+  "item.archers_expansion.tundra_hunter_feet": "Tundra Boots",
 
   "spell.archers_expansion.arctic_volley.name": "Arctic Volley",
   "spell.archers_expansion.arctic_volley.description": "Shots 8 arctic arrows that deal {damage_1} ranged- and {damage_2} frost-damage and frosts targets.",
@@ -40,6 +48,10 @@
   "effect.archers_expansion.frozen_pact.description": "Damages the targets according to their Frozen ticks and makes reduces their attack.",
 
   "item.archers_expansion.war_archer_spell_book": "War Archery Instructions",
+  "item.archers_expansion.war_archer_chest": "Bowman Chest",
+  "item.archers_expansion.war_archer_head": "Bowman Helmet",
+  "item.archers_expansion.war_archer_legs": "Bowman Leggings",
+  "item.archers_expansion.war_archer_feet": "Bowman Boots",
 
   "spell.archers_expansion.dual_shot.name": "Dual Shot",
   "spell.archers_expansion.dual_shot.description": "Fires two Arrows at once.",
@@ -55,6 +67,14 @@
   "effect.archers_expansion.point_blank_shot": "Point-Blank-Shot",
   "effect.archers_expansion.point_blank_shot.description": "Knocks the target back, , the closer it is to the caster, the further it gets knock backed.",
   "effect.archers_expansion.pin_down": "Pin Down",
-  "effect.archers_expansion.pin_down.description": "The target cant move or jump during the effect."
+  "effect.archers_expansion.pin_down.description": "The target cant move or jump during the effect.",
 
+  "advancements.archers_expansion.bow_way.title": "Archer´s Paths",
+  "advancements.archers_expansion.bow_way.description" : "Find a Archery Weapon.",
+  "advancements.archers_expansion.deadeye_spells.title": "Bounty Hunting",
+  "advancements.archers_expansion.deadeye_spells.description": "Obtain all Deadeye Spells",
+  "advancements.archers_expansion.tundra_hunter_spells.title": "Cold blooded Hunter",
+  "advancements.archers_expansion.tundra_hunter_spells.description": "Obtain all Tundra Hunter Spells",
+  "advancements.archers_expansion.war_archer_spells.title": "Load, Hold and Fire!",
+  "advancements.archers_expansion.war_archer_spells.description": "Obtain all War Archer Spells"
 }

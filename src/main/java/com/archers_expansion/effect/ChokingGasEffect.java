@@ -8,6 +8,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.Box;
+import net.more_rpg_classes.effect.MRPGCEffects;
 import net.spell_engine.utils.TargetHelper;
 
 public class ChokingGasEffect extends StatusEffect {
@@ -40,12 +41,16 @@ public class ChokingGasEffect extends StatusEffect {
     }
 
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-        entity.damage(entity.getDamageSources().magic(), 1.0F);
+        float damage = 1.0F;
+        if(entity.hasStatusEffect(MRPGCEffects.BLEEDING)){
+            damage = damage + 0.5F;
+        }
+        entity.damage(entity.getDamageSources().magic(), damage);
     }
 
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         int i;
-        i = 20 >> amplifier;
+        i = 30 >> amplifier;
         if (i > 0) {
             return duration % i == 0;
         } else {

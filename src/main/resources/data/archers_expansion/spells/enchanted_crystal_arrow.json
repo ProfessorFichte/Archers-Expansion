@@ -1,5 +1,5 @@
 {
-  "school": "PHYSICAL_RANGED",
+  "school": "FROST_RANGED",
   "range": 48,
   "learn": {
     "tier": 4
@@ -78,7 +78,7 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 0.5,
+          "spell_power_coefficient": 1.0,
           "knockback": 0
         }
       },
@@ -101,16 +101,7 @@
         }
       ],
       "sound": {
-        "id": "spell_engine:frost_hit"
-      }
-    },
-    {
-      "action": {
-        "school": "FROST",
-        "type": "DAMAGE",
-        "damage": {
-          "spell_power_coefficient": 0.5
-        }
+        "id": "spell_engine:generic_frost_impact"
       }
     },
     {

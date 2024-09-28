@@ -26,7 +26,7 @@
     "animation": "spell_engine:archery_release"
   },
   "arrow_perks": {
-    "damage_multiplier": 0.65,
+    "damage_multiplier": 0.7,
     "bypass_iframes": true,
     "knockback": 0.5
   },

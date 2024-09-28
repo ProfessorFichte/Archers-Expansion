@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "archers_expansion:war_archer_spell_book"
+    },
+    "title": {
+      "translate":   "advancements.archers_expansion.war_archer_spells.title"
+    },
+    "description": {
+      "translate":   "advancements.archers_expansion.war_archer_spells.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "more_rpg_content:bow_way",
+  "criteria": {
+    "cast": {
+      "trigger": "spell_engine:spell_binding",
+      "conditions": {
+        "complete": true,
+        "spell_pool": "archers_expansion:war_archer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cast"
+    ]
+  ]
+}

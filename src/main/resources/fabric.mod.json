@@ -3,7 +3,7 @@
 	"id": "archers_expansion",
 	"version": "${version}",
 	"name": "Archers Expansion",
-	"description": "",
+	"description": "Extends the Archers-Mod (RPG Series)  with new content. Spell Engine Add-On",
 	"authors": [
 		"Fichte"
 	],
@@ -30,15 +30,23 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.5",
-		"minecraft": "~1.20.1",
+		"minecraft": "1.20.1",
 		"java": ">=17",
 		"fabric-api": "*",
 		"azurelibarmor": "*",
 		"spell_engine": "*",
 		"ranged_weapon_api": "*",
-		"archers": "*"
+		"archers": "*",
+		"more_rpg_classes": ">=1.2.6-1.20.1"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"better_combat": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/AShKd5XrTu"
+			}
+		}
 	}
 }

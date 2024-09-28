@@ -1,0 +1,47 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:arrow"
+    },
+    "title": {
+      "translate": "advancements.archers_expansion.bow_way.title"
+    },
+    "description": {
+      "translate": "advancements.archers_expansion.bow_way.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "more_rpg_content:root",
+  "criteria": {
+    "items": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bow",
+              "minecraft:crossbow",
+              "archers:composite_longbow",
+              "archers:mechanic_shortbow",
+              "archers:royal_longbow",
+              "archers:netherite_shortbow",
+              "archers:netherite_longbow",
+              "archers:rapid_crossbow",
+              "archers:heavy_crossbow",
+              "archers:netherite_rapid_crossbow",
+              "archers:netherite_heavy_crossbow"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "items"
+    ]
+  ]
+}

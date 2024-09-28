@@ -61,7 +61,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "apply_mode": "SET",
-          "duration": 6,
+          "duration": 5,
           "amplifier": 0,
           "amplifier_power_multiplier": 0.15,
           "effect_id": "archers_expansion:choking_gas",
@@ -78,28 +78,28 @@
           "max_speed": 1.2
         },
         {
-          "particle_id": "more_rpg_classes:gas_cloud",
+          "particle_id": "more_rpg_classes:poison_smoke",
           "shape": "SPHERE",
           "origin": "CENTER",
-          "count": 50,
+          "count": 25,
           "min_speed": 0.1,
           "max_speed": 0.5,
           "pre_spawn_travel": 6
         },
         {
-          "particle_id": "more_rpg_classes:gas_cloud",
+          "particle_id": "more_rpg_classes:poison_smoke",
           "shape": "SPHERE",
           "origin": "CENTER",
-          "count": 50,
+          "count": 25,
           "min_speed": 0.1,
           "max_speed": 0.3,
           "pre_spawn_travel": 4
         },
         {
-          "particle_id": "more_rpg_classes:gas_cloud",
+          "particle_id": "more_rpg_classes:poison_smoke",
           "shape": "SPHERE",
           "origin": "CENTER",
-          "count": 50,
+          "count": 25,
           "min_speed": 0.05,
           "max_speed": 0.1,
           "pre_spawn_travel": 2
@@ -108,7 +108,7 @@
           "particle_id": "more_rpg_classes:gas_cloud",
           "shape": "CIRCLE",
           "origin": "CENTER",
-          "count": 25,
+          "count": 50,
           "min_speed": 0.1,
           "max_speed": 0.3,
           "pre_spawn_travel": 10

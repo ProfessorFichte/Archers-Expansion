@@ -3,18 +3,23 @@ package com.archers_expansion.effect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.more_rpg_classes.effect.MRPGCEffects;
 
 public class ChokingPoisonEffect extends StatusEffect {
     protected ChokingPoisonEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-        entity.damage(entity.getDamageSources().magic(), 1.0F);
+        float damage = 1.0F;
+        if(entity.hasStatusEffect(MRPGCEffects.BLEEDING)){
+            damage = damage + 0.5F;
+        }
+        entity.damage(entity.getDamageSources().magic(), damage);
     }
 
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
         int i;
-        i = 20 >> amplifier;
+        i = 30 >> amplifier;
         if (i > 0) {
             return duration % i == 0;
         } else {

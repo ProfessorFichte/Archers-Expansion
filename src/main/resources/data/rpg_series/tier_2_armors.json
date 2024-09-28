@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "archers_expansion:deadeye_head",
+    "archers_expansion:deadeye_chest",
+    "archers_expansion:deadeye_legs",
+    "archers_expansion:deadeye_feet",
+
+    "archers_expansion:tundra_hunter_head",
+    "archers_expansion:tundra_hunter_chest",
+    "archers_expansion:tundra_hunter_legs",
+    "archers_expansion:tundra_hunter_feet",
+
+    "archers_expansion:war_archer_head",
+    "archers_expansion:war_archer_chest",
+    "archers_expansion:war_archer_legs",
+    "archers_expansion:war_archer_feet"
+  ]
+}

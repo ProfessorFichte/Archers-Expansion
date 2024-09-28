@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "minecraft:chain"
+    },
+    "B": {
+      "item": "minecraft:leather"
+    },
+    "C": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "pattern": [
+    "A A",
+    "BAB",
+    "ACA"
+  ],
+  "result": {
+    "item": "archers_expansion:war_archer_chest"
+  },
+  "show_notification": true
+}
