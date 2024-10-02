@@ -1,0 +1,32 @@
+{
+  "trick_shot": {
+    "sounds": [
+      "archers_expansion:trick_shot"
+    ]
+  },
+  "special_shot": {
+    "sounds": [
+      "archers_expansion:special_shot"
+    ]
+  },
+  "enchanted_crystal_arrow_impact": {
+    "sounds": [
+      "archers_expansion:enchanted_crystal_arrow_impact"
+    ]
+  },
+  "point_blank_shot": {
+    "sounds": [
+      "archers_expansion:point_blank_shot"
+    ]
+  },
+  "pin_down": {
+    "sounds": [
+      "archers_expansion:pin_down"
+    ]
+  },
+  "poison_cloud": {
+    "sounds": [
+      "archers_expansion:poison_cloud"
+    ]
+  }
+}

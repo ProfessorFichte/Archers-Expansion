@@ -46,7 +46,6 @@ public class SmolderingArrow extends StatusEffect {
                         target.damage(entity.getDamageSources().onFire(),1.0F *(amplifier + 1));
                         if (!entity.getWorld().isClient()) {
                             ParticleHelper.sendBatches(target, new ParticleBatch[]{smoke});
-                            target.getWorld().playSoundFromEntity(null, target, SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, SoundCategory.PLAYERS, 1F, 1F);
                             target.setFireTicks(40);
                         }
                     }

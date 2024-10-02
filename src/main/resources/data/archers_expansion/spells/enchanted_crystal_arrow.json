@@ -1,6 +1,6 @@
 {
   "school": "FROST_RANGED",
-  "range": 48,
+  "range": 64,
   "learn": {
     "tier": 4
   },
@@ -29,7 +29,7 @@
       "type": "PROJECTILE",
       "projectile": {
         "launch_properties": {
-          "velocity": 2.0
+          "velocity": 1.8
         },
         "projectile": {
           "homing_angle": 2.0,
@@ -44,16 +44,27 @@
                 "origin": "CENTER",
                 "rotation": "LOOK",
                 "roll": 10,
-                "count": 10,
+                "count": 20,
                 "min_speed": 0.2,
                 "max_speed": 0.22
+              },
+              {
+                "particle_id": "spell_engine:frost_hit",
+                "shape": "LINE",
+                "origin": "CENTER",
+                "rotation": "LOOK",
+                "roll_offset": 180,
+                "roll": 10,
+                "count": 20,
+                "min_speed": 0.2,
+                "max_speed": 0.32
               },
               {
                 "particle_id": "spell_engine:snowflake",
                 "shape": "CIRCLE",
                 "rotation": "LOOK",
                 "origin": "CENTER",
-                "count": 5,
+                "count": 10,
                 "min_speed": 0,
                 "max_speed": 0.05
               }
@@ -61,7 +72,7 @@
             "model": {
               "model_id": "archers_expansion:projectile/glacial_arrow",
               "light_emission": "RADIATE",
-              "scale": 15.0,
+              "scale": 20.0,
               "light_level": 20
             }
           }
@@ -101,7 +112,7 @@
         }
       ],
       "sound": {
-        "id": "spell_engine:generic_frost_impact"
+        "id": "archers_expansion:enchanted_crystal_arrow_impact"
       }
     },
     {

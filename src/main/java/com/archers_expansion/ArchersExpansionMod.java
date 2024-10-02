@@ -6,6 +6,7 @@ import com.archers_expansion.effect.Effects;
 import com.archers_expansion.items.Group;
 import com.archers_expansion.items.Items;
 import com.archers_expansion.items.armors.Armors;
+import com.archers_expansion.sounds.Sounds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemStack;
@@ -53,6 +54,7 @@ public class ArchersExpansionMod implements ModInitializer {
 		ArcherSpellSchools.registerSchools();
 		registerItemGroup();
 		Effects.register();
+		Sounds.register();
 		Armors.register(itemConfig.value.armor_sets);
 		itemConfig.save();
 	}

@@ -51,7 +51,7 @@
         }
       ],
       "sound": {
-        "id": "entity.arrow.hit"
+        "id": "entity.generic.explode"
       }
     }
   ]

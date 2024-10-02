@@ -1,6 +1,6 @@
 {
   "school": "PHYSICAL_RANGED",
-  "range": 16,
+  "range": 26,
   "learn": {
     "tier": 3
   },
@@ -23,7 +23,7 @@
           "client_data": {
             "travel_particles": [
               {
-                "particle_id": "crit",
+                "particle_id": "spell_engine:weakness_smoke",
                 "shape": "LINE",
                 "origin": "CENTER",
                 "rotation": "LOOK",

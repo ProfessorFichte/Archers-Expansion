@@ -1,6 +1,6 @@
 {
   "school": "PHYSICAL_RANGED",
-  "range": 20,
+  "range": 26,
   "learn": {
     "tier": 2
   },
@@ -22,9 +22,7 @@
         "projectile": {
           "perks": {
             "ricochet": 7,
-            "ricochet_range": 18,
-            "bounce": 7,
-            "bounce_ricochet_sync": false
+            "ricochet_range": 26
           },
           "client_data": {
             "travel_particles": [
@@ -37,6 +35,14 @@
                 "count": 2,
                 "min_speed": 0.2,
                 "max_speed": 0.22
+              },
+              {
+                "particle_id": "spell_engine:dripping_blood",
+                "shape": "SPHERE",
+                "origin": "CENTER",
+                "count": 10.0,
+                "min_speed": 0.1,
+                "max_speed": 0.3
               }
             ],
             "model": {
@@ -49,7 +55,7 @@
     },
     "animation": "spell_engine:archery_release",
     "sound": {
-      "id": "entity.arrow.shoot"
+      "id": "archers_expansion:trick_shot"
     }
   },
   "impact": [

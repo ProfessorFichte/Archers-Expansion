@@ -27,7 +27,7 @@
       "type": "PROJECTILE",
       "projectile": {
         "launch_properties": {
-          "velocity": 1.4,
+          "velocity": 1.3,
           "extra_launch_count": 5,
           "extra_launch_delay": 0
         },

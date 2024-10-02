@@ -22,14 +22,15 @@
           "client_data": {
             "travel_particles": [
               {
-                "particle_id": "cloud",
+                "particle_id": "campfire_cosy_smoke",
                 "shape": "LINE",
                 "origin": "CENTER",
                 "rotation": "LOOK",
-                "roll": 1,
-                "count": 5,
-                "min_speed": 0.1,
-                "max_speed": 0.35
+                "roll_offset": 180,
+                "roll": 10,
+                "count": 20,
+                "min_speed": 0.2,
+                "max_speed": 0.22
               }
             ],
             "model": {
@@ -42,7 +43,7 @@
     },
     "animation": "spell_engine:archery_release",
     "sound": {
-      "id": "entity.arrow.shoot"
+      "id": "item.crossbow.shoot"
     }
   },
   "impact": [
@@ -55,8 +56,8 @@
         },
         "particles": [
           {
-            "particle_id": "crit",
-            "shape": "PILLAR",
+            "particle_id": "campfire_cosy_smoke",
+            "shape": "SPHERE",
             "origin": "CENTER",
             "count": 5,
             "min_speed": 0,
@@ -64,7 +65,7 @@
           }
         ],
         "sound": {
-          "id": "item.crossbow.hit"
+          "id": "archers_expanison:point_blank_shot"
         }
       }
     },

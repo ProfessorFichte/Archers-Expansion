@@ -1,3 +1,10 @@
+0.1.2
+- fixed an error in the translation file for Arctic Volley and the Enchanted Crystal Arrow
+- fixed knockback from Point Blank Shot pulling the target towards the player if the mob turned the back towards the player
+- fixed custom Arrow Models
+- changed some particles
+- added new sounds for some spells
+
 0.1.1
 - changed some damage multipliers for Enchanted Crystal Arrow and Arctic Volley
 - implemented new Poison Smoke Particles for Choking Gas
