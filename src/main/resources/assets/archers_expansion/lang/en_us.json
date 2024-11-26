@@ -34,13 +34,13 @@
   "item.archers_expansion.tundra_hunter_feet": "Tundra Boots",
 
   "spell.archers_expansion.arctic_volley.name": "Arctic Volley",
-  "spell.archers_expansion.arctic_volley.description": "Shots 8 arctic arrows that deal {damage_1} ranged- and {damage_2} frost-damage and frosts targets.",
+  "spell.archers_expansion.arctic_volley.description": "Shots 8 arctic arrows that deal {damage} damage and frosts targets.",
   "spell.archers_expansion.enchanted_crystal_arrow.name": "Enchanted Crystal Arrow",
   "spell.archers_expansion.enchanted_crystal_arrow.description": "Deals {damage} damage, stuns and freezes the target.",
   "spell.archers_expansion.frozen_pact.name": "Frozen Pact",
   "spell.archers_expansion.frozen_pact.description": "Damages the target according to their Frozen ticks and reduces its attack for {effect_duration} seconds.",
   "spell.archers_expansion.frozen_shot.name": "Frozen Shot",
-  "spell.archers_expansion.frozen_shot.description": "Passive skill: Stacks the frosted effect on the target for {effect_duration} seconds.",
+  "spell.archers_expansion.frozen_shot.description": "Passive:Stacks the frosted effect on the target for {effect_duration} seconds.",
 
   "effect.archers_expansion.enchanted_crystal_arrow": "Crystal Arrow",
   "effect.archers_expansion.enchanted_crystal_arrow.description": "Stuns the target and gives the target frozen ticks.",
@@ -58,9 +58,9 @@
   "spell.archers_expansion.pin_down.name": "Pin Down",
   "spell.archers_expansion.pin_down.description": "Deals {damage} damage, the target cant move or jump for {effect_duration} seconds.",
   "spell.archers_expansion.point_blank_shot.name": "Point-Blank Shot",
-  "spell.archers_expansion.point_blank_shot.description": "Shot that deals {damage} damage, if the target faces you, it gets more knockback, the closer it is to the caster.",
+  "spell.archers_expansion.point_blank_shot.description": "Deals {damage} damage, also gets knocked back more, the closer it is to the caster.",
   "spell.archers_expansion.smoldering_arrow.name": "Smoldering Arrow",
-  "spell.archers_expansion.smoldering_arrow.description": "Passive skill: Creates a small explosion near the target, damaging and burning entities around. the target.",
+  "spell.archers_expansion.smoldering_arrow.description": "Passive:Creates a small explosion at the target, damaging and burning entities around it.",
 
   "effect.archers_expansion.smoldering_arrow": "Smoldering Arrow",
   "effect.archers_expansion.smoldering_arrow.description": "Creates a small explosion near the target, damaging and burning entities around. the target.",
