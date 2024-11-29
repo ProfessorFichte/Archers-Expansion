@@ -1,3 +1,7 @@
+0.1.3
+- fixed some translations
+- made war archer armor chainmail layer a bit brighter for better contrast
+
 0.1.2
 - fixed an error in the translation file for Arctic Volley and the Enchanted Crystal Arrow
 - fixed knockback from Point Blank Shot pulling the target towards the player if the mob turned the back towards the player
