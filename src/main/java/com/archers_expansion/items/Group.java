@@ -9,8 +9,8 @@ import net.minecraft.util.Identifier;
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
 public class Group {
-    public static Identifier ID = new Identifier(MOD_ID, "generic");
-    public static RegistryKey<ItemGroup> KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(),new Identifier(MOD_ID,"generic"));
+    public static Identifier ID = Identifier.of(MOD_ID, "generic");
+    public static RegistryKey<ItemGroup> KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(),Identifier.of(MOD_ID,"generic"));
     public static ItemGroup ARCHERS_EXPANSION;
 
     public static void registerItemGroups() {

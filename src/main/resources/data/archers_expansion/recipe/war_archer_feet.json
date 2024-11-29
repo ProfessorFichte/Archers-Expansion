@@ -3,21 +3,21 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:leather"
     },
     "B": {
-      "item": "minecraft:netherite_scrap"
+      "item": "minecraft:chain"
     },
     "C": {
-      "item": "minecraft:chain"
+      "item": "minecraft:netherite_scrap"
     }
   },
   "pattern": [
-    "ABA",
-    "C C"
+    "ACA",
+    "B B"
   ],
   "result": {
-    "item": "archers_expansion:war_archer_head"
+    "id": "archers_expansion:war_archer_feet"
   },
   "show_notification": true
 }

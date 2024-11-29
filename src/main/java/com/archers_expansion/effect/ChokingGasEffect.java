@@ -2,7 +2,6 @@ package com.archers_expansion.effect;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -18,7 +17,8 @@ public class ChokingGasEffect extends StatusEffect {
     }
 
     @Override
-    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+    public void onApplied(LivingEntity entity, int amplifier) {
+        super.onApplied(entity, amplifier);
         LivingEntity attacker = entity.getLastAttacker();
         float range = 3.5F;
         Box radius = new Box(entity.getX() + range,
@@ -33,19 +33,20 @@ public class ChokingGasEffect extends StatusEffect {
                 if(entities instanceof LivingEntity target){
                     var relation = TargetHelper.getRelation(attacker,target);
                     if(relation == TargetHelper.Relation.HOSTILE || relation == TargetHelper.Relation.MIXED || relation == TargetHelper.Relation.NEUTRAL) {
-                        target.addStatusEffect(new StatusEffectInstance(Effects.CHOKING_POISON,100,0,false,false,true));
+                        target.addStatusEffect(new StatusEffectInstance(Effects.CHOKING_POISON.registryEntry,100,0,false,false,true));
                     }
                 }
             }
         }
     }
 
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         float damage = 1.0F;
-        if(entity.hasStatusEffect(MRPGCEffects.BLEEDING)){
+        if(entity.hasStatusEffect(MRPGCEffects.BLEEDING.registryEntry)){
             damage = damage + 0.5F;
         }
         entity.damage(entity.getDamageSources().magic(), damage);
+        return true;
     }
 
     public boolean canApplyUpdateEffect(int duration, int amplifier) {

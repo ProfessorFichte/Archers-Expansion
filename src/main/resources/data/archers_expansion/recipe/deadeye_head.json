@@ -3,25 +3,21 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "minecraft:gold_ingot"
+      "item": "more_rpg_classes:hardened_leather"
     },
     "B": {
-      "item": "more_rpg_classes:hardened_leather"
+      "item": "minecraft:spider_eye"
     },
     "C": {
       "item": "minecraft:rabbit_hide"
-    },
-    "D": {
-      "item": "minecraft:spider_eye"
     }
   },
   "pattern": [
-    "A A",
-    "BDB",
-    "CBC"
+    "ABA",
+    "C C"
   ],
   "result": {
-    "item": "archers_expansion:deadeye_chest"
+    "id": "archers_expansion:deadeye_head"
   },
   "show_notification": true
 }

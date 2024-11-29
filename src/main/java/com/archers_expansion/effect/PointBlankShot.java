@@ -3,9 +3,9 @@ package com.archers_expansion.effect;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
@@ -17,7 +17,8 @@ public class PointBlankShot extends StatusEffect {
     }
 
     @Override
-    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+    public void onApplied(LivingEntity entity, int amplifier) {
+        super.onApplied(entity, amplifier);
         if (!entity.getWorld().isClient) {
             LivingEntity attacker = entity.getLastAttacker();
 
@@ -29,8 +30,13 @@ public class PointBlankShot extends StatusEffect {
             int distance_to_target = (posentityX-poscasterX) + ( poscasterZ - posentityZ);
 
             float diff_calc = (range - distance_to_target)/5;
-            var level = EnchantmentHelper.getLevel(Enchantments.POWER, attacker.getMainHandStack());
-            float knockback = 0.1F + diff_calc + level;
+            float power_ench = 0.0F;
+            var power_enchantment = attacker.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(Enchantments.PUNCH);
+
+            if (power_enchantment.isPresent()) {
+                power_ench = EnchantmentHelper.getLevel(power_enchantment.get(), attacker.getMainHandStack());
+            }
+            float knockback = 0.1F + diff_calc + power_ench;
 
             double d = attacker.getX() - entity.getX();
             double e;

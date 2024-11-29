@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "archers_expansion:netherite_deadeye_head",
+    "archers_expansion:netherite_deadeye_chest",
+    "archers_expansion:netherite_deadeye_legs",
+    "archers_expansion:netherite_deadeye_feet",
+
+    "archers_expansion:netherite_tundra_hunter_head",
+    "archers_expansion:netherite_tundra_hunter_chest",
+    "archers_expansion:netherite_tundra_hunter_legs",
+    "archers_expansion:netherite_tundra_hunter_feet",
+
+    "archers_expansion:netherite_war_archer_head",
+    "archers_expansion:netherite_war_archer_chest",
+    "archers_expansion:netherite_war_archer_legs",
+    "archers_expansion:netherite_war_archer_feet"
+  ]
+}

@@ -29,9 +29,9 @@ public class Items {
     }
 
     public static void registerModItems(){
-        SpellBooks.createAndRegister(new Identifier(MOD_ID,"tundra_hunter"), SpellContainer.ContentType.ARCHERY,KEY);
-        SpellBooks.createAndRegister(new Identifier(MOD_ID,"war_archer"), SpellContainer.ContentType.ARCHERY,KEY);
-        SpellBooks.createAndRegister(new Identifier(MOD_ID,"deadeye"), SpellContainer.ContentType.ARCHERY,KEY);
+        SpellBooks.createAndRegister(Identifier.of(MOD_ID,"tundra_hunter"), SpellContainer.ContentType.ARCHERY,KEY);
+        SpellBooks.createAndRegister(Identifier.of(MOD_ID,"war_archer"), SpellContainer.ContentType.ARCHERY,KEY);
+        SpellBooks.createAndRegister(Identifier.of(MOD_ID,"deadeye"), SpellContainer.ContentType.ARCHERY,KEY);
 
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
         });

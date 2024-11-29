@@ -9,12 +9,13 @@ public class ChokingPoisonEffect extends StatusEffect {
     protected ChokingPoisonEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         float damage = 1.0F;
-        if(entity.hasStatusEffect(MRPGCEffects.BLEEDING)){
+        if(entity.hasStatusEffect(MRPGCEffects.BLEEDING.registryEntry)){
             damage = damage + 0.5F;
         }
         entity.damage(entity.getDamageSources().magic(), damage);
+        return true;
     }
 
     public boolean canApplyUpdateEffect(int duration, int amplifier) {

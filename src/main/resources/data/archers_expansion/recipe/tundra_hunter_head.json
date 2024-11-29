@@ -3,18 +3,18 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "minecraft:prismarine_shard"
-    },
-    "B": {
       "tag": "more_rpg_classes:polar_bear_fur"
+    },
+    "C": {
+      "item": "minecraft:prismarine_shard"
     }
   },
   "pattern": [
-    "A A",
-    "B B"
+    "AAA",
+    "C C"
   ],
   "result": {
-    "item": "archers_expansion:tundra_hunter_feet"
+    "id": "archers_expansion:tundra_hunter_head"
   },
   "show_notification": true
 }

@@ -3,13 +3,13 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "more_rpg_classes:hardened_leather"
+      "item": "minecraft:leather"
     },
     "B": {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:netherite_scrap"
     },
     "C": {
-      "item": "minecraft:rabbit_hide"
+      "item": "minecraft:chain"
     }
   },
   "pattern": [
@@ -18,7 +18,7 @@
     "C C"
   ],
   "result": {
-    "item": "archers_expansion:deadeye_legs"
+    "id": "archers_expansion:war_archer_legs"
   },
   "show_notification": true
 }

@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "archers_expansion:deadeye_spell_book"
+      "id": "archers_expansion:deadeye_spell_book"
     },
     "title": {
       "translate":   "advancements.archers_expansion.deadeye_spells.title"

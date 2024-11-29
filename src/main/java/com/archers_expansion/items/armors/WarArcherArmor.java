@@ -1,27 +1,32 @@
 package com.archers_expansion.items.armors;
 
 import com.archers_expansion.client.armor.WarArcherRenderer;
-import mod.azure.azurelibarmor.animatable.GeoItem;
-import mod.azure.azurelibarmor.animatable.client.RenderProvider;
+import mod.azure.azurelibarmor.common.api.client.renderer.GeoArmorRenderer;
+import mod.azure.azurelibarmor.common.api.common.animatable.GeoItem;
+import mod.azure.azurelibarmor.common.internal.client.RenderProvider;
+import mod.azure.azurelibarmor.common.internal.common.util.AzureLibUtil;
+import mod.azure.azurelibarmor.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelibarmor.core.animation.AnimatableManager;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.spell_engine.api.item.armor.Armor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public class WarArcherArmor extends ModArmorItem implements GeoItem {
-    public WarArcherArmor(Armor.CustomMaterial material, Type type, Settings settings) {
-        super(material, type, settings);
+public class WarArcherArmor extends Armor.CustomItem implements GeoItem {
+    public WarArcherArmor(RegistryEntry<ArmorMaterial> material, Type slot, Settings settings) {
+        super(material, slot, settings);
     }
 
     @Override
-    public void createRenderer(Consumer<Object> consumer) {
+    public void createRenderer(Consumer<RenderProvider> consumer) {
         consumer.accept(new RenderProvider() {
-            private WarArcherRenderer renderer;
-
+            private GeoArmorRenderer<?> renderer;
             @Override
             public @NotNull BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original) {
                 if (renderer == null)
@@ -31,5 +36,15 @@ public class WarArcherArmor extends ModArmorItem implements GeoItem {
                 return renderer;
             }
         });
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) { }
+
+    private final AnimatableInstanceCache cache = AzureLibUtil.createInstanceCache(this);
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }

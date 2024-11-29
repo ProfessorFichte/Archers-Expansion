@@ -5,17 +5,20 @@
     "A": {
       "tag": "more_rpg_classes:polar_bear_fur"
     },
-    "C": {
+    "B": {
       "item": "minecraft:prismarine_shard"
+    },
+    "C": {
+      "item": "more_rpg_classes:hardened_leather"
     }
   },
   "pattern": [
-    "AAA",
     "A A",
-    "C C"
+    "BAB",
+    "ACA"
   ],
   "result": {
-    "item": "archers_expansion:tundra_hunter_legs"
+    "id": "archers_expansion:tundra_hunter_chest"
   },
   "show_notification": true
 }

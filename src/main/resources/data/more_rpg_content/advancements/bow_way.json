@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:arrow"
+      "id": "minecraft:arrow"
     },
     "title": {
       "translate": "advancements.archers_expansion.bow_way.title"

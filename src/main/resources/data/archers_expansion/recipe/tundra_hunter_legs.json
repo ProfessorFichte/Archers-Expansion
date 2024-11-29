@@ -3,22 +3,19 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "minecraft:chain"
-    },
-    "B": {
-      "item": "minecraft:leather"
+      "tag": "more_rpg_classes:polar_bear_fur"
     },
     "C": {
-      "item": "minecraft:netherite_scrap"
+      "item": "minecraft:prismarine_shard"
     }
   },
   "pattern": [
+    "AAA",
     "A A",
-    "BAB",
-    "ACA"
+    "C C"
   ],
   "result": {
-    "item": "archers_expansion:war_archer_chest"
+    "id": "archers_expansion:tundra_hunter_legs"
   },
   "show_notification": true
 }
