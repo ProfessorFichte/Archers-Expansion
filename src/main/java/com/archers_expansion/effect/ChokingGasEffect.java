@@ -1,14 +1,11 @@
 package com.archers_expansion.effect;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.util.math.Box;
+import net.minecraft.registry.tag.EntityTypeTags;
 import net.more_rpg_classes.effect.MRPGCEffects;
-import net.spell_engine.utils.TargetHelper;
 
 public class ChokingGasEffect extends StatusEffect {
 
@@ -18,26 +15,11 @@ public class ChokingGasEffect extends StatusEffect {
 
     @Override
     public void onApplied(LivingEntity entity, int amplifier) {
-        super.onApplied(entity, amplifier);
-        LivingEntity attacker = entity.getLastAttacker();
-        float range = 3.5F;
-        Box radius = new Box(entity.getX() + range,
-                entity.getY() + (float) range / 3,
-                entity.getZ() + range,
-                entity.getX() - range,
-                entity.getY() - (float) range / 3,
-                entity.getZ() - range);
-
-        for(Entity entities : entity.getEntityWorld().getOtherEntities(entity, radius, EntityPredicates.VALID_LIVING_ENTITY)){
-            if (entities != null) {
-                if(entities instanceof LivingEntity target){
-                    var relation = TargetHelper.getRelation(attacker,target);
-                    if(relation == TargetHelper.Relation.HOSTILE || relation == TargetHelper.Relation.MIXED || relation == TargetHelper.Relation.NEUTRAL) {
-                        target.addStatusEffect(new StatusEffectInstance(Effects.CHOKING_POISON.registryEntry,100,0,false,false,true));
-                    }
-                }
-            }
+        EntityType<?> type = entity.getType();
+        if(type.isIn(EntityTypeTags.IGNORES_POISON_AND_REGEN)){
+            entity.removeStatusEffect(Effects.CHOKING_GAS.registryEntry);
         }
+        super.onApplied(entity, amplifier);
     }
 
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {

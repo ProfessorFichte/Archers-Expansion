@@ -9,10 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.effect.ActionImpairing;
-import net.spell_engine.api.effect.EntityActionsAllowed;
-import net.spell_engine.api.effect.HealthImpacting;
-import net.spell_engine.api.effect.Synchronized;
+import net.spell_engine.api.effect.*;
 
 import java.util.ArrayList;
 
@@ -44,13 +41,14 @@ public class Effects {
     public static final Entry CHOKING_GAS = new Entry("choking_gas" , new ChokingGasEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry LEAPING_SHOT = new Entry("leaping_shot", new LeapingShotEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
     public static final Entry DISABLING_SHOT = new Entry("disabling_shot", new DisablingShotEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
-    public static final Entry CHOKING_POISON = new Entry("choking_poison", new ChokingPoisonEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
     //TUNDRA HUNTER
+    public static final Entry FROZEN_SHOT = new Entry("frozen_shot",new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x99ccff));
     public static final Entry ENCHANTED_CRSYSTAL_ARROW = new Entry("enchanted_crystal_arrow",new CrystalArrowEffect(StatusEffectCategory.HARMFUL, 0x99ccff));
     public static final Entry FROZEN_PACT = new Entry("frozen_pact",new FrozenPactEffect(StatusEffectCategory.HARMFUL, 0x99ccff));
 
     //WAR ARCHER
     public static final Entry SMOLDERING_ARROW = new Entry("smoldering_arrow",new SmolderingArrow(StatusEffectCategory.HARMFUL, 0x805e4d));
+    public static final Entry SMOLDERING_ARROWS = new Entry("smoldering_arrows",new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
     public static final Entry POINT_BLANK_SHOT = new Entry("point_blank_shot",new  PointBlankShot(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry PIN_DOWN = new Entry("pin_down",new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
 
@@ -70,10 +68,12 @@ public class Effects {
                 addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,PIN_DOWN.modifierId(),
                 -1.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
+        SpellStash.configure(FAST_SHOT.effect, Identifier.of(MOD_ID, "fast_shot"), 0);
+        SpellStash.configure(FROZEN_SHOT.effect, Identifier.of(MOD_ID, "frozen_shot"), 0);
+        SpellStash.configure(SMOLDERING_ARROWS.effect, Identifier.of(MOD_ID, "smoldering_arrow"), 1);
 
         Synchronized.configure(FAST_SHOT.effect,true);
         Synchronized.configure(CHOKING_GAS.effect,true);
-        Synchronized.configure(CHOKING_POISON.effect,true);
         Synchronized.configure(LEAPING_SHOT.effect,true);
         Synchronized.configure(DISABLING_SHOT.effect,true);
         Synchronized.configure(ENCHANTED_CRSYSTAL_ARROW.effect,true);
@@ -86,7 +86,6 @@ public class Effects {
         ActionImpairing.configure(ENCHANTED_CRSYSTAL_ARROW.effect, EntityActionsAllowed.STUN);
 
         HealthImpacting.configureHealingTaken(CHOKING_GAS.effect,  effectsConfig.value.choking_gas_healing_taken);
-        HealthImpacting.configureHealingTaken(CHOKING_POISON.effect,  effectsConfig.value.choking_gas_healing_taken);
 
         for (var entry: entries) {
             entry.register();

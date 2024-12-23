@@ -16,12 +16,15 @@ public class ArchersExpansionModClient implements ClientModInitializer {
 
         CustomModels.registerModelIds(List.of(
                 Identifier.of(MOD_ID, "projectile/glacial_arrow"),
-                Identifier.of(MOD_ID, "projectile/regular_arrow")
+                Identifier.of(MOD_ID, "projectile/regular_arrow"),
+                Identifier.of(MOD_ID, "projectile/smoldering_arrow"),
+                Identifier.of(MOD_ID, "projectile/fast_arrow"),
+                Identifier.of(MOD_ID, "projectile/choking_gas_arrow"),
+                Identifier.of(MOD_ID, "projectile/pin_down_arrow")
         ));
 
         CustomParticleStatusEffect.register(Effects.ENCHANTED_CRSYSTAL_ARROW.effect, new CrystalArrowParticles(15));
         CustomParticleStatusEffect.register(Effects.CHOKING_GAS.effect, new ChokingPoisonParticles(5));
-        CustomParticleStatusEffect.register(Effects.CHOKING_POISON.effect, new ChokingPoisonParticles(5));
         CustomParticleStatusEffect.register(Effects.PIN_DOWN.effect, new PinDownParticles(2));
 
     }

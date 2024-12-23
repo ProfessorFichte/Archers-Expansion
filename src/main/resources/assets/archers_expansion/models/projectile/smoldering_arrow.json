@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "archers_expansion:spell_projectile/regular_arrow",
-		"particle": "archers_expansion:spell_projectile/regular_arrow"
+		"0": "archers_expansion:spell_projectile/smoldering_arrow",
+		"particle": "archers_expansion:spell_projectile/smoldering_arrow"
 	},
 	"elements": [
 		{

@@ -1,38 +1,89 @@
 {
   "school": "PHYSICAL_RANGED",
-  "range": 0,
   "group": "primary",
+  "range": 0,
   "learn": {
     "tier": 1
   },
-  "mode": "ITEM_USE",
-  "item_use": { },
-  "arrow_perks": {
-    "bypass_iframes": true
+  "release": {
+    "target": {
+      "type": "SELF"
+    },
+    "sound": {
+      "id": "archers:marker_shot",
+      "volume": 0.5
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:buff_rage",
+        "shape": "SPHERE",
+        "origin": "CENTER",
+        "count": 5.0,
+        "min_speed": 0.1,
+        "max_speed": 0.2
+      }
+    ]
   },
   "impact": [
     {
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "apply_mode": "ADD",
-          "duration": 3,
-          "amplifier": 4,
           "effect_id": "archers_expansion:fast_shot",
+          "duration": 8,
+          "apply_mode": "SET",
+          "amplifier": 0,
           "show_particles": false
-        },
-        "apply_to_caster": true
-      },
-      "particles": [
-        {
-          "particle_id": "electric_spark",
-          "shape": "SPHERE",
-          "origin": "CENTER",
-          "count": 15,
-          "min_speed": 0.3,
-          "max_speed": 1.5
         }
-      ]
+      }
     }
-  ]
+  ],
+  "arrow_perks": {
+    "override_render": {
+      "model_id": "archers_expansion:projectile/fast_arrow",
+      "scale": 1.0,
+      "light_level": 0
+    },
+    "bypass_iframes": true,
+    "impact": [
+      {
+        "action": {
+          "type": "STATUS_EFFECT",
+          "status_effect": {
+            "apply_mode": "ADD",
+            "duration": 3,
+            "amplifier": 4,
+            "effect_id": "archers_expansion:fast_shot",
+            "show_particles": false
+          },
+          "apply_to_caster": true
+        },
+        "particles": [
+          {
+            "particle_id": "electric_spark",
+            "shape": "SPHERE",
+            "origin": "CENTER",
+            "count": 15,
+            "min_speed": 0.3,
+            "max_speed": 1.5
+          }
+        ]
+      }
+    ],
+    "travel_particles": [
+      {
+        "particle_id": "electric_spark",
+        "shape": "LINE",
+        "origin": "CENTER",
+        "rotation": "LOOK",
+        "roll": 5,
+        "count": 20,
+        "min_speed": 0.2,
+        "max_speed": 0.22
+      }
+    ]
+  },
+  "cost": {
+    "cooldown_duration": 12
+  }
 }

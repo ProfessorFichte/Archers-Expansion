@@ -6,35 +6,35 @@
 	},
 	"elements": [
 		{
-			"name": "base",
+			"name": "feather_1",
 			"from": [6.7, 7.625, 12.5],
-			"to": [8.8, 7.875, 14.2],
+			"to": [8.8, 7.875, 14.3],
 			"rotation": {"angle": 0, "axis": "z", "origin": [3.5, 15.5, 2]},
 			"faces": {
-				"north": {"uv": [3, 4, 5, 5], "texture": "#0"},
-				"east": {"uv": [0, 0, 0, 1], "texture": "#0"},
-				"south": {"uv": [5, 2, 7, 3], "texture": "#0"},
-				"west": {"uv": [0, 0, 0, 1], "texture": "#0"},
-				"up": {"uv": [2, 0, 0, 0], "texture": "#0"},
-				"down": {"uv": [2, 0, 0, 0], "texture": "#0"}
+				"north": {"uv": [2, 6, 4, 7], "texture": "#0"},
+				"east": {"uv": [2, 0, 4, 1], "texture": "#0"},
+				"south": {"uv": [5, 6, 7, 7], "texture": "#0"},
+				"west": {"uv": [4, 6, 5, 7], "texture": "#0"},
+				"up": {"uv": [4, 6, 2, 5], "texture": "#0"},
+				"down": {"uv": [6, 5, 4, 6], "texture": "#0"}
 			}
 		},
 		{
-			"name": "base",
+			"name": "feather_2",
 			"from": [7.625, 6.7, 12.5],
 			"to": [7.875, 8.8, 14.2],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3.5, 2]},
 			"faces": {
-				"north": {"uv": [3, 5, 4, 7], "texture": "#0"},
-				"east": {"uv": [0, 0, 0, 2], "texture": "#0"},
-				"south": {"uv": [5, 3, 6, 5], "texture": "#0"},
-				"west": {"uv": [0, 0, 0, 2], "texture": "#0"},
-				"up": {"uv": [1, 0, 0, 0], "texture": "#0"},
-				"down": {"uv": [1, 0, 0, 0], "texture": "#0"}
+				"north": {"uv": [4, 2, 5, 4], "texture": "#0"},
+				"east": {"uv": [4, 2, 5, 4], "texture": "#0"},
+				"south": {"uv": [4, 2, 5, 4], "texture": "#0"},
+				"west": {"uv": [5, 2, 6, 4], "texture": "#0"},
+				"up": {"uv": [2, 3, 3, 2], "texture": "#0"},
+				"down": {"uv": [2, 4, 3, 5], "texture": "#0"}
 			}
 		},
 		{
-			"name": "base",
+			"name": "tip_3",
 			"from": [7.475, 7.25, 3.25],
 			"to": [8.025, 8.25, 4.25],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3.5, -1]},
@@ -48,7 +48,7 @@
 			}
 		},
 		{
-			"name": "base",
+			"name": "tip_2",
 			"from": [7.25, 7.475, 3.25],
 			"to": [8.25, 8.025, 4.75],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3.5, -1]},
@@ -62,7 +62,7 @@
 			}
 		},
 		{
-			"name": "base",
+			"name": "tip_1",
 			"from": [7.35, 7.575, 2.05],
 			"to": [8.15, 7.925, 3.25],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3.5, -2.5]},
@@ -76,7 +76,7 @@
 			}
 		},
 		{
-			"name": "base",
+			"name": "stick",
 			"from": [7.5, 7.5, 3.8],
 			"to": [8, 8, 13.8],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 7.5, 3.8]},

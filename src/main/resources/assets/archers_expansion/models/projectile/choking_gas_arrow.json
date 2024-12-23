@@ -1,12 +1,12 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "archers_expansion:spell_projectile/regular_arrow",
-		"particle": "archers_expansion:spell_projectile/regular_arrow"
+		"0": "archers_expansion:spell_projectile/choking_gas_arrow",
+		"particle": "archers_expansion:spell_projectile/choking_gas_arrow"
 	},
 	"elements": [
 		{
-			"name": "base",
+			"name": "feather_1",
 			"from": [6.8, 7.625, 12.5],
 			"to": [8.9, 7.875, 14.2],
 			"rotation": {"angle": 0, "axis": "z", "origin": [3.6, 15.5, 2]},
@@ -20,7 +20,7 @@
 			}
 		},
 		{
-			"name": "base",
+			"name": "feather_2",
 			"from": [7.625, 6.7, 12.5],
 			"to": [7.875, 8.8, 14.2],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3.5, 2]},
@@ -34,23 +34,9 @@
 			}
 		},
 		{
-			"name": "base",
-			"from": [7.475, 7.25, 3.25],
-			"to": [8.025, 8.25, 4.25],
-			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3.5, -1]},
-			"faces": {
-				"north": {"uv": [4, 5, 5, 6], "texture": "#0"},
-				"east": {"uv": [5, 5, 6, 6], "texture": "#0"},
-				"south": {"uv": [2, 6, 3, 7], "texture": "#0"},
-				"west": {"uv": [6, 3, 7, 4], "texture": "#0"},
-				"up": {"uv": [5, 7, 4, 6], "texture": "#0"},
-				"down": {"uv": [7, 4, 6, 5], "texture": "#0"}
-			}
-		},
-		{
-			"name": "base",
-			"from": [7.25, 7.475, 3.25],
-			"to": [8.25, 8.025, 4.75],
+			"name": "tip_1",
+			"from": [7.05, 7.275, 3.65],
+			"to": [8.45, 8.225, 4.75],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3.5, -1]},
 			"faces": {
 				"north": {"uv": [5, 6, 6, 7], "texture": "#0"},
@@ -62,21 +48,7 @@
 			}
 		},
 		{
-			"name": "base",
-			"from": [7.35, 7.575, 2.05],
-			"to": [8.15, 7.925, 3.25],
-			"rotation": {"angle": 0, "axis": "y", "origin": [0, 3.5, -2.5]},
-			"faces": {
-				"north": {"uv": [7, 2, 8, 3], "texture": "#0"},
-				"east": {"uv": [3, 7, 4, 8], "texture": "#0"},
-				"south": {"uv": [7, 3, 8, 4], "texture": "#0"},
-				"west": {"uv": [4, 7, 5, 8], "texture": "#0"},
-				"up": {"uv": [8, 5, 7, 4], "texture": "#0"},
-				"down": {"uv": [6, 7, 5, 8], "texture": "#0"}
-			}
-		},
-		{
-			"name": "base",
+			"name": "stick",
 			"from": [7.5, 7.5, 3.8],
 			"to": [8, 8, 13.8],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 7.5, 3.8]},
