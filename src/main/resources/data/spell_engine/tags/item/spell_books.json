@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "archers_expansion:deadeye_spell_book",
+    "archers_expansion:tundra_hunter_spell_book",
+    "archers_expansion:war_archer_spell_book"
+  ]
+}

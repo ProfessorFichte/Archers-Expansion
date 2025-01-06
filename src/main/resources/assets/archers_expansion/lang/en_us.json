@@ -1,7 +1,8 @@
 {
   "itemGroup.archers_expansion.general": "Archers Expansion",
 
-  "item.archers_expansion.deadeye_spell_book": "Bounty List",
+  "item.archers_expansion.deadeye_spell_book": "Deadeye´s List",
+  "item.archers_expansion.deadeye.spell_scroll": "Deadeye Scroll",
   "item.archers_expansion.deadeye_chest": "Deadeye Tunic",
   "item.archers_expansion.deadeye_head": "Deadeye Hood",
   "item.archers_expansion.deadeye_legs": "Deadeye Leggings",
@@ -30,6 +31,7 @@
   "effect.archers_expansion.disabling_shot.description": "Slows the target and damages it overtime.",
 
   "item.archers_expansion.tundra_hunter_spell_book": "Tundric Hunting",
+  "item.archers_expansion.tundra_hunter.spell_scroll": "Tundra Hunter Scroll",
   "item.archers_expansion.tundra_hunter_chest": "Tundra Tunic",
   "item.archers_expansion.tundra_hunter_head": "Tundra Hood",
   "item.archers_expansion.tundra_hunter_legs": "Tundra Leggings",
@@ -56,6 +58,7 @@
   "effect.archers_expansion.frozen_shot.description": "Your next shots stack the frosted effect on targets.",
 
   "item.archers_expansion.war_archer_spell_book": "War Archery Instructions",
+  "item.archers_expansion.war_archer.spell_scroll": "War Archer Scroll",
   "item.archers_expansion.war_archer_chest": "Bowman Chest",
   "item.archers_expansion.war_archer_head": "Bowman Helmet",
   "item.archers_expansion.war_archer_legs": "Bowman Leggings",

@@ -1,3 +1,6 @@
+1.1.1 - 1.21.1
+
+
 1.1.0 - 1.21.1
 - Spell Engine 1.2 Update
 - Smoldering Arrow, Frozen Shot, Fast Shot got reworked, they use the new SpellStash Feature
