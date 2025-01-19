@@ -7,7 +7,7 @@
     "item": "archers_expansion:tundra_hunter_chest"
   },
   "result": {
-    "id": "archers_expansion:netherite_tundra_hunter_chest"
+    "item": "archers_expansion:netherite_tundra_hunter_chest"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

@@ -129,6 +129,25 @@
       }
     }
   ],
+  "area_impact": {
+    "radius": 5.0,
+    "area": {
+      "distance_dropoff": "SQUARED"
+    },
+    "particles": [
+      {
+        "particle_id": "more_rpg_classes:gas_cloud",
+        "shape": "SPHERE",
+        "origin": "CENTER",
+        "count": 2.0,
+        "min_speed": 0.2,
+        "max_speed": 0.5
+      }
+    ],
+    "sound": {
+      "id": "archers_expansion:poison_cloud"
+    }
+  },
   "cost": {
     "cooldown_duration": 28,
     "exhaust" : 0.3,

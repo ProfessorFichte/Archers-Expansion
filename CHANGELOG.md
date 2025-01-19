@@ -1,5 +1,11 @@
 0.2.0 - 1.20.1
 - Netherite Armor Backport!
+- fixed CrystalArrowEffect & FrozenPactEffect & ChokingGasEffect
+- Fast Shot now only gives Ranged Haste and no Movement Speed
+- The Movement Speed Buffs will be moved to the Deadeye´s Armor Parts
+- Removed the FROST_RANGED Spell School and all Frost Spell Power Attributes from the Tundra Hunters Armor
+- All Tundra Hunter Spells are now PHYSICAL_RANGED like all the other Archery Spells
+- Balanced the Armor Values new
 
 0.1.3
 - fixed some translations

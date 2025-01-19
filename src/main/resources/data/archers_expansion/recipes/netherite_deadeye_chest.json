@@ -7,7 +7,7 @@
     "item": "archers_expansion:deadeye_chest"
   },
   "result": {
-    "id": "archers_expansion:netherite_deadeye_chest"
+    "item": "archers_expansion:netherite_deadeye_chest"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

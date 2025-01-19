@@ -7,7 +7,7 @@
     "item": "archers_expansion:war_archer_head"
   },
   "result": {
-    "id": "archers_expansion:netherite_war_archer_head"
+    "item": "archers_expansion:netherite_war_archer_head"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

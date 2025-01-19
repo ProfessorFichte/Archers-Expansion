@@ -23,7 +23,6 @@ public class Effects {
     public static StatusEffect CHOKING_GAS = new ChokingGasEffect(StatusEffectCategory.HARMFUL, 0x805e4d);
     public static StatusEffect LEAPING_SHOT = new LeapingShotEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d);
     public static StatusEffect DISABLING_SHOT = new DisablingShotEffect(StatusEffectCategory.HARMFUL, 0x805e4d);
-    public static StatusEffect CHOKING_POISON = new ChokingPoisonEffect(StatusEffectCategory.HARMFUL, 0x805e4d);
     //TUNDRA HUNTER
     public static StatusEffect ENCHANTED_CRSYSTAL_ARROW = new CrystalArrowEffect(StatusEffectCategory.HARMFUL, 0x99ccff);
     public static StatusEffect FROZEN_PACT = new FrozenPactEffect(StatusEffectCategory.HARMFUL, 0x99ccff);
@@ -37,9 +36,7 @@ public class Effects {
     public static void register (){
         FAST_SHOT.
                 addAttributeModifier(EntityAttributes_RangedWeapon.HASTE.attribute, "927602d9-28f9-49d7-a7ed-a2eb2f38a58b",
-                effectsConfig.value.fast_shot_haste_increase_per_stack, EntityAttributeModifier.Operation.MULTIPLY_BASE)
-            .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "927602d9-28f9-49d7-a7ed-a2eb2f38a58b",
-                effectsConfig.value.fast_shot_speed_increase_per_stack, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+                effectsConfig.value.fast_shot_haste_increase_per_stack, EntityAttributeModifier.Operation.MULTIPLY_BASE);
         DISABLING_SHOT.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,"bf290ad8-e59e-4983-b880-7cd56aa10820",
                 effectsConfig.value.disabling_shot_decreased_movement_speed, EntityAttributeModifier.Operation.MULTIPLY_BASE);
         FROZEN_PACT.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,"004f5523-4920-42bc-a79c-574e93cf9801",
@@ -50,7 +47,6 @@ public class Effects {
 
         Synchronized.configure(FAST_SHOT,true);
         Synchronized.configure(CHOKING_GAS,true);
-        Synchronized.configure(CHOKING_POISON,true);
         Synchronized.configure(LEAPING_SHOT,true);
         Synchronized.configure(DISABLING_SHOT,true);
         Synchronized.configure(ENCHANTED_CRSYSTAL_ARROW,true);
@@ -63,7 +59,6 @@ public class Effects {
         ActionImpairing.configure(ENCHANTED_CRSYSTAL_ARROW, EntityActionsAllowed.STUN);
 
         HealthImpacting.configureHealingTaken(CHOKING_GAS,  effectsConfig.value.choking_gas_healing_taken);
-        HealthImpacting.configureHealingTaken(CHOKING_POISON,  effectsConfig.value.choking_gas_healing_taken);
 
         int effect_id = 5900;
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "fast_shot").toString(), FAST_SHOT);
@@ -72,7 +67,6 @@ public class Effects {
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "disabling_shot").toString(),DISABLING_SHOT);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "enchanted_crystal_arrow").toString(),ENCHANTED_CRSYSTAL_ARROW);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "frozen_pact").toString(),FROZEN_PACT);
-        Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "choking_poison").toString(),CHOKING_POISON);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "smoldering_arrow").toString(),SMOLDERING_ARROW);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "point_blank_shot").toString(),POINT_BLANK_SHOT);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "pin_down").toString(),PIN_DOWN);

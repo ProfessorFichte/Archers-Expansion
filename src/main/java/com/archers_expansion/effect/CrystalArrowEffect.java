@@ -12,8 +12,9 @@ public class CrystalArrowEffect extends StatusEffect {
 
     @Override
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        int ticks = ((amplifier + 1) * 100) + 300;
-        entity.setFrozenTicks(entity.getFrozenTicks()+ticks);
-
+        int frozen_ticks = entity.getFrozenTicks();
+        if(frozen_ticks < 140){
+            entity.setFrozenTicks(frozen_ticks + 40);
+        }
     }
 }
