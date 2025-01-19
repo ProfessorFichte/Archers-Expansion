@@ -1,3 +1,6 @@
+0.2.0 - 1.20.1
+- Netherite Armor Backport!
+
 0.1.3
 - fixed some translations
 - made war archer armor chainmail layer a bit brighter for better contrast
