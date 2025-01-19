@@ -7,9 +7,9 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.spell.registry.SpellRegistry;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
-import static net.spell_engine.internals.SpellRegistry.getSpell;
 
 public class PointBlankShot extends StatusEffect {
     protected PointBlankShot(StatusEffectCategory category, int color) {
@@ -21,8 +21,9 @@ public class PointBlankShot extends StatusEffect {
         super.onApplied(entity, amplifier);
         if (!entity.getWorld().isClient) {
             LivingEntity attacker = entity.getLastAttacker();
-
-            float range = getSpell(Identifier.of(MOD_ID, "point_blank_shot")).range;
+            var spellEntry = SpellRegistry.from(attacker.getWorld()).getEntry(Identifier.of(MOD_ID, "point_blank_shot")).orElse(null);
+            var spell = spellEntry.value();
+            float range = spell.range;
             int poscasterX = attacker.getBlockPos().getX();
             int poscasterZ = attacker.getBlockPos().getZ();
             int posentityX = entity.getBlockPos().getX();

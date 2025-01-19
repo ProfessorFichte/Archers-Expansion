@@ -3,7 +3,6 @@
   "package": "com.archers_expansion.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin",
     "LivingEntityMixin"
   ],
   "injectors": {

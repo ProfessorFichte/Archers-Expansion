@@ -1,7 +1,6 @@
 package com.archers_expansion;
 
 import com.archers_expansion.config.Default;
-import com.archers_expansion.custom.ArcherSpellSchools;
 import com.archers_expansion.effect.Effects;
 import com.archers_expansion.items.Group;
 import com.archers_expansion.items.Items;
@@ -31,7 +30,7 @@ public class ArchersExpansionMod implements ModInitializer {
 			.build();
 
 	public static ConfigManager<ItemConfig> itemConfig = new ConfigManager<ItemConfig>
-			("items", Default.itemConfig)
+			("items_v1", Default.itemConfig)
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
@@ -51,7 +50,6 @@ public class ArchersExpansionMod implements ModInitializer {
 		itemConfig.refresh();
 		Items.registerModItems();
 		Group.registerItemGroups();
-		ArcherSpellSchools.registerSchools();
 		registerItemGroup();
 		Effects.register();
 		Sounds.register();

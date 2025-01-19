@@ -1,5 +1,19 @@
-1.1.1 - 1.21.1
+# 1.2.0 - 1.21.1
+**- Spell Engine 1.4 Update**
+- AzureLib Armor 3.0 Update
+- Armor Rebalancing
+- fixed CrystalArrowEffect & FrozenPactEffect & ChokingGasEffect
+- Fast Shot now only gives Ranged Haste and no Movement Speed
+- The Movement Speed Buffs will be moved to the Deadeye´s Armor Parts
+- Removed the FROST_RANGED Spell School and all Frost Spell Power Attributes from the Tundra Hunters Armor
+- All Tundra Hunter Spells are now PHYSICAL_RANGED like all the other Archery Spells
+- "#minecraft:freeze_hurts_extra_types" get 30% more damage from Tundra Hunter Spells like the Wizard Frost Spells
+- "#minecraft:freeze_immune_entity_types" get 30% less damage from Tundra Hunter Spells like the Wizard Frost Spells
+- Item Config Changed to file "items_v1"
 
+1.1.1 - 1.21.1
+- Spell Scroll Update
+- Renamed the Bounty List to Deadeye´s List ( Spell Book )
 
 1.1.0 - 1.21.1
 - Spell Engine 1.2 Update

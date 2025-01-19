@@ -99,7 +99,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "apply_mode": "ADD",
-          "duration": 1,
+          "duration": 2,
           "amplifier": 0,
           "effect_id": "archers_expansion:leaping_shot",
           "show_particles": false

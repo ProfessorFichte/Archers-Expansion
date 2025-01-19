@@ -55,9 +55,7 @@ public class Effects {
     public static void register (){
         FAST_SHOT.effect.
                 addAttributeModifier(EntityAttributes_RangedWeapon.HASTE.entry, FAST_SHOT.modifierId(),
-                effectsConfig.value.fast_shot_haste_increase_per_stack, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE)
-            .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, FAST_SHOT.modifierId(),
-                effectsConfig.value.fast_shot_speed_increase_per_stack, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                effectsConfig.value.fast_shot_haste_increase_per_stack, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         DISABLING_SHOT.effect.
                 addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,DISABLING_SHOT.modifierId(),
                 effectsConfig.value.disabling_shot_decreased_movement_speed, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);

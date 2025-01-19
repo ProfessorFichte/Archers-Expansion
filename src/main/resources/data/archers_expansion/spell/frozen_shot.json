@@ -1,6 +1,5 @@
 {
-  "school": "FROST_RANGED",
-  "group": "primary",
+  "school": "PHYSICAL_RANGED",
   "range": 0,
   "learn": {
     "tier": 1
@@ -30,7 +29,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "archers_expansion:frozen_shot",
-          "duration": 6,
+          "duration": 10,
           "apply_mode": "SET",
           "amplifier": 0,
           "show_particles": false
