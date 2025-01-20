@@ -1,3 +1,9 @@
+# 1.2.1 - 1.21.1
+- Disabling Shot, Pin Down & Point Blank Shot does not work on "#c:bosses"
+- Trick Shots Bleeding does not work on "#minecraft:undead"
+- Choking Gas does not work on"#minecraft:ignores_poison_and_regen"
+- Arctic Volley, Enchanted Crystal Arrow, Frozen pact and Frozen Shot Status Effects do not work on  "#minecraft:freeze_immune_entity_types"
+
 # 1.2.0 - 1.21.1
 **- Spell Engine 1.4 Update**
 - AzureLib Armor 3.0 Update

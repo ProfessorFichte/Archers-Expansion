@@ -67,6 +67,12 @@
       }
     },
     {
+      "target_conditions": [
+        {
+          "entity_type": "#minecraft:ignores_poison_and_regen",
+          "allow_action": false
+        }
+      ],
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {

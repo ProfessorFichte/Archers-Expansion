@@ -69,6 +69,12 @@
       }
     },
     {
+      "target_conditions": [
+        {
+          "entity_type": "#minecraft:undead",
+          "allow_action": false
+        }
+      ],
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {

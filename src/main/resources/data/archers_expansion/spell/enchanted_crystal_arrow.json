@@ -130,6 +130,12 @@
       }
     },
     {
+      "target_conditions": [
+        {
+          "entity_type": "#minecraft:freeze_immune_entity_types",
+          "allow_action": false
+        }
+      ],
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
