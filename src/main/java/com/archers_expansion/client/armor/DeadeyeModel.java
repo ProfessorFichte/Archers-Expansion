@@ -14,7 +14,8 @@ public class DeadeyeModel extends GeoModel<DeadeyeArmor> {
 
     @Override
     public Identifier getTextureResource(DeadeyeArmor armor) {
-        return new Identifier(MOD_ID, "textures/armor/deadeye.png");
+        var texture = armor.customMaterial.name();
+        return new Identifier(MOD_ID, "textures/armor/" + texture +".png");
     }
 
     @Override

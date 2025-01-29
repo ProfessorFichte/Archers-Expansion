@@ -14,7 +14,8 @@ public class TundraArcherModel extends GeoModel<TundraArcherArmor> {
 
     @Override
     public Identifier getTextureResource(TundraArcherArmor armor) {
-        return new Identifier(MOD_ID, "textures/armor/tundra_hunter.png");
+        var texture = armor.customMaterial.name();
+        return new Identifier(MOD_ID, "textures/armor/" + texture +".png");
     }
 
     @Override

@@ -1,3 +1,9 @@
+0.2.2 - 1.20.1
+- fix missing rpg series tag for the armor
+
+0.2.1 - 1.20.1
+- fix netherite armors showing normal variant textures
+
 0.2.0 - 1.20.1
 - Netherite Armor Backport!
 - fixed CrystalArrowEffect & FrozenPactEffect & ChokingGasEffect

@@ -14,7 +14,8 @@ public class WarArcherModel extends GeoModel<WarArcherArmor> {
 
     @Override
     public Identifier getTextureResource(WarArcherArmor armor) {
-        return new Identifier(MOD_ID, "textures/armor/war_archer.png");
+        var texture = armor.customMaterial.name();
+        return new Identifier(MOD_ID, "textures/armor/" + texture +".png");
     }
 
     @Override
