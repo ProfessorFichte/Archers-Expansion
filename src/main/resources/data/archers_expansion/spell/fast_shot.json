@@ -33,7 +33,8 @@
       "trigger": {
         "type": "ARROW_SHOT"
       },
-      "impact_mode": "PERFORM"
+      "consume": 0,
+      "impact_mode": "TRANSFER"
     }
   },
 

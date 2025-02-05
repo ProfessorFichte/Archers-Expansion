@@ -33,6 +33,7 @@
       "trigger": {
         "type": "ARROW_SHOT"
       },
+      "consume": 0,
       "impact_mode": "TRANSFER"
     }
   },
@@ -50,7 +51,7 @@
         "status_effect": {
           "apply_mode": "ADD",
           "duration": 10,
-          "amplifier": 6,
+          "amplifier": 4,
           "effect_id": "more_rpg_classes:frosted",
           "show_particles": false
         }

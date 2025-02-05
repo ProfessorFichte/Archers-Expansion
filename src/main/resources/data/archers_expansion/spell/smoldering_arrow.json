@@ -29,7 +29,7 @@
     "stash_effect": {
       "id": "archers_expansion:smoldering_arrows",
       "duration": 10,
-      "amplifier": 0,
+      "amplifier": 1,
       "trigger": {
         "type": "ARROW_SHOT"
       },
@@ -114,6 +114,8 @@
     ]
   },
   "cost": {
-    "cooldown_duration": 15
+    "cooldown": {
+      "duration": 12
+    }
   }
 }
