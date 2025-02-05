@@ -1,3 +1,6 @@
+# 1.3.0 - 1.21.1
+- Spell Engine 1.5 Update
+
 # 1.2.1 - 1.21.1
 - Disabling Shot, Pin Down & Point Blank Shot does not work on "#c:bosses"
 - Trick Shots Bleeding does not work on "#minecraft:undead"

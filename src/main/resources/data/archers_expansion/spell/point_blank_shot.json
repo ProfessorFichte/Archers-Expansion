@@ -4,48 +4,59 @@
   "learn": {
     "tier": 3
   },
-  "cast": {
-    "duration": 1.2,
-    "animation": "spell_engine:archery_pull",
-    "sound": {
-      "id": "archers:bow_pull"
+
+  "active": {
+    "cast": {
+      "duration": 1.2,
+      "animation": "spell_engine:archery_pull",
+      "sound": {
+        "id": "archers:bow_pull"
+      }
     }
   },
+
+  "target": {
+    "type": "AIM",
+    "aim": { }
+  },
+
   "release": {
-    "target": {
-      "type": "PROJECTILE",
-      "projectile": {
-        "launch_properties": {
-          "velocity": 2.5
-        },
-        "projectile": {
-          "client_data": {
-            "travel_particles": [
-              {
-                "particle_id": "campfire_cosy_smoke",
-                "shape": "LINE",
-                "origin": "CENTER",
-                "rotation": "LOOK",
-                "roll_offset": 180,
-                "roll": 10,
-                "count": 20,
-                "min_speed": 0.2,
-                "max_speed": 0.22
-              }
-            ],
-            "model": {
-              "model_id": "archers_expansion:projectile/regular_arrow",
-              "scale": 1.5
-            }
-          }
-        }
-      }
-    },
     "animation": "spell_engine:archery_release",
     "sound": {
       "id": "item.crossbow.shoot"
     }
   },
+
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "launch_properties": {
+        "velocity": 2.5
+      },
+      "projectile": {
+        "client_data": {
+          "travel_particles": [
+            {
+              "particle_id": "campfire_cosy_smoke",
+              "shape": "LINE",
+              "origin": "CENTER",
+              "rotation": "LOOK",
+              "roll_offset": 180,
+              "roll": 10,
+              "count": 20,
+              "min_speed": 0.2,
+              "max_speed": 0.22
+            }
+          ],
+          "model": {
+            "model_id": "archers_expansion:projectile/regular_arrow",
+            "scale": 1.5
+          }
+        }
+      }
+    }
+  },
+
   "impact": [
     {
       "action": {
@@ -89,8 +100,12 @@
     }
   ],
   "cost": {
-    "cooldown_duration": 16,
     "exhaust" : 0.3,
-    "item_id": "arrow"
+    "item": {
+      "id": "arrow"
+    },
+    "cooldown": {
+      "duration": 16
+    }
   }
 }

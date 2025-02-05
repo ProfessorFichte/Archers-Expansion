@@ -4,67 +4,78 @@
   "learn": {
     "tier": 4
   },
-  "cast": {
-    "duration": 1.5,
-    "animation": "spell_engine:archery_pull",
-    "sound": {
-      "id": "archers:bow_pull"
+
+  "active": {
+    "cast": {
+      "duration": 1.5,
+      "animation": "spell_engine:archery_pull",
+      "sound": {
+        "id": "archers:bow_pull"
+      }
     }
   },
+
+  "target": {
+    "type": "AIM",
+    "aim": { }
+  },
+
   "release": {
-    "target": {
-      "type": "PROJECTILE",
-      "projectile": {
-        "launch_properties": {
-          "velocity": 2.0
-        },
-        "projectile": {
-          "client_data": {
-            "travel_particles": [
-              {
-                "particle_id": "spell_engine:weakness_smoke",
-                "shape": "LINE",
-                "origin": "CENTER",
-                "rotation": "LOOK",
-                "roll_offset": 180,
-                "roll": 10,
-                "count": 20,
-                "min_speed": 0.2,
-                "max_speed": 0.22
-              },
-              {
-                "particle_id": "spell_engine:weakness_smoke",
-                "shape": "LINE",
-                "origin": "CENTER",
-                "rotation": "LOOK",
-                "roll": 10,
-                "count": 20,
-                "min_speed": 0.2,
-                "max_speed": 0.32
-              },
-              {
-                "particle_id": "spell_engine:weakness_smoke",
-                "shape": "CIRCLE",
-                "rotation": "LOOK",
-                "origin": "CENTER",
-                "count": 10,
-                "min_speed": 0,
-                "max_speed": 0.05
-              }
-            ],
-            "model": {
-              "model_id": "archers_expansion:projectile/pin_down_arrow",
-              "scale": 1.2
-            }
-          }
-        }
-      }
-    },
     "animation": "spell_engine:archery_release",
     "sound": {
       "id": "item.crossbow.shoot"
     }
   },
+
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "launch_properties": {
+        "velocity": 2.0
+      },
+      "projectile": {
+        "client_data": {
+          "travel_particles": [
+            {
+              "particle_id": "spell_engine:weakness_smoke",
+              "shape": "LINE",
+              "origin": "CENTER",
+              "rotation": "LOOK",
+              "roll_offset": 180,
+              "roll": 10,
+              "count": 20,
+              "min_speed": 0.2,
+              "max_speed": 0.22
+            },
+            {
+              "particle_id": "spell_engine:weakness_smoke",
+              "shape": "LINE",
+              "origin": "CENTER",
+              "rotation": "LOOK",
+              "roll": 10,
+              "count": 20,
+              "min_speed": 0.2,
+              "max_speed": 0.32
+            },
+            {
+              "particle_id": "spell_engine:weakness_smoke",
+              "shape": "CIRCLE",
+              "rotation": "LOOK",
+              "origin": "CENTER",
+              "count": 10,
+              "min_speed": 0,
+              "max_speed": 0.05
+            }
+          ],
+          "model": {
+            "model_id": "archers_expansion:projectile/pin_down_arrow",
+            "scale": 1.2
+          }
+        }
+      }
+    }
+  },
+
   "impact": [
     {
       "action": {
@@ -107,9 +118,14 @@
       }
     }
   ],
+
   "cost": {
-    "cooldown_duration": 28,
     "exhaust" : 0.3,
-    "item_id": "arrow"
+    "item": {
+      "id": "arrow"
+    },
+    "cooldown": {
+      "duration": 28
+    }
   }
 }

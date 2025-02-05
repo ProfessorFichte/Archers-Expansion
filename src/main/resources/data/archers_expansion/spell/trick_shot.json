@@ -4,60 +4,71 @@
   "learn": {
     "tier": 2
   },
-  "cast": {
-    "duration": 0.6,
-    "animation": "spell_engine:archery_pull",
-    "sound": {
-      "id": "archers:bow_pull",
-      "randomness": 0
+
+  "active": {
+    "cast": {
+      "duration": 0.6,
+      "animation": "spell_engine:archery_pull",
+      "animates_ranged_weapon": true,
+      "sound": {
+        "id": "archers:bow_pull"
+      }
     }
   },
+
+  "target": {
+    "type": "AIM",
+    "aim": { }
+  },
+
   "release": {
-    "target": {
-      "type": "PROJECTILE",
-      "projectile": {
-        "launch_properties": {
-          "velocity": 1.2
-        },
-        "projectile": {
-          "perks": {
-            "ricochet": 7,
-            "ricochet_range": 26
-          },
-          "client_data": {
-            "travel_particles": [
-              {
-                "particle_id": "crit",
-                "shape": "LINE",
-                "origin": "CENTER",
-                "rotation": "LOOK",
-                "roll": 1,
-                "count": 2,
-                "min_speed": 0.2,
-                "max_speed": 0.22
-              },
-              {
-                "particle_id": "spell_engine:dripping_blood",
-                "shape": "SPHERE",
-                "origin": "CENTER",
-                "count": 10.0,
-                "min_speed": 0.1,
-                "max_speed": 0.3
-              }
-            ],
-            "model": {
-              "model_id": "archers_expansion:projectile/regular_arrow",
-              "scale": 1.0
-            }
-          }
-        }
-      }
-    },
     "animation": "spell_engine:archery_release",
     "sound": {
       "id": "archers_expansion:trick_shot"
     }
   },
+
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "launch_properties": {
+        "velocity": 1.2
+      },
+      "projectile": {
+        "perks": {
+          "ricochet": 7,
+          "ricochet_range": 26
+        },
+        "client_data": {
+          "travel_particles": [
+            {
+              "particle_id": "crit",
+              "shape": "LINE",
+              "origin": "CENTER",
+              "rotation": "LOOK",
+              "roll": 1,
+              "count": 2,
+              "min_speed": 0.2,
+              "max_speed": 0.22
+            },
+            {
+              "particle_id": "spell_engine:dripping_blood",
+              "shape": "SPHERE",
+              "origin": "CENTER",
+              "count": 10.0,
+              "min_speed": 0.1,
+              "max_speed": 0.3
+            }
+          ],
+          "model": {
+            "model_id": "archers_expansion:projectile/regular_arrow",
+            "scale": 1.0
+          }
+        }
+      }
+    }
+  },
+
   "impact": [
     {
       "action": {
@@ -108,10 +119,14 @@
       }
     }
   ],
+
   "cost": {
-    "cooldown_duration": 10,
     "exhaust" : 0.3,
-    "item_id": "arrow",
-    "cooldown_haste_affected": true
+    "item": {
+      "id": "arrow"
+    },
+    "cooldown": {
+      "duration": 10
+    }
   }
 }

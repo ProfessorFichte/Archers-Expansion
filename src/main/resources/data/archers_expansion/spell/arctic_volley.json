@@ -4,74 +4,85 @@
   "learn": {
     "tier": 2
   },
-  "cast": {
-    "duration": 0.6,
-    "animation": "spell_engine:archery_pull",
-    "sound": {
-      "id": "archers:bow_pull",
-      "randomness": 0
-    },
-    "particles": [
-      {
-        "particle_id": "spell_engine:snowflake",
-        "shape": "PIPE",
-        "origin": "CENTER",
-        "count": 0.5,
-        "min_speed": 0.1,
-        "max_speed": 0.2
-      }
-    ]
-  },
-  "release": {
-    "target": {
-      "type": "PROJECTILE",
-      "projectile": {
-        "launch_properties": {
-          "velocity": 1.3,
-          "extra_launch_count": 5,
-          "extra_launch_delay": 0
-        },
-        "projectile": {
-          "divergence": 35,
-          "perks": {
-            "pierce": 0
-          },
-          "client_data": {
-            "travel_particles": [
-              {
-                "particle_id": "spell_engine:frost_hit",
-                "shape": "LINE",
-                "origin": "CENTER",
-                "rotation": "LOOK",
-                "roll": 10,
-                "count": 2,
-                "min_speed": 0.2,
-                "max_speed": 0.22
-              },
-              {
-                "particle_id": "spell_engine:snowflake",
-                "shape": "CIRCLE",
-                "rotation": "LOOK",
-                "origin": "CENTER",
-                "count": 1,
-                "min_speed": 0,
-                "max_speed": 0.05
-              }
-            ],
-            "model": {
-              "model_id": "archers_expansion:projectile/glacial_arrow",
-              "scale": 1.0,
-              "light_level": 10
-            }
-          }
+
+  "active": {
+    "cast": {
+      "duration": 0.6,
+      "animation": "spell_engine:archery_pull",
+      "sound": {
+        "id": "archers:bow_pull",
+        "randomness": 0
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:snowflake",
+          "shape": "PIPE",
+          "origin": "CENTER",
+          "count": 0.5,
+          "min_speed": 0.1,
+          "max_speed": 0.2
         }
-      }
-    },
+      ]
+    }
+  },
+
+  "target": {
+    "type": "AIM",
+    "aim": { }
+  },
+
+  "release": {
     "animation": "spell_engine:archery_release",
     "sound": {
       "id": "spell_engine:generic_frost_release"
     }
   },
+
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "launch_properties": {
+        "velocity": 1.3,
+        "extra_launch_count": 5,
+        "extra_launch_delay": 0
+      },
+      "projectile": {
+        "divergence": 35,
+        "perks": {
+          "pierce": 0
+        },
+        "client_data": {
+          "travel_particles": [
+            {
+              "particle_id": "spell_engine:frost_hit",
+              "shape": "LINE",
+              "origin": "CENTER",
+              "rotation": "LOOK",
+              "roll": 10,
+              "count": 2,
+              "min_speed": 0.2,
+              "max_speed": 0.22
+            },
+            {
+              "particle_id": "spell_engine:snowflake",
+              "shape": "CIRCLE",
+              "rotation": "LOOK",
+              "origin": "CENTER",
+              "count": 1,
+              "min_speed": 0,
+              "max_speed": 0.05
+            }
+          ],
+          "model": {
+            "model_id": "archers_expansion:projectile/glacial_arrow",
+            "scale": 1.0,
+            "light_level": 10
+          }
+        }
+      }
+    }
+  },
+
   "impact": [
     {
       "target_conditions": [
@@ -138,10 +149,14 @@
       ]
     }
   ],
+
   "cost": {
-    "cooldown_duration": 10,
     "exhaust" : 0.3,
-    "item_id": "arrow",
-    "consume_item": false
+    "item": {
+      "id": "arrow"
+    },
+    "cooldown": {
+      "duration": 10
+    }
   }
 }

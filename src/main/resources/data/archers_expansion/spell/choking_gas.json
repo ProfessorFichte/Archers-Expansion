@@ -4,58 +4,69 @@
   "learn": {
     "tier": 4
   },
-  "cast": {
-    "duration": 1.25,
-    "animation": "spell_engine:archery_pull",
-    "particles": [
-      {
-        "particle_id": "more_rpg_classes:poison_smoke",
-        "shape": "SPHERE",
-        "origin": "LAUNCH_POINT",
-        "count": 0.5,
-        "min_speed": 0.1,
-        "max_speed": 0.2
+
+  "active": {
+    "cast": {
+      "duration": 1.25,
+      "animation": "spell_engine:archery_pull",
+      "particles": [
+        {
+          "particle_id": "more_rpg_classes:poison_smoke",
+          "shape": "SPHERE",
+          "origin": "LAUNCH_POINT",
+          "count": 0.5,
+          "min_speed": 0.1,
+          "max_speed": 0.2
+        }
+      ],
+      "sound": {
+        "id": "archers:bow_pull",
+        "randomness": 0
       }
-    ],
-    "sound": {
-      "id": "archers:bow_pull",
-      "randomness": 0
     }
   },
+
+  "target": {
+    "type": "AIM",
+    "aim": { }
+  },
+
   "release": {
-    "target": {
-      "type": "PROJECTILE",
-      "projectile": {
-        "launch_properties": {
-          "velocity": 1.2
-        },
-        "projectile": {
-          "client_data": {
-            "travel_particles": [
-              {
-                "particle_id": "more_rpg_classes:gas_cloud",
-                "shape": "LINE",
-                "origin": "CENTER",
-                "rotation": "LOOK",
-                "roll": 1,
-                "count": 25,
-                "min_speed": 0.2,
-                "max_speed": 0.32
-              }
-            ],
-            "model": {
-              "model_id": "archers_expansion:projectile/choking_gas_arrow",
-              "scale": 1.0
-            }
-          }
-        }
-      }
-    },
     "animation": "spell_engine:archery_release",
     "sound": {
       "id": "entity.arrow.shoot"
     }
   },
+
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "launch_properties": {
+        "velocity": 1.2
+      },
+      "projectile": {
+        "client_data": {
+          "travel_particles": [
+            {
+              "particle_id": "more_rpg_classes:gas_cloud",
+              "shape": "LINE",
+              "origin": "CENTER",
+              "rotation": "LOOK",
+              "roll": 1,
+              "count": 25,
+              "min_speed": 0.2,
+              "max_speed": 0.32
+            }
+          ],
+          "model": {
+            "model_id": "archers_expansion:projectile/choking_gas_arrow",
+            "scale": 1.0
+          }
+        }
+      }
+    }
+  },
+
   "impact": [
     {
       "action": {
@@ -154,10 +165,14 @@
       "id": "archers_expansion:poison_cloud"
     }
   },
+
   "cost": {
-    "cooldown_duration": 28,
     "exhaust" : 0.3,
-    "item_id": "arrow",
-    "cooldown_haste_affected": true
+    "item": {
+      "id": "arrow"
+    },
+    "cooldown": {
+      "duration": 28
+    }
   }
 }

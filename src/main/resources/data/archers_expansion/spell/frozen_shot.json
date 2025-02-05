@@ -4,10 +4,10 @@
   "learn": {
     "tier": 1
   },
+
+  "active": { },
+
   "release": {
-    "target": {
-      "type": "SELF"
-    },
     "sound": {
       "id": "spell_engine:generic_frost_impact",
       "volume": 0.5
@@ -23,20 +23,51 @@
       }
     ]
   },
+
+  "deliver": {
+    "type": "STASH_EFFECT",
+    "stash_effect": {
+      "id": "archers_expansion:frozen_shot",
+      "duration": 10,
+      "amplifier": 0,
+      "trigger": {
+        "type": "ARROW_SHOT"
+      },
+      "impact_mode": "TRANSFER"
+    }
+  },
+
   "impact": [
     {
+      "target_conditions": [
+        {
+          "entity_type": "#minecraft:freeze_immune_entity_types",
+          "allow_action": false
+        }
+      ],
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "archers_expansion:frozen_shot",
+          "apply_mode": "ADD",
           "duration": 10,
-          "apply_mode": "SET",
-          "amplifier": 0,
+          "amplifier": 6,
+          "effect_id": "more_rpg_classes:frosted",
           "show_particles": false
         }
-      }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:frost_hit",
+          "shape": "CIRCLE",
+          "origin": "CENTER",
+          "count": 5,
+          "min_speed": 0.1,
+          "max_speed": 0.35
+        }
+      ]
     }
   ],
+
   "arrow_perks": {
     "override_render": {
       "model_id": "archers_expansion:projectile/glacial_arrow",
@@ -44,36 +75,6 @@
       "light_level": 10
     },
     "bypass_iframes": true,
-    "impact": [
-      {
-        "target_conditions": [
-          {
-            "entity_type": "#minecraft:freeze_immune_entity_types",
-            "allow_action": false
-          }
-        ],
-        "action": {
-          "type": "STATUS_EFFECT",
-          "status_effect": {
-            "apply_mode": "ADD",
-            "duration": 10,
-            "amplifier": 6,
-            "effect_id": "more_rpg_classes:frosted",
-            "show_particles": false
-          }
-        },
-        "particles": [
-          {
-            "particle_id": "spell_engine:frost_hit",
-            "shape": "CIRCLE",
-            "origin": "CENTER",
-            "count": 5,
-            "min_speed": 0.1,
-            "max_speed": 0.35
-          }
-        ]
-      }
-    ],
     "travel_particles": [
       {
         "particle_id": "spell_engine:frost_hit",
@@ -96,7 +97,10 @@
       }
     ]
   },
+
   "cost": {
-    "cooldown_duration": 10
+    "cooldown": {
+      "duration": 10
+    }
   }
 }

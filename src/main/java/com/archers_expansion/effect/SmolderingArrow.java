@@ -7,8 +7,8 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.Box;
 import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.internals.target.EntityRelations;
 import net.spell_engine.particle.ParticleHelper;
-import net.spell_engine.utils.TargetHelper;
 
 public class SmolderingArrow extends StatusEffect {
     public static final ParticleBatch smoke = new ParticleBatch(
@@ -17,8 +17,23 @@ public class SmolderingArrow extends StatusEffect {
             ParticleBatch.Rotation.LOOK, 50, 0.1F, 0.8F, 360);
 
 
+
+
     protected SmolderingArrow(StatusEffectCategory category, int color) {
         super(category, color);
+    }
+
+    public static boolean isProtected(Entity target, LivingEntity attacker) {
+        var relation = EntityRelations.getRelation(attacker, target);
+        switch (relation) {
+            case ALLY, FRIENDLY -> {
+                return true;
+            }
+            case NEUTRAL, MIXED, HOSTILE -> {
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -39,8 +54,7 @@ public class SmolderingArrow extends StatusEffect {
         for(Entity entities : entity.getEntityWorld().getOtherEntities(entity, radius, EntityPredicates.VALID_LIVING_ENTITY)){
             if (entities != null) {
                 if(entities instanceof LivingEntity target){
-                    var relation = TargetHelper.getRelation(attacker,target);
-                    if(relation == TargetHelper.Relation.HOSTILE || relation == TargetHelper.Relation.MIXED || relation == TargetHelper.Relation.NEUTRAL) {
+                    if(!isProtected(target,attacker)) {
                         target.damage(entity.getDamageSources().onFire(),1.0F *(amplifier + 1));
                         if (!entity.getWorld().isClient()) {
                             ParticleHelper.sendBatches(target, new ParticleBatch[]{smoke});

@@ -10,6 +10,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.*;
+import net.spell_engine.api.spell.Spell;
 
 import java.util.ArrayList;
 
@@ -64,11 +65,10 @@ public class Effects {
                 effectsConfig.value.frozen_pact_decreased_attack, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         PIN_DOWN.effect.
                 addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,PIN_DOWN.modifierId(),
-                -1.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-
-        SpellStash.configure(FAST_SHOT.effect, Identifier.of(MOD_ID, "fast_shot"), 0);
-        SpellStash.configure(FROZEN_SHOT.effect, Identifier.of(MOD_ID, "frozen_shot"), 0);
-        SpellStash.configure(SMOLDERING_ARROWS.effect, Identifier.of(MOD_ID, "smoldering_arrow"), 1);
+                -1.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+                .addAttributeModifier(
+                        EntityAttributes.GENERIC_JUMP_STRENGTH, PIN_DOWN.modifierId(),
+                        -1.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
 
         Synchronized.configure(FAST_SHOT.effect,true);
         Synchronized.configure(CHOKING_GAS.effect,true);
@@ -76,7 +76,9 @@ public class Effects {
         Synchronized.configure(DISABLING_SHOT.effect,true);
         Synchronized.configure(ENCHANTED_CRSYSTAL_ARROW.effect,true);
         Synchronized.configure(FROZEN_PACT.effect,true);
+        Synchronized.configure(FROZEN_SHOT.effect,true);
         Synchronized.configure(SMOLDERING_ARROW.effect,true);
+        Synchronized.configure(SMOLDERING_ARROWS.effect,true);
         Synchronized.configure(POINT_BLANK_SHOT.effect,true);
         Synchronized.configure(PIN_DOWN.effect,true);
 
