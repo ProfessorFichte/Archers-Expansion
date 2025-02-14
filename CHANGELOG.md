@@ -1,5 +1,8 @@
 # 1.3.0 - 1.21.1
 - Spell Engine 1.5 Update
+- Update to Fabric Loom 1.9
+- Buffed Smoldering Arrow
+- Buffed Arctic Volley
 
 # 1.2.1 - 1.21.1
 - Disabling Shot, Pin Down & Point Blank Shot does not work on "#c:bosses"

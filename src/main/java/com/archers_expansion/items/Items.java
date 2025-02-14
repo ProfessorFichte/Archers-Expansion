@@ -4,8 +4,8 @@ import com.archers_expansion.ArchersExpansionMod;
 import com.archers_expansion.items.armors.Armors;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.item.trinket.SpellBooks;
-import net.spell_engine.api.spell.SpellContainer;
+import net.spell_engine.api.item.SpellBooks;
+import net.spell_engine.api.spell.container.SpellContainer;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 

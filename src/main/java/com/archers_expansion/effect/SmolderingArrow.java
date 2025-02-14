@@ -8,7 +8,7 @@ import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.Box;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.internals.target.EntityRelations;
-import net.spell_engine.particle.ParticleHelper;
+import net.spell_engine.fx.ParticleHelper;
 
 public class SmolderingArrow extends StatusEffect {
     public static final ParticleBatch smoke = new ParticleBatch(

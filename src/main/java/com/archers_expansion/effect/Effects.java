@@ -10,6 +10,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.*;
+import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.api.spell.Spell;
 
 import java.util.ArrayList;
@@ -69,6 +70,9 @@ public class Effects {
                 .addAttributeModifier(
                         EntityAttributes.GENERIC_JUMP_STRENGTH, PIN_DOWN.modifierId(),
                         -1.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        CHOKING_GAS.effect.
+                addAttributeModifier(SpellEngineAttributes.HEALING_TAKEN.entry,CHOKING_GAS.modifierId(),
+                        effectsConfig.value.choking_gas_healing_taken, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
 
         Synchronized.configure(FAST_SHOT.effect,true);
         Synchronized.configure(CHOKING_GAS.effect,true);
@@ -84,8 +88,6 @@ public class Effects {
 
         ActionImpairing.configure(CHOKING_GAS.effect, EntityActionsAllowed.SILENCE);
         ActionImpairing.configure(ENCHANTED_CRSYSTAL_ARROW.effect, EntityActionsAllowed.STUN);
-
-        HealthImpacting.configureHealingTaken(CHOKING_GAS.effect,  effectsConfig.value.choking_gas_healing_taken);
 
         for (var entry: entries) {
             entry.register();
