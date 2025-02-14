@@ -1,11 +1,12 @@
 {
   "school": "PHYSICAL_RANGED",
   "range": 0,
-  "learn": {
-    "tier": 1
-  },
+  "tier": 1,
+  "learn": {},
 
-  "active": { },
+  "active": {
+    "scroll": {}
+  },
 
   "release": {
     "sound": {
@@ -28,17 +29,19 @@
     "type": "STASH_EFFECT",
     "stash_effect": {
       "id": "archers_expansion:fast_shot",
-      "duration": 8,
       "amplifier": 0,
-      "trigger": {
-        "type": "ARROW_SHOT"
-      },
+      "duration": 8.0,
+      "triggers": [
+        {
+          "type": "ARROW_SHOT"
+        }
+      ],
       "consume": 0,
       "impact_mode": "TRANSFER"
     }
   },
 
-  "impact": [
+  "impacts": [
     {
       "action": {
         "type": "STATUS_EFFECT",

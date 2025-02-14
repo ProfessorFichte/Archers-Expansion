@@ -1,11 +1,11 @@
 {
   "school": "PHYSICAL_RANGED",
   "range": 40,
-  "learn": {
-    "tier": 4
-  },
+  "tier": 4,
+  "learn": {},
 
   "active": {
+    "scroll": {},
     "cast": {
       "duration": 1.5,
       "animation": "spell_engine:archery_pull",
@@ -76,7 +76,7 @@
     }
   },
 
-  "impact": [
+  "impacts": [
     {
       "action": {
         "type": "DAMAGE",

@@ -1,44 +1,37 @@
 {
   "school": "PHYSICAL_RANGED",
-  "range": 0,
-  "learn": {
-    "tier": 1
+  "range": 0.0,
+  "tier": 1,
+  "learn": {},
+  "active": {
+    "scroll": {}
   },
 
-  "active": { },
-
   "release": {
+    "particles": [
+    ],
     "sound": {
       "id": "spell_engine:generic_frost_impact",
       "volume": 0.5
-    },
-    "particles": [
-      {
-        "particle_id": "spell_engine:frost_hit",
-        "shape": "SPHERE",
-        "origin": "CENTER",
-        "count": 5,
-        "min_speed": 0.5,
-        "max_speed": 0.75
-      }
-    ]
+    }
   },
 
   "deliver": {
     "type": "STASH_EFFECT",
     "stash_effect": {
       "id": "archers_expansion:frozen_shot",
-      "duration": 10,
-      "amplifier": 0,
-      "trigger": {
-        "type": "ARROW_SHOT"
-      },
-      "consume": 0,
+      "amplifier": 5,
+      "duration": 10.0,
+      "triggers": [
+        {
+          "type": "ARROW_SHOT"
+        }
+      ],
       "impact_mode": "TRANSFER"
     }
   },
 
-  "impact": [
+  "impacts": [
     {
       "target_conditions": [
         {
@@ -49,16 +42,15 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "apply_mode": "ADD",
-          "duration": 10,
-          "amplifier": 4,
           "effect_id": "more_rpg_classes:frosted",
-          "show_particles": false
+          "duration": 10.0,
+          "amplifier": 4,
+          "apply_mode": "ADD"
         }
       },
       "particles": [
         {
-          "particle_id": "spell_engine:frost_hit",
+          "particle_id": "spell_engine:frost_shard",
           "shape": "CIRCLE",
           "origin": "CENTER",
           "count": 5,
@@ -78,7 +70,7 @@
     "bypass_iframes": true,
     "travel_particles": [
       {
-        "particle_id": "spell_engine:frost_hit",
+        "particle_id": "spell_engine:magic_frost_impact_burst",
         "shape": "LINE",
         "origin": "CENTER",
         "rotation": "LOOK",
@@ -101,7 +93,7 @@
 
   "cost": {
     "cooldown": {
-      "duration": 10
+      "duration": 10.0
     }
   }
 }

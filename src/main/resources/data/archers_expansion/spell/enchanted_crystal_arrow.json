@@ -1,11 +1,11 @@
 {
   "school": "PHYSICAL_RANGED",
   "range": 64,
-  "learn": {
-    "tier": 4
-  },
+  "tier": 4,
+  "learn": {},
 
   "active": {
+    "scroll": {},
     "cast": {
       "duration": 1.25,
       "animation": "spell_engine:archery_pull",
@@ -54,7 +54,7 @@
         "client_data": {
           "travel_particles": [
             {
-              "particle_id": "spell_engine:frost_hit",
+              "particle_id": "spell_engine:magic_frost_impact_burst",
               "shape": "LINE",
               "origin": "CENTER",
               "rotation": "LOOK",
@@ -64,7 +64,7 @@
               "max_speed": 0.22
             },
             {
-              "particle_id": "spell_engine:frost_hit",
+              "particle_id": "spell_engine:magic_frost_impact_burst",
               "shape": "LINE",
               "origin": "CENTER",
               "rotation": "LOOK",
@@ -95,7 +95,7 @@
     }
   },
 
-  "impact": [
+  "impacts": [
     {
       "target_conditions": [
         {
@@ -120,7 +120,7 @@
       },
       "particles": [
         {
-          "particle_id": "spell_engine:frost_hit",
+          "particle_id": "spell_engine:magic_frost_impact_burst",
           "shape": "CIRCLE",
           "origin": "CENTER",
           "count": 25,
@@ -128,7 +128,7 @@
           "max_speed": 0.35
         },
         {
-          "particle_id": "spell_engine:frost_hit",
+          "particle_id": "spell_engine:magic_frost_impact_burst",
           "shape": "SPHERE",
           "origin": "FEET",
           "count": 10,

@@ -1,11 +1,12 @@
 {
   "school": "PHYSICAL_RANGED",
   "range": 0,
-  "learn": {
-    "tier": 1
-  },
+  "tier": 1,
+  "learn": {},
 
-  "active": { },
+  "active": {
+    "scroll": {}
+  },
 
   "release": {
     "sound": {
@@ -14,7 +15,7 @@
     },
     "particles": [
       {
-        "particle_id": "spell_engine:flame_medium_b",
+        "particle_id": "spell_engine:flame",
         "shape": "SPHERE",
         "origin": "CENTER",
         "count": 5.0,
@@ -28,16 +29,18 @@
     "type": "STASH_EFFECT",
     "stash_effect": {
       "id": "archers_expansion:smoldering_arrows",
-      "duration": 10,
-      "amplifier": 1,
-      "trigger": {
-        "type": "ARROW_SHOT"
-      },
+      "amplifier": 2,
+      "duration": 10.0,
+      "triggers": [
+        {
+          "type": "ARROW_SHOT"
+        }
+      ],
       "impact_mode": "TRANSFER"
     }
   },
 
-  "impact": [
+  "impacts": [
     {
       "action": {
         "type": "STATUS_EFFECT",

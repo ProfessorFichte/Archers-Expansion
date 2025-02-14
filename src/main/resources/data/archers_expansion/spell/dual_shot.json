@@ -1,11 +1,11 @@
 {
   "school": "PHYSICAL_RANGED",
   "range": 0,
-  "learn": {
-    "tier": 2
-  },
+  "tier": 2,
+  "learn": {},
 
   "active": {
+    "scroll": {},
     "cast": {
       "duration": 0.35,
       "animation": "spell_engine:archery_pull",
