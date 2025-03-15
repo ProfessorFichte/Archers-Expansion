@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "minecraft:book"
+        },
+        {
+          "type": "item",
+          "name": "archers_expansion:war_archer_spell_book",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{spell_container:{pool:\"archers_expansion:war_archer\",spell_ids:[\"archers_expansion:smoldering_arrow\"],spell_container:\"ARCHERY\"}}"
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "archers_expansion:war_archer_spell_book",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{spell_container:{pool:\"archers_expansion:war_archer\",spell_ids:[\"archers_expansion:smoldering_arrow\",\"archers_expansion:dual_shot\"],spell_container:\"ARCHERY\"}}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
