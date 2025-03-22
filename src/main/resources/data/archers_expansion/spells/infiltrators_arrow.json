@@ -1,0 +1,101 @@
+{
+  "school": "PHYSICAL_RANGED",
+  "range": 40,
+  "learn": {
+    "tier": 3
+  },
+  "cast": {
+    "duration": 0.5,
+    "animation": "spell_engine:archery_pull",
+    "sound": {
+      "id": "archers:bow_pull",
+      "randomness": 0
+    }
+  },
+  "release": {
+    "target": {
+      "type": "PROJECTILE",
+      "projectile": {
+        "launch_properties": {
+          "velocity": 1.2
+        },
+        "projectile": {
+          "client_data": {
+            "travel_particles": [
+              {
+                "particle_id": "poof",
+                "shape": "LINE",
+                "origin": "CENTER",
+                "rotation": "LOOK",
+                "roll": 1,
+                "count": 2,
+                "min_speed": 0.2,
+                "max_speed": 0.22
+              }
+            ],
+            "model": {
+              "model_id": "archers_expansion:projectile/regular_arrow",
+              "scale": 1.0
+            }
+          }
+        }
+      }
+    },
+    "animation": "spell_engine:archery_release",
+    "sound": {
+      "id": "entity.arrow.shoot"
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.75,
+          "knockback": 1.0
+        }
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "apply_mode": "SET",
+          "duration": 10,
+          "amplifier": 0,
+          "effect_id": "archers_expansion:infiltrators_arrow",
+          "show_particles": false
+        },
+        "apply_to_caster": true
+      },
+      "particles": [
+        {
+          "particle_id": "poof",
+          "shape": "PILLAR",
+          "origin": "CENTER",
+          "count": 5,
+          "min_speed": 0.6,
+          "max_speed": 1.0
+        },
+        {
+          "particle_id": "spell_engine:smoke_medium",
+          "shape": "CIRCLE",
+          "origin": "FEET",
+          "count": 5,
+          "min_speed": 0.3,
+          "max_speed": 0.6
+        }
+      ],
+      "sound": {
+        "id": "archers_expansion:infiltrator_vanish",
+        "randomness": 0
+      }
+    }
+  ],
+  "cost": {
+    "cooldown_duration": 42,
+    "exhaust" : 0.3,
+    "item_id": "arrow",
+    "cooldown_haste_affected": false
+  }
+}
