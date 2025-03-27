@@ -2,17 +2,22 @@ package com.archers_expansion;
 
 import com.archers_expansion.config.Default;
 import com.archers_expansion.effect.Effects;
+import com.archers_expansion.entity.WintersGripEntity;
 import com.archers_expansion.items.Group;
 import com.archers_expansion.items.Items;
 import com.archers_expansion.items.armors.Armors;
 import com.archers_expansion.sounds.Sounds;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import com.archers_expansion.config.EffectsConfig;
+import net.minecraft.util.Identifier;
 import net.spell_engine.api.item.ItemConfig;
 import net.tinyconfig.ConfigManager;
 import org.slf4j.Logger;
@@ -55,6 +60,18 @@ public class ArchersExpansionMod implements ModInitializer {
 		Sounds.register();
 		Armors.register(itemConfig.value.armor_sets);
 		itemConfig.save();
+	}
+	static{
+		WintersGripEntity.ENTITY_TYPE = Registry.register(
+				Registries.ENTITY_TYPE,
+				new Identifier(MOD_ID, "winters_grip"),
+				FabricEntityTypeBuilder.<WintersGripEntity>create(SpawnGroup.MISC, WintersGripEntity::new)
+						.dimensions(EntityDimensions.changing(6F, 0.5F))
+						.fireImmune()
+						.trackRangeBlocks(128)
+						.trackedUpdateRate(20)
+						.build()
+		);
 	}
 
 }
