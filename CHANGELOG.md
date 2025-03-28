@@ -1,3 +1,6 @@
+# 1.3.1 - 1.21.1
+- Spell Engine 1.6 Update
+
 # 1.3.0 - 1.21.1
 - Spell Engine 1.5 Update
 - Update to Fabric Loom 1.9

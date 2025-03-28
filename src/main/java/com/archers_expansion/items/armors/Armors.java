@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
+import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 
 import java.util.ArrayList;
@@ -110,13 +111,15 @@ public class Armors {
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults) {
+    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
         var entry = Armor.Entry.create(
                 material,
                 id,
                 durability,
                 factory,
-                defaults);
+                defaults,
+                Equipment.LootProperties.of(tier)
+        );
         entries.add(entry);
         return entry;
     }
@@ -152,7 +155,7 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
                                             AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t1)
                                     ))
-                    )
+                    ),2
             ).armorSet();
 
     public static final Armor.Set war_archer_t1 =
@@ -182,7 +185,7 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t1),
                                             AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t1)
                                     ))
-                    )
+                    ),2
             ).armorSet();
 
     public static final Armor.Set deadeye_t1 =
@@ -216,7 +219,7 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t1),
                                             AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t1)
                                     ))
-                    )
+                    ),2
             ).armorSet();
 
     public static final Armor.Set netherite_tundra_hunter =
@@ -250,7 +253,7 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
                                             AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t2)
                                     ))
-                    )
+                    ),3
             ).armorSet();
 
     public static final Armor.Set netherite_war_archer =
@@ -284,7 +287,7 @@ public class Armors {
                                             AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_armor_toughness_t2),
                                             AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
                                     ))
-                    )
+                    ),3
             ).armorSet();
 
     public static final Armor.Set netherite_deadeye =
@@ -318,7 +321,7 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
                                             AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t2)
                                     ))
-                    )
+                    ),3
             ).armorSet();
 
     public static void register(Map<String, ArmorSetConfig> configs) {
