@@ -1,8 +1,9 @@
 0.2.3 - 1.20.1
 - Improve Enchanted Crystal Arrow Spell Texture
 - Item Re-Textures
-- Add 3.New Treasure Spells for the LNE-Archer Add On
+- Add 3 new Treasure Spells for the LNE-Archer Add On
 - Deadeye: Infiltrator´s Arrow, Tundra Hunter: Winters Grip, War Archer: Fan of Fire
+- Add compat for Loot & Explore Archers Add-On
 
 0.2.2 - 1.20.1
 - fix missing rpg series tag for the armor
