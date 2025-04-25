@@ -1,3 +1,6 @@
+# 1.3.3 - 1.21.1
+- fix lang file because of some outdated description GitHub Issue #4
+
 # 1.3.2 - 1.21.1
 - Add spell Scrolls
 - Add smelting recipes for disassembling weapons and armor pieces
