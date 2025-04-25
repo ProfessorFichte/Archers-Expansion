@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deadeye_feet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "archers_expansion:deadeye_feet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:leather_from_smelting_deadeye_feet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_deadeye_feet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:leather_from_smelting_deadeye_feet"
+    ]
+  }
+}

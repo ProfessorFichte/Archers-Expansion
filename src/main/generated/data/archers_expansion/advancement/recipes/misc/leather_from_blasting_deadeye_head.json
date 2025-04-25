@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deadeye_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": "archers_expansion:deadeye_head"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:leather_from_blasting_deadeye_head"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_deadeye_head"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:leather_from_blasting_deadeye_head"
+    ]
+  }
+}

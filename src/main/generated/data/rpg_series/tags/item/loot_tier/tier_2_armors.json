@@ -1,0 +1,52 @@
+{
+  "values": [
+    {
+      "id": "archers_expansion:tundra_hunter_head",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:tundra_hunter_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:tundra_hunter_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:tundra_hunter_feet",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:war_archer_head",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:war_archer_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:war_archer_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:war_archer_feet",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_head",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_feet",
+      "required": false
+    }
+  ]
+}
