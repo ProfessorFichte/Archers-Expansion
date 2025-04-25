@@ -1,3 +1,8 @@
+# 1.3.2 - 1.21.1
+- Add spell Scrolls
+- Add smelting recipes for disassembling weapons and armor pieces
+- Add datagen
+
 # 1.3.1 - 1.21.1
 - Spell Engine 1.6 Update
 
