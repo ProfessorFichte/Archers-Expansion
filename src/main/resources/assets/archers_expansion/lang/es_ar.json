@@ -1,5 +1,5 @@
 {
-  "itemGroup.archers_expansion.general": "Expansión de Arqueros",
+  "itemGroup.archers_expansion.general": "Archers Expansion",
 
   "item.archers_expansion.deadeye_spell_book": "Lista del Ojo de Águila",
   "item.archers_expansion.deadeye.spell_scroll": "Pergamino del Ojo de Águila",
@@ -47,7 +47,7 @@
   "spell.archers_expansion.enchanted_crystal_arrow.description": "Causa {damage} de daño, aturde y congela al objetivo.",
   "spell.archers_expansion.frozen_pact.name": "Pacto Helado",
   "spell.archers_expansion.frozen_pact.description": "Daña al objetivo según sus ticks de congelación y reduce su ataque por {effect_duration} segundos.",
-  "spell.archers_expansion.frozen_shot.name": "Disparo Congelante"
+  "spell.archers_expansion.frozen_shot.name": "Disparo Congelante",
   "spell.archers_expansion.frozen_shot.description": "Tus próximos disparos acumulan el efecto helado en los objetivos, ralentizándolos y congelándolos.",
 
   "effect.archers_expansion.enchanted_crystal_arrow": "Flecha de Cristal",
