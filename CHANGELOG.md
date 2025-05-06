@@ -1,5 +1,7 @@
 # 1.3.3 - 1.21.1
 - fix lang file because of some outdated description GitHub Issue #4
+- add es_ar translation
+- Add armor meta type tags
 
 # 1.3.2 - 1.21.1
 - Add spell Scrolls

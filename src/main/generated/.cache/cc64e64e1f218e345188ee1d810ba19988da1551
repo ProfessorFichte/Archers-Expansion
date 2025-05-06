@@ -1,6 +1,7 @@
-// 1.21.1	2025-04-25T11:49:16.5470756	Archers Expansion/Tags for minecraft:item
+// 1.21.1	2025-05-06T19:03:35.8113574	Archers Expansion/Tags for minecraft:item
 01622743efc64a391d790cb7383a123d6a719993 data\rpg_series\tags\item\loot_tier\tier_3_armors.json
 4ed2afae423c4109cf6f5b9d78755b4c372b61c3 data\rpg_series\tags\item\loot_tier\tier_2_armors.json
+8be3a3654285d8ca22b8dfa23247460bab2dbe63 data\rpg_series\tags\item\armor_type\archery.json
 8302b1c2a519ce672101e2cb4c3cae95761885d0 data\minecraft\tags\item\foot_armor.json
 4916051744ebe5a2c262786464514f6eef20ce7b data\minecraft\tags\item\chest_armor.json
 6c561347cbfb2ba61b070d8a43a39e1139c753b0 data\minecraft\tags\item\leg_armor.json

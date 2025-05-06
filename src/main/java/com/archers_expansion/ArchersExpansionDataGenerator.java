@@ -12,6 +12,7 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
+import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -30,7 +31,7 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 
 		@Override
 		protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-			generateArmorTags(Armors.entries);
+			generateArmorTags(Armors.entries, RPGSeriesItemTags.ArmorMetaType.ARCHERY);
 		}
 	}
 
