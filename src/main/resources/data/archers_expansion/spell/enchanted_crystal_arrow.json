@@ -1,5 +1,5 @@
 {
-  "school": "PHYSICAL_RANGED",
+  "school": "FROST",
   "range": 64,
   "tier": 4,
   "learn": {},
@@ -111,6 +111,7 @@
           }
         }
       ],
+      "attribute": "ranged_weapon:damage",
       "action": {
         "type": "DAMAGE",
         "damage": {

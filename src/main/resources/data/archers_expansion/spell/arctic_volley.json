@@ -1,5 +1,5 @@
 {
-  "school": "PHYSICAL_RANGED",
+  "school": "FROST",
   "range": 24,
   "tier": 2,
   "learn": {},
@@ -42,21 +42,30 @@
     "type": "PROJECTILE",
     "projectile": {
       "direction_offsets": [
+        {},
         {
-          "yaw": 0,
-          "pitch": 7
+          "yaw": 5
         },
         {
-          "yaw": 7,
-          "pitch": 0
+          "yaw": -5
         },
         {
-          "yaw": 0,
-          "pitch": -7
+          "yaw": 15
         },
         {
-          "yaw": -7,
-          "pitch": 0
+          "yaw": -15
+        },
+        {
+          "yaw": 25
+        },
+        {
+          "yaw": -25
+        },
+        {
+          "yaw": 40
+        },
+        {
+          "yaw": -40
         }
       ],
       "launch_properties": {
@@ -117,6 +126,7 @@
           }
         }
       ],
+      "attribute": "ranged_weapon:damage",
       "action": {
         "type": "DAMAGE",
         "damage": {
