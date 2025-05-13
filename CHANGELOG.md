@@ -1,3 +1,10 @@
+# 1.3.5 - 1.21.1
+- fix errors in structure tags & loot tables
+
+# 1.3.4 - 1.21.1
+- Arctic Volley now acts like a actual volley
+- Add All Assets, Data & Code for the LNE-Compat & Treasure Spells
+
 # 1.3.3 - 1.21.1
 - fix lang file because of some outdated description GitHub Issue #4
 - add es_ar translation

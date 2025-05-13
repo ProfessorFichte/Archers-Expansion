@@ -11,7 +11,8 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.*;
 import net.spell_engine.api.entity.SpellEngineAttributes;
-import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.event.CombatEvents;
+import net.spell_engine.api.spell.event.SpellEvents;
 
 import java.util.ArrayList;
 
@@ -43,10 +44,13 @@ public class Effects {
     public static final Entry CHOKING_GAS = new Entry("choking_gas" , new ChokingGasEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry LEAPING_SHOT = new Entry("leaping_shot", new LeapingShotEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
     public static final Entry DISABLING_SHOT = new Entry("disabling_shot", new DisablingShotEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
+    public static final Entry INFILTRATORS_ARROW = new Entry("infiltrators_arrow", new InfiltratorsArrowEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
+
     //TUNDRA HUNTER
     public static final Entry FROZEN_SHOT = new Entry("frozen_shot",new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x99ccff));
     public static final Entry ENCHANTED_CRSYSTAL_ARROW = new Entry("enchanted_crystal_arrow",new CrystalArrowEffect(StatusEffectCategory.HARMFUL, 0x99ccff));
     public static final Entry FROZEN_PACT = new Entry("frozen_pact",new FrozenPactEffect(StatusEffectCategory.HARMFUL, 0x99ccff));
+    public static final Entry WINTERS_GRASP  = new Entry("winters_grip", new WintersGraspEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
 
     //WAR ARCHER
     public static final Entry SMOLDERING_ARROW = new Entry("smoldering_arrow",new SmolderingArrow(StatusEffectCategory.HARMFUL, 0x805e4d));
@@ -55,6 +59,8 @@ public class Effects {
     public static final Entry PIN_DOWN = new Entry("pin_down",new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
 
     public static void register (){
+        var config = effectsConfig.value;
+
         FAST_SHOT.effect.
                 addAttributeModifier(EntityAttributes_RangedWeapon.HASTE.entry, FAST_SHOT.modifierId(),
                 effectsConfig.value.fast_shot_haste_increase_per_stack, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
@@ -73,6 +79,40 @@ public class Effects {
         CHOKING_GAS.effect.
                 addAttributeModifier(SpellEngineAttributes.HEALING_TAKEN.entry,CHOKING_GAS.modifierId(),
                         effectsConfig.value.choking_gas_healing_taken, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        INFILTRATORS_ARROW.effect.
+                addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, INFILTRATORS_ARROW.modifierId(),
+                config.stealth_movement_speed_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        WINTERS_GRASP.effect.
+                addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, WINTERS_GRASP.modifierId(),
+                config.winters_grasp_movement_speed_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+
+
+        CombatEvents.ENTITY_ANY_ATTACK.register((args) -> {
+            var attacker = args.attacker();
+            if (attacker.hasStatusEffect(INFILTRATORS_ARROW.registryEntry)) {
+                attacker.removeStatusEffect(INFILTRATORS_ARROW.registryEntry);
+            }
+        });
+        var vanishId = Identifier.of(MOD_ID, "infiltrators_arrow");
+        SpellEvents.SPELL_CAST.register((args) -> {
+            var caster = args.caster();
+            var spellId = args.spell().getKey().get().getValue();
+            if (caster.hasStatusEffect(INFILTRATORS_ARROW.registryEntry)&& !spellId.equals(vanishId)) {
+                caster.removeStatusEffect(INFILTRATORS_ARROW.registryEntry);
+            }
+        });
+        CombatEvents.ITEM_USE.register((args) -> {
+            var user = args.user();
+            if (user.hasStatusEffect(INFILTRATORS_ARROW.registryEntry)) {
+                user.removeStatusEffect(INFILTRATORS_ARROW.registryEntry);
+            }
+        });
+        OnRemoval.configure(INFILTRATORS_ARROW.effect, (context) -> {
+            InfiltratorsArrowEffect.onRemove(context.entity());
+        });
+        OnRemoval.configure(WINTERS_GRASP.effect, (context) -> {
+            InfiltratorsArrowEffect.onRemove(context.entity());
+        });
 
         Synchronized.configure(FAST_SHOT.effect,true);
         Synchronized.configure(CHOKING_GAS.effect,true);
@@ -85,6 +125,8 @@ public class Effects {
         Synchronized.configure(SMOLDERING_ARROWS.effect,true);
         Synchronized.configure(POINT_BLANK_SHOT.effect,true);
         Synchronized.configure(PIN_DOWN.effect,true);
+        Synchronized.configure(INFILTRATORS_ARROW.effect,true);
+        Synchronized.configure(WINTERS_GRASP.effect,true);
 
         ActionImpairing.configure(CHOKING_GAS.effect, EntityActionsAllowed.SILENCE);
         ActionImpairing.configure(ENCHANTED_CRSYSTAL_ARROW.effect, EntityActionsAllowed.STUN);

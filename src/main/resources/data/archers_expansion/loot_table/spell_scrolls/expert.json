@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "archers_expansion:spell_scrolls/expert_deadeye",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "archers_expansion:spell_scrolls/expert_war_archer",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "archers_expansion:spell_books/expert_tundra_hunter",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

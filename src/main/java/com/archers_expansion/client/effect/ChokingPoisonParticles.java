@@ -1,18 +1,18 @@
-package com.archers_expansion.client;
+package com.archers_expansion.client.effect;
 
 import net.minecraft.entity.LivingEntity;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.fx.ParticleHelper;
 
-public class PinDownParticles implements CustomParticleStatusEffect.Spawner{
+public class ChokingPoisonParticles implements CustomParticleStatusEffect.Spawner{
     private final ParticleBatch particles;
 
-    public PinDownParticles(int particleCount) {
+    public ChokingPoisonParticles(int particleCount) {
         this.particles = new ParticleBatch(
-                "spell_engine:weakness_smoke",
-                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                null, particleCount, 0.1F, 0.2F, 360);
+                "more_rpg_classes:gas_cloud",
+                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
+                null, particleCount, 0.05F, 0.1F, 360);
     }
 
     @Override

@@ -1,0 +1,78 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spell_engine:scroll",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "spell_engine:spell_container": {
+                  "spell_ids": ["archers_expansion:smoldering_arrow"],
+                  "max_spell_count": 1
+                },
+                "minecraft:custom_model_data": 102,
+                "minecraft:item_name": "{translate:item.archers_expansion.war_archer.spell_scroll}",
+                "minecraft:rarity": "common"
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spell_engine:scroll",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "spell_engine:spell_container": {
+                  "spell_ids": ["archers_expansion:dual_shot"],
+                  "max_spell_count": 1
+                },
+                "minecraft:custom_model_data": 102,
+                "minecraft:item_name": "{translate:item.archers_expansion.war_archer.spell_scroll}",
+                "minecraft:rarity": "uncommon"
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spell_engine:scroll",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "spell_engine:spell_container": {
+                  "spell_ids": ["archers_expansion:point_blank_shot"],
+                  "max_spell_count": 1
+                },
+                "minecraft:custom_model_data": 102,
+                "minecraft:item_name": "{translate:item.archers_expansion.war_archer.spell_scroll}",
+                "minecraft:rarity": "rare"
+              }
+            },
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -3,10 +3,16 @@ package com.archers_expansion.client;
 import com.archers_expansion.client.armor.DeadeyeRenderer;
 import com.archers_expansion.client.armor.TundraArcherRenderer;
 import com.archers_expansion.client.armor.WarArcherRenderer;
+import com.archers_expansion.client.effect.ChokingPoisonParticles;
+import com.archers_expansion.client.effect.CrystalArrowParticles;
+import com.archers_expansion.client.effect.PinDownParticles;
+import com.archers_expansion.client.entity.WintersGripRenderer;
 import com.archers_expansion.effect.Effects;
+import com.archers_expansion.entity.WintersGripEntity;
 import com.archers_expansion.items.armors.Armors;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.item.armor.Armor;
@@ -28,7 +34,9 @@ public class ArchersExpansionModClient implements ClientModInitializer {
                 Identifier.of(MOD_ID, "projectile/smoldering_arrow"),
                 Identifier.of(MOD_ID, "projectile/fast_arrow"),
                 Identifier.of(MOD_ID, "projectile/choking_gas_arrow"),
-                Identifier.of(MOD_ID, "projectile/pin_down_arrow")
+                Identifier.of(MOD_ID, "projectile/pin_down_arrow"),
+                Identifier.of(MOD_ID, "projectile/infiltrators_arrow"),
+                WintersGripRenderer.baseId
         ));
 
         registerArmorRenderer(Armors.deadeye_t1, DeadeyeRenderer::deadeye);
@@ -42,7 +50,7 @@ public class ArchersExpansionModClient implements ClientModInitializer {
         CustomParticleStatusEffect.register(Effects.CHOKING_GAS.effect, new ChokingPoisonParticles(5));
         CustomParticleStatusEffect.register(Effects.PIN_DOWN.effect, new PinDownParticles(2));
 
-
+        EntityRendererRegistry.register(WintersGripEntity.ENTITY_TYPE, WintersGripRenderer::new);
 
     }
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

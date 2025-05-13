@@ -28,5 +28,10 @@
     "sounds": [
       "archers_expansion:poison_cloud"
     ]
+  },
+  "infiltrator_vanish": {
+    "sounds": [
+      "archers_expansion:infiltrator_vanish"
+    ]
   }
 }

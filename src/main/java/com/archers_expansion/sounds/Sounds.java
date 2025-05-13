@@ -20,6 +20,8 @@ public class Sounds {
     public static SoundEvent POINT_BLANK_SHOT_EVENT= SoundEvent.of(POINT_BLANK_SHOT_ID);
     public static final Identifier POISON_CLOUD_ID = Identifier.of(MOD_ID, "poison_cloud");
     public static SoundEvent POISON_CLOUD_EVENT= SoundEvent.of(POISON_CLOUD_ID);
+    public static final Identifier INFILTRATOR_VANISH_ID = Identifier.of(MOD_ID, "infiltrator_vanish");
+    public static SoundEvent INFILTRATOR_VANISH_EVENT= SoundEvent.of(INFILTRATOR_VANISH_ID);
 
     public static void register() {
         Registry.register(Registries.SOUND_EVENT, TRICK_SHOT_ID, TRICK_SHOT_EVENT);
@@ -28,5 +30,6 @@ public class Sounds {
         Registry.register(Registries.SOUND_EVENT, PIN_DOWN_ID, PIN_DOWN_EVENT);
         Registry.register(Registries.SOUND_EVENT, POINT_BLANK_SHOT_ID, POINT_BLANK_SHOT_EVENT);
         Registry.register(Registries.SOUND_EVENT, POISON_CLOUD_ID, POISON_CLOUD_EVENT);
+        Registry.register(Registries.SOUND_EVENT, INFILTRATOR_VANISH_ID, INFILTRATOR_VANISH_EVENT);
     }
 }
