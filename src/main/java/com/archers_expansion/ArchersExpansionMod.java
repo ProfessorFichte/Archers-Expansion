@@ -44,7 +44,7 @@ public class ArchersExpansionMod implements ModInitializer {
 
 	private void registerItemGroup() {
 		Group.ARCHERS_EXPANSION= FabricItemGroup.builder()
-				.icon(() -> new ItemStack(Armors.deadeye_t1.head.asItem()))
+				.icon(() -> new ItemStack(Armors.war_archer_t1.head.asItem()))
 				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
 				.build();
 		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);

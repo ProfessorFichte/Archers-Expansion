@@ -1,3 +1,7 @@
+# 1.3.6 - 1.21.1
+- update to newest spell engine api
+- change item group icon to war archer armor head
+
 # 1.3.5 - 1.21.1
 - fix errors in structure tags & loot tables
 

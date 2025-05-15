@@ -77,7 +77,7 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "apply_mode": "ADD",
+          "apply_mode": "SET",
           "duration": 2,
           "amplifier": 0,
           "effect_id": "archers_expansion:disabling_shot",
@@ -115,7 +115,7 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "apply_mode": "ADD",
+          "apply_mode": "SET",
           "duration": 2,
           "amplifier": 0,
           "effect_id": "archers_expansion:leaping_shot",

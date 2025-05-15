@@ -89,9 +89,9 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "apply_mode": "ADD",
+          "apply_mode": "SET",
           "duration": 7,
-          "amplifier": 1,
+          "amplifier_power_multiplier": 0.15,
           "effect_id": "more_rpg_classes:bleeding",
           "show_particles": false
         }

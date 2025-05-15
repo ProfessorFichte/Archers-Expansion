@@ -47,8 +47,10 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "apply_mode": "ADD",
-          "duration": 3,
-          "amplifier": 4,
+          "duration": 4,
+          "amplifier": 1,
+          "amplifier_cap": 4,
+          "refresh_duration": true,
           "effect_id": "archers_expansion:fast_shot",
           "show_particles": false
         },
