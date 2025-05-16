@@ -33,10 +33,14 @@
 
   "impacts": [
     {
-      "target_conditions": [
+      "target_modifiers": [
         {
-          "entity_type": "#minecraft:freeze_immune_entity_types",
-          "allow_action": false
+          "conditions": [
+            {
+              "entity_type": "#minecraft:freeze_immune_entity_types"
+            }
+          ],
+          "execute": "DENY"
         }
       ],
       "action": {
