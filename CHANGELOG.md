@@ -1,5 +1,6 @@
 # 1.3.7 - 1.21.1
 - fix some target modifiers in Passive Spell Impact
+- increase fast shot cooldown a bit
 
 # 1.3.6 - 1.21.1
 - update to newest spell engine api
