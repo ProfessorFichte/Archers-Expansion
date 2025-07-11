@@ -1,3 +1,13 @@
+# 1.3.8 - 1.21.1
+- implemented FROST_RANGED again and also FIRE_RANGED Spell Schools 
+- they benefit from frost and fire spell power besides ranged weapon damage
+- fix smoldering arrow
+- removed movement speed from the tundra hunter and added frost spell power
+- all tundra hunter spells are now FROST_RANGED
+- all war archer spells are now FIRE_RANGED
+- this re-balancing was made to make the two sub-classes more unique and support future content better
+- fix issue with a loot table
+
 # 1.3.7 - 1.21.1
 - fix some target modifiers in Passive Spell Impact
 - increase fast shot cooldown a bit

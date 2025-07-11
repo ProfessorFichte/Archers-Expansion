@@ -87,8 +87,6 @@
   "spell.archers_expansion.fan_of_fire.name": "Fan of Fire",
   "spell.archers_expansion.fan_of_fire.description": "Calls explosive arrows, in an area dealing {damage} and setting enemies on fire.",
 
-  "effect.archers_expansion.smoldering_arrow": "Smoldering Arrow",
-  "effect.archers_expansion.smoldering_arrow.description": "Creates a small explosion near the target, damaging and burning entities around. the target.",
   "effect.archers_expansion.smoldering_arrows": "Smoldering Arrow",
   "effect.archers_expansion.smoldering_arrows.description": "Your next shot creates a small explosion near the target, damaging and burning entities around.",
   "effect.archers_expansion.point_blank_shot": "Point-Blank-Shot",

@@ -17,7 +17,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "archers_expansion:spell_books/expert_tundra_hunter",
+          "value": "archers_expansion:spell_scrolls/tundra_hunter",
           "weight": 1
         }
       ]

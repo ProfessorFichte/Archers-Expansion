@@ -1,5 +1,5 @@
 {
-  "school": "PHYSICAL_RANGED",
+  "school": "FROST_RANGED",
   "range": 0,
   "tier": 5,
 
@@ -87,7 +87,6 @@
       ]
     }
   ],
-
 
   "cost": {
     "exhaust" : 0.4,

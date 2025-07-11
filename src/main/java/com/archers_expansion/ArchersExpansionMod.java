@@ -1,6 +1,7 @@
 package com.archers_expansion;
 
 import com.archers_expansion.config.Default;
+import com.archers_expansion.custom.ArcherySchools;
 import com.archers_expansion.effect.Effects;
 import com.archers_expansion.entity.WintersGripEntity;
 import com.archers_expansion.items.Group;
@@ -35,7 +36,7 @@ public class ArchersExpansionMod implements ModInitializer {
 			.build();
 
 	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
-			("equipment", Default.itemConfig)
+			("equipment_v1", Default.itemConfig)
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
@@ -61,6 +62,7 @@ public class ArchersExpansionMod implements ModInitializer {
 		Armors.register(itemConfig.value.armor_sets);
 		itemConfig.save();
 		effectsConfig.save();
+		ArcherySchools.initialize();
 
 	}
 	static{

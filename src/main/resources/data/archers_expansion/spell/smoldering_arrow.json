@@ -1,5 +1,5 @@
 {
-  "school": "PHYSICAL_RANGED",
+  "school": "FIRE_RANGED",
   "range": 0,
   "tier": 1,
   "learn": {},
@@ -33,24 +33,19 @@
       "duration": 10.0,
       "triggers": [
         {
-          "type": "ARROW_SHOT"
+          "type": "ARROW_IMPACT"
         }
       ],
-      "impact_mode": "TRANSFER"
+      "impact_mode": "PERFORM"
     }
   },
 
   "impacts": [
     {
       "action": {
-        "type": "STATUS_EFFECT",
-        "status_effect": {
-          "apply_mode": "SET",
-          "duration": 1,
-          "amplifier": 0,
-          "amplifier_power_multiplier": 0.3,
-          "effect_id": "archers_expansion:smoldering_arrow",
-          "show_particles": false
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.3
         }
       },
       "particles": [
@@ -84,8 +79,19 @@
       "sound": {
         "id": "entity.generic.explode"
       }
+    },
+    {
+      "action": {
+        "type": "FIRE",
+        "fire": {
+          "duration": 2
+        }
+      }
     }
   ],
+  "area_impact": {
+    "radius": 2.0
+  },
 
   "arrow_perks": {
     "override_render": {

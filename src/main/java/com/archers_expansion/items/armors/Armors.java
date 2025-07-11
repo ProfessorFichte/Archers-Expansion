@@ -17,6 +17,7 @@ import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,10 +45,11 @@ public class Armors {
 
     public static final float tundra_ranged_damage_t1 = 0.06F;
     public static final float tundra_haste_t1 = 0.04F;
-    public static final float tundra_speed_t1 = 0.025F;
+    private static final float tundra_t1_spell_power = 1.0F;
     public static final float tundra_ranged_damage_t2 = 0.08F;
     public static final float tundra_haste_t2 = 0.05F;
-    public static final float tundra_speed_t2 = 0.025F;
+    private static final float tundra_t2_spell_power = 1F;
+
 
     public static final float war_archer_damage_t1 = 0.10F;
     public static final float war_archer_armorknockback_t1 = 0.1F;
@@ -135,25 +137,25 @@ public class Armors {
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t1)
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t1_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t1)
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t1_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t1)
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t1_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t1)
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t1_spell_power)
                                     ))
                     ),2
             ).armorSet();
@@ -233,25 +235,25 @@ public class Armors {
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t2)
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t2)
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t2)
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,tundra_speed_t2)
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     ))
                     ),3
             ).armorSet();

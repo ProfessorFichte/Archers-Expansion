@@ -53,7 +53,6 @@ public class Effects {
     public static final Entry WINTERS_GRASP  = new Entry("winters_grip", new WintersGraspEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
 
     //WAR ARCHER
-    public static final Entry SMOLDERING_ARROW = new Entry("smoldering_arrow",new SmolderingArrow(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry SMOLDERING_ARROWS = new Entry("smoldering_arrows",new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
     public static final Entry POINT_BLANK_SHOT = new Entry("point_blank_shot",new  PointBlankShot(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry PIN_DOWN = new Entry("pin_down",new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
@@ -121,7 +120,6 @@ public class Effects {
         Synchronized.configure(ENCHANTED_CRSYSTAL_ARROW.effect,true);
         Synchronized.configure(FROZEN_PACT.effect,true);
         Synchronized.configure(FROZEN_SHOT.effect,true);
-        Synchronized.configure(SMOLDERING_ARROW.effect,true);
         Synchronized.configure(SMOLDERING_ARROWS.effect,true);
         Synchronized.configure(POINT_BLANK_SHOT.effect,true);
         Synchronized.configure(PIN_DOWN.effect,true);
