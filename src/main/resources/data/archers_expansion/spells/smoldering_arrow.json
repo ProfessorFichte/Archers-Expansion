@@ -1,5 +1,5 @@
 {
-  "school": "PHYSICAL_RANGED",
+  "school": "FIRE_RANGED",
   "range": 0,
   "learn": {
     "tier": 1
@@ -12,14 +12,9 @@
   "impact": [
     {
       "action": {
-        "type": "STATUS_EFFECT",
-        "status_effect": {
-          "apply_mode": "SET",
-          "duration": 2,
-          "amplifier": 0,
-          "amplifier_power_multiplier": 0.15,
-          "effect_id": "archers_expansion:smoldering_arrow",
-          "show_particles": false
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.1
         }
       },
       "particles": [
@@ -52,6 +47,14 @@
       ],
       "sound": {
         "id": "entity.generic.explode"
+      }
+    },
+    {
+      "action": {
+        "type": "FIRE",
+        "fire": {
+          "duration": 2
+        }
       }
     }
   ]

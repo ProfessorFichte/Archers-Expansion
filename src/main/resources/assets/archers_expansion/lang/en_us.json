@@ -79,12 +79,10 @@
   "spell.archers_expansion.point_blank_shot.name": "Point-Blank Shot",
   "spell.archers_expansion.point_blank_shot.description": "Deals {damage} damage, also gets knocked back more, the closer it is to the caster.",
   "spell.archers_expansion.smoldering_arrow.name": "Smoldering Arrow",
-  "spell.archers_expansion.smoldering_arrow.description": "Passive:Creates a small explosion at the target, damaging and burning entities around it.",
+  "spell.archers_expansion.smoldering_arrow.description": "Passive: Sets the target on fire and deals additional {damage} damage.",
   "spell.archers_expansion.fan_of_fire.name": "§5Fan of Fire",
   "spell.archers_expansion.fan_of_fire.description": "Calls explosive arrows, in an area dealing {damage} and setting enemies on fire.",
 
-  "effect.archers_expansion.smoldering_arrow": "Smoldering Arrow",
-  "effect.archers_expansion.smoldering_arrow.description": "Creates a small explosion near the target, damaging and burning entities around. the target.",
   "effect.archers_expansion.point_blank_shot": "Point-Blank-Shot",
   "effect.archers_expansion.point_blank_shot.description": "Knocks the target back, , the closer it is to the caster, the further it gets knock backed.",
   "effect.archers_expansion.pin_down": "Pin Down",

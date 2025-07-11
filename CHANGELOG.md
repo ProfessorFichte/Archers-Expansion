@@ -1,3 +1,12 @@
+0.2.4 - 1.20.1
+- implemented FROST_RANGED again and also FIRE_RANGED Spell Schools
+- they benefit from frost and fire spell power besides ranged weapon damage
+- removed movement speed from the tundra hunter and added frost spell power
+- all tundra hunter spells are now FROST_RANGED
+- all war archer spells are now FIRE_RANGED
+- this re-balancing was made to make the two sub-classes more unique
+- changed smoldering arrow on 1.20.1 version because of technical issues
+
 0.2.3 - 1.20.1
 - Improve Enchanted Crystal Arrow Spell Texture
 - Item Re-Textures

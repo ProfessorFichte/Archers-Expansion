@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.spell_engine.api.item.ItemConfig;
 import net.spell_engine.api.item.armor.Armor;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +39,10 @@ public class Armors {
 
     public static final float tundra_ranged_damage_t1 = 0.06F;
     public static final float tundra_haste_t1 = 0.04F;
-    public static final float tundra_speed_t1 = 0.025F;
+    public static final float tundra_spell_power_t1 = 1.0F;
     public static final float tundra_ranged_damage_t2 = 0.08F;
     public static final float tundra_haste_t2 = 0.05F;
-    public static final float tundra_speed_t2 = 0.025F;
+    public static final float tundra_spell_power_t2 = 1.0F;
 
     public static final float war_archer_damage_t1 = 0.10F;
     public static final float war_archer_armorknockback_t1 = 0.1F;
@@ -70,25 +71,25 @@ public class Armors {
                                     .addAll(List.of(
                                             ItemConfig.Attribute.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
                                             ItemConfig.Attribute.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            ItemConfig.Attribute.multiply(MOVEMENT_SPEED,tundra_speed_t1)
+                                            ItemConfig.Attribute.bonus(SpellSchools.FROST.id,tundra_spell_power_t1)
                                     )),
                             new ItemConfig.ArmorSet.Piece(3)
                                     .addAll(List.of(
                                             ItemConfig.Attribute.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
                                             ItemConfig.Attribute.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            ItemConfig.Attribute.multiply(MOVEMENT_SPEED,tundra_speed_t1)
+                                            ItemConfig.Attribute.bonus(SpellSchools.FROST.id,tundra_spell_power_t1)
                                     )),
                             new ItemConfig.ArmorSet.Piece(3)
                                     .addAll(List.of(
                                             ItemConfig.Attribute.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
                                             ItemConfig.Attribute.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            ItemConfig.Attribute.multiply(MOVEMENT_SPEED,tundra_speed_t1)
+                                            ItemConfig.Attribute.bonus(SpellSchools.FROST.id,tundra_spell_power_t1)
                                     )),
                             new ItemConfig.ArmorSet.Piece(2)
                                     .addAll(List.of(
                                             ItemConfig.Attribute.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
                                             ItemConfig.Attribute.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            ItemConfig.Attribute.multiply(MOVEMENT_SPEED,tundra_speed_t1)
+                                            ItemConfig.Attribute.bonus(SpellSchools.FROST.id,tundra_spell_power_t1)
                                     ))
                     )
             )
@@ -201,25 +202,25 @@ public class Armors {
                                     .addAll(List.of(
                                             ItemConfig.Attribute.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
                                             ItemConfig.Attribute.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            ItemConfig.Attribute.multiply(MOVEMENT_SPEED,tundra_speed_t2)
+                                            ItemConfig.Attribute.bonus(SpellSchools.FROST.id,tundra_spell_power_t2)
                                     )),
                             new ItemConfig.ArmorSet.Piece(3)
                                     .addAll(List.of(
                                             ItemConfig.Attribute.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
                                             ItemConfig.Attribute.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            ItemConfig.Attribute.multiply(MOVEMENT_SPEED,tundra_speed_t2)
+                                            ItemConfig.Attribute.bonus(SpellSchools.FROST.id,tundra_spell_power_t2)
                                     )),
                             new ItemConfig.ArmorSet.Piece(3)
                                     .addAll(List.of(
                                             ItemConfig.Attribute.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
                                             ItemConfig.Attribute.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            ItemConfig.Attribute.multiply(MOVEMENT_SPEED,tundra_speed_t2)
+                                            ItemConfig.Attribute.bonus(SpellSchools.FROST.id,tundra_spell_power_t2)
                                     )),
                             new ItemConfig.ArmorSet.Piece(2)
                                     .addAll(List.of(
                                             ItemConfig.Attribute.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
                                             ItemConfig.Attribute.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            ItemConfig.Attribute.multiply(MOVEMENT_SPEED,tundra_speed_t2)
+                                            ItemConfig.Attribute.bonus(SpellSchools.FROST.id,tundra_spell_power_t2)
                                     ))
                     )
             )

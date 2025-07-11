@@ -28,7 +28,6 @@ public class Effects {
     public static StatusEffect WINTERS_GRASP = new WintersGraspEffect(StatusEffectCategory.HARMFUL, 0x99ccff);
 
     //WAR ARCHER
-    public static StatusEffect SMOLDERING_ARROW = new SmolderingArrow(StatusEffectCategory.HARMFUL, 0x805e4d);
     public static StatusEffect POINT_BLANK_SHOT = new PointBlankShot(StatusEffectCategory.HARMFUL, 0x805e4d);
     public static StatusEffect PIN_DOWN = new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x805e4d);
 
@@ -56,7 +55,6 @@ public class Effects {
         Synchronized.configure(DISABLING_SHOT,true);
         Synchronized.configure(ENCHANTED_CRYSTAL_ARROW,true);
         Synchronized.configure(FROZEN_PACT,true);
-        Synchronized.configure(SMOLDERING_ARROW,true);
         Synchronized.configure(POINT_BLANK_SHOT,true);
         Synchronized.configure(PIN_DOWN,true);
         Synchronized.configure(INFILTRATORS_ARROW,true);
@@ -95,7 +93,6 @@ public class Effects {
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "disabling_shot").toString(),DISABLING_SHOT);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "enchanted_crystal_arrow").toString(),ENCHANTED_CRYSTAL_ARROW);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "frozen_pact").toString(),FROZEN_PACT);
-        Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "smoldering_arrow").toString(),SMOLDERING_ARROW);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "point_blank_shot").toString(),POINT_BLANK_SHOT);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "pin_down").toString(),PIN_DOWN);
         Registry.register(Registries.STATUS_EFFECT, effect_id++, new Identifier(MOD_ID, "infiltrators_arrow").toString(),INFILTRATORS_ARROW);
