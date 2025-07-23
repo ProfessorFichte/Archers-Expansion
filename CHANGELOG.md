@@ -1,3 +1,7 @@
+# 1.3.9 - 1.21.1
+- fix loot table console error (Again)
+- Update SPell Engine 1.7
+
 # 1.3.8 - 1.21.1
 - implemented FROST_RANGED again and also FIRE_RANGED Spell Schools 
 - they benefit from frost and fire spell power besides ranged weapon damage
