@@ -109,9 +109,6 @@ public class Effects {
         OnRemoval.configure(INFILTRATORS_ARROW.effect, (context) -> {
             InfiltratorsArrowEffect.onRemove(context.entity());
         });
-        OnRemoval.configure(WINTERS_GRASP.effect, (context) -> {
-            InfiltratorsArrowEffect.onRemove(context.entity());
-        });
 
         Synchronized.configure(FAST_SHOT.effect,true);
         Synchronized.configure(CHOKING_GAS.effect,true);
