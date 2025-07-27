@@ -22,7 +22,6 @@ public class ArcherySchools {
             EntityAttributes_RangedWeapon.DAMAGE.attribute);
 
     public static void initialize() {
-
         FROST_RANGED.addSource(SpellSchool.Trait.POWER, SpellSchool.Apply.ADD, query -> {
             var second_power = query.entity().getAttributeValue(SpellSchools.FROST.attribute);
             var power = query.entity().getAttributeValue(EntityAttributes_RangedWeapon.DAMAGE.attribute) + second_power;
