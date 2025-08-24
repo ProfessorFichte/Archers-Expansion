@@ -1,3 +1,6 @@
+0.2.5 - 1.20.1
+- Update ru_ru lang file (Thanks Strelok656)
+
 0.2.4 - 1.20.1
 - implemented FROST_RANGED again and also FIRE_RANGED Spell Schools
 - they benefit from frost and fire spell power besides ranged weapon damage
