@@ -1,4 +1,5 @@
-# 1.3.11 - 1.21.1
+# 1.3.10 - 1.21.1
+- fix loot table console error (Again)
 - Infiltrators Arrow, Fan of Fire & Winters Grip are now T4 Spells (Only important if LNE-Wizards is installed)
 - add spell Datagen
 - Point Blank Shot & Disabling Shot now use Custom Spell Impacts instead of Status Effects
@@ -8,10 +9,6 @@
 - Choking Gas now uses Spell Engine Particles for the Poison Smoke
 - Frozen Pact-, CrystalArrow- and WintersGrasp Effect now stack frozen ticks
 - already added Armory Compat Code (just awaiting Armor Model & Texture for release)
-
-# 1.3.10 - 1.21.1
-- fix loot table console error (Again)
-- Update SPell Engine 1.7
 
 # 1.3.8 - 1.21.1
 - implemented FROST_RANGED again and also FIRE_RANGED Spell Schools 
