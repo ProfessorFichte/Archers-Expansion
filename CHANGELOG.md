@@ -1,6 +1,6 @@
 # 1.3.10 - 1.21.1
 - fix loot table console error (Again)
-- Infiltrators Arrow, Fan of Fire & Winters Grip are now T4 Spells (Only important if LNE-Wizards is installed)
+- Infiltrators Arrow, Fan of Fire & Winters Grip are now T4 Spells (Only important if LNE-Archers is installed)
 - add spell Datagen
 - Point Blank Shot & Disabling Shot now use Custom Spell Impacts instead of Status Effects
 - Add ru_ru lang file (Thanks Strelok656)
