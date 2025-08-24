@@ -3,16 +3,18 @@ package com.archers_expansion.client.effect;
 import net.minecraft.entity.LivingEntity;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.ParticleHelper;
+import net.spell_engine.fx.SpellEngineParticles;
 
 public class ChokingPoisonParticles implements CustomParticleStatusEffect.Spawner{
     private final ParticleBatch particles;
 
     public ChokingPoisonParticles(int particleCount) {
         this.particles = new ParticleBatch(
-                "more_rpg_classes:gas_cloud",
-                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
-                null, particleCount, 0.05F, 0.1F, 360);
+                SpellEngineParticles.smoke_medium.id().toString(),
+                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                null, particleCount, 0.1F, 0.3F, 360).color(Color.POISON_LIGHT.toRGBA());
     }
 
     @Override

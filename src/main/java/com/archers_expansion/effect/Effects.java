@@ -42,7 +42,6 @@ public class Effects {
     //DEAD EYE
     public static final Entry FAST_SHOT  =  new Entry("fast_shot",new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
     public static final Entry CHOKING_GAS = new Entry("choking_gas" , new ChokingGasEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
-    public static final Entry LEAPING_SHOT = new Entry("leaping_shot", new LeapingShotEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
     public static final Entry DISABLING_SHOT = new Entry("disabling_shot", new DisablingShotEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry INFILTRATORS_ARROW = new Entry("infiltrators_arrow", new InfiltratorsArrowEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
 
@@ -54,7 +53,6 @@ public class Effects {
 
     //WAR ARCHER
     public static final Entry SMOLDERING_ARROWS = new Entry("smoldering_arrows",new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
-    public static final Entry POINT_BLANK_SHOT = new Entry("point_blank_shot",new  PointBlankShot(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry PIN_DOWN = new Entry("pin_down",new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
 
     public static void register (){
@@ -71,10 +69,10 @@ public class Effects {
                 effectsConfig.value.frozen_pact_decreased_attack, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         PIN_DOWN.effect.
                 addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,PIN_DOWN.modifierId(),
-                -1.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+                -10.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
                 .addAttributeModifier(
                         EntityAttributes.GENERIC_JUMP_STRENGTH, PIN_DOWN.modifierId(),
-                        -1.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                        -10.00, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         CHOKING_GAS.effect.
                 addAttributeModifier(SpellEngineAttributes.HEALING_TAKEN.entry,CHOKING_GAS.modifierId(),
                         effectsConfig.value.choking_gas_healing_taken, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
@@ -112,13 +110,11 @@ public class Effects {
 
         Synchronized.configure(FAST_SHOT.effect,true);
         Synchronized.configure(CHOKING_GAS.effect,true);
-        Synchronized.configure(LEAPING_SHOT.effect,true);
         Synchronized.configure(DISABLING_SHOT.effect,true);
         Synchronized.configure(ENCHANTED_CRSYSTAL_ARROW.effect,true);
         Synchronized.configure(FROZEN_PACT.effect,true);
         Synchronized.configure(FROZEN_SHOT.effect,true);
         Synchronized.configure(SMOLDERING_ARROWS.effect,true);
-        Synchronized.configure(POINT_BLANK_SHOT.effect,true);
         Synchronized.configure(PIN_DOWN.effect,true);
         Synchronized.configure(INFILTRATORS_ARROW.effect,true);
         Synchronized.configure(WINTERS_GRASP.effect,true);

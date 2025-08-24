@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
+import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_power.api.SpellSchools;
@@ -39,30 +40,29 @@ public class Armors {
 
     private static final Identifier RANGED_HASTE_ID = Identifier.of(EntityAttributes_RangedWeapon.HASTE.id.toString());
     private static final Identifier RANGED_DAMAGE_ID = Identifier.of(EntityAttributes_RangedWeapon.DAMAGE.id.toString());
-    private static final Identifier ARMOR_TOUGHNESS_ID = Identifier.ofVanilla("generic.armor_toughness");
+    private static final Identifier RANGED_VELOCITY_ID = Identifier.of(EntityAttributes_RangedWeapon.VELOCITY.id.toString());
     private static final Identifier KNOCKBACK_ID = Identifier.ofVanilla("generic.knockback_resistance");
-    private static final Identifier MOVEMENT_SPEED = Identifier.ofVanilla("generic.movement_speed");
 
-    public static final float tundra_ranged_damage_t1 = 0.06F;
-    public static final float tundra_haste_t1 = 0.04F;
-    private static final float tundra_t1_spell_power = 1.0F;
-    public static final float tundra_ranged_damage_t2 = 0.08F;
-    public static final float tundra_haste_t2 = 0.05F;
-    private static final float tundra_t2_spell_power = 1F;
+    public static final float tundra_ranged_damage_t2 = 0.06F;
+    public static final float tundra_haste_t2 = 0.04F;
+    private static final float tundra_t2_spell_power = 1.0F;
+    public static final float tundra_ranged_damage_t3 = 0.08F;
+    public static final float tundra_haste_t3 = 0.05F;
+    private static final float tundra_t3_spell_power = 1F;
 
 
-    public static final float war_archer_damage_t1 = 0.10F;
-    public static final float war_archer_armorknockback_t1 = 0.1F;
-    public static final float war_archer_damage_t2 = 0.12F;
-    public static final float war_archer_armor_toughness_t2 = 1.0F;
+    public static final float war_archer_damage_t2 = 0.10F;
     public static final float war_archer_armorknockback_t2 = 0.1F;
+    public static final float war_archer_damage_t3 = 0.12F;
+    public static final float war_archer_armorknockback_t3 = 0.1F;
+    public static final float war_archer_velocity_t3 = 0.25F;
 
-    public static final float deadeye_damage_t1 = 0.05F;
-    public static final float deadeye_speed_t1 = 0.025F;
-    public static final float deadeye_haste_t1 = 0.05F;
-    public static final float deadeye_damage_t2 = 0.07F;
-    public static final float deadeye_speed_t2 = 0.05F;
-    public static final float deadeye_haste_t2 = 0.07F;
+    public static final float deadeye_damage_t2 = 0.05F;
+    public static final float deadeye_evasion_t2 = 0.04F;
+    public static final float deadeye_haste_t2 = 0.05F;
+    public static final float deadeye_damage_t3 = 0.07F;
+    public static final float deadeye_evasion_t3 = 0.05F;
+    public static final float deadeye_haste_t3 = 0.07F;
 
     public static RegistryEntry<ArmorMaterial> material(String name,
                                                         int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
@@ -135,27 +135,27 @@ public class Armors {
                     ArmorSetConfig.with(
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t1_spell_power)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t1_spell_power)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t1_spell_power)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t1),
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t1),
-                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t1_spell_power)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     ))
                     ),2
             ).armorSet();
@@ -169,23 +169,23 @@ public class Armors {
                     ArmorSetConfig.with(
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t1),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t1)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
+                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
                                     )),
                             new ArmorSetConfig.Piece(5)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t1),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t1)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
+                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t1),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t1)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
+                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t1),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t1)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
+                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
                                     ))
                     ),2
             ).armorSet();
@@ -199,27 +199,27 @@ public class Armors {
                     ArmorSetConfig.with(
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t1),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t1),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t1)
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t1),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t1),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t1)
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t1),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t1),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t1)
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t1),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t1),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t1)
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
                                     ))
                     ),2
             ).armorSet();
@@ -233,27 +233,27 @@ public class Armors {
                     ArmorSetConfig.with(
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t3),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t3),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t3_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t3),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t3),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t3_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t3),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t3),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t3_spell_power)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t2),
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
-                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t3),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t3),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t3_spell_power)
                                     ))
                     ),3
             ).armorSet();
@@ -267,27 +267,27 @@ public class Armors {
                     ArmorSetConfig.with(
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_armor_toughness_t2),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t3),
+                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t3)
                                     )),
                             new ArmorSetConfig.Piece(5)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_armor_toughness_t2),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t3),
+                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t3)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_armor_toughness_t2),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t3),
+                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t3)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_armor_toughness_t2),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t3),
+                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t3)
                                     ))
                     ),3
             ).armorSet();
@@ -301,27 +301,27 @@ public class Armors {
                     ArmorSetConfig.with(
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t2)
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t2)
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t2)
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
-                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
-                                            AttributeModifier.multiply(MOVEMENT_SPEED,deadeye_speed_t2)
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
                                     ))
                     ),3
             ).armorSet();

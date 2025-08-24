@@ -1,10 +1,7 @@
 package com.archers_expansion.custom;
 
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.damage.DamageTypes;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.spell_power.SpellPowerMod;
 import net.spell_power.api.SpellSchool;
@@ -26,15 +23,7 @@ public class ArcherySchools {
 
         FROST_RANGED.addSource(SpellSchool.Trait.POWER, SpellSchool.Apply.ADD, query -> {
             var second_power = query.entity().getAttributeValue(SpellSchools.FROST.attributeEntry);
-            var power = query.entity().getAttributeValue(EntityAttributes_RangedWeapon.DAMAGE.entry) + second_power;
-
-            var world = query.entity().getWorld();
-            var powerEnch = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(Enchantments.POWER);
-            if (powerEnch.isPresent()) {
-                var level = EnchantmentHelper.getLevel(powerEnch.get(), query.entity().getMainHandStack());
-                power *= 1 + (0.05 * level);
-            }
-            return power;
+            return query.entity().getAttributeValue(EntityAttributes_RangedWeapon.DAMAGE.entry) + second_power;
         });
         FROST_RANGED.addSource(SpellSchool.Trait.HASTE, SpellSchool.Apply.ADD, query -> {
             var haste = query.entity().getAttributeValue(EntityAttributes_RangedWeapon.HASTE.entry);
@@ -46,15 +35,7 @@ public class ArcherySchools {
 
         FIRE_RANGED.addSource(SpellSchool.Trait.POWER, SpellSchool.Apply.ADD, query -> {
             var second_power = query.entity().getAttributeValue(SpellSchools.FIRE.attributeEntry);
-            var power = query.entity().getAttributeValue(EntityAttributes_RangedWeapon.DAMAGE.entry) + second_power;
-
-            var world = query.entity().getWorld();
-            var powerEnch = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(Enchantments.POWER);
-            if (powerEnch.isPresent()) {
-                var level = EnchantmentHelper.getLevel(powerEnch.get(), query.entity().getMainHandStack());
-                power *= 1 + (0.05 * level);
-            }
-            return power;
+            return query.entity().getAttributeValue(EntityAttributes_RangedWeapon.DAMAGE.entry) + second_power;
         });
         FIRE_RANGED.addSource(SpellSchool.Trait.HASTE, SpellSchool.Apply.ADD, query -> {
             var haste = query.entity().getAttributeValue(EntityAttributes_RangedWeapon.HASTE.entry);

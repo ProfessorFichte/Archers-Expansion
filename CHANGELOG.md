@@ -1,4 +1,15 @@
-# 1.3.9 - 1.21.1
+# 1.3.11 - 1.21.1
+- Infiltrators Arrow, Fan of Fire & Winters Grip are now T4 Spells (Only important if LNE-Wizards is installed)
+- add spell Datagen
+- Point Blank Shot & Disabling Shot now use Custom Spell Impacts instead of Status Effects
+- Add ru_ru lang file (Thanks Strelok656)
+- Deadeye Armor Sets now give the new Evasion Attribute
+- War Archer Netherite Armor Set now gives Ranged Velocity Attribute instead of Armor Toughness
+- Choking Gas now uses Spell Engine Particles for the Poison Smoke
+- Frozen Pact-, CrystalArrow- and WintersGrasp Effect now stack frozen ticks
+- already added Armory Compat Code (just awaiting Armor Model & Texture for release)
+
+# 1.3.10 - 1.21.1
 - fix loot table console error (Again)
 - Update SPell Engine 1.7
 

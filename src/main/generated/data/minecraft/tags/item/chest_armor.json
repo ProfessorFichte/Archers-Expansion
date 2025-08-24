@@ -1,10 +1,40 @@
 {
   "values": [
-    "archers_expansion:tundra_hunter_chest",
-    "archers_expansion:war_archer_chest",
-    "archers_expansion:deadeye_chest",
-    "archers_expansion:netherite_tundra_hunter_chest",
-    "archers_expansion:netherite_war_archer_chest",
-    "archers_expansion:netherite_deadeye_chest"
+    {
+      "id": "archers_expansion:tundra_hunter_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:war_archer_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_tundra_hunter_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_war_archer_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_deadeye_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:bounty_hunter_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:polar_stalker_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:sentinel_archer_chest",
+      "required": false
+    }
   ]
 }

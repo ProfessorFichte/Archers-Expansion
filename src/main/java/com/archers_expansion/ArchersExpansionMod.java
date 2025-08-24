@@ -7,10 +7,15 @@ import com.archers_expansion.entity.WintersGripEntity;
 import com.archers_expansion.items.Group;
 import com.archers_expansion.items.Items;
 import com.archers_expansion.items.armors.Armors;
+import com.archers_expansion.items.armors.ArmoryCompat;
 import com.archers_expansion.sounds.Sounds;
+import com.archers_expansion.config.TweaksConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.ItemStack;
@@ -36,7 +41,13 @@ public class ArchersExpansionMod implements ModInitializer {
 			.build();
 
 	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
-			("equipment_v1", Default.itemConfig)
+			("equipment_v2", Default.itemConfig)
+			.builder()
+			.setDirectory(MOD_ID)
+			.sanitize(true)
+			.build();
+	public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
+			("tweaks", new TweaksConfig())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
@@ -54,12 +65,28 @@ public class ArchersExpansionMod implements ModInitializer {
 	public void onInitialize() {
 		effectsConfig.refresh();
 		itemConfig.refresh();
+		tweaksConfig.refresh();
+		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+			tweaksConfig.value.ignore_items_required_mods = true;
+		}
 		Items.registerModItems();
 		Group.registerItemGroups();
 		registerItemGroup();
 		Effects.register();
 		Sounds.register();
 		Armors.register(itemConfig.value.armor_sets);
+		/*
+		if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || ArchersExpansionMod.tweaksConfig.value.ignore_items_required_mods) {
+			ArmoryCompat.register(itemConfig.value.armor_sets);
+			FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> {
+				ResourceManagerHelper.registerBuiltinResourcePack(
+						Identifier.of(MOD_ID, "archers_expansion_armory_compat"),
+						modContainer,
+						ResourcePackActivationType.ALWAYS_ENABLED
+				);
+			});
+		}
+		*/
 		itemConfig.save();
 		effectsConfig.save();
 		ArcherySchools.initialize();

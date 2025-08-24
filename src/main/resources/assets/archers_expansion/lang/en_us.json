@@ -11,11 +11,15 @@
   "item.archers_expansion.netherite_deadeye_head": "Netherite Deadeye Hood",
   "item.archers_expansion.netherite_deadeye_legs": "Netherite Deadeye Leggings",
   "item.archers_expansion.netherite_deadeye_feet": "Netherite Deadeye Boots",
+  "item.archers_expansion.bounty_hunter_chest": "Bounty Hunter Tunic",
+  "item.archers_expansion.bounty_hunter_head": "Bounty Hunter Hood",
+  "item.archers_expansion.bounty_hunter_legs": "Bounty Hunter Leggings",
+  "item.archers_expansion.bounty_hunter_feet": "Bounty Hunter Boots",
 
   "spell.archers_expansion.choking_gas.name": "Choking Gas",
   "spell.archers_expansion.choking_gas.description": "Creates a poisonous gas cloud on projectile contact and deals {damage} damage.",
   "spell.archers_expansion.disabling_shot.name": "Disabling Shot",
-  "spell.archers_expansion.disabling_shot.description": "Jumps back after hitting a target, slows and damages the target for {damage} damage. The jump can be disabled if you sneak.",
+  "spell.archers_expansion.disabling_shot.description": "Jumps back after shooting a target, slows for {effect_duration} seconds and damages the target for {damage} damage.",
   "spell.archers_expansion.fast_shot.name": "Fast Shot",
   "spell.archers_expansion.fast_shot.description": "With your next shots, you gain Range Haste.",
   "spell.archers_expansion.trick_shot.name": "Trick Shot",
@@ -23,15 +27,16 @@
   "spell.archers_expansion.infiltrators_arrow.name": "Infiltrators Arrow",
   "spell.archers_expansion.infiltrators_arrow.description": "Shoots a invisible arrow dealing {damage}, granting invisibility to the caster.",
 
+  "spell.archers_expansion.improved_disabling_shot.name": "Improved Disabling Shot",
+  "spell.archers_expansion.improved_disabling_shot.description": "Increases duration of Disabling Shot by {effect_duration_add} sec",
+
   "effect.archers_expansion.fast_shot": "Fast Shot",
   "effect.archers_expansion.fast_shot.description": "Increases Range Haste with each shot.",
   "effect.archers_expansion.choking_gas": "Choking Gas Cloud",
   "effect.archers_expansion.choking_gas.description": "Damages the target through poison and silences it. Damage is increased on bleeding entities.",
-  "effect.archers_expansion.leaping_shot": "Leaping Shot",
-  "effect.archers_expansion.leaping_shot.description": "Caster jumps backwards, can be disabled while sneaking.",
   "effect.archers_expansion.disabling_shot": "Disabling Shot",
   "effect.archers_expansion.disabling_shot.description": "Slows the target and damages it overtime.",
-  "effect.archers_expansion.infiltrators_arrow": "Infiltrators Arrow",
+  "effect.archers_expansion.infiltrators_arrow": "Infiltrator Vanish",
   "effect.archers_expansion.infiltrators_arrow.description": "Invisible to enemies",
 
   "item.archers_expansion.tundra_hunter_spell_book": "Tundric Hunting",
@@ -44,6 +49,10 @@
   "item.archers_expansion.netherite_tundra_hunter_head": "Netherite Tundra Hood",
   "item.archers_expansion.netherite_tundra_hunter_legs": "Netherite Tundra Leggings",
   "item.archers_expansion.netherite_tundra_hunter_feet": "Netherite Tundra Boots",
+  "item.archers_expansion.polar_stalker_chest": "Polar Stalker Tunic",
+  "item.archers_expansion.polar_stalker_head": "Polar Stalker  Hood",
+  "item.archers_expansion.polar_stalker_legs": "Polar Stalker Leggings",
+  "item.archers_expansion.polar_stalker_feet": "Polar Stalker Boots",
 
   "spell.archers_expansion.arctic_volley.name": "Arctic Volley",
   "spell.archers_expansion.arctic_volley.description": "Shots 8 arctic arrows that deal {damage} damage and frosts targets.",
@@ -55,6 +64,9 @@
   "spell.archers_expansion.frozen_shot.description": "Your next shots stack the frosted effect on targets, slowing them and freezing",
   "spell.archers_expansion.winters_grip.name": "Winters Grip",
   "spell.archers_expansion.winters_grip.description": "Spawns a winter totem, slowing enemies, freezing other enemies around on death.",
+
+  "spell.archers_expansion.improved_arctic_volley.name": "Improved Arctic Volley",
+  "spell.archers_expansion.improved_arctic_volley.description": "Reduces cooldown of Arctic Volley by {cooldown_duration_deduct} sec",
 
   "effect.archers_expansion.enchanted_crystal_arrow": "Crystal Arrow",
   "effect.archers_expansion.enchanted_crystal_arrow.description": "Stuns the target and gives the target frozen ticks.",
@@ -75,6 +87,10 @@
   "item.archers_expansion.netherite_war_archer_head": "Netherite Bowman Helmet",
   "item.archers_expansion.netherite_war_archer_legs": "Netherite Bowman Leggings",
   "item.archers_expansion.netherite_war_archer_feet": "Netherite Bowman Boots",
+  "item.archers_expansion.sentinel_archer_chest": "Sentinel Archer Chest",
+  "item.archers_expansion.sentinel_archer_head": "Sentinel Archer Helmet",
+  "item.archers_expansion.sentinel_archer_legs": "Sentinel Archer Leggings",
+  "item.archers_expansion.sentinel_archer_feet": "Sentinel Archer Boots",
 
   "spell.archers_expansion.dual_shot.name": "Dual Shot",
   "spell.archers_expansion.dual_shot.description": "Fires two Arrows at once.",
@@ -87,10 +103,11 @@
   "spell.archers_expansion.fan_of_fire.name": "Fan of Fire",
   "spell.archers_expansion.fan_of_fire.description": "Calls explosive arrows, in an area dealing {damage} and setting enemies on fire.",
 
+  "spell.archers_expansion.improved_point_blank_shot.name": "Improved Point-Blank Shot",
+  "spell.archers_expansion.improved_point_blank_shot.description": "Increases power multiplier of Point Blank Shot by {power_multiplier}",
+
   "effect.archers_expansion.smoldering_arrows": "Smoldering Arrow",
   "effect.archers_expansion.smoldering_arrows.description": "Your next shot creates a small explosion near the target, damaging and burning entities around.",
-  "effect.archers_expansion.point_blank_shot": "Point-Blank-Shot",
-  "effect.archers_expansion.point_blank_shot.description": "Knocks the target back, , the closer it is to the caster, the further it gets knock backed.",
   "effect.archers_expansion.pin_down": "Pin Down",
   "effect.archers_expansion.pin_down.description": "The target cant move or jump during the effect.",
 
@@ -101,5 +118,9 @@
   "advancements.archers_expansion.tundra_hunter_spells.title": "Cold blooded Hunter",
   "advancements.archers_expansion.tundra_hunter_spells.description": "Obtain all Tundra Hunter Spells",
   "advancements.archers_expansion.war_archer_spells.title": "Load, Hold and Fire!",
-  "advancements.archers_expansion.war_archer_spells.description": "Obtain all War Archer Spells"
+  "advancements.archers_expansion.war_archer_spells.description": "Obtain all War Archer Spells",
+
+  "equipment_set.archers_expansion.bounty_hunter": "Bounty Hunting",
+  "equipment_set.archers_expansion.polar_stalker": "Polar Prey",
+  "equipment_set.archers_expansion.sentinel_archer": "Castle Guard"
 }

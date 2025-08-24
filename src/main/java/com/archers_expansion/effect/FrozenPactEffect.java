@@ -1,8 +1,11 @@
 package com.archers_expansion.effect;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.registry.tag.EntityTypeTags;
+import net.more_rpg_classes.util.CustomMethods;
 
 public class FrozenPactEffect extends StatusEffect {
     protected FrozenPactEffect(StatusEffectCategory category, int color) {
@@ -19,5 +22,18 @@ public class FrozenPactEffect extends StatusEffect {
             entity.damage(entity.getDamageSources().freeze(), 1.0F + damage);
 
         }
+    }
+    public boolean applyUpdateEffect(LivingEntity livingEntity, int pAmplifier) {
+        EntityType<?> type = livingEntity.getType();
+        if(!type.isIn(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)) {
+            CustomMethods.freezeDamageTicks(livingEntity);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean canApplyUpdateEffect(int duration, int amplifier) {
+        return true;
+
     }
 }

@@ -1,10 +1,40 @@
 {
   "values": [
-    "archers_expansion:tundra_hunter_legs",
-    "archers_expansion:war_archer_legs",
-    "archers_expansion:deadeye_legs",
-    "archers_expansion:netherite_tundra_hunter_legs",
-    "archers_expansion:netherite_war_archer_legs",
-    "archers_expansion:netherite_deadeye_legs"
+    {
+      "id": "archers_expansion:tundra_hunter_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:war_archer_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_tundra_hunter_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_war_archer_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_deadeye_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:bounty_hunter_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:polar_stalker_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:sentinel_archer_legs",
+      "required": false
+    }
   ]
 }

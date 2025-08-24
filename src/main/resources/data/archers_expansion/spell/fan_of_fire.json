@@ -1,7 +1,7 @@
 {
   "school": "FIRE_RANGED",
   "range": 32.0,
-  "tier": 5,
+  "tier": 4,
 
   "active": {
     "scroll": {},

@@ -1,0 +1,105 @@
+{
+  "school": "spell_power:fire_ranged",
+  "range": 26.0,
+  "tier": 3,
+  "learn": {},
+  "active": {
+    "cast": {
+      "duration": 1.2,
+      "animation": "spell_engine:archery_pull",
+      "animates_ranged_weapon": true,
+      "sound": {
+        "id": "archers:bow_pull"
+      }
+    }
+  },
+  "release": {
+    "animation": "spell_engine:archery_release",
+    "sound": {
+      "id": "item.crossbow.shoot"
+    }
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {}
+  },
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "launch_properties": {
+        "velocity": 2.5
+      },
+      "projectile": {
+        "client_data": {
+          "travel_particles": [
+            {
+              "particle_id": "campfire_cosy_smoke",
+              "origin": "CENTER",
+              "shape": "LINE",
+              "rotation": "LOOK",
+              "roll": 10.0,
+              "roll_offset": 180.0,
+              "count": 20.0,
+              "min_speed": 0.2,
+              "max_speed": 0.22
+            }
+          ],
+          "model": {
+            "model_id": "archers_expansion:projectile/regular_arrow",
+            "scale": 1.5
+          }
+        }
+      }
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 1.1,
+          "knockback": 0.0
+        }
+      }
+    },
+    {
+      "target_modifiers": [
+        {
+          "conditions": [
+            {
+              "entity_type": "#c:bosses"
+            }
+          ],
+          "execute": "DENY"
+        }
+      ],
+      "action": {
+        "type": "CUSTOM",
+        "custom": {
+          "intent": "HARMFUL",
+          "handler": "more_rpg_classes:range_scaled_knockback"
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "poof",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "rotation": "LOOK",
+          "count": 50.0,
+          "min_speed": 1.0,
+          "max_speed": 2.0
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "exhaust": 0.3,
+    "cooldown": {
+      "duration": 16.0
+    },
+    "item": {
+      "id": "minecraft:arrow"
+    }
+  }
+}
