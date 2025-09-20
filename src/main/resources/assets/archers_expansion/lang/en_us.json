@@ -38,6 +38,8 @@
   "effect.archers_expansion.disabling_shot.description": "Slows the target and damages it overtime.",
   "effect.archers_expansion.infiltrators_arrow": "Infiltrator Vanish",
   "effect.archers_expansion.infiltrators_arrow.description": "Invisible to enemies",
+  "effect.archers_expansion.infiltrators_speed": "Infiltrator Speed",
+  "effect.archers_expansion.infiltrators_speed.description": "Faster movement in stealth",
 
   "item.archers_expansion.tundra_hunter_spell_book": "Tundric Hunting",
   "item.archers_expansion.tundra_hunter.spell_scroll": "Tundra Hunter Scroll",

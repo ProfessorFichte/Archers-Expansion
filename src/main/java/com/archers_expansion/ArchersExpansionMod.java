@@ -1,20 +1,16 @@
 package com.archers_expansion;
 
 import com.archers_expansion.config.Default;
-import com.archers_expansion.custom.ArcherySchools;
 import com.archers_expansion.effect.Effects;
 import com.archers_expansion.entity.WintersGripEntity;
 import com.archers_expansion.items.Group;
 import com.archers_expansion.items.Items;
 import com.archers_expansion.items.armors.Armors;
-import com.archers_expansion.items.armors.ArmoryCompat;
 import com.archers_expansion.sounds.Sounds;
 import com.archers_expansion.config.TweaksConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.SpawnGroup;
@@ -89,8 +85,6 @@ public class ArchersExpansionMod implements ModInitializer {
 		*/
 		itemConfig.save();
 		effectsConfig.save();
-		ArcherySchools.initialize();
-
 	}
 	static{
 		WintersGripEntity.ENTITY_TYPE = Registry.register(

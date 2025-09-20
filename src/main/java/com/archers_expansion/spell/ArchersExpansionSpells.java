@@ -1,8 +1,8 @@
 package com.archers_expansion.spell;
 
-import com.archers_expansion.custom.ArcherySchools;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
@@ -93,7 +93,7 @@ public class ArchersExpansionSpells {
         var title = "Improved Arctic Volley";
         var description = "Reduces cooldown of Arctic Volley by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();
-        spell.school = ArcherySchools.FROST_RANGED;
+        spell.school = MoreSpellSchools.FROST_RANGED;
 
         var modifier = new Spell.Modifier();
         modifier.spell_pattern = "archers_expansion:arctic_volley";
@@ -108,7 +108,7 @@ public class ArchersExpansionSpells {
         var title = "Improved Point Blank Shot";
         var description = "Increases power multiplier of Point Blank Shot by {power_multiplier_bonus}";
         var spell = modifierSpellBase();
-        spell.school = ArcherySchools.FIRE_RANGED;
+        spell.school = MoreSpellSchools.FIRE_RANGED;
 
         var modifier = new Spell.Modifier();
         modifier.spell_pattern = "archers_expansion:point_blank_shot";
@@ -199,7 +199,7 @@ public class ArchersExpansionSpells {
     private static Entry point_blank_shot() {
         var id = Identifier.of(MOD_ID, "point_blank_shot");
         var spell = SpellBuilder.createSpellActive();
-        spell.school = ArcherySchools.FIRE_RANGED;
+        spell.school = MoreSpellSchools.FIRE_RANGED;
         spell.range = 26;
         spell.tier = 3;
 

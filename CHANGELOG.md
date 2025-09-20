@@ -1,3 +1,8 @@
+# 1.3.11 - 1.21.1
+- forgot to add Invis Mixin's to Mixin file for Infiltrator's Stealth
+- Delete Spell Schools here because they're now provided by MRPG Lib
+- Add Infiltrator's Speed Effect for the Skill Tree Add On
+
 # 1.3.10 - 1.21.1
 - fix loot table console error (Again)
 - Infiltrators Arrow, Fan of Fire & Winters Grip are now T4 Spells (Only important if LNE-Archers is installed)

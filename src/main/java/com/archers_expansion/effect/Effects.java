@@ -44,6 +44,7 @@ public class Effects {
     public static final Entry CHOKING_GAS = new Entry("choking_gas" , new ChokingGasEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry DISABLING_SHOT = new Entry("disabling_shot", new DisablingShotEffect(StatusEffectCategory.HARMFUL, 0x805e4d));
     public static final Entry INFILTRATORS_ARROW = new Entry("infiltrators_arrow", new InfiltratorsArrowEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
+    public static final Entry INFILTRATORS_SPEED = new Entry("infiltrators_speed", new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d));
 
     //TUNDRA HUNTER
     public static final Entry FROZEN_SHOT = new Entry("frozen_shot",new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x99ccff));
@@ -79,6 +80,9 @@ public class Effects {
         INFILTRATORS_ARROW.effect.
                 addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, INFILTRATORS_ARROW.modifierId(),
                 config.stealth_movement_speed_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        INFILTRATORS_SPEED.effect.
+                addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, INFILTRATORS_SPEED.modifierId(),
+                        0.5F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         WINTERS_GRASP.effect.
                 addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, WINTERS_GRASP.modifierId(),
                 config.winters_grasp_movement_speed_multiplier, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
@@ -106,6 +110,9 @@ public class Effects {
         });
         OnRemoval.configure(INFILTRATORS_ARROW.effect, (context) -> {
             InfiltratorsArrowEffect.onRemove(context.entity());
+            if (context.entity().hasStatusEffect(INFILTRATORS_SPEED.registryEntry)) {
+                context.entity().removeStatusEffect(INFILTRATORS_SPEED.registryEntry);
+            }
         });
 
         Synchronized.configure(FAST_SHOT.effect,true);
@@ -117,6 +124,7 @@ public class Effects {
         Synchronized.configure(SMOLDERING_ARROWS.effect,true);
         Synchronized.configure(PIN_DOWN.effect,true);
         Synchronized.configure(INFILTRATORS_ARROW.effect,true);
+        Synchronized.configure(INFILTRATORS_SPEED.effect,true);
         Synchronized.configure(WINTERS_GRASP.effect,true);
 
         ActionImpairing.configure(CHOKING_GAS.effect, EntityActionsAllowed.SILENCE);
