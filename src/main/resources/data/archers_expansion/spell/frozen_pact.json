@@ -1,6 +1,7 @@
 {
-  "range": 20.0,
+  "range": 12.0,
   "school": "FROST_RANGED",
+  "secondary_archetype": "ANY",
   "tier": 3,
   "learn": {},
 
