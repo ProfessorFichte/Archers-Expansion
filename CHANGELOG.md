@@ -1,3 +1,8 @@
+0.2.6 - 1.20.1
+- Changed Spell Book Textures to be more in line with the RPG-Series Books (by SirGhaith)
+- Improve Armor Set Models (by Slepykat)
+- License changed to ARR
+
 0.2.5 - 1.20.1
 - Update ru_ru lang file (Thanks Strelok656)
 
