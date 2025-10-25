@@ -19,7 +19,7 @@ public class ArchersExpansionArmorRenderer extends AzArmorRenderer {
     }
 
     public static ArchersExpansionArmorRenderer netherite_deadeye() {
-        return new ArchersExpansionArmorRenderer("deadeye", "deadeye");
+        return new ArchersExpansionArmorRenderer("deadeye", "netherite_deadeye");
     }
     public static ArchersExpansionArmorRenderer netherite_tundra_hunter() {
         return new ArchersExpansionArmorRenderer("tundra_hunter", "netherite_tundra_hunter");

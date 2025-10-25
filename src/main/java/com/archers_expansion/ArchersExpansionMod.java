@@ -21,7 +21,7 @@ import net.minecraft.text.Text;
 import com.archers_expansion.config.EffectsConfig;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ConfigFile;
-import net.tinyconfig.ConfigManager;
+import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

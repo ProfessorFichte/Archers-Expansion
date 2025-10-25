@@ -1,3 +1,9 @@
+# 1.4.0 - 1.21.1
+- NeoForge Beta!
+- Changed Spell Book Textures to be more in line with the RPG-Series Books (by SirGhaith)
+- Improve Armor Set Models (by Slepykat)
+- License changed to ARR
+
 # 1.3.11 - 1.21.1
 - forgot to add Invis Mixin's to Mixin file for Infiltrator's Stealth
 - Delete Spell Schools here because they're now provided by MRPG Lib

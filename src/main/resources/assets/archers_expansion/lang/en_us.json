@@ -122,6 +122,13 @@
   "advancements.archers_expansion.war_archer_spells.title": "Load, Hold and Fire!",
   "advancements.archers_expansion.war_archer_spells.description": "Obtain all War Archer Spells",
 
+  "advancements.more_rpg_content.path_choose_war_archer.title": "Path of War Archery",
+  "advancements.more_rpg_content.path_choose_war_archer.description": "Create the War Archery Instructions",
+  "advancements.more_rpg_content.path_choose_deadeye.title": "Path of the Deadeye",
+  "advancements.more_rpg_content.path_choose_deadeye.description": "Create Deadeye's List",
+  "advancements.more_rpg_content.path_choose_tundra_hunter.title": "Path of the Hunter",
+  "advancements.more_rpg_content.path_choose_tundra_hunter.description": "Create Tundric Hunting",
+
   "equipment_set.archers_expansion.bounty_hunter": "Bounty Hunting",
   "equipment_set.archers_expansion.polar_stalker": "Polar Prey",
   "equipment_set.archers_expansion.sentinel_archer": "Castle Guard"
