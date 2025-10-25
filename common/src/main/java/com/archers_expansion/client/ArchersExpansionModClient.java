@@ -25,9 +25,9 @@ import java.util.function.Supplier;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
-public class ArchersExpansionModClient implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
+public class ArchersExpansionModClient {
+
+    public static void init() {
 
         CustomModels.registerModelIds(List.of(
                 Identifier.of(MOD_ID, "projectile/glacial_arrow"),

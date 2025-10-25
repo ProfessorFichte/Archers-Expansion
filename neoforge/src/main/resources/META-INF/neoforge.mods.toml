@@ -1,0 +1,52 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+#issueTrackerURL = "https://github.com/ProfessorFichte/Archers-Expansion/issues"
+license = "ARR"
+
+[[mods]]
+modId = "archers_expansion"
+version = "${version}"
+displayName = "Archers Expansion"
+authors = "Fichte"
+description = '''
+Extends the Archers-Mod (RPG Series)  with new content. Spell Engine Add-On
+'''
+#logoFile = "icon.png"
+
+[[dependencies.archers_expansion]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "azurelibarmor"
+type = "required"
+versionRange = "[${azure_lib_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "spell_engine"
+type = "required"
+versionRange = "[${spell_engine_version},)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "archers"
+type = "required"
+versionRange = "[${archers_version},)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[mixins]]
+config = "archers-expansion.mixins.json"

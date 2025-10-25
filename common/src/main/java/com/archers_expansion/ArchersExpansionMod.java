@@ -8,7 +8,6 @@ import com.archers_expansion.items.Items;
 import com.archers_expansion.items.armors.Armors;
 import com.archers_expansion.sounds.Sounds;
 import com.archers_expansion.config.TweaksConfig;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.loader.api.FabricLoader;
@@ -25,7 +24,7 @@ import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ArchersExpansionMod implements ModInitializer {
+public class ArchersExpansionMod{
 	public static final String MOD_ID = "archers_expansion";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
@@ -36,7 +35,7 @@ public class ArchersExpansionMod implements ModInitializer {
 			.sanitize(true)
 			.build();
 
-	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
+	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<ConfigFile.Equipment>
 			("equipment_v2", Default.itemConfig)
 			.builder()
 			.setDirectory(MOD_ID)
@@ -49,27 +48,29 @@ public class ArchersExpansionMod implements ModInitializer {
 			.sanitize(true)
 			.build();
 
-
-	private void registerItemGroup() {
-		Group.ARCHERS_EXPANSION= FabricItemGroup.builder()
-				.icon(() -> new ItemStack(Armors.war_archer_t1.head.asItem()))
-				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
-				.build();
-		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);
-	}
-	@Override
-	public void onInitialize() {
+	public static void init() {
 		effectsConfig.refresh();
 		itemConfig.refresh();
 		tweaksConfig.refresh();
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			tweaksConfig.value.ignore_items_required_mods = true;
 		}
+	}
+	public static void registerEffects() {
+		Effects.register();
+		effectsConfig.save();
+	}
+	public static void registerSounds() {
+		Sounds.register();
+	}
+	public static void registerItems() {
 		Items.registerModItems();
 		Group.registerItemGroups();
-		registerItemGroup();
-		Effects.register();
-		Sounds.register();
+		Group.ARCHERS_EXPANSION= FabricItemGroup.builder()
+				.icon(() -> new ItemStack(Armors.war_archer_t1.head.asItem()))
+				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
+				.build();
+		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);
 		Armors.register(itemConfig.value.armor_sets);
 		/*
 		if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || ArchersExpansionMod.tweaksConfig.value.ignore_items_required_mods) {
@@ -84,18 +85,18 @@ public class ArchersExpansionMod implements ModInitializer {
 		}
 		*/
 		itemConfig.save();
-		effectsConfig.save();
 	}
-	static{
-		WintersGripEntity.ENTITY_TYPE = Registry.register(
-				Registries.ENTITY_TYPE,
-				Identifier.of(MOD_ID, "winters_grip"),
-				FabricEntityTypeBuilder.<WintersGripEntity>create(SpawnGroup.MISC, WintersGripEntity::new)
-						.dimensions(EntityDimensions.changing(6F, 0.5F))
-						.fireImmune()
-						.trackRangeBlocks(128)
-						.trackedUpdateRate(20)
-						.build()
-		);
+	public static void registerEntities() {
+			WintersGripEntity.ENTITY_TYPE = Registry.register(
+					Registries.ENTITY_TYPE,
+					Identifier.of(MOD_ID, "winters_grip"),
+					FabricEntityTypeBuilder.<WintersGripEntity>create(SpawnGroup.MISC, WintersGripEntity::new)
+							.dimensions(EntityDimensions.changing(6F, 0.5F))
+							.fireImmune()
+							.trackRangeBlocks(128)
+							.trackedUpdateRate(20)
+							.build()
+			);
 	}
+
 }

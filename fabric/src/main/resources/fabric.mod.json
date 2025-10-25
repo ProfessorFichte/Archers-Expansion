@@ -16,10 +16,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-          "com.archers_expansion.ArchersExpansionMod"
+          "com.archers_expansion.fabric.FabricMod"
 		],
 		"client": [
-			"com.archers_expansion.client.ArchersExpansionModClient"
+			"com.archers_expansion.fabric.client.FabricClient"
 		],
 		"fabric-datagen": [
 			"com.archers_expansion.ArchersExpansionDataGenerator"
