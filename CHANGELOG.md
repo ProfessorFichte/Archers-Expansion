@@ -1,3 +1,6 @@
+# 1.4.1 - 1.21.1
+- update azurelib
+
 # 1.4.0 - 1.21.1
 - NeoForge Beta!
 - Changed Spell Book Textures to be more in line with the RPG-Series Books (by SirGhaith)

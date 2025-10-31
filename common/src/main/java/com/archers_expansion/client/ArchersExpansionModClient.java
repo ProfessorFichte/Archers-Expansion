@@ -10,7 +10,7 @@ import com.archers_expansion.effect.Effects;
 import com.archers_expansion.entity.WintersGripEntity;
 import com.archers_expansion.items.armors.Armors;
 import com.archers_expansion.items.armors.ArmoryCompat;
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.render.CustomModels;
-import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
 
 import java.util.List;
 import java.util.function.Supplier;
