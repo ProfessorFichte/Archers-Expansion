@@ -1,3 +1,8 @@
+# 1.4.2 - 1.21.1
+- nerf some ranged damage & haste values
+- remove knockback resistance from war archer armor and go for armor toughness on T3
+- add optional Critical Chance & Damage Attribute compat for War Archer and Deadeye Armor Sets
+
 # 1.4.1 - 1.21.1
 - update azurelib
 

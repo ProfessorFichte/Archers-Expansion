@@ -42,27 +42,36 @@ public class Armors {
     private static final Identifier RANGED_DAMAGE_ID = Identifier.of(EntityAttributes_RangedWeapon.DAMAGE.id.toString());
     private static final Identifier RANGED_VELOCITY_ID = Identifier.of(EntityAttributes_RangedWeapon.VELOCITY.id.toString());
     private static final Identifier KNOCKBACK_ID = Identifier.ofVanilla("generic.knockback_resistance");
+    private static final Identifier ARMOR_TOUGHNESS_ID = Identifier.ofVanilla("generic.armor_toughness");
+
+    private static final String CRIT_MOD_ID = "critical_strike";
+    private static final Identifier CRIT_CHANCE_ID = Identifier.of(CRIT_MOD_ID, "chance");
+    private static final Identifier CRIT_DAMAGE_ID = Identifier.of(CRIT_MOD_ID, "damage");
 
     public static final float tundra_ranged_damage_t2 = 0.06F;
     public static final float tundra_haste_t2 = 0.04F;
     private static final float tundra_t2_spell_power = 1.0F;
-    public static final float tundra_ranged_damage_t3 = 0.08F;
-    public static final float tundra_haste_t3 = 0.05F;
+    public static final float tundra_ranged_damage_t3 = 0.07F;
+    public static final float tundra_haste_t3 = 0.04F;
     private static final float tundra_t3_spell_power = 1F;
 
 
     public static final float war_archer_damage_t2 = 0.10F;
-    public static final float war_archer_armorknockback_t2 = 0.1F;
+    public static final float war_archer_velocity_t2 = 0.15F;
+    public static final float war_archer_t2_crit_damage = 0.04F;
     public static final float war_archer_damage_t3 = 0.12F;
-    public static final float war_archer_armorknockback_t3 = 0.1F;
     public static final float war_archer_velocity_t3 = 0.25F;
+    public static final float war_archer_t3_toughness = 1.0F;
+    public static final float war_archer_t3_crit_damage = 0.05F;
 
     public static final float deadeye_damage_t2 = 0.05F;
     public static final float deadeye_evasion_t2 = 0.04F;
     public static final float deadeye_haste_t2 = 0.05F;
-    public static final float deadeye_damage_t3 = 0.07F;
+    public static final float deadeye_t2_crit_chance = 0.02F;
+    public static final float deadeye_damage_t3 = 0.06F;
     public static final float deadeye_evasion_t3 = 0.05F;
     public static final float deadeye_haste_t3 = 0.07F;
+    public static final float deadeye_t3_crit_chance = 0.025F;
 
     public static RegistryEntry<ArmorMaterial> material(String name,
                                                         int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
@@ -170,22 +179,34 @@ public class Armors {
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
+                                            AttributeModifier.multiply(RANGED_VELOCITY_ID,war_archer_velocity_t2)
+                                    )).addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t2_crit_damage)
                                     )),
                             new ArmorSetConfig.Piece(5)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
+                                            AttributeModifier.multiply(RANGED_VELOCITY_ID,war_archer_velocity_t2)
+                                    )).addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t2_crit_damage)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
+                                            AttributeModifier.multiply(RANGED_VELOCITY_ID,war_archer_velocity_t2)
+                                    )).addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t2_crit_damage)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t2)
+                                            AttributeModifier.multiply(RANGED_VELOCITY_ID,war_archer_velocity_t2)
+                                    )).addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t2_crit_damage)
                                     ))
                     ),2
             ).armorSet();
@@ -202,23 +223,43 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
-                                    )),
-                            new ArmorSetConfig.Piece(3)
-                                    .addAll(List.of(
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t2_crit_chance),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t2_crit_chance),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
+                                    )),
+                            new ArmorSetConfig.Piece(3)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t2_crit_chance),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t2),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t2),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t2_crit_chance),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
                                     ))
                     ),2
@@ -269,25 +310,45 @@ public class Armors {
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
                                             AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t3),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t3)
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t3_crit_damage),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
                                     )),
                             new ArmorSetConfig.Piece(5)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
                                             AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t3),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t3)
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t3_crit_damage),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
                                     )),
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
                                             AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t3),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t3)
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t3_crit_damage),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
                                             AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t3),
-                                            AttributeModifier.multiply(KNOCKBACK_ID,war_archer_armorknockback_t3)
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t3),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t3_crit_damage),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
                                     ))
                     ),3
             ).armorSet();
@@ -304,23 +365,43 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
-                                    )),
-                            new ArmorSetConfig.Piece(3)
-                                    .addAll(List.of(
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
-                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t3_crit_chance),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
                                     )),
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t3_crit_chance),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
+                                    )),
+                            new ArmorSetConfig.Piece(3)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t3_crit_chance),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
                                     )),
                             new ArmorSetConfig.Piece(2)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t3),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t3),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t3_crit_chance),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
                                     ))
                     ),3

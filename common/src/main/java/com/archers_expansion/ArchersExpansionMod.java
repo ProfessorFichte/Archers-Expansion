@@ -36,7 +36,7 @@ public class ArchersExpansionMod{
 			.build();
 
 	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<ConfigFile.Equipment>
-			("equipment_v2", Default.itemConfig)
+			("equipment_v3", Default.itemConfig)
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
