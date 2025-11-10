@@ -38,6 +38,8 @@
   "effect.archers_expansion.disabling_shot.description": "Ralentiza y daña al objetivo con el tiempo.",
   "effect.archers_expansion.infiltrators_arrow": "Flecha del Infiltrador",
   "effect.archers_expansion.infiltrators_arrow.description": "Invisible para los enemigos",
+  "effect.archers_expansion.infiltrators_speed": "Velocidad del Infiltrador",
+  "effect.archers_expansion.infiltrators_speed.description": "Movimiento más rápido al estar en sigilo",
 
   "item.archers_expansion.tundra_hunter_spell_book": "Caza Tundrica",
   "item.archers_expansion.tundra_hunter.spell_scroll": "Pergamino del Cazador de la Tundra",
@@ -119,6 +121,13 @@
   "advancements.archers_expansion.tundra_hunter_spells.description": "Obtén todos los hechizos del Cazador de la Tundra.",
   "advancements.archers_expansion.war_archer_spells.title": "¡Carga, Apunta y Dispara!",
   "advancements.archers_expansion.war_archer_spells.description": "Obtén todos los hechizos del Arquero de Guerra.",
+
+  "advancements.more_rpg_content.path_choose_war_archer.title": "Camino del Arquero de Guerra",
+  "advancements.more_rpg_content.path_choose_war_archer.description": "Creá las Instrucciones del Arquero de Guerra",
+  "advancements.more_rpg_content.path_choose_deadeye.title": "Camino del Ojo de Águila",
+  "advancements.more_rpg_content.path_choose_deadeye.description": "Creá la Lista del Ojo de Águila",
+  "advancements.more_rpg_content.path_choose_tundra_hunter.title": "Camino del Cazador",
+  "advancements.more_rpg_content.path_choose_tundra_hunter.description": "Creá la Caza Tundrica",
 
   "equipment_set.archers_expansion.bounty_hunter": "Cazador de Recompensas",
   "equipment_set.archers_expansion.polar_stalker": "Acechador Polar",
