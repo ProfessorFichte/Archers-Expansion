@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "archers_expansion:item/polar_stalker_feet"
+  }
+}

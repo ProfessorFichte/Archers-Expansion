@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "archers_expansion:item/bounty_hunter_legs"
+  }
+}

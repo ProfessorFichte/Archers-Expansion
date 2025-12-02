@@ -10,6 +10,8 @@ import com.archers_expansion.sounds.Sounds;
 import com.archers_expansion.config.TweaksConfig;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.SpawnGroup;
@@ -24,6 +26,8 @@ import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.archers_expansion.compat.CompatLoadingCheck.armoryLoadCheck;
+
 public class ArchersExpansionMod{
 	public static final String MOD_ID = "archers_expansion";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
@@ -36,7 +40,7 @@ public class ArchersExpansionMod{
 			.build();
 
 	public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<ConfigFile.Equipment>
-			("equipment_v3", Default.itemConfig)
+			("equipment_v4", Default.itemConfig)
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
@@ -72,9 +76,7 @@ public class ArchersExpansionMod{
 				.build();
 		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);
 		Armors.register(itemConfig.value.armor_sets);
-		/*
-		if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || ArchersExpansionMod.tweaksConfig.value.ignore_items_required_mods) {
-			ArmoryCompat.register(itemConfig.value.armor_sets);
+		if (armoryLoadCheck()) {
 			FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> {
 				ResourceManagerHelper.registerBuiltinResourcePack(
 						Identifier.of(MOD_ID, "archers_expansion_armory_compat"),
@@ -83,7 +85,6 @@ public class ArchersExpansionMod{
 				);
 			});
 		}
-		*/
 		itemConfig.save();
 	}
 	public static void registerEntities() {

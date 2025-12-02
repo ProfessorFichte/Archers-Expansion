@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:leather_from_blasting_tundra_hunter_legs"
+        "recipe": "archers_expansion:leather_from_blasting_tundra_hunter_legs"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:leather_from_blasting_tundra_hunter_legs"
+      "archers_expansion:leather_from_blasting_tundra_hunter_legs"
     ]
   }
 }

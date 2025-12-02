@@ -2,6 +2,7 @@ package com.archers_expansion.items.armors;
 
 import com.archers_expansion.items.Group;
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
@@ -12,20 +13,24 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.api.spell.SpellDataComponents;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
+import static com.archers_expansion.compat.CompatLoadingCheck.armoryLoadCheck;
 
 public class Armors {
     private static final Supplier<Ingredient> TUNDRA_INGREDIENTS = () -> Ingredient.ofItems(
@@ -37,6 +42,14 @@ public class Armors {
     private static final Supplier<Ingredient> DEADEYE_INGREDIENTS = () -> Ingredient.ofItems(
             MRPGCItems.HARDENED_LEATHER, Items.LEATHER
     );
+
+    private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
+        return Armor.ItemSettingsTweaker.standard(itemSettings -> {
+            itemSettings
+                    .component(SpellDataComponents.EQUIPMENT_SET, equipmentSetId)
+                    .component(DataComponentTypes.RARITY, Rarity.RARE);
+        });
+    }
 
     private static final Identifier RANGED_HASTE_ID = Identifier.of(EntityAttributes_RangedWeapon.HASTE.id.toString());
     private static final Identifier RANGED_DAMAGE_ID = Identifier.of(EntityAttributes_RangedWeapon.DAMAGE.id.toString());
@@ -54,7 +67,9 @@ public class Armors {
     public static final float tundra_ranged_damage_t3 = 0.07F;
     public static final float tundra_haste_t3 = 0.04F;
     private static final float tundra_t3_spell_power = 1F;
-
+    public static final float tundra_ranged_damage_t5 = 0.07F;
+    public static final float tundra_haste_t5 = 0.04F;
+    private static final float tundra_t5_spell_power = 1.5F;
 
     public static final float war_archer_damage_t2 = 0.10F;
     public static final float war_archer_velocity_t2 = 0.15F;
@@ -63,6 +78,10 @@ public class Armors {
     public static final float war_archer_velocity_t3 = 0.25F;
     public static final float war_archer_t3_toughness = 1.0F;
     public static final float war_archer_t3_crit_damage = 0.05F;
+    public static final float war_archer_damage_t5 = 0.13F;
+    public static final float war_archer_velocity_t5 = 0.25F;
+    public static final float war_archer_t5_toughness = 1.0F;
+    public static final float war_archer_t5_crit_damage = 0.06F;
 
     public static final float deadeye_damage_t2 = 0.05F;
     public static final float deadeye_evasion_t2 = 0.04F;
@@ -72,6 +91,10 @@ public class Armors {
     public static final float deadeye_evasion_t3 = 0.05F;
     public static final float deadeye_haste_t3 = 0.07F;
     public static final float deadeye_t3_crit_chance = 0.025F;
+    public static final float deadeye_damage_t5 = 0.06F;
+    public static final float deadeye_evasion_t5 = 0.05F;
+    public static final float deadeye_haste_t5 = 0.08F;
+    public static final float deadeye_t5_crit_chance = 0.03F;
 
     public static RegistryEntry<ArmorMaterial> material(String name,
                                                         int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
@@ -120,16 +143,33 @@ public class Armors {
             2, 3, 3, 2,
             15,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+    public static RegistryEntry<ArmorMaterial> material_bounty_hunter = material(
+            "bounty_hunter",
+            2, 4, 4, 2,
+            18,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+    public static RegistryEntry<ArmorMaterial> material_polar_stalker = material(
+            "polar_stalker",
+            2, 4, 4, 2,
+            18,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+    public static RegistryEntry<ArmorMaterial> material_sentinel_archer = material(
+            "sentinel_archer",
+            3, 5, 4, 3,
+            18,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
+    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability,
+                                      Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier, Armor.ItemSettingsTweaker settings) {
         var entry = Armor.Entry.create(
                 material,
                 id,
                 durability,
                 factory,
                 defaults,
-                Equipment.LootProperties.of(tier)
+                Equipment.LootProperties.of(tier),
+                settings
         );
         entries.add(entry);
         return entry;
@@ -166,7 +206,7 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t2),
                                             AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t2_spell_power)
                                     ))
-                    ),2
+                    ),2,null
             ).armorSet();
 
     public static final Armor.Set war_archer_t1 =
@@ -179,7 +219,7 @@ public class Armors {
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.multiply(RANGED_VELOCITY_ID,war_archer_velocity_t2)
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t2)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t2_crit_damage)
@@ -187,7 +227,7 @@ public class Armors {
                             new ArmorSetConfig.Piece(5)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.multiply(RANGED_VELOCITY_ID,war_archer_velocity_t2)
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t2)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t2_crit_damage)
@@ -195,7 +235,7 @@ public class Armors {
                             new ArmorSetConfig.Piece(4)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.multiply(RANGED_VELOCITY_ID,war_archer_velocity_t2)
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t2)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t2_crit_damage)
@@ -203,12 +243,12 @@ public class Armors {
                             new ArmorSetConfig.Piece(3)
                                     .addAll(List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
-                                            AttributeModifier.multiply(RANGED_VELOCITY_ID,war_archer_velocity_t2)
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t2)
                                     )).addConditional(CRIT_MOD_ID, List.of(
                                             AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t2),
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t2_crit_damage)
                                     ))
-                    ),2
+                    ),2,null
             ).armorSet();
 
     public static final Armor.Set deadeye_t1 =
@@ -262,7 +302,7 @@ public class Armors {
                                             AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t2_crit_chance),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t2)
                                     ))
-                    ),2
+                    ),2,null
             ).armorSet();
 
     public static final Armor.Set netherite_tundra_hunter =
@@ -296,7 +336,7 @@ public class Armors {
                                             AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t3),
                                             AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t3_spell_power)
                                     ))
-                    ),3
+                    ),3,null
             ).armorSet();
 
     public static final Armor.Set netherite_war_archer =
@@ -350,7 +390,7 @@ public class Armors {
                                             AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t3_crit_damage),
                                             AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t3_toughness)
                                     ))
-                    ),3
+                    ),3,null
             ).armorSet();
 
     public static final Armor.Set netherite_deadeye =
@@ -404,10 +444,155 @@ public class Armors {
                                             AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t3_crit_chance),
                                             AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t3)
                                     ))
-                    ),3
+                    ),3,null
             ).armorSet();
 
+    public static Armor.Entry bountyHunterArmorSet;
+    public static Armor.Entry polarStalkerArmorSet;
+    public static Armor.Entry sentinelArcherArmorSet;
+
+    public static Identifier bounty_hunter_passive = Identifier.of(MOD_ID, "bounty_hunter");
+    public static Identifier polar_stalker_passive = Identifier.of(MOD_ID, "polar_stalker");
+    public static Identifier sentinel_archer_passive = Identifier.of(MOD_ID, "sentinel_archer");
+
     public static void register(Map<String, ArmorSetConfig> configs) {
+        if (armoryLoadCheck()) {
+            bountyHunterArmorSet = create(
+                    material_bounty_hunter,
+                    Identifier.of(MOD_ID, "bounty_hunter"),
+                    40,
+                    Armor.CustomItem::new,
+                    ArmorSetConfig.with(
+                            new ArmorSetConfig.Piece(2)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t5),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t5),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t5)
+                                    )).addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t5),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t5_crit_chance),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t5)
+                                    )),
+                            new ArmorSetConfig.Piece(4)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t5),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t5),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t5)
+                                    )).addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t5),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t5_crit_chance),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t5)
+                                    )),
+                            new ArmorSetConfig.Piece(4)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t5),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t5),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t5)
+                                    )).addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t5),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t5_crit_chance),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t5)
+                                    )),
+                            new ArmorSetConfig.Piece(2)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t5),
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,deadeye_damage_t5),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t5)
+                                    )).addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,deadeye_haste_t5),
+                                            AttributeModifier.multiply(CRIT_CHANCE_ID,deadeye_t5_crit_chance),
+                                            AttributeModifier.multiply(SpellEngineAttributes.EVASION_CHANCE.id,deadeye_evasion_t5)
+                                    ))
+                    ),5,
+                    commonSettings(bounty_hunter_passive)
+            );
+            polarStalkerArmorSet = create(
+                    material_polar_stalker,
+                    Identifier.of(MOD_ID, "polar_stalker"),
+                    40,
+                    Armor.CustomItem::new,
+                    ArmorSetConfig.with(
+                            new ArmorSetConfig.Piece(2)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t5),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t5),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t5_spell_power)
+                                    )),
+                            new ArmorSetConfig.Piece(4)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t5),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t5),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t5_spell_power)
+                                    )),
+                            new ArmorSetConfig.Piece(4)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t5),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t5),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t5_spell_power)
+                                    )),
+                            new ArmorSetConfig.Piece(2)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,tundra_ranged_damage_t5),
+                                            AttributeModifier.multiply(RANGED_HASTE_ID,tundra_haste_t5),
+                                            AttributeModifier.bonus(SpellSchools.FROST.id,tundra_t5_spell_power)
+                                    ))
+                    ),5,
+                    commonSettings(polar_stalker_passive)
+            );
+            sentinelArcherArmorSet = create(
+                    material_sentinel_archer,
+                    Identifier.of(MOD_ID, "sentinel_archer"),
+                    40,
+                    Armor.CustomItem::new,
+                    ArmorSetConfig.with(
+                            new ArmorSetConfig.Piece(3)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t5),
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t5),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t5_toughness)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t5),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t5_crit_damage),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t5_toughness)
+                                    )),
+                            new ArmorSetConfig.Piece(5)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t5),
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t5),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t5_toughness)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t5),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t5_crit_damage),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t5_toughness)
+                                    )),
+                            new ArmorSetConfig.Piece(4)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t5),
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t5),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t5_toughness)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t5),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t5_crit_damage),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t5_toughness)
+                                    )),
+                            new ArmorSetConfig.Piece(3)
+                                    .addAll(List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t5),
+                                            AttributeModifier.bonus(RANGED_VELOCITY_ID,war_archer_velocity_t5),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t5_toughness)
+                                    ))
+                                    .addConditional(CRIT_MOD_ID, List.of(
+                                            AttributeModifier.multiply(RANGED_DAMAGE_ID,war_archer_damage_t5),
+                                            AttributeModifier.multiply(CRIT_DAMAGE_ID,war_archer_t5_crit_damage),
+                                            AttributeModifier.bonus(ARMOR_TOUGHNESS_ID,war_archer_t5_toughness)
+                                    ))
+                    ),5,
+                    commonSettings(sentinel_archer_passive)
+            );
+        }
         Armor.register(configs, entries, Group.KEY);
     }
 

@@ -1,13 +1,16 @@
 package com.archers_expansion;
 
 import com.archers_expansion.items.armors.Armors;
-import com.archers_expansion.items.armors.ArmoryCompat;
 import com.archers_expansion.spell.ArchersExpansionSpells;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.Models;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -32,6 +35,27 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ItemTagGenerator::new);
 		pack.addProvider(UnsmeltGenerator::new);
 		pack.addProvider(SpellGen::new);
+		pack.addProvider(ModelProvider::new);
+	}
+
+	public static class ModelProvider extends FabricModelProvider {
+		public ModelProvider(FabricDataOutput output) {
+			super(output);
+		}
+
+		@Override
+		public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+
+		}
+
+		@Override
+		public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+			Armors.entries.forEach(entry -> {
+				for (var piece: entry.armorSet().pieces()) {
+					itemModelGenerator.register((Item) piece, Models.GENERATED);
+				}
+			});
+		}
 	}
 
 	public static class SpellGen extends SpellGenerator {

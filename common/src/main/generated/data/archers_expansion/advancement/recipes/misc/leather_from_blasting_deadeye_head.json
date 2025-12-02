@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:leather_from_blasting_deadeye_head"
+        "recipe": "archers_expansion:leather_from_blasting_deadeye_head"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:leather_from_blasting_deadeye_head"
+      "archers_expansion:leather_from_blasting_deadeye_head"
     ]
   }
 }

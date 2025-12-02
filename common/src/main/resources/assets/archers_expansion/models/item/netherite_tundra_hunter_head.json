@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "archers_expansion:item/netherite_tundra_hunter_head"
-  }
-}

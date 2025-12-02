@@ -9,9 +9,7 @@ import com.archers_expansion.client.entity.WintersGripRenderer;
 import com.archers_expansion.effect.Effects;
 import com.archers_expansion.entity.WintersGripEntity;
 import com.archers_expansion.items.armors.Armors;
-import com.archers_expansion.items.armors.ArmoryCompat;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
@@ -46,13 +44,12 @@ public class ArchersExpansionModClient {
         registerArmorRenderer(Armors.netherite_tundra_hunter, ArchersExpansionArmorRenderer::netherite_tundra_hunter);
         registerArmorRenderer(Armors.war_archer_t1, ArchersExpansionArmorRenderer::war_archer);
         registerArmorRenderer(Armors.netherite_war_archer, ArchersExpansionArmorRenderer::netherite_war_archer);
-        /*
+
         if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || ArchersExpansionMod.tweaksConfig.value.ignore_items_required_mods) {
-            registerArmorRenderer(ArmoryCompat.bounty_hunter.armorSet(), ArchersExpansionArmorRenderer::bounty_hunter);
-            registerArmorRenderer(ArmoryCompat.polar_stalker.armorSet(), ArchersExpansionArmorRenderer::polar_stalker);
-            registerArmorRenderer(ArmoryCompat.sentinel_archer.armorSet(), ArchersExpansionArmorRenderer::sentinel_archer);
+            registerArmorRenderer(Armors.bountyHunterArmorSet.armorSet(), ArchersExpansionArmorRenderer::bounty_hunter);
+            registerArmorRenderer(Armors.polarStalkerArmorSet.armorSet(), ArchersExpansionArmorRenderer::polar_stalker);
+            registerArmorRenderer(Armors.sentinelArcherArmorSet.armorSet(), ArchersExpansionArmorRenderer::sentinel_archer);
         }
-         */
 
         CustomParticleStatusEffect.register(Effects.ENCHANTED_CRSYSTAL_ARROW.effect, new CrystalArrowParticles(15));
         CustomParticleStatusEffect.register(Effects.CHOKING_GAS.effect, new ChokingPoisonParticles(10));
