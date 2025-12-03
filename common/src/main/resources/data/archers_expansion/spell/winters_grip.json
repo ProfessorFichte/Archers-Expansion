@@ -1,6 +1,7 @@
 {
   "school": "FROST_RANGED",
   "range": 0,
+  "secondary_archetype": "ANY",
   "tier": 4,
 
   "active": {
