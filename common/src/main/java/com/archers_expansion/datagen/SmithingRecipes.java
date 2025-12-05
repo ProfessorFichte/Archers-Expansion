@@ -15,7 +15,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
     @Override
     public void generate() {
         Identifier templateItem = Identifier.of("armory_rpgs", "epic_armor_upgrade");
-        Identifier wardenCrystal = Identifier.of("more_rpg_classes", "warden_upgrade_crystal");
+        Identifier generalCrystal = Identifier.of("more_rpg_classes", "general_upgrade_crystal");
         Identifier ravagerCrystal = Identifier.of("more_rpg_classes", "ravager_upgrade_crystal");
 
         // ==========================================
@@ -25,7 +25,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
                 "smithing_from_deadeye",
                 Armors.deadeye_t1,
                 templateItem,
-                wardenCrystal,
+                generalCrystal,
                 Armors.bountyHunterArmorSet.armorSet(),
                 "armory_rpgs"
         );
@@ -33,7 +33,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
                 "smithing_from_netherite_deadeye",
                 Armors.netherite_deadeye,
                 templateItem,
-                wardenCrystal,
+                generalCrystal,
                 Armors.bountyHunterArmorSet.armorSet(),
                 "armory_rpgs"
         );
@@ -65,7 +65,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
                 "smithing_from_war_archer",
                 Armors.war_archer_t1,
                 templateItem,
-                wardenCrystal,
+                generalCrystal,
                 Armors.sentinelArcherArmorSet.armorSet(),
                 "armory_rpgs"
         );
@@ -73,7 +73,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
                 "smithing_from_netherite_war_archer",
                 Armors.netherite_war_archer,
                 templateItem,
-                wardenCrystal,
+                generalCrystal,
                 Armors.sentinelArcherArmorSet.armorSet(),
                 "armory_rpgs"
         );

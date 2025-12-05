@@ -1,3 +1,7 @@
+# 1.4.4 - 1.21.1
+- give Choking Gas Poison Effect better damage scaling
+- fix wrong Upgrade Crystal -> General's Lost Crystal is the correct
+
 # 1.4.3 - 1.21.1
 **Add T5 Armory Compat Sets for each Archer Class!**
 - Bounty Hunter Armor Set -> DeadEye
