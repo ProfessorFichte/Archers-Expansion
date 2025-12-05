@@ -180,12 +180,11 @@ if (System.getenv("MODRINTH_API_KEY")) {
     modrinth {
         token = System.getenv("MODRINTH_API_KEY")
         projectId = System.getenv("MODRINTH_PROJECT_ID")
-        changelog = changelog_last_section()
         versionName = "${version}-${platform}"
         versionNumber = "${version}-${platform}"
         versionType = release_type
         uploadFile = remapJar
-        gameVersions = ["${project.minecraft_version}", "${project.minecraft_compat_version}"]
+        gameVersions = ["${project.minecraft_version}"]
         loaders = ["neoforge"]
         changelog = changelog_last_section()
         dependencies {

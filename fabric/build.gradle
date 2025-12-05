@@ -168,7 +168,7 @@ if (System.getenv("MODRINTH_API_KEY")) {
         versionNumber = "${version}-${platform}"
         versionType = release_type
         uploadFile = remapJar
-        gameVersions = ["${project.minecraft_version}", "${project.minecraft_compat_version}"]
+        gameVersions = ["${project.minecraft_version}"]
         loaders = ["fabric"]
         changelog = changelog_last_section()
         dependencies {
