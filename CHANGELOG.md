@@ -1,3 +1,11 @@
+# 1.4.3 - 1.21.1
+**Add T5 Armory Compat Sets for each Archer Class!**
+- Bounty Hunter Armor Set -> DeadEye
+- Polar Stalker Armor Set -> Tundra Hunter
+- Sentinel Archer Armor Set > War Archer
+- Migrate Recipes To Datagen
+- Small Fixes
+
 # 1.4.2 - 1.21.1
 - nerf some ranged damage & haste values
 - remove knockback resistance from war archer armor and go for armor toughness on T3

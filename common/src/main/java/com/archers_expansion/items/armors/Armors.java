@@ -26,7 +26,6 @@ import net.spell_power.api.SpellSchools;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Supplier;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;

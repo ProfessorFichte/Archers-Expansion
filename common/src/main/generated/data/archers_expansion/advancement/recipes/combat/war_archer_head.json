@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "archers_expansion:war_archer_head"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_war_archer_head": {
+      "conditions": {
+        "items": [
+          {
+            "items": "archers_expansion:war_archer_head"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_war_archer_head"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "archers_expansion:war_archer_head"
+    ]
+  }
+}

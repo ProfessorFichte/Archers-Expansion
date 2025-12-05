@@ -17,6 +17,7 @@ import static com.archers_expansion.items.Group.KEY;
 public class Items {
 
     public static final HashMap<String, Item> entries;
+
     static {
         entries = new HashMap<>();
         for(var entry: Armors.entries) {

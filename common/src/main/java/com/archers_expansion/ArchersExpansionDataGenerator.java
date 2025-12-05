@@ -1,5 +1,7 @@
 package com.archers_expansion;
 
+import com.archers_expansion.datagen.CraftingRecipeGenerator;
+import com.archers_expansion.datagen.SmithingRecipes;
 import com.archers_expansion.items.armors.Armors;
 import com.archers_expansion.spell.ArchersExpansionSpells;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -36,6 +38,8 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(UnsmeltGenerator::new);
 		pack.addProvider(SpellGen::new);
 		pack.addProvider(ModelProvider::new);
+		pack.addProvider(CraftingRecipeGenerator::new);
+		pack.addProvider(SmithingRecipes::new);
 	}
 
 	public static class ModelProvider extends FabricModelProvider {
@@ -139,7 +143,6 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 		@Override
 		protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 			armorTags(Armors.entries, RPGSeriesItemTags.ArmorMetaType.ARCHERY);
-			//armorTags(ArmoryCompat.entries, RPGSeriesItemTags.ArmorMetaType.ARCHERY);
 		}
 	}
 
@@ -158,6 +161,11 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 			disassembleArmor(exporter, Armors.netherite_deadeye, Items.NETHERITE_SCRAP);
 			disassembleArmor(exporter, Armors.netherite_war_archer, Items.NETHERITE_SCRAP);
 			disassembleArmor(exporter, Armors.netherite_tundra_hunter, Items.NETHERITE_SCRAP);
+		}
+
+		@Override
+		public String getName() {
+			return "Unsmelt Recipes";
 		}
 
 		private static void disassembleArmor(RecipeExporter exporter, Armor.Set armorSet, Item output) {

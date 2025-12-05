@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "archers_expansion:tundra_hunter_feet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tundra_hunter_feet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "archers_expansion:tundra_hunter_feet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tundra_hunter_feet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "archers_expansion:tundra_hunter_feet"
+    ]
+  }
+}
