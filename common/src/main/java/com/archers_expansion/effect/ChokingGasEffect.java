@@ -23,21 +23,19 @@ public class ChokingGasEffect extends StatusEffect {
     }
 
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        float damage = 1.0F;
+        float damage = amplifier + 1.0F;
         if(entity.hasStatusEffect(MRPGCEffects.BLEEDING.registryEntry)){
-            damage = damage + 0.5F;
+            damage = damage * 1.2F;
         }
         entity.damage(entity.getDamageSources().magic(), damage);
         return true;
     }
 
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
-        int i;
-        i = 30 >> amplifier;
-        if (i > 0) {
-            return duration % i == 0;
-        } else {
-            return true;
+        int interval = 40 >> amplifier;
+        if (interval < 25) {
+            interval = 25;
         }
+        return duration % interval == 0;
     }
 }
