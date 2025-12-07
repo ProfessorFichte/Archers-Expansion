@@ -24,9 +24,6 @@ public class ChokingGasEffect extends StatusEffect {
 
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         float damage = amplifier + 1.0F;
-        if(entity.hasStatusEffect(MRPGCEffects.BLEEDING.registryEntry)){
-            damage = damage * 1.2F;
-        }
         entity.damage(entity.getDamageSources().magic(), damage);
         return true;
     }
