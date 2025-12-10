@@ -1,3 +1,6 @@
+# 1.4.6 - 1.21.1
+- Update to newest MRPG Lib Version
+
 # 1.4.5 - 1.21.1
 - fix missing model part for Bounty Hunter Armor Set (Epic Deadeye Armor Set)
 - remove additional damage logic for choking gas if the entity is bleeding 

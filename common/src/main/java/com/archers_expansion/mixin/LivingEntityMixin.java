@@ -46,7 +46,7 @@ public class LivingEntityMixin {
             for(Entity entities : entity.getEntityWorld().getOtherEntities(entity, radius, EntityPredicates.VALID_LIVING_ENTITY)) {
                 if (entities != null) {
                     if (entities instanceof LivingEntity targets && !isProtected(targets, entity)) {
-                        targets.addStatusEffect(new StatusEffectInstance(MRPGCEffects.FROZEN_SOLID.registryEntry, 60, 0, false, false, true));
+                        targets.addStatusEffect(new StatusEffectInstance(MRPGCEffects.FROZEN_SOLID.entry, 60, 0, false, false, true));
                     }
                 }
             }
