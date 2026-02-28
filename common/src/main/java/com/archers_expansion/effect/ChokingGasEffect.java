@@ -17,7 +17,7 @@ public class ChokingGasEffect extends StatusEffect {
     public void onApplied(LivingEntity entity, int amplifier) {
         EntityType<?> type = entity.getType();
         if(type.isIn(EntityTypeTags.IGNORES_POISON_AND_REGEN)){
-            entity.removeStatusEffect(Effects.CHOKING_GAS.registryEntry);
+            entity.removeStatusEffect(ArchersEffects.getEntry(ArchersEffects.CHOKING_GAS));
         }
         super.onApplied(entity, amplifier);
     }

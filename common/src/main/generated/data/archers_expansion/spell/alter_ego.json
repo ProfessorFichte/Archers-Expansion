@@ -1,0 +1,105 @@
+{
+  "school": "spell_power:physical_ranged",
+  "secondary_archetype": "ANY",
+  "range": 4.0,
+  "tier": 4,
+  "learn": {},
+  "active": {},
+  "release": {
+    "animation": {
+      "id": "spell_engine:one_handed_area_release"
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:smoke_large",
+        "origin": "CENTER",
+        "shape": "SPHERE",
+        "count": 50.0,
+        "min_speed": 1.0,
+        "color_rgba": 4294967295
+      },
+      {
+        "particle_id": "spell_engine:smoke_large",
+        "origin": "CENTER",
+        "shape": "SPHERE",
+        "count": 50.0,
+        "min_speed": 1.0,
+        "color_rgba": 4294967295
+      }
+    ],
+    "particles_scaled_with_ranged": [
+      {
+        "particle_id": "spell_engine:area_effect_293",
+        "origin": "GROUND",
+        "shape": "SPHERE",
+        "count": 1.0,
+        "max_speed": 0.0,
+        "color_rgba": 65535,
+        "scale": 0.8
+      }
+    ]
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "archers_expansion:infiltrators_arrow",
+          "duration": 7.0
+        }
+      }
+    },
+    {
+      "action": {
+        "type": "SPAWN",
+        "spawns": [
+          {
+            "entity_type_id": "archers_expansion:alter_ego",
+            "time_to_live_seconds": 12,
+            "delay_ticks": 20,
+            "placement": {
+              "location_offset_by_look": 3.0,
+              "apply_yaw": true
+            }
+          },
+          {
+            "entity_type_id": "archers_expansion:alter_ego",
+            "time_to_live_seconds": 12,
+            "delay_ticks": 20,
+            "placement": {
+              "location_offset_by_look": 3.0,
+              "location_yaw_offset": 90.0,
+              "apply_yaw": true
+            }
+          },
+          {
+            "entity_type_id": "archers_expansion:alter_ego",
+            "time_to_live_seconds": 12,
+            "delay_ticks": 20,
+            "placement": {
+              "location_offset_by_look": 3.0,
+              "location_yaw_offset": -90.0,
+              "apply_yaw": true
+            }
+          },
+          {
+            "entity_type_id": "archers_expansion:alter_ego",
+            "time_to_live_seconds": 12,
+            "delay_ticks": 20,
+            "placement": {
+              "location_offset_by_look": 3.0,
+              "location_yaw_offset": -180.0,
+              "apply_yaw": true
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.4,
+    "cooldown": {
+      "duration": 40.0
+    }
+  }
+}

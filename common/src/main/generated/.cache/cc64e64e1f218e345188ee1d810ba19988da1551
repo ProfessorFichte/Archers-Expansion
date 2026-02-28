@@ -1,9 +1,0 @@
-// 1.21.1	2025-12-05T22:26:16.3631482	Archers Expansion/Tags for minecraft:item
-4437eb58d7acdc3acde8c1bc16a53ff2299b1957 data\minecraft\tags\item\chest_armor.json
-d52f39b6a0083d87650e4b671a21aab072c918e9 data\minecraft\tags\item\leg_armor.json
-36e38ae2c0af6035468aff7e4c459a46420978f7 data\rpg_series\tags\item\armor_type\archery.json
-50b47cab2f9c68731ea15a9bda6b3abc7e78bf3f data\rpg_series\tags\item\loot_tier\tier_5_armors.json
-01622743efc64a391d790cb7383a123d6a719993 data\rpg_series\tags\item\loot_tier\tier_3_armors.json
-ceca03aafad886a8ceeff484399778912b7c1907 data\minecraft\tags\item\head_armor.json
-4ed2afae423c4109cf6f5b9d78755b4c372b61c3 data\rpg_series\tags\item\loot_tier\tier_2_armors.json
-abdc4e169dce7249236ef1aa6a1fb899e224062d data\minecraft\tags\item\foot_armor.json

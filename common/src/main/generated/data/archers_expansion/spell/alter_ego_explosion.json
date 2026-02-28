@@ -1,0 +1,62 @@
+{
+  "school": "spell_power:physical_ranged",
+  "range": 4.0,
+  "tier": 4,
+  "learn": {},
+  "active": {},
+  "release": {
+    "particles": [
+      {
+        "particle_id": "spell_engine:smoke_medium",
+        "origin": "GROUND",
+        "shape": "CIRCLE",
+        "count": 130.0,
+        "min_speed": 0.2,
+        "max_speed": 0.6
+      },
+      {
+        "particle_id": "spell_engine:smoke_large",
+        "origin": "GROUND",
+        "shape": "CIRCLE",
+        "count": 130.0,
+        "min_speed": 0.5,
+        "max_speed": 0.9
+      }
+    ],
+    "sound": {
+      "id": "entity.generic.explode"
+    }
+  },
+  "target": {
+    "type": "AREA",
+    "area": {
+      "vertical_range_multiplier": 0.5
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.5,
+          "knockback": 0.8
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:smoke_medium",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 30.0,
+          "min_speed": 0.2,
+          "max_speed": 0.7
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "cooldown": {
+      "duration": 1.0
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "more_rpg_content:root",
+  "criteria": {
+    "book": {
+      "conditions": {
+        "spell_pool": "archers_expansion:spell_book/deadeye"
+      },
+      "trigger": "spell_engine:spell_book_creation"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.archers_expansion.path_choose_deadeye.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "components": {
+        "spell_engine:item_model": "archers_expansion:item/spell_scroll/deadeye"
+      },
+      "id": "spell_engine:spell_scroll"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.archers_expansion.path_choose_deadeye.title"
+    }
+  }
+}

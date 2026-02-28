@@ -1,7 +1,6 @@
 package com.archers_expansion.datagen;
 
-import com.archers_expansion.items.Items;
-import com.archers_expansion.items.armors.Armors;
+import com.archers_expansion.items.Armors;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
@@ -9,7 +8,6 @@ import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
@@ -27,7 +25,6 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
     @Override
     public void generate(RecipeExporter exporter) {
         generateArmorRecipes(exporter);
-        generateSpellBookRecipes(exporter);
     }
 
     private void generateArmorRecipes(RecipeExporter exporter) {
@@ -35,7 +32,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
         // DEADEYE ARMOR SET
         // ==========================================
 
-        createShapedRecipe(exporter, Armors.deadeye_t1.head,
+        createShapedRecipe(exporter, Armors.deadeye_t1.armorSet().head,
                 "ABA",
                 "C C",
                 null,
@@ -44,7 +41,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', net.minecraft.item.Items.RABBIT_HIDE
         );
 
-        createShapedRecipe(exporter, Armors.deadeye_t1.chest,
+        createShapedRecipe(exporter, Armors.deadeye_t1.armorSet().chest,
                 "A A",
                 "BDB",
                 "CBC",
@@ -54,7 +51,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'D', net.minecraft.item.Items.SPIDER_EYE
         );
 
-        createShapedRecipe(exporter, Armors.deadeye_t1.legs,
+        createShapedRecipe(exporter, Armors.deadeye_t1.armorSet().legs,
                 "AAA",
                 "B B",
                 "C C",
@@ -63,7 +60,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', net.minecraft.item.Items.RABBIT_HIDE
         );
 
-        createShapedRecipe(exporter, Armors.deadeye_t1.feet,
+        createShapedRecipe(exporter, Armors.deadeye_t1.armorSet().feet,
                 "ACA",
                 "B B",
                 null,
@@ -76,7 +73,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
         // TUNDRA HUNTER ARMOR SET
         // ==========================================
 
-        createShapedRecipe(exporter, Armors.tundra_hunter_t1.head,
+        createShapedRecipe(exporter, Armors.tundra_hunter_t1.armorSet().head,
                 "AAA",
                 "C C",
                 null,
@@ -84,7 +81,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', net.minecraft.item.Items.PRISMARINE_SHARD
         );
 
-        createShapedRecipe(exporter, Armors.tundra_hunter_t1.chest,
+        createShapedRecipe(exporter, Armors.tundra_hunter_t1.armorSet().chest,
                 "A A",
                 "BAB",
                 "ACA",
@@ -93,7 +90,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', MRPGCItems.HARDENED_LEATHER
         );
 
-        createShapedRecipe(exporter, Armors.tundra_hunter_t1.legs,
+        createShapedRecipe(exporter, Armors.tundra_hunter_t1.armorSet().legs,
                 "AAA",
                 "A A",
                 "C C",
@@ -101,7 +98,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', net.minecraft.item.Items.PRISMARINE_SHARD
         );
 
-        createShapedRecipe(exporter, Armors.tundra_hunter_t1.feet,
+        createShapedRecipe(exporter, Armors.tundra_hunter_t1.armorSet().feet,
                 "A A",
                 "B B",
                 null,
@@ -113,7 +110,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
         // WAR ARCHER ARMOR SET
         // ==========================================
 
-        createShapedRecipe(exporter,Armors.war_archer_t1.head,
+        createShapedRecipe(exporter,Armors.war_archer_t1.armorSet().head,
                 "ABA",
                 "C C",
                 null,
@@ -122,7 +119,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', net.minecraft.item.Items.CHAIN
         );
 
-        createShapedRecipe(exporter, Armors.war_archer_t1.chest,
+        createShapedRecipe(exporter, Armors.war_archer_t1.armorSet().chest,
                 "A A",
                 "BAB",
                 "ACA",
@@ -131,7 +128,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', net.minecraft.item.Items.NETHERITE_SCRAP
         );
 
-        createShapedRecipe(exporter, Armors.war_archer_t1.legs,
+        createShapedRecipe(exporter, Armors.war_archer_t1.armorSet().legs,
                 "AAA",
                 "B B",
                 "C C",
@@ -140,7 +137,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', net.minecraft.item.Items.CHAIN
         );
 
-        createShapedRecipe(exporter, Armors.war_archer_t1.feet,
+        createShapedRecipe(exporter, Armors.war_archer_t1.armorSet().feet,
                 "ACA",
                 "B B",
                 null,
@@ -148,46 +145,6 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'B', net.minecraft.item.Items.CHAIN,
                 'C', net.minecraft.item.Items.NETHERITE_SCRAP
         );
-    }
-
-    private void generateSpellBookRecipes(RecipeExporter exporter) {
-        Identifier deadeyeSpellBook = Identifier.of("archers_expansion", "deadeye_spell_book");
-        Identifier tundraHunterSpellBook = Identifier.of("archers_expansion", "tundra_hunter_spell_book");
-        Identifier warArcherSpellBook = Identifier.of("archers_expansion", "war_archer_spell_book");
-        createShapelessRecipe(exporter, deadeyeSpellBook,
-                net.minecraft.item.Items.ARROW,
-                net.minecraft.item.Items.RABBIT_HIDE,
-                net.minecraft.item.Items.BOOK,
-                net.minecraft.item.Items.LAPIS_LAZULI
-        );
-        createShapelessRecipe(exporter, tundraHunterSpellBook,
-                net.minecraft.item.Items.ARROW,
-                "more_rpg_classes:polar_bear_fur",
-                net.minecraft.item.Items.BOOK,
-                net.minecraft.item.Items.LAPIS_LAZULI
-        );
-        createShapelessRecipe(exporter, warArcherSpellBook,
-                net.minecraft.item.Items.ARROW,
-                net.minecraft.item.Items.NETHERITE_SCRAP,
-                net.minecraft.item.Items.BOOK,
-                net.minecraft.item.Items.LAPIS_LAZULI
-        );
-    }
-
-    public static ShapedRecipeJsonBuilder shaped(
-            RecipeCategory category,
-            Item result,
-            int count
-    ) {
-        return ShapedRecipeJsonBuilder.create(category, result, count);
-    }
-
-    public static ShapelessRecipeJsonBuilder shapeless(
-            RecipeCategory category,
-            Item result,
-            int count
-    ) {
-        return ShapelessRecipeJsonBuilder.create(category, result, count);
     }
 
     public static void createShapedRecipe(
@@ -249,15 +206,6 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
 
         builder.criterion(hasItem(result), conditionsFromItem(result))
                 .offerTo(exporter);
-    }
-
-    public static void createShapelessRecipe(
-            RecipeExporter exporter,
-            Identifier resultId,
-            Object... ingredients
-    ) {
-        Item result = Registries.ITEM.get(resultId);
-        createShapelessRecipe(exporter, result, ingredients);
     }
 
     @Override

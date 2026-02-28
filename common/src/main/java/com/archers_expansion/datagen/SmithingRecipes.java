@@ -1,6 +1,6 @@
 package com.archers_expansion.datagen;
 
-import com.archers_expansion.items.armors.Armors;
+import com.archers_expansion.items.Armors;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -23,7 +23,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
         // ==========================================
         createArmorSetUpgrade(
                 "smithing_from_deadeye",
-                Armors.deadeye_t1,
+                Armors.deadeye_t1.armorSet(),
                 templateItem,
                 generalCrystal,
                 Armors.bountyHunterArmorSet.armorSet(),
@@ -31,7 +31,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
         );
         createArmorSetUpgrade(
                 "smithing_from_netherite_deadeye",
-                Armors.netherite_deadeye,
+                Armors.netherite_deadeye.armorSet(),
                 templateItem,
                 generalCrystal,
                 Armors.bountyHunterArmorSet.armorSet(),
@@ -43,7 +43,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
         // ==========================================
         createArmorSetUpgrade(
                 "smithing_from_tundra_hunter",
-                Armors.tundra_hunter_t1,
+                Armors.tundra_hunter_t1.armorSet(),
                 templateItem,
                 ravagerCrystal,
                 Armors.polarStalkerArmorSet.armorSet(),
@@ -51,7 +51,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
         );
         createArmorSetUpgrade(
                 "smithing_from_netherite_tundra_hunter",
-                Armors.netherite_tundra_hunter,
+                Armors.netherite_tundra_hunter.armorSet(),
                 templateItem,
                 ravagerCrystal,
                 Armors.polarStalkerArmorSet.armorSet(),
@@ -63,7 +63,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
         // ==========================================
         createArmorSetUpgrade(
                 "smithing_from_war_archer",
-                Armors.war_archer_t1,
+                Armors.war_archer_t1.armorSet(),
                 templateItem,
                 generalCrystal,
                 Armors.sentinelArcherArmorSet.armorSet(),
@@ -71,7 +71,7 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
         );
         createArmorSetUpgrade(
                 "smithing_from_netherite_war_archer",
-                Armors.netherite_war_archer,
+                Armors.netherite_war_archer.armorSet(),
                 templateItem,
                 generalCrystal,
                 Armors.sentinelArcherArmorSet.armorSet(),
@@ -83,24 +83,24 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
         // ==========================================
         createSimpleArmorSetUpgrade(
                 "netherite_deadeye",
-                Armors.deadeye_t1,
+                Armors.deadeye_t1.armorSet(),
                 Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,
                 Items.NETHERITE_INGOT,
-                Armors.netherite_deadeye
+                Armors.netherite_deadeye.armorSet()
         );
         createSimpleArmorSetUpgrade(
                 "netherite_tundra_hunter",
-                Armors.tundra_hunter_t1,
+                Armors.tundra_hunter_t1.armorSet(),
                 Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,
                 Items.NETHERITE_INGOT,
-                Armors.netherite_tundra_hunter
+                Armors.netherite_tundra_hunter.armorSet()
         );
         createSimpleArmorSetUpgrade(
                 "netherite_war_archer",
-                Armors.war_archer_t1,
+                Armors.war_archer_t1.armorSet(),
                 Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,
                 Items.NETHERITE_INGOT,
-                Armors.netherite_war_archer
+                Armors.netherite_war_archer.armorSet()
         );
     }
 }

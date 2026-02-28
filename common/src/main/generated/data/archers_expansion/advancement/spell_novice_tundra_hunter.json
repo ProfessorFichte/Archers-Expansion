@@ -1,0 +1,27 @@
+{
+  "parent": "archers_expansion:path_choose_tundra_hunter",
+  "criteria": {
+    "bind": {
+      "conditions": {
+        "complete": false,
+        "spell_pool": "archers_expansion:spell_book/tundra_hunter"
+      },
+      "trigger": "spell_engine:spell_binding"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.archers_expansion.spell_novice_tundra_hunter.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "archers:rapid_crossbow"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.archers_expansion.spell_novice_tundra_hunter.title"
+    }
+  }
+}

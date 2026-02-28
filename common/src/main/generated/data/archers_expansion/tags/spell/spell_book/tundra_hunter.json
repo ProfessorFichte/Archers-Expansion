@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "archers_expansion:frozen_shot",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:frozen_pact",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:arctic_volley",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:enchanted_crystal_arrow",
+      "required": false
+    }
+  ]
+}

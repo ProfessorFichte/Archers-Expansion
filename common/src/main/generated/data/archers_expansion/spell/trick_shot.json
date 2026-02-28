@@ -1,0 +1,130 @@
+{
+  "school": "spell_power:physical_ranged",
+  "range": 26.0,
+  "tier": 2,
+  "learn": {},
+  "active": {
+    "cast": {
+      "duration": 0.6,
+      "animation": {
+        "id": "spell_engine:archery_pull"
+      },
+      "animates_ranged_weapon": true,
+      "sound": {
+        "id": "archers:bow_pull"
+      }
+    }
+  },
+  "release": {
+    "animation": {
+      "id": "spell_engine:archery_release"
+    },
+    "sound": {
+      "id": "archers_expansion:trick_shot"
+    }
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {}
+  },
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "launch_properties": {
+        "velocity": 1.2
+      },
+      "projectile": {
+        "perks": {
+          "ricochet": 7,
+          "ricochet_range": 26.0
+        },
+        "client_data": {
+          "travel_particles": [
+            {
+              "particle_id": "crit",
+              "origin": "CENTER",
+              "shape": "LINE",
+              "rotation": "LOOK",
+              "roll": 1.0,
+              "count": 2.0,
+              "min_speed": 0.2,
+              "max_speed": 0.22
+            },
+            {
+              "particle_id": "spell_engine:dripping_blood",
+              "origin": "CENTER",
+              "shape": "SPHERE",
+              "count": 10.0,
+              "min_speed": 0.1,
+              "max_speed": 0.3
+            }
+          ],
+          "model": {
+            "model_id": "archers_expansion:spell_projectile/regular_arrow"
+          }
+        }
+      }
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.6,
+          "knockback": 0.5
+        }
+      }
+    },
+    {
+      "target_modifiers": [
+        {
+          "conditions": [
+            {
+              "entity_type": "#minecraft:undead"
+            }
+          ],
+          "execute": "DENY"
+        }
+      ],
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "more_rpg_classes:bleeding",
+          "duration": 7.0,
+          "amplifier_power_multiplier": 0.15
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "crit",
+          "origin": "CENTER",
+          "shape": "PILLAR",
+          "count": 5.0,
+          "max_speed": 0.1
+        },
+        {
+          "particle_id": "spell_engine:smoke_medium",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 10.0,
+          "min_speed": 0.1,
+          "max_speed": 0.3,
+          "color_rgba": 3208659199
+        }
+      ],
+      "sound": {
+        "id": "entity.arrow.hit"
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.3,
+    "cooldown": {
+      "duration": 10.0
+    },
+    "item": {
+      "id": "minecraft:arrow"
+    }
+  }
+}

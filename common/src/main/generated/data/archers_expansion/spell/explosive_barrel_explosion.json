@@ -1,0 +1,85 @@
+{
+  "school": "spell_power:fire_ranged",
+  "range": 6.0,
+  "tier": 4,
+  "learn": {},
+  "active": {},
+  "release": {
+    "particles": [
+      {
+        "particle_id": "spell_engine:fire_explosion",
+        "origin": "CENTER",
+        "shape": "SPHERE",
+        "count": 1.0,
+        "min_speed": 0.2,
+        "max_speed": 0.6,
+        "scale": 5.0
+      },
+      {
+        "particle_id": "spell_engine:smoke_large",
+        "origin": "GROUND",
+        "shape": "CIRCLE",
+        "count": 40.0,
+        "min_speed": 0.5,
+        "max_speed": 0.9
+      },
+      {
+        "particle_id": "spell_engine:flame_medium_b",
+        "origin": "GROUND",
+        "shape": "SPHERE",
+        "count": 40.0,
+        "min_speed": 0.5,
+        "max_speed": 0.9
+      }
+    ],
+    "sound": {
+      "id": "entity.generic.explode"
+    }
+  },
+  "target": {
+    "type": "AREA",
+    "area": {
+      "vertical_range_multiplier": 2.0
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.3,
+          "knockback": 1.5
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:flame_medium_a",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 30.0,
+          "min_speed": 0.2,
+          "max_speed": 0.7
+        },
+        {
+          "particle_id": "spell_engine:smoke_medium",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 30.0,
+          "min_speed": 0.2,
+          "max_speed": 0.7
+        }
+      ]
+    },
+    {
+      "action": {
+        "type": "FIRE",
+        "fire": {}
+      }
+    }
+  ],
+  "cost": {
+    "cooldown": {
+      "duration": 1.0
+    }
+  }
+}

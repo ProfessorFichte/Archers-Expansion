@@ -1,0 +1,37 @@
+{
+  "enchanted_crystal_arrow_impact": {
+    "sounds": [
+      "archers_expansion:enchanted_crystal_arrow_impact"
+    ]
+  },
+  "infiltrator_vanish": {
+    "sounds": [
+      "archers_expansion:infiltrator_vanish"
+    ]
+  },
+  "pin_down": {
+    "sounds": [
+      "archers_expansion:pin_down"
+    ]
+  },
+  "point_blank_shot": {
+    "sounds": [
+      "archers_expansion:point_blank_shot"
+    ]
+  },
+  "poison_cloud": {
+    "sounds": [
+      "archers_expansion:poison_cloud"
+    ]
+  },
+  "special_shot": {
+    "sounds": [
+      "archers_expansion:special_shot"
+    ]
+  },
+  "trick_shot": {
+    "sounds": [
+      "archers_expansion:trick_shot"
+    ]
+  }
+}

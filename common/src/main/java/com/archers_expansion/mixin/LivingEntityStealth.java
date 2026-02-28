@@ -1,7 +1,7 @@
 package com.archers_expansion.mixin;
 
 import com.archers_expansion.ArchersExpansionMod;
-import com.archers_expansion.effect.Effects;
+import com.archers_expansion.effect.ArchersEffects;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.Entity;
@@ -19,14 +19,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class LivingEntityStealth {
     @WrapOperation(method = "updatePotionVisibility", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasStatusEffect(Lnet/minecraft/registry/entry/RegistryEntry;)Z"))
     private boolean updatePotionVisibility_WRAP_Stealth(LivingEntity instance, RegistryEntry<StatusEffect> effect, Operation<Boolean> original) {
-        return original.call(instance, effect) || instance.hasStatusEffect(Effects.INFILTRATORS_ARROW.registryEntry);
+        return original.call(instance, effect) || instance.hasStatusEffect(ArchersEffects.getEntry(ArchersEffects.INFILTRATORS_ARROW));
     }
 
     @Inject(method = "getAttackDistanceScalingFactor", at = @At("RETURN"), cancellable = true)
     private void getAttackDistanceScalingFactor_RETURN_Stealth(Entity entity, CallbackInfoReturnable<Double> cir) {
         var thisEntity = (LivingEntity) (Object) this;
-        if (thisEntity.hasStatusEffect(Effects.INFILTRATORS_ARROW.registryEntry)) {
-            cir.setReturnValue(cir.getReturnValue() * ArchersExpansionMod.effectsConfig.value.stealth_visibility_multiplier);
+        if (thisEntity.hasStatusEffect(ArchersEffects.getEntry(ArchersEffects.INFILTRATORS_ARROW))) {
+            cir.setReturnValue(cir.getReturnValue() * ArchersExpansionMod.tweaksConfig.value.stealth_visibility_multiplier);
         }
     }
 }

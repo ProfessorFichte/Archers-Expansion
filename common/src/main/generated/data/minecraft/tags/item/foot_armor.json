@@ -1,30 +1,6 @@
 {
   "values": [
     {
-      "id": "archers_expansion:tundra_hunter_feet",
-      "required": false
-    },
-    {
-      "id": "archers_expansion:war_archer_feet",
-      "required": false
-    },
-    {
-      "id": "archers_expansion:deadeye_feet",
-      "required": false
-    },
-    {
-      "id": "archers_expansion:netherite_tundra_hunter_feet",
-      "required": false
-    },
-    {
-      "id": "archers_expansion:netherite_war_archer_feet",
-      "required": false
-    },
-    {
-      "id": "archers_expansion:netherite_deadeye_feet",
-      "required": false
-    },
-    {
       "id": "archers_expansion:bounty_hunter_feet",
       "required": false
     },
@@ -35,6 +11,12 @@
     {
       "id": "archers_expansion:sentinel_archer_feet",
       "required": false
-    }
+    },
+    "archers_expansion:tundra_hunter_feet",
+    "archers_expansion:war_archer_feet",
+    "archers_expansion:deadeye_feet",
+    "archers_expansion:netherite_tundra_hunter_feet",
+    "archers_expansion:netherite_war_archer_feet",
+    "archers_expansion:netherite_deadeye_feet"
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "parent": "archers_expansion:spell_novice_war_archer",
+  "criteria": {
+    "bind": {
+      "conditions": {
+        "complete": true,
+        "spell_pool": "archers_expansion:spell_book/war_archer"
+      },
+      "trigger": "spell_engine:spell_binding"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.archers_expansion.spell_master_war_archer.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "id": "archers_expansion:netherite_war_archer_head"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.archers_expansion.spell_master_war_archer.title"
+    }
+  }
+}

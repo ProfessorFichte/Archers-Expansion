@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "archers_expansion:fast_shot",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:trick_shot",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:disabling_shot",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:choking_gas",
+      "required": false
+    }
+  ]
+}

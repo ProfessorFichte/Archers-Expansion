@@ -1,7 +1,7 @@
 package com.archers_expansion.mixin;
 
 import com.archers_expansion.ArchersExpansionMod;
-import com.archers_expansion.effect.Effects;
+import com.archers_expansion.effect.ArchersEffects;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
 import net.minecraft.entity.mob.MobEntity;
 import org.spongepowered.asm.mixin.Final;
@@ -36,8 +36,8 @@ public class TrackTargetGoalStealth {
     private void getFollowRange_HEAD(CallbackInfoReturnable<Double> cir) {
         var target = mob.getTarget();
         if (target != null
-                && (target.hasStatusEffect(Effects.INFILTRATORS_ARROW.registryEntry) )) {
-            cir.setReturnValue(ArchersExpansionMod.effectsConfig.value.stealth_follow_range);
+                && (target.hasStatusEffect(ArchersEffects.getEntry(ArchersEffects.INFILTRATORS_ARROW)) )) {
+            cir.setReturnValue(ArchersExpansionMod.tweaksConfig.value.stealth_follow_range);
             cir.cancel();
         }
     }

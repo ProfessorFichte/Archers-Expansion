@@ -6,7 +6,9 @@
   "active": {
     "cast": {
       "duration": 1.25,
-      "animation": "spell_engine:archery_pull",
+      "animation": {
+        "id": "spell_engine:archery_pull"
+      },
       "animates_ranged_weapon": true,
       "sound": {
         "id": "archers:bow_pull"
@@ -26,7 +28,9 @@
     }
   },
   "release": {
-    "animation": "spell_engine:archery_release",
+    "animation": {
+      "id": "spell_engine:archery_release"
+    },
     "sound": {
       "id": "entity.arrow.shoot"
     }
@@ -58,7 +62,7 @@
             }
           ],
           "model": {
-            "model_id": "archers_expansion:projectile/choking_gas_arrow",
+            "model_id": "archers_expansion:spell_projectile/choking_gas_arrow",
             "scale": 1.2
           }
         }

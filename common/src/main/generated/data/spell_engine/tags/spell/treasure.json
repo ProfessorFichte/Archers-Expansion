@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "#archers_expansion:spell_scroll/deadeye",
+      "required": false
+    },
+    {
+      "id": "#archers_expansion:spell_scroll/tundra_hunter",
+      "required": false
+    },
+    {
+      "id": "#archers_expansion:spell_scroll/war_archer",
+      "required": false
+    }
+  ]
+}

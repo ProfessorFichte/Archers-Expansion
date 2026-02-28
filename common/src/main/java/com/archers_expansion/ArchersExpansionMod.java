@@ -1,25 +1,22 @@
 package com.archers_expansion;
 
 import com.archers_expansion.config.Default;
-import com.archers_expansion.effect.Effects;
-import com.archers_expansion.entity.WintersGripEntity;
+import com.archers_expansion.effect.ArchersEffects;
+import com.archers_expansion.entity.ModEntitiesRegistry;
 import com.archers_expansion.items.Group;
 import com.archers_expansion.items.Items;
-import com.archers_expansion.items.armors.Armors;
+import com.archers_expansion.items.Armors;
 import com.archers_expansion.sounds.Sounds;
 import com.archers_expansion.config.TweaksConfig;
+import com.archers_expansion.spell.CustomSpellImpacts;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
-import com.archers_expansion.config.EffectsConfig;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ConfigFile;
 import net.tiny_config.ConfigManager;
@@ -32,8 +29,8 @@ public class ArchersExpansionMod{
 	public static final String MOD_ID = "archers_expansion";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static ConfigManager<EffectsConfig> effectsConfig = new ConfigManager<EffectsConfig>
-			("effects_v2", new EffectsConfig())
+	public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
+			("effects_v3", new ConfigFile.Effects())
 			.builder()
 			.setDirectory(MOD_ID)
 			.sanitize(true)
@@ -53,6 +50,8 @@ public class ArchersExpansionMod{
 			.build();
 
 	public static void init() {
+		CustomSpellImpacts.registerCustomImpacts();
+		CustomSpellImpacts.registerCustomDeliveries();
 		effectsConfig.refresh();
 		itemConfig.refresh();
 		tweaksConfig.refresh();
@@ -61,7 +60,7 @@ public class ArchersExpansionMod{
 		}
 	}
 	public static void registerEffects() {
-		Effects.register();
+		ArchersEffects.register(effectsConfig.value);
 		effectsConfig.save();
 	}
 	public static void registerSounds() {
@@ -71,7 +70,7 @@ public class ArchersExpansionMod{
 		Items.registerModItems();
 		Group.registerItemGroups();
 		Group.ARCHERS_EXPANSION= FabricItemGroup.builder()
-				.icon(() -> new ItemStack(Armors.war_archer_t1.head.asItem()))
+				.icon(() -> new ItemStack(Armors.war_archer_t1.armorSet().head.asItem()))
 				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
 				.build();
 		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);
@@ -88,16 +87,7 @@ public class ArchersExpansionMod{
 		itemConfig.save();
 	}
 	public static void registerEntities() {
-			WintersGripEntity.ENTITY_TYPE = Registry.register(
-					Registries.ENTITY_TYPE,
-					Identifier.of(MOD_ID, "winters_grip"),
-					FabricEntityTypeBuilder.<WintersGripEntity>create(SpawnGroup.MISC, WintersGripEntity::new)
-							.dimensions(EntityDimensions.changing(6F, 0.5F))
-							.fireImmune()
-							.trackRangeBlocks(128)
-							.trackedUpdateRate(20)
-							.build()
-			);
+		ModEntitiesRegistry.registerEntities();
 	}
 
 }

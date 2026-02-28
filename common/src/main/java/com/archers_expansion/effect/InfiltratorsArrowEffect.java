@@ -8,6 +8,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.fx.ParticleHelper;
+import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.utils.SoundHelper;
 
 public class InfiltratorsArrowEffect extends StatusEffect {
@@ -15,7 +16,7 @@ public class InfiltratorsArrowEffect extends StatusEffect {
         super(category, color);
     }
     public static final ParticleBatch POP_PARTICLES = new ParticleBatch(
-            "spell_engine:smoke_medium",
+            SpellEngineParticles.smoke_medium.id().toString(),
             ParticleBatch.Shape.CIRCLE,
             ParticleBatch.Origin.FEET,
             null,

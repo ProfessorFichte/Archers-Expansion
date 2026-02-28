@@ -5,31 +5,45 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
 public class Sounds {
-    public static final Identifier TRICK_SHOT_ID = Identifier.of(MOD_ID, "trick_shot");
-    public static SoundEvent TRICK_SHOT_EVENT= SoundEvent.of(TRICK_SHOT_ID);
-    public static final Identifier SPECIAL_SHOT_ID = Identifier.of(MOD_ID, "special_shot");
-    public static SoundEvent SPECIAL_SHOT_EVENT= SoundEvent.of(SPECIAL_SHOT_ID);
-    public static final Identifier CRYSTAL_ARROW_ID = Identifier.of(MOD_ID, "enchanted_crystal_arrow_impact");
-    public static SoundEvent CRYSTAL_ARROW_EVENT= SoundEvent.of(CRYSTAL_ARROW_ID);
-    public static final Identifier PIN_DOWN_ID = Identifier.of(MOD_ID, "pin_down");
-    public static SoundEvent PIN_DOWN_EVENT= SoundEvent.of(PIN_DOWN_ID);
-    public static final Identifier POINT_BLANK_SHOT_ID = Identifier.of(MOD_ID, "point_blank_shot");
-    public static SoundEvent POINT_BLANK_SHOT_EVENT= SoundEvent.of(POINT_BLANK_SHOT_ID);
-    public static final Identifier POISON_CLOUD_ID = Identifier.of(MOD_ID, "poison_cloud");
-    public static SoundEvent POISON_CLOUD_EVENT= SoundEvent.of(POISON_CLOUD_ID);
-    public static final Identifier INFILTRATOR_VANISH_ID = Identifier.of(MOD_ID, "infiltrator_vanish");
-    public static SoundEvent INFILTRATOR_VANISH_EVENT= SoundEvent.of(INFILTRATOR_VANISH_ID);
+    public record Entry(Identifier id, SoundEvent soundEvent, int variants) {}
+
+    public static final List<Entry> entries = new ArrayList<>();
+
+    private static Entry add(String name, int variants) {
+        var id = Identifier.of(MOD_ID, name);
+        var soundEvent = SoundEvent.of(id);
+        var entry = new Entry(id, soundEvent, variants);
+        entries.add(entry);
+        return entry;
+    }
+
+    // Sound entries with variant count
+    public static final Entry TRICK_SHOT = add("trick_shot", 1);
+    public static final Entry SPECIAL_SHOT = add("special_shot", 1);
+    public static final Entry CRYSTAL_ARROW_IMPACT = add("enchanted_crystal_arrow_impact", 1);
+    public static final Entry PIN_DOWN = add("pin_down", 1);
+    public static final Entry POINT_BLANK_SHOT = add("point_blank_shot", 1);
+    public static final Entry POISON_CLOUD = add("poison_cloud", 1);
+    public static final Entry INFILTRATOR_VANISH = add("infiltrator_vanish", 1);
+
+    // Legacy accessors for backwards compatibility
+    public static final SoundEvent TRICK_SHOT_EVENT = TRICK_SHOT.soundEvent();
+    public static final SoundEvent SPECIAL_SHOT_EVENT = SPECIAL_SHOT.soundEvent();
+    public static final SoundEvent CRYSTAL_ARROW_EVENT = CRYSTAL_ARROW_IMPACT.soundEvent();
+    public static final SoundEvent PIN_DOWN_EVENT = PIN_DOWN.soundEvent();
+    public static final SoundEvent POINT_BLANK_SHOT_EVENT = POINT_BLANK_SHOT.soundEvent();
+    public static final SoundEvent POISON_CLOUD_EVENT = POISON_CLOUD.soundEvent();
+    public static final SoundEvent INFILTRATOR_VANISH_EVENT = INFILTRATOR_VANISH.soundEvent();
 
     public static void register() {
-        Registry.register(Registries.SOUND_EVENT, TRICK_SHOT_ID, TRICK_SHOT_EVENT);
-        Registry.register(Registries.SOUND_EVENT, SPECIAL_SHOT_ID, SPECIAL_SHOT_EVENT);
-        Registry.register(Registries.SOUND_EVENT, CRYSTAL_ARROW_ID, CRYSTAL_ARROW_EVENT);
-        Registry.register(Registries.SOUND_EVENT, PIN_DOWN_ID, PIN_DOWN_EVENT);
-        Registry.register(Registries.SOUND_EVENT, POINT_BLANK_SHOT_ID, POINT_BLANK_SHOT_EVENT);
-        Registry.register(Registries.SOUND_EVENT, POISON_CLOUD_ID, POISON_CLOUD_EVENT);
-        Registry.register(Registries.SOUND_EVENT, INFILTRATOR_VANISH_ID, INFILTRATOR_VANISH_EVENT);
+        for (var entry : entries) {
+            Registry.register(Registries.SOUND_EVENT, entry.id(), entry.soundEvent());
+        }
     }
 }

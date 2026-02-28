@@ -1,0 +1,27 @@
+{
+  "parent": "archers_expansion:spell_novice_deadeye",
+  "criteria": {
+    "bind": {
+      "conditions": {
+        "complete": true,
+        "spell_pool": "archers_expansion:spell_book/deadeye"
+      },
+      "trigger": "spell_engine:spell_binding"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.archers_expansion.spell_master_deadeye.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "id": "archers_expansion:netherite_deadeye_head"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.archers_expansion.spell_master_deadeye.title"
+    }
+  }
+}

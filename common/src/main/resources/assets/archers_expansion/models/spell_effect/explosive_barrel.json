@@ -1,0 +1,22 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Slepykat",
+	"texture_size": [32, 32],
+	"textures": {
+		"3": "archers_expansion:spell_effect/explosive_barrel"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0.016, 0.016, 7.984, 7.984], "texture": "#3"},
+				"east": {"uv": [0.016, 0.016, 7.984, 7.984], "texture": "#3"},
+				"south": {"uv": [0.016, 0.016, 7.984, 7.984], "texture": "#3"},
+				"west": {"uv": [0.016, 0.016, 7.984, 7.984], "texture": "#3"},
+				"up": {"uv": [7.984, 15.984, 0.016, 8.016], "texture": "#3"},
+				"down": {"uv": [15.984, 7.984, 8.016, 0.016], "texture": "#3"}
+			}
+		}
+	]
+}

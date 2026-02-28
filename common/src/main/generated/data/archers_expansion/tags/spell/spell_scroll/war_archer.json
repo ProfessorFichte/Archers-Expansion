@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "archers_expansion:dual_shot",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:smoldering_arrow",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:point_blank_shot",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:pin_down",
+      "required": false
+    }
+  ]
+}

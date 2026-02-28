@@ -1,3 +1,13 @@
+# 1.5.0 - 1.21.1
+**Update to use Spell Engine 1.9.0**
+- DISCLAIMER: All spell books and spell scrolls will be reset, due to major API changes.
+- All Archer Expansion Spell Books now offers 3 spells only, to match other classes
+- **DEADEYE:** Fast Shot & Trick Shot are now T2-Spell Choices
+- **TUNDRA HUNTER:** Frozen Shot & Frozen Pact are now T2-Spell Choices
+- **WAR ARCHER:** Dual Shot & Smoldering Arrows are now T2-Spell Choices
+**Internal Changes & Functional Additions**
+- Added Entities & Custom Spell-Deliveries for future Spell Choices
+
 # 1.4.6 - 1.21.1
 - Update to newest MRPG Lib Version
 

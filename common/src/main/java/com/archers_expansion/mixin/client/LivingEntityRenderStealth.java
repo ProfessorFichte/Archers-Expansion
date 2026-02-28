@@ -1,6 +1,6 @@
 package com.archers_expansion.mixin.client;
 
-import com.archers_expansion.effect.Effects;
+import com.archers_expansion.effect.ArchersEffects;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -44,7 +44,7 @@ public abstract class LivingEntityRenderStealth<T extends Entity> extends Entity
         // probably due to some threading or tick order related weirdness.
         var effects = ((Synchronized.Provider)entity).SpellEngine_syncedStatusEffects();
         for (var effect : effects) {
-            if (effect.effect() == Effects.INFILTRATORS_ARROW.effect) {
+            if (effect.effect() == ArchersEffects.INFILTRATORS_ARROW.effect) {
                 return true;
             }
         }
