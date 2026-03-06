@@ -829,7 +829,7 @@ public class ArchersExpansionSpells {
                         ParticleBatch.Rotation.LOOK, 10, 0F, 0.05F, 0)
         };
         projectile.client_data.model = new Spell.ProjectileModel();
-        projectile.client_data.model.model_id = "archers_expansion:spell_projectile/enchanted_crystal_arrow";
+        projectile.client_data.model.model_id = "archers_expansion:spell_projectile/glacial_arrow";
         projectile.client_data.model.scale = 1.5F;
         projectile.client_data.light_level = 14;
         shoot.projectile = projectile;
@@ -1016,7 +1016,7 @@ public class ArchersExpansionSpells {
         };
         projectile.client_data.model = new Spell.ProjectileModel();
         projectile.client_data.model.model_id = "archers_expansion:spell_projectile/regular_arrow";
-        projectile.client_data.model.scale = 1.5F;
+        projectile.client_data.model.scale = 3.0F;
         shoot.projectile = projectile;
         spell.deliver.projectile = shoot;
 

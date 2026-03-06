@@ -79,8 +79,8 @@
             }
           ],
           "model": {
-            "model_id": "archers_expansion:spell_projectile/enchanted_crystal_arrow",
-            "scale": 1.5
+            "model_id": "archers_expansion:spell_projectile/glacial_arrow",
+            "scale": 3.0
           }
         }
       }
