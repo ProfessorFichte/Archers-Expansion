@@ -63,7 +63,6 @@ public class ArchersExpansionAdvancementDatagen implements DataProvider {
     }
 
     static {
-        /// Deadeye
         addEntry(new Entry(
                 id("path_choose_deadeye"),
                 "Path of the Deadeye",
@@ -111,7 +110,6 @@ public class ArchersExpansionAdvancementDatagen implements DataProvider {
                 MOD_ID + ":spell_book/deadeye"
         ));
 
-        /// TUNDRA_HUNTER
         addEntry(new Entry(
                 id("path_choose_tundra_hunter"),
                 "Path of the Tundra Hunter",
@@ -158,7 +156,6 @@ public class ArchersExpansionAdvancementDatagen implements DataProvider {
                 SpellEngineCriteriaType.ALL_SPELLS_BOUND,
                 MOD_ID + ":spell_book/tundra_hunter"
         ));
-        /// WAR ARCHER
         addEntry(new Entry(
                 id("path_choose_war_archer"),
                 "Path of the War Archer",
@@ -227,7 +224,6 @@ public class ArchersExpansionAdvancementDatagen implements DataProvider {
     private JsonObject createAdvancementJson(Entry entry) {
         JsonObject advancement = new JsonObject();
 
-        // Display
         JsonObject display = new JsonObject();
         JsonObject icon = new JsonObject();
         String iconName = entry.iconItemName().contains(":") ? entry.iconItemName() : MOD_ID + ":" + entry.iconItemName();
@@ -258,12 +254,10 @@ public class ArchersExpansionAdvancementDatagen implements DataProvider {
         }
         advancement.add("display", display);
 
-        // Parent
         if (entry.parent() != null) {
             advancement.addProperty("parent", entry.parent().toString());
         }
 
-        // Criteria
         JsonObject criteria = getCriteriaForType(entry.criteriaType(), entry.criteriaValue());
         advancement.add("criteria", criteria);
 

@@ -11,22 +11,16 @@ import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.DefaultSkinHelper;
 import net.minecraft.util.Identifier;
 
-/**
- * Renderer for AlterEgoEntity that mimics a player's appearance.
- * Uses a basic biped model with the player's skin texture, armor, and held items.
- */
 public class AlterEgoRenderer extends MobEntityRenderer<AlterEgoEntity, BipedEntityModel<AlterEgoEntity>> {
 
     public AlterEgoRenderer(EntityRendererFactory.Context context) {
         super(context, new BipedEntityModel<>(context.getPart(EntityModelLayers.PLAYER)), 0.5F);
 
-        // Add armor rendering
         this.addFeature(new ArmorFeatureRenderer<>(this,
             new BipedEntityModel<>(context.getPart(EntityModelLayers.PLAYER_INNER_ARMOR)),
             new BipedEntityModel<>(context.getPart(EntityModelLayers.PLAYER_OUTER_ARMOR)),
             context.getModelManager()));
 
-        // Add held item rendering
         this.addFeature(new HeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
     }
 
@@ -44,7 +38,6 @@ public class AlterEgoRenderer extends MobEntityRenderer<AlterEgoEntity, BipedEnt
             }
         }
 
-        // Default Steve skin Fallback
         return DefaultSkinHelper.getSkinTextures(playerUuid != null ? playerUuid : new java.util.UUID(0, 0)).texture();
     }
 }

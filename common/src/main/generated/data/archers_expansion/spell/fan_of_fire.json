@@ -7,7 +7,7 @@
     "cast": {
       "duration": 1.0,
       "animation": {
-        "id": "spell_engine:archery_pull"
+        "id": "spell_engine:archery_upwards_pull"
       },
       "sound": {
         "id": "archers:bow_pull"
@@ -16,7 +16,7 @@
   },
   "release": {
     "animation": {
-      "id": "spell_engine:archery_release"
+      "id": "spell_engine:archery_upwards_release"
     },
     "sound": {
       "id": "minecraft:item.crossbow.shoot"
@@ -48,9 +48,15 @@
               "max_speed": 0.0
             }
           ],
-          "model": {
-            "model_id": "archers_expansion:spell_projectile/smoldering_arrow",
-            "scale": 1.3
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers_expansion:spell_projectile/smoldering_arrow",
+                  "scale": 1.3
+                }
+              }
+            ]
           }
         }
       }

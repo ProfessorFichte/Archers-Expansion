@@ -23,7 +23,6 @@ public class Sounds {
         return entry;
     }
 
-    // Sound entries with variant count
     public static final Entry TRICK_SHOT = add("trick_shot", 1);
     public static final Entry SPECIAL_SHOT = add("special_shot", 1);
     public static final Entry CRYSTAL_ARROW_IMPACT = add("enchanted_crystal_arrow_impact", 1);
@@ -31,15 +30,6 @@ public class Sounds {
     public static final Entry POINT_BLANK_SHOT = add("point_blank_shot", 1);
     public static final Entry POISON_CLOUD = add("poison_cloud", 1);
     public static final Entry INFILTRATOR_VANISH = add("infiltrator_vanish", 1);
-
-    // Legacy accessors for backwards compatibility
-    public static final SoundEvent TRICK_SHOT_EVENT = TRICK_SHOT.soundEvent();
-    public static final SoundEvent SPECIAL_SHOT_EVENT = SPECIAL_SHOT.soundEvent();
-    public static final SoundEvent CRYSTAL_ARROW_EVENT = CRYSTAL_ARROW_IMPACT.soundEvent();
-    public static final SoundEvent PIN_DOWN_EVENT = PIN_DOWN.soundEvent();
-    public static final SoundEvent POINT_BLANK_SHOT_EVENT = POINT_BLANK_SHOT.soundEvent();
-    public static final SoundEvent POISON_CLOUD_EVENT = POISON_CLOUD.soundEvent();
-    public static final SoundEvent INFILTRATOR_VANISH_EVENT = INFILTRATOR_VANISH.soundEvent();
 
     public static void register() {
         for (var entry : entries) {

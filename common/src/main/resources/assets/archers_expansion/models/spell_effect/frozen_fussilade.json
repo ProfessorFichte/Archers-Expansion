@@ -1,0 +1,23 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "archers_expansion:spell_effect/frozen_fussilade",
+		"particle": "archers_expansion:spell_effect/frozen_fussilade"
+	},
+	"elements": [
+		{
+			"from": [-16, 0, -16],
+			"to": [32, 0, 32],
+			"faces": {
+				"north": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#0"},
+				"west": {"uv": [0, 1.075, 0, 0], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#0"}
+			}
+		}
+	]
+}

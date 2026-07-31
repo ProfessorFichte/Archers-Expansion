@@ -15,6 +15,14 @@
     {
       "id": "archers_expansion:pin_down",
       "required": false
+    },
+    {
+      "id": "archers_expansion:scorched_earth",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:explosive_barrel",
+      "required": false
     }
   ]
 }

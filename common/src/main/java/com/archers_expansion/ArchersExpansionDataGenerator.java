@@ -3,7 +3,7 @@ package com.archers_expansion;
 import com.archers_expansion.datagen.ArchersExpansionAdvancementDatagen;
 import com.archers_expansion.datagen.CraftingRecipeGenerator;
 import com.archers_expansion.datagen.SmithingRecipes;
-import com.archers_expansion.effect.ArchersEffects;
+import com.archers_expansion.effect.ArchersExpansionEffects;
 import com.archers_expansion.items.Armors;
 import com.archers_expansion.sounds.Sounds;
 import com.archers_expansion.spell.ArchersExpansionSpells;
@@ -223,10 +223,8 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 
 		@Override
 		public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder builder) {
-			// Item Group
 			builder.add("itemGroup.archers_expansion.general", "Archers Expansion");
 
-			// Spell Books and Scrolls
 			builder.add("item.archers_expansion.spell_book/deadeye", "Deadeye's List");
 			builder.add("item.archers_expansion.spell_book/deadeye.spell_binding.description",
 					"Spell Book of Rogue Archers, using fast ranged weapons and tricky archery skills to slowly defeat enemies.\n- Strengths: Inflicting harmful effects and making sure not to be caught.\n- Weaknesses: Heavily armored enemies\n- Equipment: Moderately armored");
@@ -242,7 +240,6 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 					"Spell Book of War Archers, using fast high ranged damage weapons to cause explosions and heavy damage.\n- Strengths: High Burst Damage.\n- Weaknesses: Fast and tricky Enemies\n- Equipment: Heavily armored");
 			builder.add("item.archers_expansion.spell_scroll/war_archer", "War Archer Scroll");
 
-			// Armor translations (from Entry translatedName)
 			Armors.entries.forEach(entry -> {
 				var translations = new LinkedHashMap<String, String>();
 				translations.put(((Item)entry.armorSet().head).getTranslationKey(), entry.armorSet().headTranslation);
@@ -254,13 +251,11 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 				}
 			});
 
-			// Effects
-			ArchersEffects.entries.forEach(entry -> {
+			ArchersExpansionEffects.entries.forEach(entry -> {
 				builder.add("effect." + MOD_ID + "." + entry.id.getPath(), entry.title);
 				builder.add("effect." + MOD_ID + "." + entry.id.getPath() + ".description", entry.description);
 			});
 
-			// Spells
 			ArchersExpansionSpells.entries.forEach(entry -> {
 				if (entry.title() != null && !entry.title().isEmpty()) {
 					builder.add("spell." + MOD_ID + "." + entry.id().getPath() + ".name", entry.title());
@@ -268,19 +263,15 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 				}
 			});
 
-
-			// Advancements
 			for (var entry : ArchersExpansionAdvancementDatagen.getEntries()) {
 				builder.add(entry.titleKey(), entry.title());
 				builder.add(entry.descriptionKey(), entry.description());
 			}
-			// Entities
 			builder.add("entity.archers_expansion.winters_grip", "Winter's Grip");
 			builder.add("entity.archers_expansion.explosive_barrel", "Explosive Barrel");
 			builder.add("entity.archers_expansion.alter_ego", "Alter Ego");
 			builder.add("entity.archers_expansion.spell_polar_bear", "Polar Bear");
 
-			// Equipment Sets
 			builder.add("equipment_set.archers_expansion.bounty_hunter", "Bounty Hunting");
 			builder.add("equipment_set.archers_expansion.polar_stalker", "Polar Prey");
 			builder.add("equipment_set.archers_expansion.sentinel_archer", "Castle Guard");

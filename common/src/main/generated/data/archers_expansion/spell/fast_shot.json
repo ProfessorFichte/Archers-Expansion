@@ -74,8 +74,14 @@
         "max_speed": 0.22
       }
     ],
-    "override_render": {
-      "model_id": "archers_expansion:spell_projectile/fast_arrow"
+    "composite_model": {
+      "models": [
+        {
+          "fx": {
+            "model_id": "archers_expansion:spell_projectile/fast_arrow"
+          }
+        }
+      ]
     }
   },
   "cost": {

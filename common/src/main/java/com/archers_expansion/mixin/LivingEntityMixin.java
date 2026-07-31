@@ -1,7 +1,6 @@
 package com.archers_expansion.mixin;
 
-import com.archers_expansion.ArchersExpansionMod;
-import com.archers_expansion.effect.ArchersEffects;
+import com.archers_expansion.effect.ArchersExpansionEffects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -34,8 +33,7 @@ public class LivingEntityMixin {
     @Inject(method = "onDeath", at = @At("TAIL"))
     public void onDeath$wintersGrip(CallbackInfo ci) {
         LivingEntity entity = (LivingEntity)(Object)this;
-        if (entity.hasStatusEffect(ArchersEffects.getEntry(ArchersEffects.WINTERS_GRASP))) {
-            ArchersExpansionMod.LOGGER.info("JAAAAA");
+        if (entity.hasStatusEffect(ArchersExpansionEffects.getEntry(ArchersExpansionEffects.WINTERS_GRASP))) {
             float range = 3.0F;
             Box radius = new Box(entity.getX() + range,
                     entity.getY() + (float) range / 3,

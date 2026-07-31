@@ -18,7 +18,7 @@
   "spell.archers_expansion.disabling_shot.description": "Отталкивает назад после попадания в цель, замедляет и наносит цели {damage} урона.",
   "spell.archers_expansion.fast_shot.name": "Быстрый выстрел",
   "spell.archers_expansion.fast_shot.description": "Увеличивает вашу скорость стрельбы с каждым выстрелом.",
-  "spell.archers_expansion.trick_shot.name": "Хитрый выстрел",
+  "spell.archers_expansion.trick_shot.name": "Отскакивающая стрела",
   "spell.archers_expansion.trick_shot.description": "Создает отскакивающую стрелу, которая отскакивает от целей и наносит {damage} урона.",
   "spell.archers_expansion.infiltrators_arrow.name": "§5Стрела проникновения",
   "spell.archers_expansion.infiltrators_arrow.description": "Выпускает невидимую стрелу, наносящую {damage} урона и дарующую невидимость заклинателю.",

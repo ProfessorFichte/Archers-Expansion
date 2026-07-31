@@ -5,7 +5,7 @@
       "required": false
     },
     {
-      "id": "archers_expansion:trick_shot",
+      "id": "archers_expansion:bouncing_arrow",
       "required": false
     },
     {
@@ -14,6 +14,18 @@
     },
     {
       "id": "archers_expansion:choking_gas",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:venom_cask",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:alter_ego",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:infiltrators_arrow",
       "required": false
     }
   ]

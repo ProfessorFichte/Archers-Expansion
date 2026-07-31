@@ -77,9 +77,15 @@
         "max_speed": 0.05
       }
     ],
-    "override_render": {
-      "model_id": "archers_expansion:spell_projectile/glacial_arrow",
-      "light_emission": "RADIATE"
+    "composite_model": {
+      "models": [
+        {
+          "fx": {
+            "model_id": "archers_expansion:spell_projectile/glacial_arrow",
+            "light_emission": "RADIATE"
+          }
+        }
+      ]
     }
   },
   "cost": {

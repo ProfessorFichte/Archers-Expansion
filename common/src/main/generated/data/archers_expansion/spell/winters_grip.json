@@ -46,12 +46,14 @@
               "max_speed": 0.4
             }
           ],
-          "model": {
-            "model_id": "archers_expansion:spell_effect/winters_grip",
-            "light_emission": "RADIATE",
-            "scale": 1.5,
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "archers_expansion:spell_effect/winters_grip",
+              "light_emission": "RADIATE",
+              "scale": 1.5,
+              "duration": 200
+            }
+          ]
         }
       }
     ]

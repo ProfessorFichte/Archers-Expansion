@@ -4,21 +4,16 @@ import com.archers_expansion.ArchersExpansionMod;
 import com.archers_expansion.client.armor.ArchersExpansionArmorRenderer;
 import com.archers_expansion.client.effect.ChokingPoisonParticles;
 import com.archers_expansion.client.effect.CrystalArrowParticles;
-import com.archers_expansion.client.effect.PinDownParticles;
-import com.archers_expansion.client.entity.WintersGripRenderer;
-import com.archers_expansion.client.entity.ExplosiveBarrelRenderer;
-import com.archers_expansion.client.entity.AlterEgoRenderer;
-import com.archers_expansion.client.entity.SpellPolarBearRenderer;
-import com.archers_expansion.effect.ArchersEffects;
-import com.archers_expansion.entity.WintersGripEntity;
-import com.archers_expansion.entity.ExplosiveBarrelEntity;
-import com.archers_expansion.entity.AlterEgoEntity;
-import com.archers_expansion.entity.PolarBearEntity;
+import com.archers_expansion.client.entity.*;
+import com.archers_expansion.effect.ArchersExpansionEffects;
+import com.archers_expansion.entity.*;
 import com.archers_expansion.items.Armors;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
+import net.spell_engine.client.render.SpellCloudRenderer;
 import net.spell_engine.rpg_series.item.Armor;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
 
@@ -41,14 +36,18 @@ public class ArchersExpansionModClient {
             registerArmorRenderer(Armors.sentinelArcherArmorSet.armorSet(), ArchersExpansionArmorRenderer::sentinel_archer);
         }
 
-        CustomParticleStatusEffect.register(ArchersEffects.ENCHANTED_CRYSTAL_ARROW.effect, new CrystalArrowParticles(15));
-        CustomParticleStatusEffect.register(ArchersEffects.CHOKING_GAS.effect, new ChokingPoisonParticles(10));
-        CustomParticleStatusEffect.register(ArchersEffects.PIN_DOWN.effect, new PinDownParticles(2));
+        CustomParticleStatusEffect.register(ArchersExpansionEffects.ENCHANTED_CRYSTAL_ARROW.effect, new CrystalArrowParticles(15));
+        CustomParticleStatusEffect.register(ArchersExpansionEffects.CHOKING_GAS.effect, new ChokingPoisonParticles(10));
+
+        EntityModelLayerRegistry.registerModelLayer(GlacialBearEntityModel.LAYER_LOCATION, GlacialBearEntityModel::createBodyLayer);
 
         EntityRendererRegistry.register(WintersGripEntity.ENTITY_TYPE, WintersGripRenderer::new);
         EntityRendererRegistry.register(ExplosiveBarrelEntity.ENTITY_TYPE, ExplosiveBarrelRenderer::new);
         EntityRendererRegistry.register(AlterEgoEntity.ENTITY_TYPE, AlterEgoRenderer::new);
         EntityRendererRegistry.register(PolarBearEntity.ENTITY_TYPE, SpellPolarBearRenderer::new);
+        EntityRendererRegistry.register(PoisonFlaskProjectile.ENTITY_TYPE, PoisonFlaskRenderer::new);
+        EntityRendererRegistry.register(FrozenFussiladeEntity.ENTITY_TYPE, SpellCloudRenderer::new);
+        EntityRendererRegistry.register(InfiltratorsArrowProjectile.ENTITY_TYPE, InfiltratorsArrowRenderer::new);
 
     }
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

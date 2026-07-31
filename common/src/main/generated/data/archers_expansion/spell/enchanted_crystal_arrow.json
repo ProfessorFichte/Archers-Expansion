@@ -1,11 +1,19 @@
 {
   "school": "spell_power:frost_ranged",
-  "range": 40.0,
+  "range": 32.0,
   "tier": 4,
   "learn": {},
   "active": {
     "cast": {
       "duration": 2.0,
+      "type": "CHARGE",
+      "charge": {
+        "min_release_ratio": 0.25,
+        "bonus": {
+          "range_add": 32.0,
+          "projectile_scale_multiply": 0.75
+        }
+      },
       "animation": {
         "id": "spell_engine:archery_pull"
       },
@@ -78,9 +86,15 @@
               "max_speed": 0.05
             }
           ],
-          "model": {
-            "model_id": "archers_expansion:spell_projectile/glacial_arrow",
-            "scale": 3.0
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers_expansion:spell_projectile/glacial_arrow",
+                  "scale": 1.5
+                }
+              }
+            ]
           }
         }
       }

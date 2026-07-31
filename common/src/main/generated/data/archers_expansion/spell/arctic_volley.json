@@ -86,8 +86,14 @@
               "max_speed": 0.05
             }
           ],
-          "model": {
-            "model_id": "archers_expansion:spell_projectile/glacial_arrow"
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers_expansion:spell_projectile/glacial_arrow"
+                }
+              }
+            ]
           }
         }
       }

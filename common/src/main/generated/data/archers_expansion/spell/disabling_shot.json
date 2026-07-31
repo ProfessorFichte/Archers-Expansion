@@ -47,8 +47,14 @@
               "color_rgba": 3208659199
             }
           ],
-          "model": {
-            "model_id": "archers_expansion:spell_projectile/regular_arrow"
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers_expansion:spell_projectile/regular_arrow"
+                }
+              }
+            ]
           }
         }
       }
@@ -108,11 +114,16 @@
     },
     {
       "action": {
-        "type": "CUSTOM",
+        "type": "VELOCITY",
         "apply_to_caster": true,
-        "custom": {
-          "intent": "HARMFUL",
-          "handler": "more_rpg_classes:backward_dash_fixed"
+        "velocity": {
+          "frame": "LOOK",
+          "push": {
+            "x": 0.0,
+            "y": 0.7,
+            "z": -3.0
+          },
+          "intent": "HELPFUL"
         }
       },
       "particles": [

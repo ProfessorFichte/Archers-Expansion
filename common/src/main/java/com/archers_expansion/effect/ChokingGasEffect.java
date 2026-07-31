@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.registry.tag.EntityTypeTags;
-import net.more_rpg_classes.effect.MRPGCEffects;
 
 public class ChokingGasEffect extends StatusEffect {
 
@@ -17,7 +16,7 @@ public class ChokingGasEffect extends StatusEffect {
     public void onApplied(LivingEntity entity, int amplifier) {
         EntityType<?> type = entity.getType();
         if(type.isIn(EntityTypeTags.IGNORES_POISON_AND_REGEN)){
-            entity.removeStatusEffect(ArchersEffects.getEntry(ArchersEffects.CHOKING_GAS));
+            entity.removeStatusEffect(ArchersExpansionEffects.getEntry(ArchersExpansionEffects.CHOKING_GAS));
         }
         super.onApplied(entity, amplifier);
     }
@@ -25,6 +24,8 @@ public class ChokingGasEffect extends StatusEffect {
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         float damage = amplifier + 1.0F;
         entity.damage(entity.getDamageSources().magic(), damage);
+        int interval = Math.max(25, 40 >> amplifier);
+        entity.setAir(entity.getAir() - interval);
         return true;
     }
 

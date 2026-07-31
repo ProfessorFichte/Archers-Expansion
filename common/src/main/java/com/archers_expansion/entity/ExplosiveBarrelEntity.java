@@ -9,19 +9,17 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+
+import java.util.UUID;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.api.entity.SpellEntity;
-import net.spell_engine.api.spell.Spell;
-import net.spell_engine.api.spell.registry.SpellRegistry;
-import net.spell_engine.fx.ParticleHelper;
-import net.spell_engine.internals.SpellHelper;
 import net.spell_engine.internals.target.EntityRelations;
-import net.spell_engine.utils.TargetHelper;
-import net.spell_power.api.SpellPower;
+
+import com.archers_expansion.entity.util.SpellAreaExplosion;
 
 import java.util.List;
 
@@ -33,13 +31,12 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
     private static final double BARREL_DETECTION_RADIUS = 16.0;
     private static final int CHECK_INTERVAL = 10;
     private static final TrackedData<String> SPELL_ID_TRACKER = DataTracker.registerData(ExplosiveBarrelEntity.class, TrackedDataHandlerRegistry.STRING);
-    private static final TrackedData<Integer> OWNER_ID_TRACKER = DataTracker.registerData(ExplosiveBarrelEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> TIME_TO_LIVE_TRACKER = DataTracker.registerData(ExplosiveBarrelEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Float> HEALTH_TRACKER = DataTracker.registerData(ExplosiveBarrelEntity.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<Integer> EXPLOSION_COUNTDOWN_TRACKER = DataTracker.registerData(ExplosiveBarrelEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     private Identifier spellId;
-    private int ownerId;
+    private UUID ownerUuid;
     private int timeToLive;
     private LivingEntity cachedOwner = null;
     private boolean hasExploded = false;
@@ -58,8 +55,8 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
 
         this.spellId = spellId;
         this.getDataTracker().set(SPELL_ID_TRACKER, this.spellId.toString());
-        this.ownerId = owner.getId();
-        this.getDataTracker().set(OWNER_ID_TRACKER, this.ownerId);
+        this.ownerUuid = owner.getUuid();
+        this.cachedOwner = owner;
         this.timeToLive = spawn.time_to_live_seconds * 20;
         this.getDataTracker().set(TIME_TO_LIVE_TRACKER, this.timeToLive);
         this.health = 2.0F;
@@ -69,7 +66,6 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         builder.add(SPELL_ID_TRACKER, "");
-        builder.add(OWNER_ID_TRACKER, 0);
         builder.add(TIME_TO_LIVE_TRACKER, 0);
         builder.add(HEALTH_TRACKER, 2.0F);
         builder.add(EXPLOSION_COUNTDOWN_TRACKER, -1);
@@ -89,15 +85,16 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-        this.spellId = Identifier.of(nbt.getString("SpellId"));
-        this.ownerId = nbt.getInt("OwnerId");
+        if (nbt.contains("SpellId")) {
+            this.spellId = Identifier.of(nbt.getString("SpellId"));
+            this.getDataTracker().set(SPELL_ID_TRACKER, this.spellId.toString());
+        }
+        if (nbt.containsUuid("Owner")) this.ownerUuid = nbt.getUuid("Owner");
         this.timeToLive = nbt.getInt("TimeToLive");
         this.hasExploded = nbt.getBoolean("HasExploded");
         this.health = nbt.getFloat("Health");
         this.explosionCountdown = nbt.getInt("ExplosionCountdown");
 
-        this.getDataTracker().set(SPELL_ID_TRACKER, this.spellId.toString());
-        this.getDataTracker().set(OWNER_ID_TRACKER, this.ownerId);
         this.getDataTracker().set(TIME_TO_LIVE_TRACKER, this.timeToLive);
         this.getDataTracker().set(HEALTH_TRACKER, this.health);
         this.getDataTracker().set(EXPLOSION_COUNTDOWN_TRACKER, this.explosionCountdown);
@@ -105,8 +102,8 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.putString("SpellId", this.spellId.toString());
-        nbt.putInt("OwnerId", this.ownerId);
+        if (this.spellId != null) nbt.putString("SpellId", this.spellId.toString());
+        if (this.ownerUuid != null) nbt.putUuid("Owner", this.ownerUuid);
         nbt.putInt("TimeToLive", this.timeToLive);
         nbt.putBoolean("HasExploded", this.hasExploded);
         nbt.putFloat("Health", this.health);
@@ -117,19 +114,6 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
     public void tick() {
         super.tick();
 
-        // Check if owner is dead or removed
-        var owner = this.getOwner();
-        if (owner == null || owner.isRemoved() || !owner.isAlive()) {
-            this.discard();
-            return;
-        }
-
-        // Check if entity should despawn
-        if (this.age > this.timeToLive && !this.hasExploded) {
-            this.discard();
-            return;
-        }
-
         if (this.hasExploded) {
             return;
         }
@@ -137,6 +121,17 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
         var world = this.getWorld();
 
         if (!world.isClient()) {
+            var owner = this.getOwner();
+            if (owner == null || owner.isRemoved() || !owner.isAlive()) {
+                this.discard();
+                return;
+            }
+
+            if (this.age > this.timeToLive) {
+                this.discard();
+                return;
+            }
+
             if (this.explosionCountdown >= 0) {
                 if (this.explosionCountdown == 0) {
                     triggerExplosion();
@@ -303,25 +298,19 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
     private void applyExplosionSpell() {
         var owner = this.getOwner();
         if (owner == null) return;
-        RegistryEntry<Spell> spellExplosion = SpellRegistry.from(
-                owner.getWorld()).getEntry(Identifier.of(MOD_ID, "explosive_barrel_explosion")).get();
-        ParticleHelper.sendBatches(this, spellExplosion.value().release.particles);
-        ParticleHelper.sendBatches(this, spellExplosion.value().release.particles_scaled_with_ranged);
-        for(Entity targetEntity : TargetHelper.targetsFromArea(this, spellExplosion.value().range, spellExplosion.value().target.area, e -> e != this)) {
-            SpellHelper.performImpacts(owner.getWorld(), owner, targetEntity, owner, spellExplosion,
-                    spellExplosion.value().impacts, new SpellHelper.ImpactContext().power(SpellPower.getSpellPower(spellExplosion.value().school, owner)).position(this.getPos()));
-            ParticleHelper.sendBatches(targetEntity, spellExplosion.value().impacts.get(0).particles);
-        }
+        SpellAreaExplosion.trigger(this, owner, Identifier.of(MOD_ID, "explosive_barrel_explosion"));
     }
 
     private LivingEntity getOwner() {
-        if (cachedOwner != null) {
+        if (cachedOwner != null && cachedOwner.isAlive()) {
             return cachedOwner;
         }
-        var owner = this.getWorld().getEntityById(this.ownerId);
-        if (owner instanceof LivingEntity livingOwner) {
-            cachedOwner = livingOwner;
-            return livingOwner;
+        if (ownerUuid != null && getWorld() instanceof ServerWorld sw) {
+            Entity e = sw.getEntity(ownerUuid);
+            if (e instanceof LivingEntity living) {
+                cachedOwner = living;
+                return living;
+            }
         }
         return null;
     }

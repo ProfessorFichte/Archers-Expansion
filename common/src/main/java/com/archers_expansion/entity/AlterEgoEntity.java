@@ -2,15 +2,10 @@ package com.archers_expansion.entity;
 
 import com.archers_expansion.ArchersExpansionMod;
 import net.minecraft.sound.SoundEvent;
-import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.fx.ParticleHelper;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.utils.SoundHelper;
-import net.spell_engine.utils.TargetHelper;
-import net.spell_power.api.SpellPower;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -19,25 +14,20 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.api.entity.SpellEntity;
-import net.spell_engine.api.spell.Spell;
-import net.spell_engine.api.spell.registry.SpellRegistry;
-import net.spell_engine.internals.SpellHelper;
 import net.spell_engine.internals.target.EntityRelations;
+
+import com.archers_expansion.entity.util.SpellAreaExplosion;
 
 import java.util.UUID;
 
@@ -54,7 +44,6 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
 
 
     private static final TrackedData<String> SPELL_ID_TRACKER = DataTracker.registerData(AlterEgoEntity.class, TrackedDataHandlerRegistry.STRING);
-    private static final TrackedData<Integer> OWNER_ID_TRACKER = DataTracker.registerData(AlterEgoEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Integer> TIME_TO_LIVE_TRACKER = DataTracker.registerData(AlterEgoEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Float> COPIED_HEALTH_TRACKER = DataTracker.registerData(AlterEgoEntity.class, TrackedDataHandlerRegistry.FLOAT);
     private static final TrackedData<String> PLAYER_UUID_TRACKER = DataTracker.registerData(AlterEgoEntity.class, TrackedDataHandlerRegistry.STRING);
@@ -67,7 +56,7 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
     private static final TrackedData<ItemStack> OFF_HAND_TRACKER = DataTracker.registerData(AlterEgoEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
 
     private Identifier spellId;
-    private int ownerId;
+    private UUID ownerUuid;
     private int timeToLive;
     private LivingEntity cachedOwner = null;
     private UUID playerUuid;
@@ -84,8 +73,10 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
         this.goalSelector.add(0, new net.minecraft.entity.ai.goal.SwimGoal(this));
         this.goalSelector.add(1, new FleeFromHostilesGoal(this, 1.0, 8.0F, 10.0F));
         this.goalSelector.add(2, new ProvokeHostilesGoal(this));
-        this.goalSelector.add(3, new net.minecraft.entity.ai.goal.WanderAroundFarGoal(this, 1.0, 0.001F));
-        this.goalSelector.add(4, new net.minecraft.entity.ai.goal.LookAroundGoal(this));
+        this.goalSelector.add(3, new net.minecraft.entity.ai.goal.LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(4, new net.minecraft.entity.ai.goal.WanderAroundFarGoal(this, 1.0, 0.001F));
+        this.goalSelector.add(5, new net.minecraft.entity.ai.goal.LookAroundGoal(this));
+        this.goalSelector.add(6, new IdleShiftGoal(this));
     }
 
     @Override
@@ -96,8 +87,8 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
 
         this.spellId = spellId;
         this.getDataTracker().set(SPELL_ID_TRACKER, this.spellId.toString());
-        this.ownerId = owner.getId();
-        this.getDataTracker().set(OWNER_ID_TRACKER, this.ownerId);
+        this.ownerUuid = owner.getUuid();
+        this.cachedOwner = owner;
         this.timeToLive = spawn.time_to_live_seconds * 20;
         this.getDataTracker().set(TIME_TO_LIVE_TRACKER, this.timeToLive);
 
@@ -138,7 +129,6 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
         super.initDataTracker(builder);
 
         builder.add(SPELL_ID_TRACKER, "");
-        builder.add(OWNER_ID_TRACKER, 0);
         builder.add(TIME_TO_LIVE_TRACKER, 0);
         builder.add(COPIED_HEALTH_TRACKER, 20.0F);
         builder.add(PLAYER_UUID_TRACKER, "");
@@ -174,8 +164,11 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
 
-        this.spellId = Identifier.of(nbt.getString("SpellId"));
-        this.ownerId = nbt.getInt("OwnerId");
+        if (nbt.contains("SpellId")) {
+            this.spellId = Identifier.of(nbt.getString("SpellId"));
+            this.getDataTracker().set(SPELL_ID_TRACKER, this.spellId.toString());
+        }
+        if (nbt.containsUuid("Owner")) this.ownerUuid = nbt.getUuid("Owner");
         this.timeToLive = nbt.getInt("TimeToLive");
         this.copiedHealth = nbt.getFloat("CopiedHealth");
         this.hasExploded = nbt.getBoolean("HasExploded");
@@ -184,8 +177,6 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
             this.playerUuid = nbt.getUuid("PlayerUuid");
         }
 
-        this.getDataTracker().set(SPELL_ID_TRACKER, this.spellId.toString());
-        this.getDataTracker().set(OWNER_ID_TRACKER, this.ownerId);
         this.getDataTracker().set(TIME_TO_LIVE_TRACKER, this.timeToLive);
         this.getDataTracker().set(COPIED_HEALTH_TRACKER, this.copiedHealth);
         if (this.playerUuid != null) {
@@ -197,8 +188,8 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
 
-        nbt.putString("SpellId", this.spellId.toString());
-        nbt.putInt("OwnerId", this.ownerId);
+        if (this.spellId != null) nbt.putString("SpellId", this.spellId.toString());
+        if (this.ownerUuid != null) nbt.putUuid("Owner", this.ownerUuid);
         nbt.putInt("TimeToLive", this.timeToLive);
         nbt.putFloat("CopiedHealth", this.copiedHealth);
         nbt.putBoolean("HasExploded", this.hasExploded);
@@ -214,19 +205,19 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
 
         if (this.hasExploded) return;
 
-        var owner = this.getOwner();
-        if (owner == null || owner.isRemoved() || !owner.isAlive()) {
-            this.discard();
-            return;
-        }
-
-        if (this.age > this.timeToLive) {
-            this.triggerExplosion();
-            this.discard();
-            return;
-        }
-
         if (!this.getWorld().isClient()) {
+            var owner = this.getOwner();
+            if (owner == null || owner.isRemoved() || !owner.isAlive()) {
+                this.discard();
+                return;
+            }
+
+            if (this.age > this.timeToLive) {
+                this.triggerExplosion();
+                this.discard();
+                return;
+            }
+
             checkEnemyCollision();
         }
     }
@@ -260,14 +251,17 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
     }
 
     @Override
-    public void kill() {
+    public void onDeath(net.minecraft.entity.damage.DamageSource damageSource) {
         if (!this.hasExploded) {
             var owner = this.getOwner();
-            if (owner != null && this.lastAttacker != null && !isProtected(owner, this.lastAttacker)) {
-                triggerExplosion();
+            var attacker = this.lastAttacker != null
+                    ? this.lastAttacker
+                    : (damageSource.getAttacker() instanceof LivingEntity a ? a : null);
+            if (owner != null && attacker != null && !isProtected(owner, attacker)) {
+                explodeEffects();
             }
         }
-        super.kill();
+        super.onDeath(damageSource);
     }
 
     @Override
@@ -276,13 +270,16 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
 
     private void triggerExplosion() {
         if (this.hasExploded) return;
+        explodeEffects();
+        this.discard();
+    }
+
+    private void explodeEffects() {
+        if (this.hasExploded) return;
         this.hasExploded = true;
 
         var owner = this.getOwner();
-        if (owner == null) {
-            this.discard();
-            return;
-        }
+        if (owner == null) return;
 
         applyExplosionSpell();
 
@@ -291,32 +288,24 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
                 this.getX(), this.getY() + 1.0, this.getZ(),
                 1, 0, 0, 0, 0);
         }
-
-        this.discard();
     }
 
     private void applyExplosionSpell() {
         var owner = this.getOwner();
         if (owner == null) return;
-        RegistryEntry<Spell> spellExplosion = SpellRegistry.from(
-                owner.getWorld()).getEntry(Identifier.of(MOD_ID, "alter_ego_explosion")).get();
-        ParticleHelper.sendBatches(this, spellExplosion.value().release.particles);
-        ParticleHelper.sendBatches(this, spellExplosion.value().release.particles_scaled_with_ranged);
-        for(Entity targetEntity : TargetHelper.targetsFromArea(this, spellExplosion.value().range, spellExplosion.value().target.area, e -> e != this)) {
-            SpellHelper.performImpacts(owner.getWorld(), owner, targetEntity, owner, spellExplosion,
-                    spellExplosion.value().impacts, new SpellHelper.ImpactContext().power(SpellPower.getSpellPower(spellExplosion.value().school, owner)).position(this.getPos()));
-            ParticleHelper.sendBatches(targetEntity, spellExplosion.value().impacts.get(0).particles);
-        }
+        SpellAreaExplosion.trigger(this, owner, Identifier.of(MOD_ID, "alter_ego_explosion"));
     }
 
-    private LivingEntity getOwner() {
-        if (cachedOwner != null) {
+    public LivingEntity getOwner() {
+        if (cachedOwner != null && cachedOwner.isAlive()) {
             return cachedOwner;
         }
-        var owner = this.getWorld().getEntityById(this.ownerId);
-        if (owner instanceof LivingEntity livingOwner) {
-            cachedOwner = livingOwner;
-            return livingOwner;
+        if (ownerUuid != null && getWorld() instanceof ServerWorld sw) {
+            Entity e = sw.getEntity(ownerUuid);
+            if (e instanceof LivingEntity living) {
+                cachedOwner = living;
+                return living;
+            }
         }
         return null;
     }
@@ -499,6 +488,46 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
             return nearest;
         }
     }
+    private class IdleShiftGoal extends net.minecraft.entity.ai.goal.Goal {
+        private final AlterEgoEntity alterEgo;
+        private int cooldownTicks;
+
+        public IdleShiftGoal(AlterEgoEntity alterEgo) {
+            this.alterEgo = alterEgo;
+            this.setControls(java.util.EnumSet.of(Control.MOVE));
+            this.cooldownTicks = pickCooldown();
+        }
+
+        private int pickCooldown() {
+            return 60 + alterEgo.random.nextInt(140);
+        }
+
+        @Override
+        public boolean canStart() {
+            if (--this.cooldownTicks > 0) return false;
+            return alterEgo.getNavigation().isIdle();
+        }
+
+        @Override
+        public boolean shouldContinue() {
+            return !alterEgo.getNavigation().isIdle();
+        }
+
+        @Override
+        public void start() {
+            double angle = alterEgo.random.nextDouble() * (Math.PI * 2);
+            double distance = 1.5 + alterEgo.random.nextDouble() * 2.0;
+            double targetX = alterEgo.getX() + Math.cos(angle) * distance;
+            double targetZ = alterEgo.getZ() + Math.sin(angle) * distance;
+            alterEgo.getNavigation().startMovingTo(targetX, alterEgo.getY(), targetZ, 0.6);
+        }
+
+        @Override
+        public void stop() {
+            this.cooldownTicks = pickCooldown();
+        }
+    }
+
     public boolean isProtected(LivingEntity owner, Entity other) {
         if (owner == null) {
             return false;

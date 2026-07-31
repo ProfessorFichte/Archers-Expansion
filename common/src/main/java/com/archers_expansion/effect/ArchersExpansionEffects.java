@@ -15,21 +15,20 @@ import net.spell_engine.api.effect.*;
 import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.api.event.CombatEvents;
 import net.spell_engine.api.spell.event.SpellEvents;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
-import static com.archers_expansion.ArchersExpansionMod.tweaksConfig;
 
-public class ArchersEffects {
+public class ArchersExpansionEffects {
     public static final List<Effects.Entry> entries = new ArrayList<>();
     private static Effects.Entry add(Effects.Entry entry) {
         entries.add(entry);
         return entry;
     }
 
-    // DEAD EYE
     public static final Effects.Entry FAST_SHOT = add(new Effects.Entry(
             Identifier.of(MOD_ID, "fast_shot"),
             "Fast Shot",
@@ -62,7 +61,7 @@ public class ArchersEffects {
             Identifier.of(MOD_ID, "disabling_shot"),
             "Disabling Shot",
             "Slows the target and damages it overtime.",
-            new DisablingShotEffect(StatusEffectCategory.HARMFUL, 0x805e4d),
+            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x805e4d),
             new EffectConfig(List.of(
                     new AttributeModifier(
                             EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
@@ -72,8 +71,8 @@ public class ArchersEffects {
             ))
     ));
 
-    public static final Effects.Entry INFILTRATORS_ARROW = add(new Effects.Entry(
-            Identifier.of(MOD_ID, "infiltrators_arrow"),
+    public static final Effects.Entry INFILTRATORS_VANISH = add(new Effects.Entry(
+            Identifier.of(MOD_ID, "infiltrators_vanish"),
             "Infiltrator Vanish",
             "Invisible to enemies",
             new InfiltratorsArrowEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d),
@@ -100,7 +99,6 @@ public class ArchersEffects {
             ))
     ));
 
-    // TUNDRA HUNTER
     public static final Effects.Entry FROZEN_SHOT = add(new Effects.Entry(
             Identifier.of(MOD_ID, "frozen_shot"),
             "Frozen Shot",
@@ -120,12 +118,22 @@ public class ArchersEffects {
     public static final Effects.Entry FROZEN_PACT = add(new Effects.Entry(
             Identifier.of(MOD_ID, "frozen_pact"),
             "Frozen Pact",
-            "Damages the targets according to their Frozen ticks and reduces their attack.",
+            "Damages the targets according to their Frozen ticks and reduces their offensive attributes.",
             new FrozenPactEffect(StatusEffectCategory.HARMFUL, 0x99ccff),
             new EffectConfig(List.of(
                     new AttributeModifier(
                             EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(),
-                            -0.25F,
+                            -0.2F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    new AttributeModifier(
+                            SpellSchools.GENERIC.id.toString(),
+                            -0.2F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    new AttributeModifier(
+                            EntityAttributes_RangedWeapon.DAMAGE.id.toString(),
+                            -0.2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
@@ -145,32 +153,40 @@ public class ArchersEffects {
             ))
     ));
 
-    // WAR ARCHER
+    public static final Effects.Entry FROZEN_FUSILLADE_SLOW = add(new Effects.Entry(
+            Identifier.of(MOD_ID, "frozen_fusillade_slow"),
+            "Frozen Fusillade",
+            "Movement is slowed by a barrage of frozen shards.",
+            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x99ccff),
+            new EffectConfig(List.of(
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            -0.3F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    )
+            ))
+    ));
+
+    public static final Effects.Entry FROZEN_FUSILLADE_HASTE = add(new Effects.Entry(
+            Identifier.of(MOD_ID, "frozen_fusillade_haste"),
+            "Frozen Fusillade",
+            "Movement is quickened by a barrage of frozen shards.",
+            new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x99ccff),
+            new EffectConfig(List.of(
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            0.3F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    )
+            ))
+    ));
+
     public static final Effects.Entry SMOLDERING_ARROWS = add(new Effects.Entry(
             Identifier.of(MOD_ID, "smoldering_arrows"),
             "Smoldering Arrow",
             "Your next shot creates a small explosion near the target, damaging and burning entities around.",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d),
             new EffectConfig(List.of())
-    ));
-
-    public static final Effects.Entry PIN_DOWN = add(new Effects.Entry(
-            Identifier.of(MOD_ID, "pin_down"),
-            "Pin Down",
-            "The target cant move or jump during the effect.",
-            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x805e4d),
-            new EffectConfig(List.of(
-                    new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
-                            -10.0F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-                    ),
-                    new AttributeModifier(
-                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
-                            -10.0F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                    )
-            ))
     ));
 
     public static RegistryEntry<StatusEffect> getEntry(Effects.Entry entry) {
@@ -189,7 +205,7 @@ public class ArchersEffects {
 
         CombatEvents.ENTITY_ANY_ATTACK.register((args) -> {
             var attacker = args.attacker();
-            var entry = getEntry(INFILTRATORS_ARROW);
+            var entry = getEntry(INFILTRATORS_VANISH);
             if (attacker.hasStatusEffect(entry)) {
                 attacker.removeStatusEffect(entry);
             }
@@ -201,7 +217,7 @@ public class ArchersEffects {
         SpellEvents.SPELL_CAST.register((args) -> {
             var caster = args.caster();
             var spellId = args.spell().getKey().get().getValue();
-            var entry = getEntry(INFILTRATORS_ARROW);
+            var entry = getEntry(INFILTRATORS_VANISH);
             if (caster.hasStatusEffect(entry)
                     && !spellId.equals(vanishId) && !spellId.equals(alterEgoId) && !spellId.equals(alterEgoExplosionId)) {
                 caster.removeStatusEffect(entry);
@@ -210,14 +226,15 @@ public class ArchersEffects {
 
         CombatEvents.ITEM_USE.register((args) -> {
             var user = args.user();
-            var entry = getEntry(INFILTRATORS_ARROW);
+            var entry = getEntry(INFILTRATORS_VANISH);
             if (user.hasStatusEffect(entry)) {
                 user.removeStatusEffect(entry);
             }
         });
 
-        OnRemoval.configure(INFILTRATORS_ARROW.effect, (context) -> {
-            InfiltratorsArrowEffect.onRemove(context.entity());
+
+        OnRemoval.configure(INFILTRATORS_VANISH.effect, (context) -> {
+            ((InfiltratorsArrowEffect) INFILTRATORS_VANISH.effect).onStealthRemoved(context.entity());
             var speedEntry = getEntry(INFILTRATORS_SPEED);
             if (context.entity().hasStatusEffect(speedEntry)) {
                 context.entity().removeStatusEffect(speedEntry);

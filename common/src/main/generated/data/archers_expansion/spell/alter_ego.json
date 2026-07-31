@@ -44,8 +44,8 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "archers_expansion:infiltrators_arrow",
-          "duration": 7.0
+          "effect_id": "archers_expansion:infiltrators_vanish",
+          "duration": 13.0
         }
       }
     },

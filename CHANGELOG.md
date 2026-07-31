@@ -1,3 +1,13 @@
+# 1.5.2 - 1.21.1
+- Adapt to Spell Engine 1.9.10+ API Changes
+**Balancing & Internal Changes:**
+- Prepared the Spell Expansion Spells technically, they'll be available once they're fully ready
+- Models, Textures, Sound Effects & Animations are still missing
+- Renamed the Spell Trick Shot (id: "trick_shot") to Bouncing Arrow (id: "bouncing_arrow")
+- Enchanted Crystal Arrow can now be charged, that the projectile is bigger and hits harder
+- Added uk_ua localization- #18 - thx: Ch1sho
+
+
 # 1.5.1 - 1.21.1
 - Fix Crash with Enchanted Crystal Arrow, due to wrong projectile model_id
 

@@ -8,7 +8,6 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -21,14 +20,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
-import net.spell_engine.client.render.FlyingSpellEntity;
 import net.spell_engine.internals.SpellHelper;
 import org.jetbrains.annotations.Nullable;
 
-public class PoisonFlaskProjectile extends ProjectileEntity implements FlyingSpellEntity {
+public class PoisonFlaskProjectile extends ProjectileEntity {
     public static EntityType<PoisonFlaskProjectile> ENTITY_TYPE;
 
-    private static final float GRAVITY = 0.05F;
+    private static final float GRAVITY = 0.04F;
     private static final float DRAG = 0.99F;
     private static final int MAX_AGE = 600;
 
@@ -76,7 +74,6 @@ public class PoisonFlaskProjectile extends ProjectileEntity implements FlyingSpe
             return;
         }
 
-        // Collision detection
         HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
         if (hitResult.getType() != HitResult.Type.MISS) {
             this.onCollision(hitResult);
@@ -84,7 +81,6 @@ public class PoisonFlaskProjectile extends ProjectileEntity implements FlyingSpe
 
         this.checkBlockCollision();
 
-        // Movement with gravity
         Vec3d velocity = this.getVelocity();
         double x = this.getX() + velocity.x;
         double y = this.getY() + velocity.y;
@@ -122,23 +118,11 @@ public class PoisonFlaskProjectile extends ProjectileEntity implements FlyingSpe
         if (this.getOwner() instanceof LivingEntity caster && this.spellEntry != null) {
             var hitPosition = blockHitResult.getPos();
             var impactContext = this.context != null ? this.context : new SpellHelper.ImpactContext();
-            SpellHelper.projectileImpact(caster, this, null, this.spellEntry, impactContext.position(hitPosition));
+            com.archers_expansion.spell.CustomSpellImpacts.placeVenomCloud(caster, null, hitPosition, impactContext.position(hitPosition));
         }
         this.kill();
     }
 
-    // FlyingSpellEntity implementation
-    @Override
-    public Spell.ProjectileModel renderData() {
-        return null;
-    }
-
-    @Override
-    public ItemStack getStack() {
-        return ItemStack.EMPTY;
-    }
-
-    // NBT persistence
     private static final String NBT_SPELL_ID = "SpellId";
     private static final String NBT_IMPACT_CONTEXT = "ImpactContext";
 

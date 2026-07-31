@@ -1,11 +1,17 @@
 {
   "school": "spell_power:physical_ranged",
-  "range": 40.0,
+  "range": 8.0,
   "tier": 5,
   "learn": {},
   "active": {
     "cast": {
-      "duration": 0.5,
+      "duration": 3.0,
+      "type": "CHARGE",
+      "charge": {
+        "bonus": {
+          "range_add": 22.0
+        }
+      },
       "animation": {
         "id": "spell_engine:archery_pull"
       },
@@ -27,30 +33,9 @@
     "aim": {}
   },
   "deliver": {
-    "type": "PROJECTILE",
-    "projectile": {
-      "launch_properties": {
-        "velocity": 1.2
-      },
-      "projectile": {
-        "client_data": {
-          "travel_particles": [
-            {
-              "particle_id": "poof",
-              "origin": "CENTER",
-              "shape": "LINE",
-              "rotation": "LOOK",
-              "roll": 1.0,
-              "count": 2.0,
-              "min_speed": 0.2,
-              "max_speed": 0.22
-            }
-          ],
-          "model": {
-            "model_id": "archers_expansion:spell_projectile/infiltrators_arrow"
-          }
-        }
-      }
+    "type": "CUSTOM",
+    "custom": {
+      "handler": "archers_expansion:infiltrators_arrow"
     }
   },
   "impacts": [
@@ -58,37 +43,8 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 0.75
+          "spell_power_coefficient": 0.8
         }
-      }
-    },
-    {
-      "action": {
-        "type": "STATUS_EFFECT",
-        "apply_to_caster": true,
-        "status_effect": {
-          "effect_id": "archers_expansion:infiltrators_arrow"
-        }
-      },
-      "particles": [
-        {
-          "particle_id": "poof",
-          "origin": "CENTER",
-          "shape": "PILLAR",
-          "count": 5.0,
-          "min_speed": 0.6
-        },
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "FEET",
-          "shape": "CIRCLE",
-          "count": 5.0,
-          "min_speed": 0.3,
-          "max_speed": 0.6
-        }
-      ],
-      "sound": {
-        "id": "archers_expansion:infiltrator_vanish"
       }
     }
   ],

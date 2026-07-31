@@ -1,21 +1,19 @@
 package com.archers_expansion.effect;
 
 import com.archers_expansion.ArchersExpansionMod;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.more_rpg_classes.effect.StealthStatusEffect;
+import net.more_rpg_classes.sounds.MRPGLibSounds;
 import net.spell_engine.api.spell.fx.ParticleBatch;
-import net.spell_engine.fx.ParticleHelper;
 import net.spell_engine.fx.SpellEngineParticles;
-import net.spell_engine.utils.SoundHelper;
 
-public class InfiltratorsArrowEffect extends StatusEffect {
+public class InfiltratorsArrowEffect  extends StealthStatusEffect{
     protected InfiltratorsArrowEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
-    public static final ParticleBatch POP_PARTICLES = new ParticleBatch(
+
+    private static final ParticleBatch POP_PARTICLES = new ParticleBatch(
             SpellEngineParticles.smoke_medium.id().toString(),
             ParticleBatch.Shape.CIRCLE,
             ParticleBatch.Origin.FEET,
@@ -24,13 +22,25 @@ public class InfiltratorsArrowEffect extends StatusEffect {
             0.18F,
             0.2F,
             0);
-    public static final Identifier LEAVE_SOUND_ID = Identifier.of(ArchersExpansionMod.MOD_ID, "infiltrator_vanish");
-    public static final SoundEvent LEAVE_SOUND = SoundEvent.of(LEAVE_SOUND_ID);
+    private static final Identifier LEAVE_SOUND_ID = MRPGLibSounds.STEALTH_VANISH.id();
 
-    public static void onRemove(LivingEntity entity) {
-        if (!entity.getWorld().isClient()) {
-            SoundHelper.playSoundEvent(entity.getWorld(), entity, LEAVE_SOUND);
-            ParticleHelper.sendBatches(entity, new ParticleBatch[]{POP_PARTICLES});
-        }
+    @Override
+    public ParticleBatch stealthPopParticles() {
+        return POP_PARTICLES;
+    }
+
+    @Override
+    public Identifier stealthLeaveSoundId() {
+        return LEAVE_SOUND_ID;
+    }
+
+    @Override
+    public double stealthFollowRange() {
+        return ArchersExpansionMod.tweaksConfig.value.stealth_follow_range;
+    }
+
+    @Override
+    public double stealthVisibilityMultiplier() {
+        return ArchersExpansionMod.tweaksConfig.value.stealth_visibility_multiplier;
     }
 }

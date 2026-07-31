@@ -61,9 +61,15 @@
               "color_rgba": 2583652095
             }
           ],
-          "model": {
-            "model_id": "archers_expansion:spell_projectile/choking_gas_arrow",
-            "scale": 1.2
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers_expansion:spell_projectile/choking_gas_arrow",
+                  "scale": 1.2
+                }
+              }
+            ]
           }
         }
       }

@@ -1,7 +1,9 @@
 package com.archers_expansion;
 
 import com.archers_expansion.config.Default;
-import com.archers_expansion.effect.ArchersEffects;
+import com.archers_expansion.effect.ArchersExpansionEffects;
+import com.archers_expansion.entity.ArcherExpansionSummons;
+import com.archers_expansion.entity.ArchersTeamMatcher;
 import com.archers_expansion.entity.ModEntitiesRegistry;
 import com.archers_expansion.items.Group;
 import com.archers_expansion.items.Items;
@@ -19,6 +21,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.api.spell.summon.SummonedEntityConfig;
 import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,19 +51,33 @@ public class ArchersExpansionMod{
 			.setDirectory(MOD_ID)
 			.sanitize(true)
 			.build();
+	public static ConfigManager<SummonedEntityConfig> summonConfig = new ConfigManager<>
+			("summoned_entities", seededSummonDefaults())
+			.builder()
+			.setDirectory(MOD_ID)
+			.sanitize(true)
+			.build();
+
+	private static SummonedEntityConfig seededSummonDefaults() {
+		var config = new SummonedEntityConfig();
+		config.entries.put(ModEntitiesRegistry.POLAR_BEAR_ID.toString(), ArcherExpansionSummons.defaults());
+		return config;
+	}
 
 	public static void init() {
 		CustomSpellImpacts.registerCustomImpacts();
 		CustomSpellImpacts.registerCustomDeliveries();
+		ArchersTeamMatcher.register();
 		effectsConfig.refresh();
 		itemConfig.refresh();
 		tweaksConfig.refresh();
+		summonConfig.refresh();
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			tweaksConfig.value.ignore_items_required_mods = true;
 		}
 	}
 	public static void registerEffects() {
-		ArchersEffects.register(effectsConfig.value);
+		ArchersExpansionEffects.register(effectsConfig.value);
 		effectsConfig.save();
 	}
 	public static void registerSounds() {

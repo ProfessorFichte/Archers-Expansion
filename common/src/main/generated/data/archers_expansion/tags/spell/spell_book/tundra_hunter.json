@@ -15,6 +15,14 @@
     {
       "id": "archers_expansion:enchanted_crystal_arrow",
       "required": false
+    },
+    {
+      "id": "archers_expansion:bearward",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:frozen_fusillade",
+      "required": false
     }
   ]
 }

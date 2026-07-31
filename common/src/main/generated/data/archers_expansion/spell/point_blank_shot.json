@@ -48,9 +48,15 @@
               "max_speed": 0.22
             }
           ],
-          "model": {
-            "model_id": "archers_expansion:spell_projectile/regular_arrow",
-            "scale": 1.5
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers_expansion:spell_projectile/regular_arrow",
+                  "scale": 3.0
+                }
+              }
+            ]
           }
         }
       }

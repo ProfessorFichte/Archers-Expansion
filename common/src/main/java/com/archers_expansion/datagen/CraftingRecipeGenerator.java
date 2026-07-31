@@ -28,10 +28,6 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
     }
 
     private void generateArmorRecipes(RecipeExporter exporter) {
-        // ==========================================
-        // DEADEYE ARMOR SET
-        // ==========================================
-
         createShapedRecipe(exporter, Armors.deadeye_t1.armorSet().head,
                 "ABA",
                 "C C",
@@ -69,10 +65,6 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'C', net.minecraft.item.Items.GOLD_INGOT
         );
 
-        // ==========================================
-        // TUNDRA HUNTER ARMOR SET
-        // ==========================================
-
         createShapedRecipe(exporter, Armors.tundra_hunter_t1.armorSet().head,
                 "AAA",
                 "C C",
@@ -105,10 +97,6 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 'A', net.minecraft.item.Items.PRISMARINE_SHARD,
                 'B', "more_rpg_classes:polar_bear_fur"
         );
-
-        // ==========================================
-        // WAR ARCHER ARMOR SET
-        // ==========================================
 
         createShapedRecipe(exporter,Armors.war_archer_t1.armorSet().head,
                 "ABA",
@@ -173,7 +161,6 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
             } else if (ingredient instanceof TagKey<?> tag) {
                 builder.input(key, (TagKey<Item>) tag);
             } else if (ingredient instanceof String str) {
-                // Convert string identifier to TagKey
                 TagKey<Item> tag = TagKey.of(RegistryKeys.ITEM, Identifier.of(str));
                 builder.input(key, tag);
             }
@@ -198,7 +185,6 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
             } else if (ingredient instanceof TagKey<?> tag) {
                 builder.input((TagKey<Item>) tag);
             } else if (ingredient instanceof String str) {
-                // Convert string identifier to TagKey
                 TagKey<Item> tag = TagKey.of(RegistryKeys.ITEM, Identifier.of(str));
                 builder.input(tag);
             }

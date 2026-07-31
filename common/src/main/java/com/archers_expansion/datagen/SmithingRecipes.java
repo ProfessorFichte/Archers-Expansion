@@ -18,9 +18,6 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
         Identifier generalCrystal = Identifier.of("more_rpg_classes", "general_upgrade_crystal");
         Identifier ravagerCrystal = Identifier.of("more_rpg_classes", "ravager_upgrade_crystal");
 
-        // ==========================================
-        // BOUNTY HUNTER UPGRADES (Deadeye -> Bounty Hunter)
-        // ==========================================
         createArmorSetUpgrade(
                 "smithing_from_deadeye",
                 Armors.deadeye_t1.armorSet(),
@@ -38,9 +35,6 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
                 "armory_rpgs"
         );
 
-        // ==========================================
-        // POLAR STALKER UPGRADES (Tundra Hunter -> Polar Stalker)
-        // ==========================================
         createArmorSetUpgrade(
                 "smithing_from_tundra_hunter",
                 Armors.tundra_hunter_t1.armorSet(),
@@ -58,9 +52,6 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
                 "armory_rpgs"
         );
 
-        // ==========================================
-        // SENTINEL ARCHER UPGRADES (War Archer -> Sentinel Archer)
-        // ==========================================
         createArmorSetUpgrade(
                 "smithing_from_war_archer",
                 Armors.war_archer_t1.armorSet(),
@@ -78,9 +69,6 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
                 "armory_rpgs"
         );
 
-        // ==========================================
-        // NETHERITE UPGRADES (T1 -> Netherite) - WITHOUT Load Conditions
-        // ==========================================
         createSimpleArmorSetUpgrade(
                 "netherite_deadeye",
                 Armors.deadeye_t1.armorSet(),

@@ -68,9 +68,15 @@
               "color_rgba": 3208659199
             }
           ],
-          "model": {
-            "model_id": "archers_expansion:spell_projectile/pin_down_arrow",
-            "scale": 1.2
+          "composite_model": {
+            "models": [
+              {
+                "fx": {
+                  "model_id": "archers_expansion:spell_projectile/pin_down_arrow",
+                  "scale": 1.2
+                }
+              }
+            ]
           }
         }
       }
@@ -113,7 +119,7 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "archers_expansion:pin_down",
+          "effect_id": "spell_engine:immobilize",
           "duration": 4.0
         }
       }
