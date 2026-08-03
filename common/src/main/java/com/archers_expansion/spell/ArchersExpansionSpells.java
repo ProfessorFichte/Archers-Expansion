@@ -154,6 +154,7 @@ public class ArchersExpansionSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 0;
         spell.tier = 2;
+        spell.group = POISONER;
 
         spell.release.sound = Sound.withVolume(Identifier.of("archers","marker_shot"),0.5F);
         spell.release.particles = new ParticleBatch[]{
@@ -215,6 +216,7 @@ public class ArchersExpansionSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 26;
         spell.tier = 2;
+        spell.group = TRICKSTER;
 
         spell.active.cast.duration = 0.6F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -286,6 +288,7 @@ public class ArchersExpansionSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 26;
         spell.tier = 3;
+        spell.group = TRICKSTER;
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -356,6 +359,7 @@ public class ArchersExpansionSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 20;
         spell.tier = 4;
+        spell.group = POISONER;
 
         spell.active.cast.duration = 1.25F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -447,6 +451,7 @@ public class ArchersExpansionSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 20;
         spell.tier = 3;
+        spell.group = POISONER;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
 
         spell.active.cast.duration = 0.6F;
@@ -558,6 +563,7 @@ public class ArchersExpansionSpells {
         spell.range = 4;
         spell.tier = 4;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
+        spell.group = TRICKSTER;
 
         spell.active.cast.duration = 0F;
 
@@ -677,6 +683,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FROST_RANGED;
         spell.range = 0;
         spell.tier = 2;
+        spell.group = STALKER;
 
         spell.release.sound = new Sound("spell_engine:generic_frost_impact");
 
@@ -734,6 +741,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FROST_RANGED;
         spell.range = 12;
         spell.tier = 2;
+        spell.group = ARCTIC;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
 
         spell.active.cast.duration = 0.5F;
@@ -789,6 +797,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FROST_RANGED;
         spell.range = 32;
         spell.tier = 3;
+        spell.group = ARCTIC;
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -873,6 +882,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FROST_RANGED;
         spell.range = 32;
         spell.tier = 4;
+        spell.group = ARCTIC;
 
         var charge = SpellBuilder.Casting.charge(spell, 2.0F);
         charge.min_release_ratio = 0.25F;
@@ -971,6 +981,7 @@ public class ArchersExpansionSpells {
         spell.range = 0;
         spell.tier = 4;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
+        spell.group = STALKER;
 
         spell.active.cast.duration = 1.0F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
@@ -1029,6 +1040,7 @@ public class ArchersExpansionSpells {
         spell.range = 0;
         spell.tier = 3;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
+        spell.group = STALKER;
 
         spell.active.cast.duration = 0.6F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
@@ -1114,6 +1126,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FIRE_RANGED;
         spell.range = 0;
         spell.tier = 2;
+        spell.group = GUARD;
 
         spell.active.cast.duration = 0.35F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -1150,6 +1163,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FIRE_RANGED;
         spell.range = 0;
         spell.tier = 2;
+        spell.group = EXPLOSIVES;
 
         spell.release.sound = Sound.withVolume(Identifier.of("entity.generic.extinguish_fire"), 0.5F);
         spell.release.particles = new ParticleBatch[]{
@@ -1222,6 +1236,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FIRE_RANGED;
         spell.range = 26;
         spell.tier = 3;
+        spell.group = GUARD;
 
         spell.active.cast.duration = 1.2F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -1282,6 +1297,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FIRE_RANGED;
         spell.range = 40;
         spell.tier = 4;
+        spell.group = GUARD;
 
         spell.active.cast.duration = 1.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -1349,6 +1365,7 @@ public class ArchersExpansionSpells {
         spell.school = MoreSpellSchools.FIRE_RANGED;
         spell.range = 0;
         spell.tier = 4;
+        spell.group = EXPLOSIVES;
 
         spell.active.cast.duration = 0.6F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
@@ -1427,6 +1444,7 @@ public class ArchersExpansionSpells {
         spell.range = 0;
         spell.tier = 3;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
+        spell.group = EXPLOSIVES;
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");

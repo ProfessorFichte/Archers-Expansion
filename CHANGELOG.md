@@ -6,7 +6,8 @@
 - Renamed the Spell Trick Shot (id: "trick_shot") to Bouncing Arrow (id: "bouncing_arrow")
 - Enchanted Crystal Arrow can now be charged, that the projectile is bigger and hits harder
 - Added uk_ua localization- #18 - thx: Ch1sho
-
+- Changed Infiltrator's Arrow (Will soon be moved to LNE-Archers or a new Mod that holds all extra spells)
+- It's now a charged spell, that shoots a arrow
 
 # 1.5.1 - 1.21.1
 - Fix Crash with Enchanted Crystal Arrow, due to wrong projectile model_id
