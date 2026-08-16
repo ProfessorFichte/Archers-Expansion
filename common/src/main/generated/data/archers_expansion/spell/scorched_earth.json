@@ -2,12 +2,13 @@
   "school": "spell_power:fire_ranged",
   "range": 0.0,
   "tier": 4,
+  "group": "explosives",
   "learn": {},
   "active": {
     "cast": {
-      "duration": 0.6,
+      "duration": 0.5,
       "animation": {
-        "id": "spell_engine:archery_pull"
+        "id": "more_rpg_classes:archery_downwards_pull"
       },
       "sound": {
         "id": "archers:bow_pull"
@@ -16,7 +17,7 @@
   },
   "release": {
     "animation": {
-      "id": "spell_engine:one_handed_area_release"
+      "id": "more_rpg_classes:archery_downwards_release"
     },
     "particles": [
       {
@@ -37,7 +38,7 @@
     "clouds": [
       {
         "volume": {
-          "radius": 1.5
+          "radius": 2.0
         },
         "time_to_live_seconds": 1.5,
         "placement": {
@@ -110,6 +111,7 @@
           }
         ],
         "client_data": {
+          "light_level": 15,
           "particles": [
             {
               "particle_id": "spell_engine:flame_medium_b",
@@ -128,6 +130,11 @@
               "max_speed": 0.2
             }
           ]
+        },
+        "spawn": {
+          "sound": {
+            "id": "archers_expansion:scorched_earth_ignite"
+          }
         }
       }
     ]

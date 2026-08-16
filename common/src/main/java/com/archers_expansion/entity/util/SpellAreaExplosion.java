@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import net.spell_engine.fx.ParticleHelper;
 import net.spell_engine.internals.SpellHelper;
+import net.spell_engine.utils.SoundHelper;
 import net.spell_engine.utils.TargetHelper;
 import net.spell_power.api.SpellPower;
 import net.spell_engine.api.spell.registry.SpellRegistry;
@@ -17,6 +18,7 @@ public class SpellAreaExplosion {
 
         ParticleHelper.sendBatches(source, spell.release.particles);
         ParticleHelper.sendBatches(source, spell.release.particles_scaled_with_ranged);
+        SoundHelper.playSound(owner.getWorld(),source,spell.release.sound);
         for (var target : TargetHelper.targetsFromArea(source, spell.range, spell.target.area, e -> e != source)) {
             SpellHelper.performImpacts(owner.getWorld(), owner, target, owner, spellEntry,
                     spell.impacts, new SpellHelper.ImpactContext()

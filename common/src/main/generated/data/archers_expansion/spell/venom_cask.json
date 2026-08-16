@@ -3,21 +3,19 @@
   "secondary_archetype": "ANY",
   "range": 20.0,
   "tier": 3,
+  "group": "poisoner",
   "learn": {},
   "active": {
     "cast": {
-      "duration": 0.6,
+      "duration": 0.4,
       "animation": {
-        "id": "spell_engine:archery_pull"
-      },
-      "sound": {
-        "id": "archers:bow_pull"
+        "id": "spell_engine:one_handed_throw_charge"
       }
     }
   },
   "release": {
     "animation": {
-      "id": "spell_engine:archery_release"
+      "id": "spell_engine:one_handed_throw_release"
     },
     "particles": [
       {
@@ -65,7 +63,7 @@
         }
       ],
       "sound": {
-        "id": "archers_expansion:poison_cloud"
+        "id": "block.glass.break"
       }
     },
     {

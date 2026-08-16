@@ -1,13 +1,23 @@
-# 1.5.2 - 1.21.1
+# 2.0.0 - 1.21.1
 - Adapt to Spell Engine 1.9.10+ API Changes
+**Spell Expansion**
+Deadeye:
+- T3 Venom Cask: Throws a cask of venom that shatters on impact, deals damage to the target. Also leaves a poisonous cloud on the ground.
+- T4 Alter Ego: Creates decoys and grants invisibility to the caster.
+Tundra hunter:
+- T3 Frozen Fusillade: Summons a barrage of ice around you, slowing nearby enemies and speeding your allies.
+- T4 Polar Bearward: Summons a Polar Bear to fight by your side, empowered by your Ranged Damage. The Bear gets a short raging speed boost if its target is some distance away.
+War Archer:
+- T3 Explosive Barrel: Places an explosive barrel that detonates itself and other near barrels when struck or approached by an enemy, creating a huge explosion.
+- T4 Scorched Earth: Fires a bolt that ignites a line of ground in front of you, dealing damage and burning enemies.
 **Balancing & Internal Changes:**
-- Prepared the Spell Expansion Spells technically, they'll be available once they're fully ready
-- Models, Textures, Sound Effects & Animations are still missing
 - Renamed the Spell Trick Shot (id: "trick_shot") to Bouncing Arrow (id: "bouncing_arrow")
 - Enchanted Crystal Arrow can now be charged, that the projectile is bigger and hits harder
 - Added uk_ua localization- #18 - thx: Ch1sho
 - Changed Infiltrator's Arrow (Will soon be moved to LNE-Archers or a new Mod that holds all extra spells)
-- It's now a charged spell, that shoots a arrow
+- It's now a charged spell, that shoots an arrow that flies further the longer you charge.
+- You'll get teleported to the location where the arrow hit.
+- Armory  Compat Equipment is now added to a separate Item Group
 
 # 1.5.1 - 1.21.1
 - Fix Crash with Enchanted Crystal Arrow, due to wrong projectile model_id

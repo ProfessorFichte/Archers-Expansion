@@ -3,6 +3,7 @@
   "secondary_archetype": "ANY",
   "range": 4.0,
   "tier": 4,
+  "group": "trickster",
   "learn": {},
   "active": {},
   "release": {
@@ -56,7 +57,7 @@
           {
             "entity_type_id": "archers_expansion:alter_ego",
             "time_to_live_seconds": 12,
-            "delay_ticks": 20,
+            "delay_ticks": 10,
             "placement": {
               "location_offset_by_look": 3.0,
               "apply_yaw": true
@@ -65,7 +66,7 @@
           {
             "entity_type_id": "archers_expansion:alter_ego",
             "time_to_live_seconds": 12,
-            "delay_ticks": 20,
+            "delay_ticks": 10,
             "placement": {
               "location_offset_by_look": 3.0,
               "location_yaw_offset": 90.0,
@@ -75,7 +76,7 @@
           {
             "entity_type_id": "archers_expansion:alter_ego",
             "time_to_live_seconds": 12,
-            "delay_ticks": 20,
+            "delay_ticks": 10,
             "placement": {
               "location_offset_by_look": 3.0,
               "location_yaw_offset": -90.0,
@@ -85,7 +86,7 @@
           {
             "entity_type_id": "archers_expansion:alter_ego",
             "time_to_live_seconds": 12,
-            "delay_ticks": 20,
+            "delay_ticks": 10,
             "placement": {
               "location_offset_by_look": 3.0,
               "location_yaw_offset": -180.0,

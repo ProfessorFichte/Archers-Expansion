@@ -2,6 +2,7 @@
   "school": "spell_power:physical_ranged",
   "range": 26.0,
   "tier": 2,
+  "group": "trickster",
   "learn": {},
   "active": {
     "cast": {

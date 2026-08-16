@@ -18,7 +18,6 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
@@ -283,11 +282,6 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
 
         applyExplosionSpell();
 
-        if (this.getWorld() instanceof ServerWorld serverWorld) {
-            serverWorld.spawnParticles(ParticleTypes.EXPLOSION,
-                this.getX(), this.getY() + 1.0, this.getZ(),
-                1, 0, 0, 0, 0);
-        }
     }
 
     private void applyExplosionSpell() {

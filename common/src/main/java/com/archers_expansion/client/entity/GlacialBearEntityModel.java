@@ -164,6 +164,8 @@ public class GlacialBearEntityModel extends SinglePartEntityModel<PolarBearEntit
         float attackSpeed = (float) entity.getAttributeValue(EntityAttributes.GENERIC_ATTACK_SPEED);
         this.updateAnimation(entity.attackAnimationState, GlacialBearAnimations.ATTACK, ageInTicks, attackSpeed);
         this.updateAnimation(entity.idleAnimationState, GlacialBearAnimations.IDLE, ageInTicks, 1.0f);
+        this.updateAnimation(entity.spawnAnimationState, GlacialBearAnimations.SPAWN, ageInTicks, 1.0f);
+        this.updateAnimation(entity.despawnAnimationState, GlacialBearAnimations.DEATH, ageInTicks, 1.0f);
     }
 
     @Override

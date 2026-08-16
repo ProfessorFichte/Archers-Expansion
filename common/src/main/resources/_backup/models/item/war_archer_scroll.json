@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "archers_expansion:item/war_archer_scroll"
-  }
-}

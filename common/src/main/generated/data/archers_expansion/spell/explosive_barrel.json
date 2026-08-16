@@ -3,21 +3,12 @@
   "secondary_archetype": "ANY",
   "range": 0.0,
   "tier": 3,
+  "group": "explosives",
   "learn": {},
-  "active": {
-    "cast": {
-      "duration": 0.5,
-      "animation": {
-        "id": "spell_engine:one_handed_area_charge"
-      },
-      "sound": {
-        "id": "archers:bow_pull"
-      }
-    }
-  },
+  "active": {},
   "release": {
     "animation": {
-      "id": "spell_engine:one_handed_area_release"
+      "id": "more_rpg_classes:place_object_instant"
     },
     "particles": [
       {
@@ -40,7 +31,7 @@
         "spawns": [
           {
             "entity_type_id": "archers_expansion:explosive_barrel",
-            "time_to_live_seconds": 32,
+            "time_to_live_seconds": 25,
             "placement": {
               "location_offset_by_look": 2.0
             }

@@ -1,5 +1,6 @@
 package com.archers_expansion.entity;
 
+import com.archers_expansion.sounds.Sounds;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.more_rpg_classes.custom.MoreSpellSchools;
@@ -21,10 +22,10 @@ public class ArcherExpansionSummons {
 
     public static SummonedEntityConfig.Entry defaults() {
         var e = new SummonedEntityConfig.Entry();
-        e.common = new SummonedEntityConfig.CommonAttributes(30, 0.25, 6);
+        e.common = new SummonedEntityConfig.CommonAttributes(24, 0.32, 7);
         e.common.follow_range = 16;
         e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(), 0.5));
+                EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(), 0.25));
         // GlacialBearEntityModel reads GENERIC_ATTACK_SPEED for its attack animation, but SummonedEntity.createAttributes() doesn't register it, so it must be seeded here or it throws.
         e.custom.add(new SummonedEntityConfig.CustomAttribute(
                 EntityAttributes.GENERIC_ATTACK_SPEED.getIdAsString(), 1.0));
@@ -34,11 +35,11 @@ public class ArcherExpansionSummons {
     public static Summon summon() {
         var b = new SummonBehaviour();
         b.lifespan.spawn_ticks = 20;
-        b.lifespan.active_seconds = 45;
+        b.lifespan.active_seconds = 30;
         b.lifespan.despawn_ticks = 20;
 
         b.movement.follow = new SummonBehaviour.Movement.Follow();
-        b.movement.follow.teleport_after_distance = 24F;
+        b.movement.follow.teleport_after_distance = 32F;
         b.movement.collision = SummonBehaviour.Movement.CollisionMode.ENEMIES;
 
         b.targeting.attack_with_owner = true;
@@ -46,21 +47,21 @@ public class ArcherExpansionSummons {
         b.targeting.automatic_targeting = SummonBehaviour.Targeting.AutoTarget.HOSTILE;
 
         var attack = new SummonBehaviour.Action.MeleeAttack();
-        attack.max_range = 0; // no cap - chase any acquired target, like the Spirit Wolf
-        attack.speed = 0.9F;
-        attack.duration = 25;
-        attack.windup = 0.5F;
-        attack.radius = 2.5F;
-        attack.movement_speed = 1.0F;
-        attack.swing_sound = new Sound("minecraft:entity.polar_bear.warning");
-        attack.impact_sound = new Sound("spell_engine:generic_frost_impact");
+        attack.max_range = 0;
+        attack.speed = 1.4F;
+        attack.duration = 20;
+        attack.windup = 0.35F;
+        attack.radius = 1.5F;
+        attack.movement_speed = 1.2F;
+        attack.swing_sound = new Sound(Sounds.POLARBEAR_SWING.id());
+        attack.impact_sound = new Sound(Sounds.POLARBEAR_SWING_IMPACT.id());
         b.actions = List.of(SummonBehaviour.Action.attack(attack));
 
-        b.sounds.spawn = new Sound("minecraft:entity.polar_bear.ambient");
+        b.sounds.spawn = new Sound(Sounds.POLARBEAR_SPAWN.id());
         b.sounds.despawn = new Sound("minecraft:entity.polar_bear.hurt");
         b.sounds.hurt = new Sound("minecraft:entity.polar_bear.hurt");
-        b.sounds.death = new Sound("minecraft:entity.polar_bear.death");
-        b.sounds.ambient = new Sound("minecraft:entity.polar_bear.ambient");
+        b.sounds.death = new Sound(Sounds.POLARBEAR_DEATH.id());
+        b.sounds.ambient = new Sound(Sounds.POLARBEAR_IDLE.id());
         b.sounds.step = new Sound("minecraft:entity.polar_bear.step");
 
         b.spawn_fx = new VFX();
@@ -93,8 +94,10 @@ public class ArcherExpansionSummons {
     private static List<AttributeScaling.Entry> frostScaling() {
         var s = MoreSpellSchools.FROST_RANGED.attributeEntry.getIdAsString();
         var entries = new ArrayList<AttributeScaling.Entry>();
-        entries.add(scalingEntry(EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString(), s, 0, 2.0));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(), s, 0, 0.3));
+        entries.add(scalingEntry(EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString(), s, 0, 0.7));
+        entries.add(scalingEntry(EntityAttributes.GENERIC_ARMOR.getIdAsString(), s, 0, 0.04));
+        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(), s, 0, 0.55));
+        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_KNOCKBACK.getIdAsString(), s, 0, 0.1));
         return entries;
     }
 

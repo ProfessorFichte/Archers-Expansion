@@ -30,6 +30,13 @@ public class Sounds {
     public static final Entry POINT_BLANK_SHOT = add("point_blank_shot", 1);
     public static final Entry POISON_CLOUD = add("poison_cloud", 1);
     public static final Entry INFILTRATOR_VANISH = add("infiltrator_vanish", 1);
+    public static final Entry SCORCHED_EARTH_IGNITE = add("scorched_earth_ignite", 1);
+    public static final Entry POLARBEAR_SPAWN = add("polarbear_spawn", 1);
+    public static final Entry POLARBEAR_IDLE = add("polarbear_idle", 1);
+    public static final Entry POLARBEAR_SWING_IMPACT = add("polarbear_swing_impact", 1);
+    public static final Entry POLARBEAR_SWING = add("polarbear_swing", 1);
+    public static final Entry POLARBEAR_DEATH = add("polarbear_death", 1);
+    public static final Entry BARREL_EXPLOSION = add("barrel_explosion", 1);
 
     public static void register() {
         for (var entry : entries) {

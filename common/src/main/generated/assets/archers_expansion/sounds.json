@@ -1,4 +1,9 @@
 {
+  "barrel_explosion": {
+    "sounds": [
+      "archers_expansion:barrel_explosion"
+    ]
+  },
   "enchanted_crystal_arrow_impact": {
     "sounds": [
       "archers_expansion:enchanted_crystal_arrow_impact"
@@ -22,6 +27,36 @@
   "poison_cloud": {
     "sounds": [
       "archers_expansion:poison_cloud"
+    ]
+  },
+  "polarbear_death": {
+    "sounds": [
+      "archers_expansion:polarbear_death"
+    ]
+  },
+  "polarbear_idle": {
+    "sounds": [
+      "archers_expansion:polarbear_idle"
+    ]
+  },
+  "polarbear_spawn": {
+    "sounds": [
+      "archers_expansion:polarbear_spawn"
+    ]
+  },
+  "polarbear_swing": {
+    "sounds": [
+      "archers_expansion:polarbear_swing"
+    ]
+  },
+  "polarbear_swing_impact": {
+    "sounds": [
+      "archers_expansion:polarbear_swing_impact"
+    ]
+  },
+  "scorched_earth_ignite": {
+    "sounds": [
+      "archers_expansion:scorched_earth_ignite"
     ]
   },
   "special_shot": {

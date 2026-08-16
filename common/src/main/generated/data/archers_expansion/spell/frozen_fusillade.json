@@ -3,10 +3,11 @@
   "secondary_archetype": "ANY",
   "range": 0.0,
   "tier": 3,
+  "group": "stalker",
   "learn": {},
   "active": {
     "cast": {
-      "duration": 0.6,
+      "duration": 0.5,
       "animation": {
         "id": "spell_engine:one_handed_area_charge"
       },

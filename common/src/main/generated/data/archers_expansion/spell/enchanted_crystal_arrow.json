@@ -2,6 +2,7 @@
   "school": "spell_power:frost_ranged",
   "range": 32.0,
   "tier": 4,
+  "group": "arctic",
   "learn": {},
   "active": {
     "cast": {

@@ -3,31 +3,12 @@
   "secondary_archetype": "ANY",
   "range": 0.0,
   "tier": 4,
+  "group": "stalker",
   "learn": {},
-  "active": {
-    "cast": {
-      "duration": 1.0,
-      "animation": {
-        "id": "spell_engine:one_handed_area_charge"
-      },
-      "sound": {
-        "id": "spell_engine:generic_frost_casting"
-      },
-      "particles": [
-        {
-          "particle_id": "spell_engine:snowflake",
-          "origin": "CENTER",
-          "shape": "PIPE",
-          "count": 0.5,
-          "min_speed": 0.1,
-          "max_speed": 0.2
-        }
-      ]
-    }
-  },
+  "active": {},
   "release": {
     "animation": {
-      "id": "spell_engine:one_handed_area_release"
+      "id": "more_rpg_classes:two_handed_roar"
     },
     "particles": [
       {
@@ -88,7 +69,7 @@
             },
             "movement": {
               "follow": {
-                "teleport_after_distance": 24.0
+                "teleport_after_distance": 32.0
               }
             },
             "targeting": {
@@ -96,12 +77,12 @@
             },
             "lifespan": {
               "spawn_ticks": 20,
-              "active_seconds": 45,
+              "active_seconds": 30,
               "despawn_ticks": 20
             },
             "sounds": {
               "spawn": {
-                "id": "minecraft:entity.polar_bear.ambient"
+                "id": "archers_expansion:polarbear_spawn"
               },
               "despawn": {
                 "id": "minecraft:entity.polar_bear.hurt"
@@ -110,10 +91,10 @@
                 "id": "minecraft:entity.polar_bear.hurt"
               },
               "death": {
-                "id": "minecraft:entity.polar_bear.death"
+                "id": "archers_expansion:polarbear_death"
               },
               "ambient": {
-                "id": "minecraft:entity.polar_bear.ambient"
+                "id": "archers_expansion:polarbear_idle"
               },
               "step": {
                 "id": "minecraft:entity.polar_bear.step"
@@ -124,14 +105,15 @@
                 "type": "MELEE_ATTACK",
                 "melee_attack": {
                   "max_range": 0.0,
-                  "speed": 0.9,
-                  "duration": 25,
-                  "radius": 2.5,
+                  "speed": 1.4,
+                  "movement_speed": 1.2,
+                  "windup": 0.35,
+                  "radius": 1.5,
                   "swing_sound": {
-                    "id": "minecraft:entity.polar_bear.warning"
+                    "id": "archers_expansion:polarbear_swing"
                   },
                   "impact_sound": {
-                    "id": "spell_engine:generic_frost_impact"
+                    "id": "archers_expansion:polarbear_swing_impact"
                   }
                 }
               }
@@ -146,7 +128,18 @@
                     "attribute_id": "ranged_weapon:damage",
                     "operation": "ADD_VALUE",
                     "base": 0.0,
-                    "coefficient": 2.0
+                    "coefficient": 0.7
+                  }
+                ]
+              },
+              {
+                "attribute_id": "minecraft:generic.armor",
+                "modifiers": [
+                  {
+                    "attribute_id": "ranged_weapon:damage",
+                    "operation": "ADD_VALUE",
+                    "base": 0.0,
+                    "coefficient": 0.04
                   }
                 ]
               },
@@ -157,7 +150,18 @@
                     "attribute_id": "ranged_weapon:damage",
                     "operation": "ADD_VALUE",
                     "base": 0.0,
-                    "coefficient": 0.3
+                    "coefficient": 0.55
+                  }
+                ]
+              },
+              {
+                "attribute_id": "minecraft:generic.attack_knockback",
+                "modifiers": [
+                  {
+                    "attribute_id": "ranged_weapon:damage",
+                    "operation": "ADD_VALUE",
+                    "base": 0.0,
+                    "coefficient": 0.1
                   }
                 ]
               }

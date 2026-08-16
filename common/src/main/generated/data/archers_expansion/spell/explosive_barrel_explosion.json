@@ -13,7 +13,7 @@
         "count": 1.0,
         "min_speed": 0.2,
         "max_speed": 0.6,
-        "scale": 5.0
+        "scale": 1.5
       },
       {
         "particle_id": "spell_engine:smoke_large",
@@ -30,10 +30,28 @@
         "count": 40.0,
         "min_speed": 0.5,
         "max_speed": 0.9
+      },
+      {
+        "particle_id": "spell_engine:area_effect_574",
+        "origin": "CENTER",
+        "shape": "SPHERE",
+        "count": 1.0,
+        "max_speed": 0.0,
+        "color_rgba": 4278190335,
+        "scale": 0.5
+      },
+      {
+        "particle_id": "spell_engine:aura_effect_574",
+        "origin": "CENTER",
+        "shape": "SPHERE",
+        "count": 1.0,
+        "max_speed": 0.0,
+        "color_rgba": 4278190335,
+        "scale": 0.5
       }
     ],
     "sound": {
-      "id": "entity.generic.explode"
+      "id": "archers_expansion:barrel_explosion"
     }
   },
   "target": {

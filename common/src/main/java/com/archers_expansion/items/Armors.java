@@ -1,18 +1,22 @@
 package com.archers_expansion.items;
 
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.more_rpg_classes.item.MRPGCItemGroups;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
@@ -23,6 +27,7 @@ import net.spell_engine.api.spell.SpellDataComponents;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -170,6 +175,13 @@ public class Armors {
                 settings
         );
         entries.add(entry);
+        return entry;
+    }
+
+    private static final Map<Armor.Entry, RegistryKey<ItemGroup>> groupOverrides = new IdentityHashMap<>();
+
+    private static Armor.Entry groupKey(Armor.Entry entry, RegistryKey<ItemGroup> key) {
+        groupOverrides.put(entry, key);
         return entry;
     }
 
@@ -455,7 +467,7 @@ public class Armors {
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         if (armoryLoadCheck()) {
-            bountyHunterArmorSet = create(
+            bountyHunterArmorSet = groupKey(create(
                     material_bounty_hunter,
                     Identifier.of(MOD_ID, "bounty_hunter"),
                     40,
@@ -503,8 +515,8 @@ public class Armors {
                                     ))
                     ),5,
                     commonSettings(bounty_hunter_passive)
-            ).translatedName("Bounty Hunter Hood", "Bounty Hunter Tunic", "Bounty Hunter Leggings", "Bounty Hunter Boots");
-            polarStalkerArmorSet = create(
+            ).translatedName("Bounty Hunter Hood", "Bounty Hunter Tunic", "Bounty Hunter Leggings", "Bounty Hunter Boots"), MRPGCItemGroups.ARMORY_KEY);
+            polarStalkerArmorSet = groupKey(create(
                     material_polar_stalker,
                     Identifier.of(MOD_ID, "polar_stalker"),
                     40,
@@ -536,8 +548,8 @@ public class Armors {
                                     ))
                     ),5,
                     commonSettings(polar_stalker_passive)
-            ).translatedName("Polar Stalker Hood", "Polar Stalker Tunic", "Polar Stalker Leggings", "Polar Stalker Boots");
-            sentinelArcherArmorSet = create(
+            ).translatedName("Polar Stalker Hood", "Polar Stalker Tunic", "Polar Stalker Leggings", "Polar Stalker Boots"), MRPGCItemGroups.ARMORY_KEY);
+            sentinelArcherArmorSet = groupKey(create(
                     material_sentinel_archer,
                     Identifier.of(MOD_ID, "sentinel_archer"),
                     40,
@@ -589,9 +601,23 @@ public class Armors {
                                     ))
                     ),5,
                     commonSettings(sentinel_archer_passive)
-            ).translatedName("Sentinel Archer Helmet", "Sentinel Archer Chest", "Sentinel Archer Leggings", "Sentinel Archer Boots");
+            ).translatedName("Sentinel Archer Helmet", "Sentinel Archer Chest", "Sentinel Archer Leggings", "Sentinel Archer Boots"), MRPGCItemGroups.ARMORY_KEY);
         }
         Armor.register(configs, entries, Group.KEY);
+        for (var override : groupOverrides.entrySet()) {
+            var entry = override.getKey();
+            var key = override.getValue();
+            var pieces = entry.armorSet().pieces();
+            ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
+                content.getDisplayStacks().removeIf(stack -> pieces.stream().anyMatch(p -> stack.isOf((ArmorItem) p)));
+                content.getSearchTabStacks().removeIf(stack -> pieces.stream().anyMatch(p -> stack.isOf((ArmorItem) p)));
+            });
+            ItemGroupEvents.modifyEntriesEvent(key).register(content -> {
+                for (var piece : pieces) {
+                    content.add((ArmorItem) piece);
+                }
+            });
+        }
     }
 
 }

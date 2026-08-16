@@ -4,6 +4,7 @@ import com.archers_expansion.effect.ArchersExpansionEffects;
 import com.archers_expansion.entity.AlterEgoEntity;
 import com.archers_expansion.entity.ExplosiveBarrelEntity;
 import com.archers_expansion.entity.ArcherExpansionSummons;
+import com.archers_expansion.sounds.Sounds;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
@@ -447,21 +448,20 @@ public class ArchersExpansionSpells {
         var id = Identifier.of(MOD_ID, "venom_cask");
         var spell = SpellBuilder.createSpellActive();
         var title = "Venom Cask";
-        var description = "Throws a cask of venom that shatters on impact, dealing {damage} damage. Leaves a poisonous cloud.";
+        var description = "Throws a cask of venom that shatters on impact, dealing {damage} damage. Leaves a poisonous cloud on the ground.";
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
         spell.range = 20;
         spell.tier = 3;
         spell.group = POISONER;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
 
-        spell.active.cast.duration = 0.6F;
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.duration = 0.4F;
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
+        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_throw_release");
         spell.release.sound = new Sound("item.bottle.throw");
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(
@@ -475,7 +475,7 @@ public class ArchersExpansionSpells {
         spell.deliver.custom.handler = "archers_expansion:venom_flask";
 
         var damage = SpellBuilder.Impacts.damage(0.6F, 0F);
-        damage.sound = new Sound("archers_expansion:poison_cloud");
+        damage.sound = new Sound("block.glass.break");
         damage.particles = new ParticleBatch[]{
                 new ParticleBatch(
                         SpellEngineParticles.smoke_medium.id().toString(),
@@ -521,18 +521,27 @@ public class ArchersExpansionSpells {
 
         spell.deliver.type = Spell.Delivery.Type.CLOUD;
         var cloud = new Spell.Delivery.Cloud();
+        cloud.spawn_ticks = 8;
+        cloud.despawn_ticks = 15;
         cloud.volume.radius = 3.0F;
         cloud.volume.area = new Spell.Target.Area();
         cloud.volume.sound = Sound.withVolume(Identifier.of("archers_expansion:poison_cloud"), 0.3F);
         cloud.impact_tick_interval = 25;
         cloud.time_to_live_seconds = 6;
         cloud.client_data = new Spell.Delivery.Cloud.ClientData();
-        cloud.client_data.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        8, 0.3F, 0.5F).color(Color.POISON_LIGHT.toRGBA())
-        };
+        int venomCaskTotalTicks = (int) (cloud.time_to_live_seconds * 20);
+        float venomBlobScale = 2.0F;
+        cloud.client_data.model_fx = List.of(
+                ModelEffectBuilder.create("archers_expansion:spell_effect/venom_blob")
+                        .light(LightEmission.GLOW_TRANSLUCENT)
+                        .positioning(0F)
+                        .scale(venomBlobScale)
+                        .initialTranslateY(0.5F * (venomBlobScale - 1F) + 0.2F)
+                        .duration(venomCaskTotalTicks)
+                        .scaleIn(0, cloud.spawn_ticks, ModelEffect.Easing.EASE_OUT_BOUNCE)
+                        .scaleOut(venomCaskTotalTicks - cloud.despawn_ticks, venomCaskTotalTicks, ModelEffect.Easing.EASE_IN_CUBIC)
+                        .build()
+        );
         spell.deliver.clouds = List.of(cloud);
 
         var poison = SpellBuilder.Impacts.effectSet("minecraft:poison", 3, 0);
@@ -590,7 +599,7 @@ public class ArchersExpansionSpells {
         var vanish = SpellBuilder.Impacts.effectSet(ArchersExpansionEffects.INFILTRATORS_VANISH.id.toString(),13,0);
         vanish.action.status_effect.show_particles = false;
 
-        int egoDelay = 20;
+        int egoDelay = 10;
         int egoLiveSeconds = 12;
         var spawn = new Spell.Impact();
         spawn.action = new Spell.Impact.Action();
@@ -653,11 +662,23 @@ public class ArchersExpansionSpells {
                 new ParticleBatch(
                         SpellEngineParticles.smoke_medium.id().toString(),
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.GROUND,
-                        130, 0.2F, 0.6F),
+                        10, 0.2F, 0.6F),
                 new ParticleBatch(
                         SpellEngineParticles.smoke_large.id().toString(),
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.GROUND,
-                        130, 0.5F, 0.9F)
+                        10, 0.5F, 0.9F),
+                new ParticleBatch(
+                        SpellEngineParticles.area_effect_574.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        1, 0, 0)
+                        .scale(0.5F)
+                        .color(Color.BLUE.toRGBA()),
+                new ParticleBatch(
+                        SpellEngineParticles.aura_effect_574.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        1, 0, 0)
+                        .scale(0.5F)
+                        .color(Color.BLUE.toRGBA()),
         };
 
         var damage = SpellBuilder.Impacts.damage(0.5F, 0.8F);
@@ -665,7 +686,7 @@ public class ArchersExpansionSpells {
                 new ParticleBatch(
                         SpellEngineParticles.smoke_medium.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        30, 0.2F, 0.7F)
+                        5, 0.2F, 0.7F)
         };
 
         spell.impacts = List.of(damage);
@@ -974,26 +995,17 @@ public class ArchersExpansionSpells {
         var id = Identifier.of(MOD_ID, "bearward");
         var spell = SpellBuilder.createSpellActive();
         var title = "Polar Bearward";
-        var description = "Summons a Polar Bear infused with frost to fight by your side for "
-                + SpellTooltip.placeholder(SpellTooltip.summonDurationToken)
-                + " sec, scales with the caster.";
+        var description = "Summons a Polar Bear to fight by your side for "
+                + SpellTooltip.placeholder(SpellTooltip.summonDurationToken) + " sec, empowered by your Ranged Damage. " +
+                "The Bear gets a short raging speed boost if its target is some distance away.";
         spell.school = MoreSpellSchools.FROST_RANGED;
         spell.range = 0;
         spell.tier = 4;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
         spell.group = STALKER;
 
-        spell.active.cast.duration = 1.0F;
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
-        spell.active.cast.sound = new Sound("spell_engine:generic_frost_casting");
-        spell.active.cast.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.snowflake.id().toString(),
-                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
-                        0.5F, 0.1F, 0.2F)
-        };
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
+        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
         spell.release.sound = new Sound("spell_engine:generic_frost_release");
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(
@@ -1035,14 +1047,14 @@ public class ArchersExpansionSpells {
         var id = Identifier.of(MOD_ID, "frozen_fusillade");
         var spell = SpellBuilder.createSpellActive();
         var title = "Frozen Fusillade";
-        var description = "Summons a barrage of ice around you, slowing nearby enemies and hastening your allies for {effect_duration} seconds.";
+        var description = "Summons a barrage of ice around you, slowing nearby enemies and speeding your allies for {effect_duration} seconds.";
         spell.school = MoreSpellSchools.FROST_RANGED;
         spell.range = 0;
         spell.tier = 3;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
         spell.group = STALKER;
 
-        spell.active.cast.duration = 0.6F;
+        spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
         spell.active.cast.sound = new Sound("spell_engine:generic_frost_casting");
         spell.active.cast.particles = new ParticleBatch[]{
@@ -1361,17 +1373,17 @@ public class ArchersExpansionSpells {
         var id = Identifier.of(MOD_ID, "scorched_earth");
         var spell = SpellBuilder.createSpellActive();
         var title = "Scorched Earth";
-        var description = "Fires a bolt that ignites a line of ground in front of you, dealing {damage} damage..";
+        var description = "Fires a bolt that ignites a line of ground in front of you, dealing {damage} damage.";
         spell.school = MoreSpellSchools.FIRE_RANGED;
         spell.range = 0;
         spell.tier = 4;
         spell.group = EXPLOSIVES;
 
-        spell.active.cast.duration = 0.6F;
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
+        spell.active.cast.duration = 0.5F;
+        spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:archery_downwards_pull");
         spell.active.cast.sound = new Sound("archers:bow_pull");
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
+        spell.release.animation = PlayerAnimation.of("more_rpg_classes:archery_downwards_release");
         spell.release.sound = new Sound("minecraft:item.crossbow.shoot");
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(
@@ -1382,11 +1394,14 @@ public class ArchersExpansionSpells {
 
         spell.deliver.type = Spell.Delivery.Type.CLOUD;
         var cloud = new Spell.Delivery.Cloud();
-        cloud.volume.radius = 1.5F;
+        cloud.spawn.sound = new Sound(Sounds.SCORCHED_EARTH_IGNITE.id());
+        cloud.volume.radius = 2F;
+        cloud.volume.area.vertical_range_multiplier = 0.75F;
         cloud.volume.area = new Spell.Target.Area();
         cloud.impact_tick_interval = 5;
         cloud.time_to_live_seconds = 1.5F;
         cloud.client_data = new Spell.Delivery.Cloud.ClientData();
+        cloud.client_data.light_level = 15;
         cloud.client_data.particles = new ParticleBatch[]{
                 new ParticleBatch(
                         SpellEngineParticles.flame_medium_b.id().toString(),
@@ -1446,11 +1461,7 @@ public class ArchersExpansionSpells {
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
         spell.group = EXPLOSIVES;
 
-        spell.active.cast.duration = 0.5F;
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
-        spell.active.cast.sound = new Sound("archers:bow_pull");
-
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
+        spell.release.animation = PlayerAnimation.of("more_rpg_classes:place_object_instant");
         spell.release.sound = new Sound("minecraft:block.barrel.open");
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(
@@ -1464,7 +1475,7 @@ public class ArchersExpansionSpells {
         spawn.action.type = Spell.Impact.Action.Type.SPAWN;
         var barrel = new Spell.Impact.Action.Spawn();
         barrel.entity_type_id = ExplosiveBarrelEntity.ENTITY_TYPE.getRegistryEntry().getKey().get().getValue().toString();
-        barrel.time_to_live_seconds = 32;
+        barrel.time_to_live_seconds = 25;
         barrel.placement.location_offset_by_look = 2.0F;
         barrel.placement.force_onto_ground = true;
         spawn.action.spawns = List.of(barrel);
@@ -1492,12 +1503,12 @@ public class ArchersExpansionSpells {
         spell.target.area.vertical_range_multiplier = 2.0F;
 
         spell.release = new Spell.Release();
-        spell.release.sound = new Sound("entity.generic.explode");
+        spell.release.sound = new Sound(Sounds.BARREL_EXPLOSION.id());
         spell.release.particles = new ParticleBatch[] {
                 new ParticleBatch(
                         SpellEngineParticles.fire_explosion.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        1, 0.2F, 0.6F).scale(5),
+                        1, 0.2F, 0.6F).scale(1.5F),
                 new ParticleBatch(
                         SpellEngineParticles.smoke_large.id().toString(),
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.GROUND,
@@ -1505,7 +1516,19 @@ public class ArchersExpansionSpells {
                 new ParticleBatch(
                         SpellEngineParticles.flame_medium_b.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
-                        40, 0.5F, 0.9F)
+                        40, 0.5F, 0.9F),
+                new ParticleBatch(
+                        SpellEngineParticles.area_effect_574.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        1, 0, 0)
+                        .scale(0.5F)
+                        .color(Color.RED.toRGBA()),
+                new ParticleBatch(
+                        SpellEngineParticles.aura_effect_574.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        1, 0, 0)
+                        .scale(0.5F)
+                        .color(Color.RED.toRGBA()),
         };
 
         var damage = SpellBuilder.Impacts.damage(0.3F, 1.5F);

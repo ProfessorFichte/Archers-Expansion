@@ -2,6 +2,7 @@
   "school": "spell_power:physical_ranged",
   "range": 20.0,
   "tier": 4,
+  "group": "poisoner",
   "learn": {},
   "active": {
     "cast": {

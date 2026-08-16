@@ -2,6 +2,7 @@
   "school": "spell_power:frost_ranged",
   "range": 0.0,
   "tier": 2,
+  "group": "stalker",
   "learn": {},
   "active": {},
   "release": {

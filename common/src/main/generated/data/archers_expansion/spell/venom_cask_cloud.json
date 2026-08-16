@@ -8,6 +8,8 @@
     "type": "CLOUD",
     "clouds": [
       {
+        "spawn_ticks": 8,
+        "despawn_ticks": 15,
         "volume": {
           "radius": 3.0,
           "sound": {
@@ -18,15 +20,49 @@
         "time_to_live_seconds": 6.0,
         "impact_tick_interval": 25,
         "client_data": {
-          "particles": [
+          "model_fx": [
             {
-              "particle_id": "spell_engine:smoke_medium",
-              "origin": "FEET",
-              "shape": "CIRCLE",
-              "count": 8.0,
-              "min_speed": 0.3,
-              "max_speed": 0.5,
-              "color_rgba": 2583652095
+              "model_id": "archers_expansion:spell_effect/venom_blob",
+              "light_emission": "GLOW_TRANSLUCENT",
+              "scale": 2.0,
+              "duration": 120,
+              "positioning": {
+                "vertical": 0.0
+              },
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "operation": "translate",
+                  "x": 0.0,
+                  "y": 0.7,
+                  "z": 0.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 8,
+                  "easing": "EASE_OUT_BOUNCE",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 105,
+                  "end": 120,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ]
             }
           ]
         }
