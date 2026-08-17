@@ -5,6 +5,7 @@ import com.archers_expansion.entity.AlterEgoEntity;
 import com.archers_expansion.entity.ExplosiveBarrelEntity;
 import com.archers_expansion.entity.ArcherExpansionSummons;
 import com.archers_expansion.sounds.Sounds;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
@@ -14,10 +15,12 @@ import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.*;
+import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.api.util.TriState;
 import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
+import net.spell_engine.internals.SpellHelper;
 import net.spell_engine.internals.target.SpellTarget;
 import org.jetbrains.annotations.Nullable;
 
@@ -98,6 +101,20 @@ public class ArchersExpansionSpells {
         var modifier = createImpactModifier("#minecraft:freeze_immune_entity_types");
         modifier.execute = TriState.DENY;
         impact.target_modifiers = List.of(modifier);
+    }
+
+    // Pulls the estimated damage of a helper spell (a hidden sub-spell used for a secondary impact, e.g. an explosion triggered by another spell) into the parent spell's own tooltip.
+    private static SpellTooltip.DescriptionMutator helperDamageMutator(Identifier helperId, String token) {
+        return (args) -> {
+            var world = args.player().getWorld();
+            if (world == null) return args.description();
+            var optional = SpellRegistry.from(world).getEntry(helperId);
+            if (optional.isEmpty()) return args.description();
+            var estimated = SpellHelper.estimate(optional.get().value(), args.player(), ItemStack.EMPTY);
+            if (estimated.damage().isEmpty()) return args.description();
+            var dmg = estimated.damage().get(0);
+            return args.description().replace(token, SpellTooltip.formattedRange(dmg.min(), dmg.max()));
+        };
     }
 
     public static Entry improved_disabling_shot = add(improved_disabling_shot());
@@ -448,21 +465,23 @@ public class ArchersExpansionSpells {
         var id = Identifier.of(MOD_ID, "venom_cask");
         var spell = SpellBuilder.createSpellActive();
         var title = "Venom Cask";
-        var description = "Throws a cask of venom that shatters on impact, dealing {damage} damage. Leaves a poisonous cloud on the ground.";
+        var description = "Throws a cask of venom that shatters on impact, dealing {damage} damage. Leaves a poisonous cloud for {poison_duration}s that poisons those inside.";
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
-        spell.range = 20;
+        spell.range = 3;
         spell.tier = 3;
         spell.group = POISONER;
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
 
-        spell.active.cast.duration = 0.4F;
+        var charge = SpellBuilder.Casting.charge(spell, 1.2F);
+        charge.min_release_ratio = 0.25F;
+        charge.bonus.range_add = 11;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_throw_release");
-        spell.release.sound = new Sound("item.bottle.throw");
+        spell.release.sound = new Sound(Sounds.VENOM_CASK_THROW.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(
                         SpellEngineParticles.smoke_medium.id().toString(),
@@ -506,7 +525,17 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 16);
         SpellBuilder.Cost.exhaust(spell, 0.3F);
 
-        return new Entry(id, spell, title, description, null, Book.DEADEYE);
+        SpellTooltip.DescriptionMutator mutator = (args) -> {
+            var world = args.player().getWorld();
+            if (world == null) return args.description();
+            var optional = SpellRegistry.from(world).getEntry(Identifier.of(MOD_ID, "venom_cask_cloud"));
+            if (optional.isEmpty()) return args.description();
+            var cloudSpell = optional.get().value();
+            if (cloudSpell.deliver.clouds == null || cloudSpell.deliver.clouds.isEmpty()) return args.description();
+            var seconds = (int) cloudSpell.deliver.clouds.get(0).time_to_live_seconds;
+            return args.description().replace("{poison_duration}", String.valueOf(seconds));
+        };
+        return new Entry(id, spell, title, description, mutator, Book.DEADEYE);
     }
     public static final Entry VENOM_CASK_CLOUD = add(VENOM_CASK_CLOUD());
     private static Entry VENOM_CASK_CLOUD() {
@@ -565,7 +594,7 @@ public class ArchersExpansionSpells {
     private static Entry ALTER_EGO() {
         var id = Identifier.of(MOD_ID, "alter_ego");
         var title = "Alter Ego";
-        var description = "Creates decoys and grants invisibility to the caster.";
+        var description = "Creates decoys and grants invisibility to the caster. Decoys explode for {explosion_damage} damage when destroyed or when their duration expires.";
 
         var spell = SpellBuilder.createSpellActive();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
@@ -577,6 +606,7 @@ public class ArchersExpansionSpells {
         spell.active.cast.duration = 0F;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
+        spell.release.sound = new Sound(Sounds.ALTER_EGO_VANISH.id());
         spell.release.particles = new ParticleBatch[] {
                 new ParticleBatch(
                         SpellEngineParticles.smoke_large.id().toString(),
@@ -615,31 +645,25 @@ public class ArchersExpansionSpells {
         ego2.delay_ticks = egoDelay;
         ego2.time_to_live_seconds = egoLiveSeconds;
         ego2.placement.location_offset_by_look = 3.0F;
-        ego2.placement.location_yaw_offset = 90.0F;
+        ego2.placement.location_yaw_offset = 120.0F;
         ego2.placement.apply_yaw = true;
         var ego3 = new Spell.Impact.Action.Spawn();
         ego3.entity_type_id = AlterEgoEntity.ENTITY_TYPE.getRegistryEntry().getKey().get().getValue().toString();
         ego3.delay_ticks = egoDelay;
         ego3.time_to_live_seconds = egoLiveSeconds;
         ego3.placement.location_offset_by_look = 3.0F;
-        ego3.placement.location_yaw_offset = -90.0F;
+        ego3.placement.location_yaw_offset = -120.0F;
         ego3.placement.apply_yaw = true;
-        var ego4 = new Spell.Impact.Action.Spawn();
-        ego4.entity_type_id = AlterEgoEntity.ENTITY_TYPE.getRegistryEntry().getKey().get().getValue().toString();
-        ego4.delay_ticks = egoDelay;
-        ego4.time_to_live_seconds = egoLiveSeconds;
-        ego4.placement.location_offset_by_look = 3.0F;
-        ego4.placement.location_yaw_offset = -180.0F;
-        ego4.placement.apply_yaw = true;
 
-        spawn.action.spawns = List.of(ego1,ego2, ego3,ego4);
+        spawn.action.spawns = List.of(ego1,ego2, ego3);
 
         spell.impacts = List.of(vanish,spawn);
 
         SpellBuilder.Cost.cooldown(spell, 40);
         spell.cost.exhaust = 0.4F;
 
-        return new Entry(id, spell, title, description, null,Book.DEADEYE);
+        var mutator = helperDamageMutator(Identifier.of(MOD_ID, "alter_ego_explosion"), "{explosion_damage}");
+        return new Entry(id, spell, title, description, mutator, Book.DEADEYE);
     }
     public static final Entry ALTER_EGO_EXPLOSION = add(ALTER_EGO_EXPLOSION());
     private static Entry ALTER_EGO_EXPLOSION() {
@@ -657,7 +681,7 @@ public class ArchersExpansionSpells {
         spell.target.area.vertical_range_multiplier = 0.5F;
 
         spell.release = new Spell.Release();
-        spell.release.sound = new Sound("entity.generic.explode");
+        spell.release.sound = new Sound(Sounds.ALTER_EGO_EXPLOSION.id());
         spell.release.particles = new ParticleBatch[] {
                 new ParticleBatch(
                         SpellEngineParticles.smoke_medium.id().toString(),
@@ -1454,7 +1478,7 @@ public class ArchersExpansionSpells {
         var id = Identifier.of(MOD_ID, "explosive_barrel");
         var spell = SpellBuilder.createSpellActive();
         var title = "Explosive Barrel";
-        var description = "Places an explosive barrel that detonates when struck or approached by an enemy, creating a huge explosion.";
+        var description = "Places an explosive barrel that detonates when struck or approached by an enemy, creating a huge explosion dealing {explosion_damage} damage and setting enemies on fire.";
         spell.school = MoreSpellSchools.FIRE_RANGED;
         spell.range = 0;
         spell.tier = 3;
@@ -1485,7 +1509,8 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 8);
         SpellBuilder.Cost.exhaust(spell, 0.3F);
 
-        return new Entry(id, spell, title, description, null, Book.WAR_ARCHER);
+        var mutator = helperDamageMutator(Identifier.of(MOD_ID, "explosive_barrel_explosion"), "{explosion_damage}");
+        return new Entry(id, spell, title, description, mutator, Book.WAR_ARCHER);
     }
     public static final Entry EXPLOSIVE_BARREL_EXPLOSION = add(EXPLOSIVE_BARREL_EXPLOSION());
     private static Entry EXPLOSIVE_BARREL_EXPLOSION() {
@@ -1549,182 +1574,5 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 1);
 
         return new Entry(id, spell, title, description, null, null);
-    }
-    public static final Entry fan_of_fire = add(fan_of_fire());
-    private static Entry fan_of_fire() {
-        var id = Identifier.of(MOD_ID, "fan_of_fire");
-        var spell = SpellBuilder.createSpellActive();
-        var title = "Fan of Fire";
-        var description = "Calls explosive arrows, in an area dealing {damage} and setting enemies on fire.";
-        spell.school = MoreSpellSchools.FIRE_RANGED;
-        spell.range = 32;
-        spell.tier = 5;
-
-        spell.active.cast.duration = 1.0F;
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_upwards_pull");
-        spell.active.cast.sound = new Sound("archers:bow_pull");
-
-        spell.target.type = Spell.Target.Type.AIM;
-        spell.target.aim = new Spell.Target.Aim();
-
-        spell.release.animation = PlayerAnimation.of("spell_engine:archery_upwards_release");
-        spell.release.sound = new Sound("minecraft:item.crossbow.shoot");
-
-        spell.deliver.type = Spell.Delivery.Type.METEOR;
-        var meteor = new Spell.Delivery.Meteor();
-        meteor.launch_height = 15;
-        meteor.launch_radius = 5.0F;
-        meteor.launch_properties = new Spell.LaunchProperties();
-        meteor.launch_properties.velocity = 2.0F;
-        meteor.launch_properties.extra_launch_count = 25;
-        meteor.launch_properties.extra_launch_delay = 4;
-        meteor.projectile = new Spell.ProjectileData();
-        meteor.projectile.divergence = 0F;
-        meteor.projectile.client_data = new Spell.ProjectileData.Client();
-        meteor.projectile.client_data.travel_particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        "minecraft:large_smoke",
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        ParticleBatch.Rotation.LOOK, 3, 0F, 0F, 0)
-        };
-        meteor.projectile.client_data.composite_model = SpellBuilder.ProjectileModels.single("archers_expansion:spell_projectile/smoldering_arrow", 1.3F);
-        spell.deliver.meteor = meteor;
-
-        var damage = SpellBuilder.Impacts.damage(0.3F, 0F);
-        damage.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.fire_explosion.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        1, 0.2F, 0.5F),
-                new ParticleBatch(
-                        SpellEngineParticles.flame_medium_b.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.1F, 0.3F).preSpawnTravel(2),
-                new ParticleBatch(
-                        SpellEngineParticles.flame_medium_b.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.2F, 0.5F).preSpawnTravel(4)
-        };
-        damage.sound = Sound.withRandomness(Identifier.of("entity.generic.explode"),1.2F);
-
-        var fire = SpellBuilder.Impacts.fire(5);
-
-        spell.impacts = List.of(damage, fire);
-
-        spell.area_impact = new Spell.AreaImpact();
-        spell.area_impact.radius = 3.0F;
-        spell.area_impact.area = new Spell.Target.Area();
-        spell.area_impact.area.distance_dropoff = Spell.Target.Area.DropoffCurve.NONE;
-        spell.area_impact.sound = new Sound("minecraft:entity.arrow.hit");
-
-        SpellBuilder.Cost.cooldown(spell, 28);
-        SpellBuilder.Cost.exhaust(spell, 0.3F);
-        SpellBuilder.Cost.item(spell, "minecraft:arrow", 1);
-
-        return new Entry(id, spell, title, description, null,null);
-    }
-    public static final Entry winters_grip = add(winters_grip());
-    private static Entry winters_grip() {
-        var id = Identifier.of(MOD_ID, "winters_grip");
-        var spell = SpellBuilder.createSpellActive();
-        var title = "Winters Grip";
-        var description = "Spawns a winter totem, slowing enemies, freezing other enemies around on death.";
-        spell.school = MoreSpellSchools.FROST_RANGED;
-        spell.range = 0;
-        spell.tier = 5;
-        spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
-
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
-
-        spell.deliver.type = Spell.Delivery.Type.CLOUD;
-        var cloud = new Spell.Delivery.Cloud();
-        cloud.volume.radius = 10.0F;
-        cloud.volume.area = new Spell.Target.Area();
-        cloud.volume.area.vertical_range_multiplier = 1.5F;
-        cloud.volume.sound = Sound.withVolume(Identifier.of("spell_engine:generic_wind_charging"),0.2F);
-        cloud.impact_tick_interval = 10;
-        cloud.time_to_live_seconds = 10;
-        cloud.client_data = new Spell.Delivery.Cloud.ClientData();
-        cloud.client_data.light_level = 14;
-        cloud.client_data.model_fx = List.of(
-                ModelEffectBuilder.create("archers_expansion:spell_effect/winters_grip")
-                        .scale(1.5F)
-                        .light(LightEmission.RADIATE)
-                        .duration((int) (cloud.time_to_live_seconds * 20))
-                        .build()
-        );
-        cloud.client_data.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.snowflake.id().toString(),
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        35, 0.05F, 0.1F),
-                new ParticleBatch(
-                        SpellEngineParticles.snowflake.id().toString(),
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        35, 0.25F, 0.4F)
-        };
-        cloud.placement = new Spell.EntityPlacement();
-        cloud.placement.force_onto_ground = true;
-        cloud.placement.location_offset_y = 0F;
-        spell.deliver.clouds = List.of(cloud);
-
-        var slow = SpellBuilder.Impacts.effectSet("archers_expansion:winters_grip", 3, 0);
-        slow.action.status_effect.show_particles = false;
-        slow.particles = new ParticleBatch[]{
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.FROST,
-                                SpellEngineParticles.MagicParticles.Motion.BURST
-                        ).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        15, 0.2F, 0.4F)
-        };
-
-        spell.impacts = List.of(slow);
-
-        SpellBuilder.Cost.cooldown(spell, 25);
-        spell.cost.cooldown.haste_affected = true;
-        SpellBuilder.Cost.exhaust(spell, 0.4F);
-
-        return new Entry(id, spell, title, description, null, null);
-    }
-    public static final Entry infiltrators_arrow = add(infiltrators_arrow());
-    private static Entry infiltrators_arrow() {
-        var id = Identifier.of(MOD_ID, "infiltrators_arrow");
-        var spell = SpellBuilder.createSpellActive();
-        var title = "Infiltrators Arrow";
-        var description = "Shoots a short-range invisible arrow dealing {damage}. On impact, teleports you to the arrow and grants you invisibility.";
-        spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
-        spell.range = 8;
-        spell.tier = 5;
-
-        var charge = SpellBuilder.Casting.charge(spell, 3.0F);
-        charge.min_release_ratio = 0.3F;
-        var bonus = charge.bonus;
-        bonus.range_add = 22;
-
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
-        spell.active.cast.sound = new Sound("archers:bow_pull");
-
-        spell.target.type = Spell.Target.Type.AIM;
-        spell.target.aim = new Spell.Target.Aim();
-
-        spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
-        spell.release.sound = new Sound("entity.arrow.shoot");
-
-        spell.deliver.type = Spell.Delivery.Type.CUSTOM;
-        spell.deliver.custom = new Spell.Delivery.Custom();
-        spell.deliver.custom.handler = "archers_expansion:infiltrators_arrow";
-
-        var damage = SpellBuilder.Impacts.damage(0.8F, 1.0F);
-
-        spell.impacts = List.of(damage);
-
-        SpellBuilder.Cost.cooldown(spell, 42);
-        spell.cost.cooldown.haste_affected = false;
-        SpellBuilder.Cost.exhaust(spell, 0.3F);
-        SpellBuilder.Cost.item(spell, "minecraft:arrow", 1);
-
-        return new Entry(id, spell, title, description, null,null);
     }
 }

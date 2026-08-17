@@ -75,7 +75,7 @@ public class ArchersExpansionEffects {
             Identifier.of(MOD_ID, "infiltrators_vanish"),
             "Infiltrator Vanish",
             "Invisible to enemies",
-            new InfiltratorsArrowEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d),
+            new InfiltratorsVanishEffect(StatusEffectCategory.BENEFICIAL, 0x805e4d),
             new EffectConfig(List.of(
                     new AttributeModifier(
                             EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
@@ -133,20 +133,6 @@ public class ArchersExpansionEffects {
                     ),
                     new AttributeModifier(
                             EntityAttributes_RangedWeapon.DAMAGE.id.toString(),
-                            -0.2F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                    )
-            ))
-    ));
-
-    public static final Effects.Entry WINTERS_GRASP = add(new Effects.Entry(
-            Identifier.of(MOD_ID, "winters_grip"),
-            "Winters Grip",
-            "Freezes nearby targets solid on death.",
-            new WintersGraspEffect(StatusEffectCategory.HARMFUL, 0x805e4d),
-            new EffectConfig(List.of(
-                    new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
                             -0.2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -234,7 +220,7 @@ public class ArchersExpansionEffects {
 
 
         OnRemoval.configure(INFILTRATORS_VANISH.effect, (context) -> {
-            ((InfiltratorsArrowEffect) INFILTRATORS_VANISH.effect).onStealthRemoved(context.entity());
+            ((InfiltratorsVanishEffect) INFILTRATORS_VANISH.effect).onStealthRemoved(context.entity());
             var speedEntry = getEntry(INFILTRATORS_SPEED);
             if (context.entity().hasStatusEffect(speedEntry)) {
                 context.entity().removeStatusEffect(speedEntry);

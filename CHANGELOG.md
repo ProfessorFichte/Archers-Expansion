@@ -14,6 +14,7 @@ War Archer:
 - Renamed the Spell Trick Shot (id: "trick_shot") to Bouncing Arrow (id: "bouncing_arrow")
 - Enchanted Crystal Arrow can now be charged, that the projectile is bigger and hits harder
 - Added uk_ua localization- #18 - thx: Ch1sho
+- Infiltrators Arrow, Winters Grip & Fan of Fire are now available in the LNE Archers Mod!
 - Changed Infiltrator's Arrow (Will soon be moved to LNE-Archers or a new Mod that holds all extra spells)
 - It's now a charged spell, that shoots an arrow that flies further the longer you charge.
 - You'll get teleported to the location where the arrow hit.

@@ -8,11 +8,13 @@ import com.archers_expansion.client.entity.*;
 import com.archers_expansion.effect.ArchersExpansionEffects;
 import com.archers_expansion.entity.*;
 import com.archers_expansion.items.Armors;
+import com.archers_expansion.spell.ArchersExpansionSpells;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
+import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.render.SpellCloudRenderer;
 import net.spell_engine.rpg_series.item.Armor;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
@@ -22,6 +24,12 @@ import java.util.function.Supplier;
 public class ArchersExpansionModClient {
 
     public static void init() {
+
+        for (var entry : ArchersExpansionSpells.entries) {
+            if (entry.mutator() != null) {
+                SpellTooltip.addDescriptionMutator(entry.id(), entry.mutator());
+            }
+        }
 
         registerArmorRenderer(Armors.deadeye_t1.armorSet(), ArchersExpansionArmorRenderer::deadeye);
         registerArmorRenderer(Armors.netherite_deadeye.armorSet(), ArchersExpansionArmorRenderer::netherite_deadeye);
@@ -41,13 +49,11 @@ public class ArchersExpansionModClient {
 
         EntityModelLayerRegistry.registerModelLayer(GlacialBearEntityModel.LAYER_LOCATION, GlacialBearEntityModel::createBodyLayer);
 
-        EntityRendererRegistry.register(WintersGripEntity.ENTITY_TYPE, WintersGripRenderer::new);
         EntityRendererRegistry.register(ExplosiveBarrelEntity.ENTITY_TYPE, ExplosiveBarrelRenderer::new);
         EntityRendererRegistry.register(AlterEgoEntity.ENTITY_TYPE, AlterEgoRenderer::new);
         EntityRendererRegistry.register(PolarBearEntity.ENTITY_TYPE, SpellPolarBearRenderer::new);
         EntityRendererRegistry.register(PoisonFlaskProjectile.ENTITY_TYPE, PoisonFlaskRenderer::new);
         EntityRendererRegistry.register(FrozenFussiladeEntity.ENTITY_TYPE, SpellCloudRenderer::new);
-        EntityRendererRegistry.register(InfiltratorsArrowProjectile.ENTITY_TYPE, InfiltratorsArrowRenderer::new);
 
     }
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

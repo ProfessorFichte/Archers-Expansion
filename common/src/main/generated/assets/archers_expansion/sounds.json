@@ -1,4 +1,14 @@
 {
+  "alter_ego_explosion": {
+    "sounds": [
+      "archers_expansion:alter_ego_explosion"
+    ]
+  },
+  "alter_ego_vanish": {
+    "sounds": [
+      "archers_expansion:alter_ego_vanish"
+    ]
+  },
   "barrel_explosion": {
     "sounds": [
       "archers_expansion:barrel_explosion"
@@ -67,6 +77,16 @@
   "trick_shot": {
     "sounds": [
       "archers_expansion:trick_shot"
+    ]
+  },
+  "venom_cask_land": {
+    "sounds": [
+      "archers_expansion:venom_cask_land"
+    ]
+  },
+  "venom_cask_throw": {
+    "sounds": [
+      "archers_expansion:venom_cask_throw"
     ]
   }
 }

@@ -267,7 +267,6 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 				builder.add(entry.titleKey(), entry.title());
 				builder.add(entry.descriptionKey(), entry.description());
 			}
-			builder.add("entity.archers_expansion.winters_grip", "Winter's Grip");
 			builder.add("entity.archers_expansion.explosive_barrel", "Explosive Barrel");
 			builder.add("entity.archers_expansion.alter_ego", "Alter Ego");
 			builder.add("entity.archers_expansion.spell_polar_bear", "Polar Bear");

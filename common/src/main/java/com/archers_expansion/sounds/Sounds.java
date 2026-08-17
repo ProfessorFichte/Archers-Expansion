@@ -37,6 +37,10 @@ public class Sounds {
     public static final Entry POLARBEAR_SWING = add("polarbear_swing", 1);
     public static final Entry POLARBEAR_DEATH = add("polarbear_death", 1);
     public static final Entry BARREL_EXPLOSION = add("barrel_explosion", 1);
+    public static final Entry ALTER_EGO_VANISH = add("alter_ego_vanish", 1);
+    public static final Entry ALTER_EGO_EXPLOSION = add("alter_ego_explosion", 1);
+    public static final Entry VENOM_CASK_THROW = add("venom_cask_throw", 1);
+    public static final Entry VENOM_CASK_LAND = add("venom_cask_land", 1);
 
     public static void register() {
         for (var entry : entries) {

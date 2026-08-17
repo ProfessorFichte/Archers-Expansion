@@ -8,8 +8,8 @@ import net.more_rpg_classes.sounds.MRPGLibSounds;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.fx.SpellEngineParticles;
 
-public class InfiltratorsArrowEffect  extends StealthStatusEffect{
-    protected InfiltratorsArrowEffect(StatusEffectCategory category, int color) {
+public class InfiltratorsVanishEffect extends StealthStatusEffect{
+    protected InfiltratorsVanishEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
 

@@ -16,17 +16,6 @@ public class ModEntitiesRegistry {
     public static final Identifier POLAR_BEAR_ID = Identifier.of(MOD_ID, "spell_polar_bear");
 
     public static void registerEntities() {
-        WintersGripEntity.ENTITY_TYPE = Registry.register(
-                Registries.ENTITY_TYPE,
-                Identifier.of(MOD_ID, "winters_grip"),
-                FabricEntityTypeBuilder.<WintersGripEntity>create(SpawnGroup.MISC, WintersGripEntity::new)
-                        .dimensions(EntityDimensions.changing(6F, 0.5F))
-                        .fireImmune()
-                        .trackRangeBlocks(128)
-                        .trackedUpdateRate(20)
-                        .build()
-        );
-
         ExplosiveBarrelEntity.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
                 Identifier.of(MOD_ID, "explosive_barrel"),
@@ -66,16 +55,6 @@ public class ModEntitiesRegistry {
                         .dimensions(EntityDimensions.fixed(0.6F, 0.6F))
                         .trackRangeBlocks(64)
                         .trackedUpdateRate(10)
-                        .build()
-        );
-
-        InfiltratorsArrowProjectile.ENTITY_TYPE = Registry.register(
-                Registries.ENTITY_TYPE,
-                Identifier.of(MOD_ID, "infiltrators_arrow"),
-                FabricEntityTypeBuilder.<InfiltratorsArrowProjectile>create(SpawnGroup.MISC, InfiltratorsArrowProjectile::new)
-                        .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
-                        .trackRangeBlocks(64)
-                        .trackedUpdateRate(20)
                         .build()
         );
 

@@ -1,13 +1,20 @@
 {
   "school": "spell_power:physical_ranged",
   "secondary_archetype": "ANY",
-  "range": 20.0,
+  "range": 3.0,
   "tier": 3,
   "group": "poisoner",
   "learn": {},
   "active": {
     "cast": {
-      "duration": 0.4,
+      "duration": 1.2,
+      "type": "CHARGE",
+      "charge": {
+        "min_release_ratio": 0.25,
+        "bonus": {
+          "range_add": 11.0
+        }
+      },
       "animation": {
         "id": "spell_engine:one_handed_throw_charge"
       }
@@ -29,7 +36,7 @@
       }
     ],
     "sound": {
-      "id": "item.bottle.throw"
+      "id": "archers_expansion:venom_cask_throw"
     }
   },
   "target": {

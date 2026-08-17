@@ -1,5 +1,6 @@
 package com.archers_expansion.entity;
 
+import com.archers_expansion.sounds.Sounds;
 import com.google.gson.Gson;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,6 +22,7 @@ import net.minecraft.world.World;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.internals.SpellHelper;
+import net.spell_engine.utils.SoundHelper;
 import org.jetbrains.annotations.Nullable;
 
 public class PoisonFlaskProjectile extends ProjectileEntity {
@@ -107,6 +109,7 @@ public class PoisonFlaskProjectile extends ProjectileEntity {
             var impactContext = this.context != null ? this.context : new SpellHelper.ImpactContext();
             SpellHelper.projectileImpact(caster, this, target, this.spellEntry, impactContext.position(hitPosition));
         }
+        SoundHelper.playSoundEvent(this.getWorld(), this, Sounds.VENOM_CASK_LAND.soundEvent());
         this.kill();
     }
 
@@ -120,6 +123,7 @@ public class PoisonFlaskProjectile extends ProjectileEntity {
             var impactContext = this.context != null ? this.context : new SpellHelper.ImpactContext();
             com.archers_expansion.spell.CustomSpellImpacts.placeVenomCloud(caster, null, hitPosition, impactContext.position(hitPosition));
         }
+        SoundHelper.playSoundEvent(this.getWorld(), this, Sounds.VENOM_CASK_LAND.soundEvent());
         this.kill();
     }
 

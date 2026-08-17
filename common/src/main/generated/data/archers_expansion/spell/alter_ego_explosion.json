@@ -42,7 +42,7 @@
       }
     ],
     "sound": {
-      "id": "entity.generic.explode"
+      "id": "archers_expansion:alter_ego_explosion"
     }
   },
   "target": {
