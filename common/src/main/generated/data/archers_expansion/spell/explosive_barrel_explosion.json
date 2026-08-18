@@ -38,7 +38,7 @@
         "count": 1.0,
         "max_speed": 0.0,
         "color_rgba": 4278190335,
-        "scale": 0.5
+        "scale": 3.0
       },
       {
         "particle_id": "spell_engine:aura_effect_574",
@@ -47,7 +47,7 @@
         "count": 1.0,
         "max_speed": 0.0,
         "color_rgba": 4278190335,
-        "scale": 0.5
+        "scale": 3.0
       }
     ],
     "sound": {

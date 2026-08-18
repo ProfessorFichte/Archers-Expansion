@@ -594,7 +594,7 @@ public class ArchersExpansionSpells {
     private static Entry ALTER_EGO() {
         var id = Identifier.of(MOD_ID, "alter_ego");
         var title = "Alter Ego";
-        var description = "Creates decoys and grants invisibility to the caster. Decoys explode for {explosion_damage} damage when destroyed or when their duration expires.";
+        var description = "Creates decoys and grants invisibility for {effect_duration} sec. Decoys explode for {explosion_damage} damage when destroyed, their duration expires or a enemy collides with them.";
 
         var spell = SpellBuilder.createSpellActive();
         spell.school = ExternalSpellSchools.PHYSICAL_RANGED;
@@ -626,7 +626,7 @@ public class ArchersExpansionSpells {
                         .color(Color.BLUE.toRGBA())
         };
 
-        var vanish = SpellBuilder.Impacts.effectSet(ArchersExpansionEffects.INFILTRATORS_VANISH.id.toString(),13,0);
+        var vanish = SpellBuilder.Impacts.effectSet(ArchersExpansionEffects.INFILTRATORS_VANISH.id.toString(),8,0);
         vanish.action.status_effect.show_particles = false;
 
         int egoDelay = 10;
@@ -695,13 +695,13 @@ public class ArchersExpansionSpells {
                         SpellEngineParticles.area_effect_574.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         1, 0, 0)
-                        .scale(0.5F)
+                        .scale(2.0F)
                         .color(Color.BLUE.toRGBA()),
                 new ParticleBatch(
                         SpellEngineParticles.aura_effect_574.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         1, 0, 0)
-                        .scale(0.5F)
+                        .scale(2.0F)
                         .color(Color.BLUE.toRGBA()),
         };
 
@@ -1071,7 +1071,7 @@ public class ArchersExpansionSpells {
         var id = Identifier.of(MOD_ID, "frozen_fusillade");
         var spell = SpellBuilder.createSpellActive();
         var title = "Frozen Fusillade";
-        var description = "Summons a barrage of ice around you, slowing nearby enemies and speeding your allies for {effect_duration} seconds.";
+        var description = "Summons a barrage of ice around you, slowing nearby enemies and speeding your allies for {effect_duration_1} seconds.";
         spell.school = MoreSpellSchools.FROST_RANGED;
         spell.range = 0;
         spell.tier = 3;
@@ -1546,13 +1546,13 @@ public class ArchersExpansionSpells {
                         SpellEngineParticles.area_effect_574.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         1, 0, 0)
-                        .scale(0.5F)
+                        .scale(3.0F)
                         .color(Color.RED.toRGBA()),
                 new ParticleBatch(
                         SpellEngineParticles.aura_effect_574.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         1, 0, 0)
-                        .scale(0.5F)
+                        .scale(3.0F)
                         .color(Color.RED.toRGBA()),
         };
 
