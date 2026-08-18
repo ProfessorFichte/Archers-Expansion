@@ -573,8 +573,7 @@ public class ArchersExpansionSpells {
         );
         spell.deliver.clouds = List.of(cloud);
 
-        var poison = SpellBuilder.Impacts.effectSet("minecraft:poison", 3, 0);
-        poison.action.status_effect.amplifier_power_multiplier = 0.05F;
+        var poison = SpellBuilder.Impacts.effectAdd_ScaledCap("minecraft:poison", 6, 0.1F);
         poison.action.status_effect.show_particles = false;
         poisonImmuneDeny(poison);
         poison.particles = new ParticleBatch[]{
@@ -584,7 +583,9 @@ public class ArchersExpansionSpells {
                         10, 0.2F, 0.4F).color(Color.POISON_LIGHT.toRGBA())
         };
 
-        spell.impacts = List.of(poison);
+        var damage = SpellBuilder.Impacts.damage(0.2F);
+
+        spell.impacts = List.of(poison, damage);
 
         SpellBuilder.Cost.cooldown(spell, 1);
 
