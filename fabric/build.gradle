@@ -55,6 +55,12 @@ configurations {
 
 repositories {
     maven { url 'https://maven.fabricmc.net' }
+    maven {
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
     maven { url 'https://maven.azuredoom.com/mods' }
@@ -88,9 +94,11 @@ dependencies {
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${project.cloth_config_version}")
     modImplementation("mod.azure.azurelibarmor:azurelibarmor-fabric-${project.azure_mc_version}:${project.azure_lib_version}")
     modImplementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
-    modImplementation("maven.modrinth:more-rpg-library:${project.more_rpg_library_version}-${platform}")
+    modImplementation("net.more_rpg_classes:more_rpg_library-${platform}:${project.more_rpg_library_version}") { transitive = false }
     modImplementation("maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}-${platform}")
-    modImplementation("maven.modrinth:archers:${project.archers_version}-${platform}")
+    modImplementation("net.rpg_series:archers-${platform}:${project.archers_version}") { transitive = false }
+    // Archers 3.1.1 replaced AzureLib with ArmorModelAPI; transitive=false strips it, so declare it for the dev runtime.
+    modRuntimeOnly("curse.maven:armor-model-api-1659764:${project.armor_model_api_fabric_file}")
     modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
     modImplementation "maven.modrinth:bundle-api:${project.bundle_api_version}-${platform}"
 
@@ -98,7 +106,7 @@ dependencies {
     modImplementation("dev.emi:trinkets:${project.trinkets_version}")
 
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
-    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}") { transitive = false }
 }
 
 processResources {

@@ -38,14 +38,18 @@
         "client_data": {
           "travel_particles": [
             {
-              "particle_id": "spell_engine:smoke_medium",
-              "origin": "CENTER",
-              "shape": "LINE",
-              "rotation": "LOOK",
-              "count": 2.0,
-              "min_speed": 0.01,
-              "max_speed": 0.05,
-              "color_rgba": 3208659199
+              "id": "spell_engine:smoke_medium",
+              "appearance": {
+                "color": 3208659199
+              },
+              "batch": {
+                "count": 2.0,
+                "shape": "LINE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "min_speed": 0.01,
+                "max_speed": 0.05
+              }
             }
           ],
           "composite_model": {
@@ -91,27 +95,36 @@
           "apply_mode": "ADD"
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "rotation": "LOOK",
-          "count": 10.0,
-          "min_speed": 0.1,
-          "max_speed": 0.3,
-          "color_rgba": 3208659199
-        },
-        {
-          "particle_id": "spell_engine:dripping_blood",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "rotation": "LOOK",
-          "count": 10.0,
-          "min_speed": 0.05,
-          "max_speed": 0.3
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {
+              "color": 3208659199
+            },
+            "batch": {
+              "count": 10.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "alignment": "LOOK",
+              "min_speed": 0.1,
+              "max_speed": 0.3
+            }
+          },
+          {
+            "id": "spell_engine:dripping_blood",
+            "appearance": {},
+            "batch": {
+              "count": 10.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "alignment": "LOOK",
+              "min_speed": 0.05,
+              "max_speed": 0.3
+            }
+          }
+        ]
+      }
     },
     {
       "action": {
@@ -127,27 +140,38 @@
           "intent": "HELPFUL"
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "FEET",
-          "shape": "CIRCLE",
-          "rotation": "LOOK",
-          "count": 5.0,
-          "min_speed": 0.3,
-          "max_speed": 0.5,
-          "color_rgba": 4294967295
-        },
-        {
-          "particle_id": "poof",
-          "origin": "FEET",
-          "shape": "PILLAR",
-          "rotation": "LOOK",
-          "count": 5.0,
-          "min_speed": 0.3,
-          "max_speed": 0.6
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {
+              "color": 4294967295
+            },
+            "batch": {
+              "count": 5.0,
+              "shape": "CIRCLE",
+              "anchor": "ENTITY",
+              "vertical_origin": 0.1,
+              "alignment": "LOOK",
+              "min_speed": 0.3,
+              "max_speed": 0.5
+            }
+          },
+          {
+            "id": "poof",
+            "appearance": {},
+            "batch": {
+              "count": 5.0,
+              "shape": "PILLAR",
+              "anchor": "ENTITY",
+              "vertical_origin": 0.1,
+              "alignment": "LOOK",
+              "min_speed": 0.3,
+              "max_speed": 0.6
+            }
+          }
+        ]
+      }
     }
   ],
   "cost": {

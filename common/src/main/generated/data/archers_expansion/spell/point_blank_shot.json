@@ -38,15 +38,18 @@
         "client_data": {
           "travel_particles": [
             {
-              "particle_id": "campfire_cosy_smoke",
-              "origin": "CENTER",
-              "shape": "LINE",
-              "rotation": "LOOK",
-              "roll": 10.0,
-              "roll_offset": 180.0,
-              "count": 20.0,
-              "min_speed": 0.2,
-              "max_speed": 0.22
+              "id": "campfire_cosy_smoke",
+              "appearance": {},
+              "batch": {
+                "count": 20.0,
+                "shape": "LINE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "roll_per_tick": 10.0,
+                "roll_offset": 180.0,
+                "min_speed": 0.2,
+                "max_speed": 0.22
+              }
             }
           ],
           "composite_model": {
@@ -91,17 +94,22 @@
           "handler": "more_rpg_classes:range_scaled_knockback"
         }
       },
-      "particles": [
-        {
-          "particle_id": "poof",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "rotation": "LOOK",
-          "count": 50.0,
-          "min_speed": 1.0,
-          "max_speed": 2.0
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "poof",
+            "appearance": {},
+            "batch": {
+              "count": 50.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "alignment": "LOOK",
+              "min_speed": 1.0,
+              "max_speed": 2.0
+            }
+          }
+        ]
+      }
     }
   ],
   "cost": {

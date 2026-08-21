@@ -2,7 +2,8 @@ package com.archers_expansion.entity;
 
 import com.archers_expansion.ArchersExpansionMod;
 import net.minecraft.sound.SoundEvent;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
 import net.spell_engine.fx.ParticleHelper;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.utils.SoundHelper;
@@ -28,6 +29,7 @@ import net.spell_engine.internals.target.EntityRelations;
 
 import com.archers_expansion.entity.util.SpellAreaExplosion;
 
+import java.util.List;
 import java.util.UUID;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
@@ -106,20 +108,16 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
             this.getDataTracker().set(MAIN_HAND_TRACKER, player.getMainHandStack().copy());
             this.getDataTracker().set(OFF_HAND_TRACKER, player.getOffHandStack().copy());
         }
-        final ParticleBatch POP_PARTICLES = new ParticleBatch(
-                SpellEngineParticles.smoke_medium.id().toString(),
-                ParticleBatch.Shape.CIRCLE,
-                ParticleBatch.Origin.FEET,
-                null,
-                20,
-                0.18F,
-                0.2F,
-                0);
+        final ParticleGroup POP_PARTICLES = ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)
+                .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
+                        .count(20)
+                        .speed(0.18F, 0.2F)
+                        .verticalOrigin(ParticleGroupBuilder.Batches.FEET));
         final Identifier LEAVE_SOUND_ID = Identifier.of(ArchersExpansionMod.MOD_ID, "infiltrator_vanish");
         final SoundEvent LEAVE_SOUND = SoundEvent.of(LEAVE_SOUND_ID);
         if (!this.getWorld().isClient()) {
             SoundHelper.playSoundEvent(this.getWorld(), this, LEAVE_SOUND);
-            ParticleHelper.sendBatches(this, new ParticleBatch[]{POP_PARTICLES});
+            ParticleHelper.sendBatches(this, List.of(POP_PARTICLES));
         }
     }
 

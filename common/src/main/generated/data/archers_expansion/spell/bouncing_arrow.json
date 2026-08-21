@@ -42,22 +42,28 @@
         "client_data": {
           "travel_particles": [
             {
-              "particle_id": "crit",
-              "origin": "CENTER",
-              "shape": "LINE",
-              "rotation": "LOOK",
-              "roll": 1.0,
-              "count": 2.0,
-              "min_speed": 0.2,
-              "max_speed": 0.22
+              "id": "crit",
+              "appearance": {},
+              "batch": {
+                "count": 2.0,
+                "shape": "LINE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "roll_per_tick": 1.0,
+                "min_speed": 0.2,
+                "max_speed": 0.22
+              }
             },
             {
-              "particle_id": "spell_engine:dripping_blood",
-              "origin": "CENTER",
-              "shape": "SPHERE",
-              "count": 10.0,
-              "min_speed": 0.1,
-              "max_speed": 0.3
+              "id": "spell_engine:dripping_blood",
+              "appearance": {},
+              "batch": {
+                "count": 10.0,
+                "shape": "SPHERE",
+                "anchor": "ENTITY",
+                "min_speed": 0.1,
+                "max_speed": 0.3
+              }
             }
           ],
           "composite_model": {
@@ -103,24 +109,33 @@
           "amplifier_cap": 2
         }
       },
-      "particles": [
-        {
-          "particle_id": "crit",
-          "origin": "CENTER",
-          "shape": "PILLAR",
-          "count": 5.0,
-          "max_speed": 0.1
-        },
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 10.0,
-          "min_speed": 0.1,
-          "max_speed": 0.3,
-          "color_rgba": 3208659199
-        }
-      ],
+      "visuals": {
+        "particles": [
+          {
+            "id": "crit",
+            "appearance": {},
+            "batch": {
+              "count": 5.0,
+              "shape": "PILLAR",
+              "anchor": "ENTITY",
+              "max_speed": 0.1
+            }
+          },
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {
+              "color": 3208659199
+            },
+            "batch": {
+              "count": 10.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.1,
+              "max_speed": 0.3
+            }
+          }
+        ]
+      },
       "sound": {
         "id": "entity.arrow.hit"
       }

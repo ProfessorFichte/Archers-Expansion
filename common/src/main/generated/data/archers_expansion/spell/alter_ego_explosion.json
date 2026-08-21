@@ -5,42 +5,57 @@
   "learn": {},
   "active": {},
   "release": {
-    "particles": [
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "GROUND",
-        "shape": "CIRCLE",
-        "count": 10.0,
-        "min_speed": 0.2,
-        "max_speed": 0.6
-      },
-      {
-        "particle_id": "spell_engine:smoke_large",
-        "origin": "GROUND",
-        "shape": "CIRCLE",
-        "count": 10.0,
-        "min_speed": 0.5,
-        "max_speed": 0.9
-      },
-      {
-        "particle_id": "spell_engine:area_effect_574",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "max_speed": 0.0,
-        "color_rgba": 65535,
-        "scale": 2.0
-      },
-      {
-        "particle_id": "spell_engine:aura_effect_574",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "max_speed": 0.0,
-        "color_rgba": 65535,
-        "scale": 2.0
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 10.0,
+            "shape": "CIRCLE",
+            "anchor": "GROUND",
+            "min_speed": 0.2,
+            "max_speed": 0.6
+          }
+        },
+        {
+          "id": "spell_engine:smoke_large",
+          "appearance": {},
+          "batch": {
+            "count": 10.0,
+            "shape": "CIRCLE",
+            "anchor": "GROUND",
+            "min_speed": 0.5,
+            "max_speed": 0.9
+          }
+        },
+        {
+          "id": "spell_engine:area_effect_574",
+          "appearance": {
+            "color": 65535,
+            "scale": 2.0
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY"
+          }
+        },
+        {
+          "id": "spell_engine:area_effect_574",
+          "appearance": {
+            "color": 65535,
+            "scale": 2.0,
+            "facing": "CAMERA"
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY"
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "archers_expansion:alter_ego_explosion"
     }
@@ -60,16 +75,21 @@
           "knockback": 0.8
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 5.0,
-          "min_speed": 0.2,
-          "max_speed": 0.7
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {},
+            "batch": {
+              "count": 5.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.2,
+              "max_speed": 0.7
+            }
+          }
+        ]
+      }
     }
   ],
   "cost": {

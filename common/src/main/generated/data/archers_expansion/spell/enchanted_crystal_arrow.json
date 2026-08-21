@@ -24,12 +24,16 @@
       },
       "particles": [
         {
-          "particle_id": "spell_engine:snowflake",
-          "origin": "CENTER",
-          "shape": "PIPE",
-          "count": 0.5,
-          "min_speed": 0.1,
-          "max_speed": 0.2
+          "id": "spell_engine:snowflake",
+          "appearance": {},
+          "batch": {
+            "count": 1.0,
+            "chance": 0.5,
+            "shape": "PIPE",
+            "anchor": "ENTITY",
+            "min_speed": 0.1,
+            "max_speed": 0.2
+          }
         }
       ]
     }
@@ -58,33 +62,46 @@
           "light_level": 14,
           "travel_particles": [
             {
-              "particle_id": "spell_engine:magic_frost_burst",
-              "origin": "CENTER",
-              "shape": "LINE",
-              "rotation": "LOOK",
-              "roll": 10.0,
-              "roll_offset": 180.0,
-              "count": 20.0,
-              "min_speed": 0.2,
-              "max_speed": 0.22
+              "id": "spell_engine:magic_frost",
+              "appearance": {
+                "motion": "BURST"
+              },
+              "batch": {
+                "count": 20.0,
+                "shape": "LINE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "roll_per_tick": 10.0,
+                "roll_offset": 180.0,
+                "min_speed": 0.2,
+                "max_speed": 0.22
+              }
             },
             {
-              "particle_id": "spell_engine:magic_frost_burst",
-              "origin": "CENTER",
-              "shape": "LINE",
-              "rotation": "LOOK",
-              "roll": 10.0,
-              "count": 20.0,
-              "min_speed": 0.2,
-              "max_speed": 0.32
+              "id": "spell_engine:magic_frost",
+              "appearance": {
+                "motion": "BURST"
+              },
+              "batch": {
+                "count": 20.0,
+                "shape": "LINE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "roll_per_tick": 10.0,
+                "min_speed": 0.2,
+                "max_speed": 0.32
+              }
             },
             {
-              "particle_id": "spell_engine:snowflake",
-              "origin": "CENTER",
-              "shape": "CIRCLE",
-              "rotation": "LOOK",
-              "count": 10.0,
-              "max_speed": 0.05
+              "id": "spell_engine:snowflake",
+              "appearance": {},
+              "batch": {
+                "count": 10.0,
+                "shape": "CIRCLE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "max_speed": 0.05
+              }
             }
           ],
           "composite_model": {
@@ -110,24 +127,34 @@
           "knockback": 0.5
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:magic_frost_burst",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 50.0,
-          "min_speed": 0.2,
-          "max_speed": 0.7
-        },
-        {
-          "particle_id": "spell_engine:snowflake",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 25.0,
-          "min_speed": 0.1,
-          "max_speed": 0.4
-        }
-      ],
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:magic_frost",
+            "appearance": {
+              "motion": "BURST"
+            },
+            "batch": {
+              "count": 50.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.2,
+              "max_speed": 0.7
+            }
+          },
+          {
+            "id": "spell_engine:snowflake",
+            "appearance": {},
+            "batch": {
+              "count": 25.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.1,
+              "max_speed": 0.4
+            }
+          }
+        ]
+      },
       "sound": {
         "id": "archers_expansion:enchanted_crystal_arrow_impact"
       }

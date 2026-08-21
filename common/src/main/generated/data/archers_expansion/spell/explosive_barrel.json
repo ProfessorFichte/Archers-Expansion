@@ -10,16 +10,21 @@
     "animation": {
       "id": "more_rpg_classes:place_object_instant"
     },
-    "particles": [
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "GROUND",
-        "shape": "CIRCLE",
-        "count": 20.0,
-        "min_speed": 0.2,
-        "max_speed": 0.4
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 20.0,
+            "shape": "CIRCLE",
+            "anchor": "GROUND",
+            "min_speed": 0.2,
+            "max_speed": 0.4
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "minecraft:block.barrel.open"
     }
