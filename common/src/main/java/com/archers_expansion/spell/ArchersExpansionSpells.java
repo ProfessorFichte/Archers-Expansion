@@ -33,16 +33,12 @@ import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 public class ArchersExpansionSpells {
     public enum Book { DEADEYE, TUNDRA_HUNTER, WAR_ARCHER }
     public record Entry(Identifier id, Spell spell, String title, String description,
-                        @Nullable SpellTooltip.DescriptionMutator mutator,
                         @Nullable Book book) {
         public Entry(Identifier id, Spell spell, String title, String description) {
-            this(id, spell, title, description, null, null);
-        }
-        public Entry mutator(SpellTooltip.DescriptionMutator mutator) {
-            return new Entry(id, spell, title, description, mutator, book);
+            this(id, spell, title, description, null);
         }
         public Entry book(Book book) {
-            return new Entry(id, spell, title, description, mutator, book);
+            return new Entry(id, spell, title, description, book);
         }
     }
 
@@ -104,20 +100,6 @@ public class ArchersExpansionSpells {
         impact.target_modifiers = List.of(modifier);
     }
 
-    // Pulls the estimated damage of a helper spell (a hidden sub-spell used for a secondary impact, e.g. an explosion triggered by another spell) into the parent spell's own tooltip.
-    private static SpellTooltip.DescriptionMutator helperDamageMutator(Identifier helperId, String token) {
-        return (args) -> {
-            var world = args.player().getWorld();
-            if (world == null) return args.description();
-            var optional = SpellRegistry.from(world).getEntry(helperId);
-            if (optional.isEmpty()) return args.description();
-            var estimated = SpellEstimation.estimate(optional.get().value(), args.player(), ItemStack.EMPTY);
-            if (estimated.damage().isEmpty()) return args.description();
-            var dmg = estimated.damage().get(0);
-            return args.description().replace(token, SpellTooltip.formattedRange(dmg.min(), dmg.max()));
-        };
-    }
-
     public static Entry improved_disabling_shot = add(improved_disabling_shot());
     private static Entry improved_disabling_shot() {
         var id = Identifier.of(MOD_ID, "improved_disabling_shot");
@@ -131,7 +113,7 @@ public class ArchersExpansionSpells {
         modifier.effect_duration_add = 2;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null,null);
+        return new Entry(id, spell, title, description, null);
     }
     public static Entry improved_arctic_volley = add(improved_arctic_volley());
     private static Entry improved_arctic_volley() {
@@ -146,7 +128,7 @@ public class ArchersExpansionSpells {
         modifier.cooldown_duration_deduct = 3;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null,null);
+        return new Entry(id, spell, title, description, null);
     }
     public static Entry improved_point_blank_shot = add(improved_point_blank_shot());
     private static Entry improved_point_blank_shot() {
@@ -162,7 +144,7 @@ public class ArchersExpansionSpells {
         modifier.power_modifier.power_multiplier = 0.1F;
         spell.modifiers = List.of(modifier);
 
-        return new Entry(id, spell, title, description, null,null);
+        return new Entry(id, spell, title, description, null);
     }
     public static final Entry fast_shot = add(fast_shot());
     private static Entry fast_shot() {
@@ -218,7 +200,7 @@ public class ArchersExpansionSpells {
 
         SpellBuilder.Cost.cooldown(spell, 15);
 
-        return new Entry(id, spell, title, description, null, Book.DEADEYE);
+        return new Entry(id, spell, title, description, Book.DEADEYE);
     }
 
     public static final Entry bouncing_arrow = add(bouncing_arrow());
@@ -287,7 +269,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.exhaust(spell, 0.3F);
         SpellBuilder.Cost.item(spell, "minecraft:arrow", 1);
 
-        return new Entry(id, spell, title, description, null,Book.DEADEYE);
+        return new Entry(id, spell, title, description, Book.DEADEYE);
     }
     public static final Entry disabling_shot = add(disabling_shot());
     private static Entry disabling_shot() {
@@ -360,7 +342,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.exhaust(spell, 0.3F);
         SpellBuilder.Cost.item(spell,"minecraft:arrow",1);
 
-        return new Entry(id, spell, title, description, null,Book.DEADEYE);
+        return new Entry(id, spell, title, description, Book.DEADEYE);
     }
     public static final Entry choking_gas = add(choking_gas());
     private static Entry choking_gas() {
@@ -459,7 +441,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.exhaust(spell, 0.3F);
         SpellBuilder.Cost.item(spell,"minecraft:arrow",1);
 
-        return new Entry(id, spell, title, description, null, Book.DEADEYE);
+        return new Entry(id, spell, title, description, Book.DEADEYE);
     }
 
     public static final Entry venom_cask = add(venom_cask());
@@ -525,17 +507,8 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 16);
         SpellBuilder.Cost.exhaust(spell, 0.3F);
 
-        SpellTooltip.DescriptionMutator mutator = (args) -> {
-            var world = args.player().getWorld();
-            if (world == null) return args.description();
-            var optional = SpellRegistry.from(world).getEntry(Identifier.of(MOD_ID, "venom_cask_cloud"));
-            if (optional.isEmpty()) return args.description();
-            var cloudSpell = optional.get().value();
-            if (cloudSpell.deliver.clouds == null || cloudSpell.deliver.clouds.isEmpty()) return args.description();
-            var seconds = (int) cloudSpell.deliver.clouds.get(0).time_to_live_seconds;
-            return args.description().replace("{poison_duration}", String.valueOf(seconds));
-        };
-        return new Entry(id, spell, title, description, mutator, Book.DEADEYE);
+        // `{poison_duration}` reads the cloud of a *different* spell - see `registerTooltipTokens()`.
+        return new Entry(id, spell, title, description, Book.DEADEYE);
     }
     public static final Entry VENOM_CASK_CLOUD = add(VENOM_CASK_CLOUD());
     private static Entry VENOM_CASK_CLOUD() {
@@ -588,7 +561,7 @@ public class ArchersExpansionSpells {
 
         SpellBuilder.Cost.cooldown(spell, 1);
 
-        return new Entry(id, spell, title, description, null, null);
+        return new Entry(id, spell, title, description, null);
     }
     public static final Entry ALTER_EGO = add(ALTER_EGO());
     private static Entry ALTER_EGO() {
@@ -660,8 +633,8 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 40);
         spell.cost.exhaust = 0.4F;
 
-        var mutator = helperDamageMutator(Identifier.of(MOD_ID, "alter_ego_explosion"), "{explosion_damage}");
-        return new Entry(id, spell, title, description, mutator, Book.DEADEYE);
+        // `{explosion_damage}` is the estimate of the `alter_ego_explosion` helper spell - see `registerTooltipTokens()`.
+        return new Entry(id, spell, title, description, Book.DEADEYE);
     }
     public static final Entry ALTER_EGO_EXPLOSION = add(ALTER_EGO_EXPLOSION());
     private static Entry ALTER_EGO_EXPLOSION() {
@@ -712,7 +685,7 @@ public class ArchersExpansionSpells {
 
         SpellBuilder.Cost.cooldown(spell, 1);
 
-        return new Entry(id, spell, title, description, null,null);
+        return new Entry(id, spell, title, description, null);
     }
     public static final Entry frozen_shot = add(frozen_shot());
     private static Entry frozen_shot() {
@@ -764,7 +737,7 @@ public class ArchersExpansionSpells {
 
         SpellBuilder.Cost.cooldown(spell, 10);
 
-        return new Entry(id, spell, title, description, null,Book.TUNDRA_HUNTER);
+        return new Entry(id, spell, title, description, Book.TUNDRA_HUNTER);
     }
 
     public static final Entry frozen_pact = add(frozen_pact());
@@ -815,7 +788,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 22);
         SpellBuilder.Cost.exhaust(spell, 0.3F);
 
-        return new Entry(id, spell, title, description, null,Book.TUNDRA_HUNTER);
+        return new Entry(id, spell, title, description, Book.TUNDRA_HUNTER);
     }
     public static final Entry arctic_volley = add(arctic_volley());
     private static Entry arctic_volley() {
@@ -891,7 +864,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.exhaust(spell, 0.3F);
         SpellBuilder.Cost.item(spell, "minecraft:arrow", 1);
 
-        return new Entry(id, spell, title, description, null, Book.TUNDRA_HUNTER);
+        return new Entry(id, spell, title, description, Book.TUNDRA_HUNTER);
     }
     public static final Entry enchanted_crystal_arrow = add(enchanted_crystal_arrow());
     private static Entry enchanted_crystal_arrow() {
@@ -974,15 +947,17 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.exhaust(spell, 0.3F);
         SpellBuilder.Cost.item(spell, "minecraft:arrow", 1);
 
-        return new Entry(id, spell, title, description, null, Book.TUNDRA_HUNTER);
+        return new Entry(id, spell, title, description, Book.TUNDRA_HUNTER);
     }
     public static final Entry bearward = add(bearward());
     private static Entry bearward() {
         var id = Identifier.of(MOD_ID, "bearward");
         var spell = SpellBuilder.createSpellActive();
         var title = "Polar Bearward";
+        // `TooltipTokens.placeholder`, not `SpellTooltip.placeholder`: this runs during class init,
+        // which happens on a dedicated server too, and `SpellTooltip` is client-only.
         var description = "Summons a Polar Bear to fight by your side for "
-                + SpellTooltip.placeholder(TooltipTokens.summonDurationToken) + " sec, empowered by your Ranged Damage. " +
+                + TooltipTokens.placeholder(TooltipTokens.summonDurationToken) + " sec, empowered by your Ranged Damage. " +
                 "The Bear gets a short raging speed boost if its target is some distance away.";
         spell.school = MoreSpellSchools.FROST_RANGED;
         spell.range = 0;
@@ -1008,7 +983,7 @@ public class ArchersExpansionSpells {
         spell.cost.cooldown.haste_affected = false;
         SpellBuilder.Cost.exhaust(spell, 0.4F);
 
-        return new Entry(id, spell, title, description, null, Book.TUNDRA_HUNTER);
+        return new Entry(id, spell, title, description, Book.TUNDRA_HUNTER);
     }
     private static List<ModelEffect> fusilladeFx(int spawnTicks, int despawnTicks, int totalTicks) {
         float modelScale = 4.0F;
@@ -1096,7 +1071,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 24);
         SpellBuilder.Cost.exhaust(spell, 0.3F);
 
-        return new Entry(id, spell, title, description, null, Book.TUNDRA_HUNTER);
+        return new Entry(id, spell, title, description, Book.TUNDRA_HUNTER);
     }
     public static final Entry dual_shot = add(dual_shot());
     private static Entry dual_shot() {
@@ -1133,7 +1108,7 @@ public class ArchersExpansionSpells {
         spell.cost.item.id = "arrow";
         spell.cost.item.consume = false;
 
-        return new Entry(id, spell, title, description, null,Book.WAR_ARCHER);
+        return new Entry(id, spell, title, description, Book.WAR_ARCHER);
     }
     public static final Entry smoldering_arrow = add(smoldering_arrow());
     private static Entry smoldering_arrow() {
@@ -1202,7 +1177,7 @@ public class ArchersExpansionSpells {
 
         SpellBuilder.Cost.cooldown(spell, 12);
 
-        return new Entry(id, spell, title, description, null, Book.WAR_ARCHER);
+        return new Entry(id, spell, title, description, Book.WAR_ARCHER);
     }
     public static final Entry point_blank_shot = add(point_blank_shot());
     private static Entry point_blank_shot() {
@@ -1262,7 +1237,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.exhaust(spell, 0.3F);
         SpellBuilder.Cost.item(spell,"minecraft:arrow",1);
 
-        return new Entry(id, spell, title, description, null,Book.WAR_ARCHER);
+        return new Entry(id, spell, title, description, Book.WAR_ARCHER);
     }
     public static final Entry pin_down = add(pin_down());
     private static Entry pin_down() {
@@ -1329,7 +1304,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.exhaust(spell, 0.3F);
         SpellBuilder.Cost.item(spell, "minecraft:arrow", 1);
 
-        return new Entry(id, spell, title, description, null, Book.WAR_ARCHER);
+        return new Entry(id, spell, title, description, Book.WAR_ARCHER);
     }
     public static final Entry scorched_earth = add(scorched_earth());
     private static Entry scorched_earth() {
@@ -1405,7 +1380,7 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 30);
         SpellBuilder.Cost.exhaust(spell, 0.35F);
 
-        return new Entry(id, spell, title, description, null, Book.WAR_ARCHER);
+        return new Entry(id, spell, title, description, Book.WAR_ARCHER);
     }
     public static final Entry explosive_barrel = add(explosive_barrel());
     private static Entry explosive_barrel() {
@@ -1442,8 +1417,8 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 8);
         SpellBuilder.Cost.exhaust(spell, 0.3F);
 
-        var mutator = helperDamageMutator(Identifier.of(MOD_ID, "explosive_barrel_explosion"), "{explosion_damage}");
-        return new Entry(id, spell, title, description, mutator, Book.WAR_ARCHER);
+        // `{explosion_damage}` is the estimate of the `explosive_barrel_explosion` helper spell - see `registerTooltipTokens()`.
+        return new Entry(id, spell, title, description, Book.WAR_ARCHER);
     }
     public static final Entry EXPLOSIVE_BARREL_EXPLOSION = add(EXPLOSIVE_BARREL_EXPLOSION());
     private static Entry EXPLOSIVE_BARREL_EXPLOSION() {
@@ -1504,6 +1479,54 @@ public class ArchersExpansionSpells {
 
         SpellBuilder.Cost.cooldown(spell, 1);
 
-        return new Entry(id, spell, title, description, null, null);
+        return new Entry(id, spell, title, description, null);
+    }
+
+    /// Registers the description values that no declarative `{token}` can express.
+    ///
+    /// Every one of these reads a *different* spell out of the registry: the parent spell's own
+    /// impacts only spawn an entity (or hand off to a custom delivery), so the engine's own
+    /// `{damage}` / `{cloud_duration}` tokens see nothing to report. Cross-spell lookups are
+    /// genuinely bespoke, hence `TooltipTokens.Custom`.
+    ///
+    /// `TooltipTokens.Custom` references only shared types, unlike the
+    /// `SpellTooltip.DescriptionMutator` it replaces, which put a client-only type into the `Entry`
+    /// record - and this class *is* loaded on a dedicated server (datagen and spell registration
+    /// reference it). The handler bodies still call the client-only `SpellTooltip.formattedRange`
+    /// (that render helper stayed on `SpellTooltip` in 1.10), which is safe because this method is
+    /// only ever called from `ArchersExpansionModClient.init()`, so the lambdas are never created -
+    /// let alone run - on a server.
+    public static void registerTooltipTokens() {
+        subSpellDamage(ALTER_EGO.id(), ALTER_EGO_EXPLOSION.id(), "{explosion_damage}");
+        subSpellDamage(explosive_barrel.id(), EXPLOSIVE_BARREL_EXPLOSION.id(), "{explosion_damage}");
+
+        // Venom Cask hands off to a CUSTOM delivery that casts `venom_cask_cloud`; the cloud - and
+        // therefore its lifetime - belongs to that spell, so `{cloud_duration}` never fires here.
+        TooltipTokens.registerCustom(venom_cask.id(), args -> {
+            var world = args.player().getWorld();
+            if (world == null) return args.description();
+            var optional = SpellRegistry.from(world).getEntry(VENOM_CASK_CLOUD.id());
+            if (optional.isEmpty()) return args.description();
+            var cloudSpell = optional.get().value();
+            if (cloudSpell.deliver.clouds == null || cloudSpell.deliver.clouds.isEmpty()) return args.description();
+            var seconds = (int) cloudSpell.deliver.clouds.get(0).time_to_live_seconds;
+            return args.description().replace("{poison_duration}", String.valueOf(seconds));
+        });
+    }
+
+    /// Resolves `token` in `spellId`'s description to the estimated damage of `helperId`, the hidden
+    /// sub-spell that actually carries the damage impact (an explosion cast by a spawned entity).
+    /// A missing registry entry or an empty estimate leaves the description untouched.
+    private static void subSpellDamage(Identifier spellId, Identifier helperId, String token) {
+        TooltipTokens.registerCustom(spellId, args -> {
+            var world = args.player().getWorld();
+            if (world == null) return args.description();
+            var optional = SpellRegistry.from(world).getEntry(helperId);
+            if (optional.isEmpty()) return args.description();
+            var estimated = SpellEstimation.estimate(optional.get().value(), args.player(), ItemStack.EMPTY);
+            if (estimated.damage().isEmpty()) return args.description();
+            var dmg = estimated.damage().get(0);
+            return args.description().replace(token, SpellTooltip.formattedRange(dmg.min(), dmg.max()));
+        });
     }
 }
