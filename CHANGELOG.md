@@ -1,3 +1,5 @@
+# 2.1.0 - 1.21.1
+- Adopt Spell Engine 1.10
 # 2.0.0 - 1.21.1
 - Adapt to Spell Engine 1.9.10+ API Changes
 **Spell Expansion**

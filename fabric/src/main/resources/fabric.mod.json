@@ -29,7 +29,7 @@
 		"archers-expansion.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=${fabric_loader_version}",
+		"fabricloader": ">=${fabric_loader_compat_version}",
 		"minecraft": ">=${minecraft_compat_version}",
 		"java": ">=17",
 		"fabric-api": "*",
