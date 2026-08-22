@@ -29,14 +29,14 @@
 		"archers-expansion.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.7",
-		"minecraft": ">=1.21",
+		"fabricloader": ">=${fabric_loader_version}",
+		"minecraft": ">=${minecraft_compat_version}",
 		"java": ">=17",
 		"fabric-api": "*",
-		"azurelibarmor": "*",
-		"spell_engine": ">=1.5.0",
-		"ranged_weapon_api": "*",
-		"more_rpg_classes": ">=2.2.0-1.21.1"
+		"azurelibarmor": ">=${azure_lib_version}",
+		"spell_engine": ">=${spell_engine_version}",
+		"ranged_weapon_api": ">=${ranged_weapon_api_version}",
+		"more_rpg_classes": ">=${more_rpg_library_version}"
 	},
 	"suggests": {
 		"better_combat": "*"
