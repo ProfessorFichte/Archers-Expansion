@@ -44,38 +44,51 @@
           "apply_mode": "ADD"
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:frost_shard",
-          "origin": "CENTER",
-          "shape": "CIRCLE",
-          "count": 5.0,
-          "min_speed": 0.1,
-          "max_speed": 0.35
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:frost_shard",
+            "appearance": {},
+            "batch": {
+              "count": 5.0,
+              "shape": "CIRCLE",
+              "anchor": "ENTITY",
+              "min_speed": 0.1,
+              "max_speed": 0.35
+            }
+          }
+        ]
+      }
     }
   ],
   "arrow_perks": {
     "bypass_iframes": true,
     "travel_particles": [
       {
-        "particle_id": "spell_engine:magic_frost_burst",
-        "origin": "CENTER",
-        "shape": "LINE",
-        "rotation": "LOOK",
-        "roll": 5.0,
-        "count": 20.0,
-        "min_speed": 0.2,
-        "max_speed": 0.22
+        "id": "spell_engine:magic_frost",
+        "appearance": {
+          "motion": "BURST"
+        },
+        "batch": {
+          "count": 20.0,
+          "shape": "LINE",
+          "anchor": "ENTITY",
+          "alignment": "LOOK",
+          "roll_per_tick": 5.0,
+          "min_speed": 0.2,
+          "max_speed": 0.22
+        }
       },
       {
-        "particle_id": "spell_engine:snowflake",
-        "origin": "CENTER",
-        "shape": "CIRCLE",
-        "rotation": "LOOK",
-        "count": 5.0,
-        "max_speed": 0.05
+        "id": "spell_engine:snowflake",
+        "appearance": {},
+        "batch": {
+          "count": 5.0,
+          "shape": "CIRCLE",
+          "anchor": "ENTITY",
+          "alignment": "LOOK",
+          "max_speed": 0.05
+        }
       }
     ],
     "composite_model": {

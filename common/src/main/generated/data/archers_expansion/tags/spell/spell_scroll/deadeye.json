@@ -23,10 +23,6 @@
     {
       "id": "archers_expansion:alter_ego",
       "required": false
-    },
-    {
-      "id": "archers_expansion:infiltrators_arrow",
-      "required": false
     }
   ]
 }

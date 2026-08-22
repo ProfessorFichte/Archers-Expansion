@@ -7,7 +7,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.spell_engine.api.spell.event.SpellHandlers;
-import net.spell_engine.internals.SpellHelper;
+import net.spell_engine.internals.SpellExecution;
+import net.spell_engine.internals.SpellParameters;
+import net.spell_engine.internals.delivery.CloudPlacer;
+import net.spell_engine.internals.delivery.LaunchGeometry;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_power.api.SpellPower;
 
@@ -81,11 +84,11 @@ public class CustomSpellImpacts {
         );
     }
 
-    public static boolean placeVenomCloud(LivingEntity caster, Entity target, Vec3d position, SpellHelper.ImpactContext context) {
+    public static boolean placeVenomCloud(LivingEntity caster, Entity target, Vec3d position, SpellExecution.ImpactContext context) {
         var cloudEntryOptional = SpellRegistry.from(caster.getWorld())
                 .getEntry(Identifier.of(MOD_ID, "venom_cask_cloud"));
         if (cloudEntryOptional.isEmpty()) return false;
-        SpellHelper.placeCloud(caster.getWorld(), caster, target, position, cloudEntryOptional.get(), context);
+        CloudPlacer.placeCloud(caster.getWorld(), caster, target, position, cloudEntryOptional.get(), context);
         return true;
     }
 
@@ -105,8 +108,8 @@ public class CustomSpellImpacts {
                         impactContext = impactContext.power(SpellPower.getSpellPower(spell.school, caster));
                     }
 
-                    var effectiveRange = SpellHelper.getRange(caster, spellEntry, impactContext.chargeModifier());
-                    var launchPoint = SpellHelper.launchPoint(caster);
+                    var effectiveRange = SpellParameters.getRangeCurved(caster, spellEntry, impactContext.charge());
+                    var launchPoint = LaunchGeometry.launchPoint(caster);
 
                     // Pitch is fully computed from the target range (a lobbed, mortar-like arc) rather than the caster's look pitch, so the flask reliably lands at `range` regardless of aim.
                     var angleDegrees = arcProjectileAngleDegrees(effectiveRange);

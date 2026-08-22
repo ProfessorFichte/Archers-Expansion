@@ -6,17 +6,24 @@
   "learn": {},
   "active": {},
   "release": {
-    "particles": [
-      {
-        "particle_id": "spell_engine:magic_stripe_float",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 5.0,
-        "min_speed": 0.1,
-        "max_speed": 0.2,
-        "color_rgba": 3208659199
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:magic_stripe",
+          "appearance": {
+            "color": 3208659199,
+            "motion": "FLOAT"
+          },
+          "batch": {
+            "count": 5.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 0.1,
+            "max_speed": 0.2
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "archers:marker_shot",
       "volume": 0.5
@@ -49,30 +56,38 @@
           "apply_mode": "ADD"
         }
       },
-      "particles": [
-        {
-          "particle_id": "electric_spark",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 15.0,
-          "min_speed": 0.3,
-          "max_speed": 1.5
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "electric_spark",
+            "appearance": {},
+            "batch": {
+              "count": 15.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.3,
+              "max_speed": 1.5
+            }
+          }
+        ]
+      }
     }
   ],
   "arrow_perks": {
     "bypass_iframes": true,
     "travel_particles": [
       {
-        "particle_id": "electric_spark",
-        "origin": "CENTER",
-        "shape": "LINE",
-        "rotation": "LOOK",
-        "roll": 5.0,
-        "count": 20.0,
-        "min_speed": 0.2,
-        "max_speed": 0.22
+        "id": "electric_spark",
+        "appearance": {},
+        "batch": {
+          "count": 20.0,
+          "shape": "LINE",
+          "anchor": "ENTITY",
+          "alignment": "LOOK",
+          "roll_per_tick": 5.0,
+          "min_speed": 0.2,
+          "max_speed": 0.22
+        }
       }
     ],
     "composite_model": {

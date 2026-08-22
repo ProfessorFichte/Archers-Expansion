@@ -6,9 +6,10 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder.Placements;
 import net.spell_engine.api.spell.Spell.Impact.Action.Summon;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.Fx;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
 import net.spell_engine.api.spell.fx.Sound;
-import net.spell_engine.api.spell.fx.VFX;
 import net.spell_engine.api.spell.summon.AttributeScaling;
 import net.spell_engine.api.spell.summon.SummonBehaviour;
 import net.spell_engine.api.spell.summon.SummonedEntityConfig;
@@ -64,23 +65,21 @@ public class ArcherExpansionSummons {
         b.sounds.ambient = new Sound(Sounds.POLARBEAR_IDLE.id());
         b.sounds.step = new Sound("minecraft:entity.polar_bear.step");
 
-        b.spawn_fx = new VFX();
-        b.spawn_fx.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.FROST,
-                        SpellEngineParticles.MagicParticles.Motion.BURST).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        40, 0.2F, 0.5F).color(Color.BLUE.toRGBA()),
-                new ParticleBatch(SpellEngineParticles.snowflake.id().toString(),
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        30, 0.1F, 0.3F)
-        };
-        b.despawn_fx = new VFX();
-        b.despawn_fx.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.snowflake.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        25, 0.1F, 0.3F).color(Color.BLUE.toRGBA())
-        };
+        b.spawn_fx = Fx.Visuals.of(
+                ParticleGroupBuilder.magic(SpellEngineParticles.magic_frost, ParticleGroup.Motion.BURST, Color.BLUE)
+                        .batch(b2 -> b2.shape(ParticleGroup.Shape.SPHERE)
+                                .count(40).speed(0.2F, 0.5F)
+                                .verticalOrigin(ParticleGroupBuilder.Batches.CENTER)),
+                ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
+                        .batch(b2 -> b2.shape(ParticleGroup.Shape.PILLAR)
+                                .count(30).speed(0.1F, 0.3F)
+                                .verticalOrigin(ParticleGroupBuilder.Batches.FEET)));
+        b.despawn_fx = Fx.Visuals.of(
+                ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
+                        .color(Color.BLUE)
+                        .batch(b2 -> b2.shape(ParticleGroup.Shape.CIRCLE)
+                                .count(25).speed(0.1F, 0.3F)
+                                .verticalOrigin(ParticleGroupBuilder.Batches.FEET)));
 
         var placements = List.of(Placements.pointAtAngle(2.0F, 0F));
 

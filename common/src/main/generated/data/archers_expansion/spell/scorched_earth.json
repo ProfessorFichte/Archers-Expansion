@@ -19,16 +19,21 @@
     "animation": {
       "id": "more_rpg_classes:archery_downwards_release"
     },
-    "particles": [
-      {
-        "particle_id": "spell_engine:flame",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 5.0,
-        "min_speed": 0.1,
-        "max_speed": 0.2
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:flame",
+          "appearance": {},
+          "batch": {
+            "count": 5.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 0.1,
+            "max_speed": 0.2
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "minecraft:item.crossbow.shoot"
     }
@@ -114,20 +119,28 @@
           "light_level": 15,
           "particles": [
             {
-              "particle_id": "spell_engine:flame_medium_b",
-              "origin": "FEET",
-              "shape": "CIRCLE",
-              "count": 10.0,
-              "min_speed": 0.1,
-              "max_speed": 0.3
+              "id": "spell_engine:flame_medium_b",
+              "appearance": {},
+              "batch": {
+                "count": 10.0,
+                "shape": "CIRCLE",
+                "anchor": "ENTITY",
+                "vertical_origin": 0.1,
+                "min_speed": 0.1,
+                "max_speed": 0.3
+              }
             },
             {
-              "particle_id": "smoke",
-              "origin": "FEET",
-              "shape": "CIRCLE",
-              "count": 3.0,
-              "min_speed": 0.1,
-              "max_speed": 0.2
+              "id": "smoke",
+              "appearance": {},
+              "batch": {
+                "count": 3.0,
+                "shape": "CIRCLE",
+                "anchor": "ENTITY",
+                "vertical_origin": 0.1,
+                "min_speed": 0.1,
+                "max_speed": 0.2
+              }
             }
           ]
         },
@@ -159,16 +172,21 @@
           "duration": 3.0
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:flame_medium_b",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 15.0,
-          "min_speed": 0.1,
-          "max_speed": 0.3
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:flame_medium_b",
+            "appearance": {},
+            "batch": {
+              "count": 15.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.1,
+              "max_speed": 0.3
+            }
+          }
+        ]
+      }
     }
   ],
   "cost": {

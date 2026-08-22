@@ -5,51 +5,70 @@
   "learn": {},
   "active": {},
   "release": {
-    "particles": [
-      {
-        "particle_id": "spell_engine:fire_explosion",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "min_speed": 0.2,
-        "max_speed": 0.6,
-        "scale": 1.5
-      },
-      {
-        "particle_id": "spell_engine:smoke_large",
-        "origin": "GROUND",
-        "shape": "CIRCLE",
-        "count": 40.0,
-        "min_speed": 0.5,
-        "max_speed": 0.9
-      },
-      {
-        "particle_id": "spell_engine:flame_medium_b",
-        "origin": "GROUND",
-        "shape": "SPHERE",
-        "count": 40.0,
-        "min_speed": 0.5,
-        "max_speed": 0.9
-      },
-      {
-        "particle_id": "spell_engine:area_effect_574",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "max_speed": 0.0,
-        "color_rgba": 4278190335,
-        "scale": 3.0
-      },
-      {
-        "particle_id": "spell_engine:aura_effect_574",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "max_speed": 0.0,
-        "color_rgba": 4278190335,
-        "scale": 3.0
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:fire_explosion",
+          "appearance": {
+            "scale": 1.5
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 0.2,
+            "max_speed": 0.6
+          }
+        },
+        {
+          "id": "spell_engine:smoke_large",
+          "appearance": {},
+          "batch": {
+            "count": 40.0,
+            "shape": "CIRCLE",
+            "anchor": "GROUND",
+            "min_speed": 0.5,
+            "max_speed": 0.9
+          }
+        },
+        {
+          "id": "spell_engine:flame_medium_b",
+          "appearance": {},
+          "batch": {
+            "count": 40.0,
+            "shape": "SPHERE",
+            "anchor": "GROUND",
+            "min_speed": 0.5,
+            "max_speed": 0.9
+          }
+        },
+        {
+          "id": "spell_engine:area_effect_574",
+          "appearance": {
+            "color": 4278190335,
+            "scale": 3.0
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY"
+          }
+        },
+        {
+          "id": "spell_engine:area_effect_574",
+          "appearance": {
+            "color": 4278190335,
+            "scale": 3.0,
+            "facing": "CAMERA"
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY"
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "archers_expansion:barrel_explosion"
     }
@@ -69,24 +88,32 @@
           "knockback": 1.5
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:flame_medium_a",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 30.0,
-          "min_speed": 0.2,
-          "max_speed": 0.7
-        },
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 30.0,
-          "min_speed": 0.2,
-          "max_speed": 0.7
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:flame_medium_a",
+            "appearance": {},
+            "batch": {
+              "count": 30.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.2,
+              "max_speed": 0.7
+            }
+          },
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {},
+            "batch": {
+              "count": 30.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.2,
+              "max_speed": 0.7
+            }
+          }
+        ]
+      }
     },
     {
       "action": {

@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
-import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.render.SpellCloudRenderer;
 import net.spell_engine.rpg_series.item.Armor;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
@@ -25,11 +24,9 @@ public class ArchersExpansionModClient {
 
     public static void init() {
 
-        for (var entry : ArchersExpansionSpells.entries) {
-            if (entry.mutator() != null) {
-                SpellTooltip.addDescriptionMutator(entry.id(), entry.mutator());
-            }
-        }
+        // Description values that aren't expressible as declarative `{token}`s. `TooltipTokens` is
+        // server-safe; it is registered here simply because the tooltip is a client concern.
+        ArchersExpansionSpells.registerTooltipTokens();
 
         registerArmorRenderer(Armors.deadeye_t1.armorSet(), ArchersExpansionArmorRenderer::deadeye);
         registerArmorRenderer(Armors.netherite_deadeye.armorSet(), ArchersExpansionArmorRenderer::netherite_deadeye);
