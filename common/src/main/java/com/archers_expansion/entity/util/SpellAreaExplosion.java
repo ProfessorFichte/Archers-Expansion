@@ -20,9 +20,6 @@ public class SpellAreaExplosion {
         if (spellEntry == null) return;
         var spell = spellEntry.value();
 
-        // `release.visuals` merges what used to be `release.particles` and
-        // `release.particles_scaled_with_ranged`; resolving against the spell's reach is what
-        // applies `scale_with = RANGE` to the entries that ask for it.
         var releaseVisuals = spell.release.visuals
                 .resolved(Fx.Context.ofRange(SpellParameters.getRange(owner, spellEntry)));
         ParticleHelper.sendBatches(source, releaseVisuals.particles);

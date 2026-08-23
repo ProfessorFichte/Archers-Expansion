@@ -160,7 +160,7 @@ public class ArchersExpansionSpells {
         spell.release.sound = Sound.withVolume(Identifier.of("archers","marker_shot"),0.5F);
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_stripe, ParticleGroup.Motion.FLOAT)
-                        .color(3208659199L) // == Color.RAGE.toRGBA() (0xbf4040ff)
+                        .color(3208659199L)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(5).speed(0.1F, 0.2F)));
 
@@ -507,7 +507,6 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 16);
         SpellBuilder.Cost.exhaust(spell, 0.3F);
 
-        // `{poison_duration}` reads the cloud of a *different* spell - see `registerTooltipTokens()`.
         return new Entry(id, spell, title, description, Book.DEADEYE);
     }
     public static final Entry VENOM_CASK_CLOUD = add(VENOM_CASK_CLOUD());
@@ -589,9 +588,6 @@ public class ArchersExpansionSpells {
                         .color(Color.WHITE.toRGBA())
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(50).speed(1F, 1F)),
-                // V1 particles_scaled_with_ranged: SpellHelper did copy().scale(range), which
-                // OVERWROTE the authored 0.8 - it never rendered. V2 multiplies, so the authored
-                // scale stays at 1 to keep the decal at the spell's full range.
                 ParticleGroupBuilder.of(SpellEngineParticles.area_effect_293)
                         .color(Color.BLUE.toRGBA())
                         .scaleWith(Fx.ScaleWith.RANGE)
@@ -633,7 +629,6 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 40);
         spell.cost.exhaust = 0.4F;
 
-        // `{explosion_damage}` is the estimate of the `alter_ego_explosion` helper spell - see `registerTooltipTokens()`.
         return new Entry(id, spell, title, description, Book.DEADEYE);
     }
     public static final Entry ALTER_EGO_EXPLOSION = add(ALTER_EGO_EXPLOSION());
@@ -666,9 +661,6 @@ public class ArchersExpansionSpells {
                         .color(Color.BLUE).scale(2.0F)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(1)),
-                // V1 aura_effect_574 was zone/effect_574 registered a SECOND time, camera-facing.
-                // 1.10 keeps one entry and picks facing per effect. NOT aura(), which would also
-                // attach POSITION_SCALED - V1 set orientation only.
                 ParticleGroupBuilder.of(SpellEngineParticles.area_effect_574)
                         .color(Color.BLUE).scale(2.0F)
                         .facing(ParticleGroup.Facing.CAMERA)
@@ -756,8 +748,6 @@ public class ArchersExpansionSpells {
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
         spell.active.cast.sound = new Sound("spell_engine:generic_frost_casting");
         spell.active.cast.particles = List.of(
-                // V1 read a fractional count as a per-tick spawn CHANCE; V2 reads it as a period,
-                // so the rate is preserved as count(1) + chance(0.5).
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
                                 .count(1F).chance(0.5F).speed(0.1F, 0.2F)));
@@ -885,8 +875,6 @@ public class ArchersExpansionSpells {
         spell.active.cast.animates_ranged_weapon = true;
         spell.active.cast.sound = new Sound("archers:bow_pull");
         spell.active.cast.particles = List.of(
-                // V1 read a fractional count as a per-tick spawn CHANCE; V2 reads it as a period,
-                // so the rate is preserved as count(1) + chance(0.5).
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
                                 .count(1F).chance(0.5F).speed(0.1F, 0.2F)));
@@ -954,8 +942,6 @@ public class ArchersExpansionSpells {
         var id = Identifier.of(MOD_ID, "bearward");
         var spell = SpellBuilder.createSpellActive();
         var title = "Polar Bearward";
-        // `TooltipTokens.placeholder`, not `SpellTooltip.placeholder`: this runs during class init,
-        // which happens on a dedicated server too, and `SpellTooltip` is client-only.
         var description = "Summons a Polar Bear to fight by your side for "
                 + TooltipTokens.placeholder(TooltipTokens.summonDurationToken) + " sec, empowered by your Ranged Damage. " +
                 "The Bear gets a short raging speed boost if its target is some distance away.";
@@ -1014,8 +1000,6 @@ public class ArchersExpansionSpells {
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
         spell.active.cast.sound = new Sound("spell_engine:generic_frost_casting");
         spell.active.cast.particles = List.of(
-                // V1 read a fractional count as a per-tick spawn CHANCE; V2 reads it as a period,
-                // so the rate is preserved as count(1) + chance(0.5).
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
                                 .count(1F).chance(0.5F).speed(0.1F, 0.2F)));
@@ -1417,7 +1401,6 @@ public class ArchersExpansionSpells {
         SpellBuilder.Cost.cooldown(spell, 8);
         SpellBuilder.Cost.exhaust(spell, 0.3F);
 
-        // `{explosion_damage}` is the estimate of the `explosive_barrel_explosion` helper spell - see `registerTooltipTokens()`.
         return new Entry(id, spell, title, description, Book.WAR_ARCHER);
     }
     public static final Entry EXPLOSIVE_BARREL_EXPLOSION = add(EXPLOSIVE_BARREL_EXPLOSION());
@@ -1455,9 +1438,6 @@ public class ArchersExpansionSpells {
                         .color(Color.RED.toRGBA())
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(1).speed(0F, 0F)),
-                // V1 aura_effect_574 was zone/effect_574 registered a second time as
-                // Orientation.VERTICAL - same texture, camera-facing. The aura twins are
-                // gone in 1.10; NOT aura(), which would add a POSITION_SCALED attachment.
                 ParticleGroupBuilder.of(SpellEngineParticles.area_effect_574)
                         .facing(ParticleGroup.Facing.CAMERA)
                         .scale(3.0F)
@@ -1482,26 +1462,14 @@ public class ArchersExpansionSpells {
         return new Entry(id, spell, title, description, null);
     }
 
-    /// Registers the description values that no declarative `{token}` can express.
-    ///
-    /// Every one of these reads a *different* spell out of the registry: the parent spell's own
-    /// impacts only spawn an entity (or hand off to a custom delivery), so the engine's own
-    /// `{damage}` / `{cloud_duration}` tokens see nothing to report. Cross-spell lookups are
-    /// genuinely bespoke, hence `TooltipTokens.Custom`.
-    ///
-    /// `TooltipTokens.Custom` references only shared types, unlike the
-    /// `SpellTooltip.DescriptionMutator` it replaces, which put a client-only type into the `Entry`
-    /// record - and this class *is* loaded on a dedicated server (datagen and spell registration
-    /// reference it). The handler bodies still call the client-only `SpellTooltip.formattedRange`
-    /// (that render helper stayed on `SpellTooltip` in 1.10), which is safe because this method is
-    /// only ever called from `ArchersExpansionModClient.init()`, so the lambdas are never created -
-    /// let alone run - on a server.
+    /// This class is loaded on a dedicated server (datagen and spell registration reference it),
+    /// but the handler bodies below call the client-only `SpellTooltip.formattedRange`. That's only
+    /// safe because this method itself is called exclusively from `ArchersExpansionModClient.init()`,
+    /// so the lambdas are never created - let alone run - on a server.
     public static void registerTooltipTokens() {
         subSpellDamage(ALTER_EGO.id(), ALTER_EGO_EXPLOSION.id(), "{explosion_damage}");
         subSpellDamage(explosive_barrel.id(), EXPLOSIVE_BARREL_EXPLOSION.id(), "{explosion_damage}");
 
-        // Venom Cask hands off to a CUSTOM delivery that casts `venom_cask_cloud`; the cloud - and
-        // therefore its lifetime - belongs to that spell, so `{cloud_duration}` never fires here.
         TooltipTokens.registerCustom(venom_cask.id(), args -> {
             var world = args.player().getWorld();
             if (world == null) return args.description();
@@ -1514,9 +1482,6 @@ public class ArchersExpansionSpells {
         });
     }
 
-    /// Resolves `token` in `spellId`'s description to the estimated damage of `helperId`, the hidden
-    /// sub-spell that actually carries the damage impact (an explosion cast by a spawned entity).
-    /// A missing registry entry or an empty estimate leaves the description untouched.
     private static void subSpellDamage(Identifier spellId, Identifier helperId, String token) {
         TooltipTokens.registerCustom(spellId, args -> {
             var world = args.player().getWorld();
