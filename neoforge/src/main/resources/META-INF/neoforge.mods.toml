@@ -28,16 +28,9 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.archers_expansion]]
-modId = "forgified_fabric_api"
+modId = "armor_model_api"
 type = "required"
-versionRange = "[${forgified_fabric_api_version},)"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.archers_expansion]]
-modId = "azurelibarmor"
-type = "required"
-versionRange = "[${azure_lib_version},)"
+versionRange = "[${armor_model_api_version},)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -48,12 +41,6 @@ versionRange = "[${spell_engine_version},)"
 ordering = "BEFORE"
 side = "BOTH"
 
-[[dependencies.archers_expansion]]
-modId = "archers"
-type = "required"
-versionRange = "[${archers_version},)"
-ordering = "BEFORE"
-side = "BOTH"
 
 [[mixins]]
 config = "archers-expansion.mixins.json"

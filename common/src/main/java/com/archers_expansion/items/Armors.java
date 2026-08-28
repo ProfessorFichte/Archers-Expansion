@@ -1,7 +1,6 @@
 package com.archers_expansion.items;
 
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -604,20 +603,22 @@ public class Armors {
             ).translatedName("Sentinel Archer Helmet", "Sentinel Archer Chest", "Sentinel Archer Leggings", "Sentinel Archer Boots"), MRPGCItemGroups.ARMORY_KEY);
         }
         Armor.register(configs, entries, Group.KEY);
+    }
+
+    /// Sets registered into a different creative tab (e.g. Armory RPGs compat) get added to
+    /// {@link Group#KEY} like every other set by {@link Armor#register}, so the caller also needs to
+    /// pull them back out of the default tab. Each platform owns the actual add/remove event wiring
+    /// (Fabric's `FabricItemGroupEntries` vs NeoForge's `BuildCreativeModeTabContentsEvent` aren't
+    /// portable through a common interface), this just hands over what needs moving where.
+    public static void forEachGroupOverride(GroupOverrideConsumer consumer) {
         for (var override : groupOverrides.entrySet()) {
-            var entry = override.getKey();
-            var key = override.getValue();
-            var pieces = entry.armorSet().pieces();
-            ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
-                content.getDisplayStacks().removeIf(stack -> pieces.stream().anyMatch(p -> stack.isOf((ArmorItem) p)));
-                content.getSearchTabStacks().removeIf(stack -> pieces.stream().anyMatch(p -> stack.isOf((ArmorItem) p)));
-            });
-            ItemGroupEvents.modifyEntriesEvent(key).register(content -> {
-                for (var piece : pieces) {
-                    content.add((ArmorItem) piece);
-                }
-            });
+            consumer.accept(override.getKey().armorSet().pieces(), override.getValue());
         }
+    }
+
+    @FunctionalInterface
+    public interface GroupOverrideConsumer {
+        void accept(List<?> pieces, RegistryKey<ItemGroup> targetGroup);
     }
 
 }

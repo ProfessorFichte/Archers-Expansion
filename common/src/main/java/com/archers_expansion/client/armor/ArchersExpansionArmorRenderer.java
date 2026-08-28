@@ -1,47 +1,47 @@
 package com.archers_expansion.client.armor;
 
-import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
-import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererConfig;
 import net.minecraft.util.Identifier;
+import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
-public class ArchersExpansionArmorRenderer extends AzArmorRenderer {
+public final class ArchersExpansionArmorRenderer {
 
-    public static ArchersExpansionArmorRenderer deadeye() {
-        return new ArchersExpansionArmorRenderer("deadeye", "deadeye");
-    }
-    public static ArchersExpansionArmorRenderer tundra_hunter() {
-        return new ArchersExpansionArmorRenderer("tundra_hunter", "tundra_hunter");
-    }
-    public static ArchersExpansionArmorRenderer war_archer() {
-        return new ArchersExpansionArmorRenderer("war_archer", "war_archer");
-    }
+    private ArchersExpansionArmorRenderer() { }
 
-    public static ArchersExpansionArmorRenderer netherite_deadeye() {
-        return new ArchersExpansionArmorRenderer("deadeye", "netherite_deadeye");
+    public static GeoArmorRenderer deadeye() {
+        return make("deadeye", "deadeye");
     }
-    public static ArchersExpansionArmorRenderer netherite_tundra_hunter() {
-        return new ArchersExpansionArmorRenderer("tundra_hunter", "netherite_tundra_hunter");
+    public static GeoArmorRenderer tundra_hunter() {
+        return make("tundra_hunter", "tundra_hunter");
     }
-    public static ArchersExpansionArmorRenderer netherite_war_archer() {
-        return new ArchersExpansionArmorRenderer("war_archer", "netherite_war_archer");
+    public static GeoArmorRenderer war_archer() {
+        return make("war_archer", "war_archer");
     }
 
-    public static ArchersExpansionArmorRenderer bounty_hunter() {
-        return new ArchersExpansionArmorRenderer("bounty_hunter", "bounty_hunter");
+    public static GeoArmorRenderer netherite_deadeye() {
+        return make("deadeye", "netherite_deadeye");
     }
-    public static ArchersExpansionArmorRenderer polar_stalker() {
-        return new ArchersExpansionArmorRenderer("polar_stalker", "polar_stalker");
+    public static GeoArmorRenderer netherite_tundra_hunter() {
+        return make("tundra_hunter", "netherite_tundra_hunter");
     }
-    public static ArchersExpansionArmorRenderer sentinel_archer() {
-        return new ArchersExpansionArmorRenderer("sentinel_archer", "sentinel_archer");
+    public static GeoArmorRenderer netherite_war_archer() {
+        return make("war_archer", "netherite_war_archer");
     }
 
-    public ArchersExpansionArmorRenderer(String modelName, String textureName) {
-        super(AzArmorRendererConfig.builder(
+    public static GeoArmorRenderer bounty_hunter() {
+        return make("bounty_hunter", "bounty_hunter");
+    }
+    public static GeoArmorRenderer polar_stalker() {
+        return make("polar_stalker", "polar_stalker");
+    }
+    public static GeoArmorRenderer sentinel_archer() {
+        return make("sentinel_archer", "sentinel_archer");
+    }
+
+    private static GeoArmorRenderer make(String modelName, String textureName) {
+        return GeoArmorRenderer.of(
                 Identifier.of(MOD_ID, "geo/" + modelName + ".geo.json"),
-                Identifier.of(MOD_ID, "textures/armor/" + textureName + ".png")
-        ).build());
+                Identifier.of(MOD_ID, "textures/armor/" + textureName + ".png"));
     }
 }

@@ -1,8 +1,7 @@
 package com.archers_expansion.entity;
 
 import com.archers_expansion.ArchersExpansionMod;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -19,53 +18,53 @@ public class ModEntitiesRegistry {
         ExplosiveBarrelEntity.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
                 Identifier.of(MOD_ID, "explosive_barrel"),
-                FabricEntityTypeBuilder.<ExplosiveBarrelEntity>create(SpawnGroup.MISC, ExplosiveBarrelEntity::new)
-                        .dimensions(EntityDimensions.fixed(1.0F, 1.0F))
-                        .fireImmune()
-                        .trackRangeBlocks(64)
-                        .trackedUpdateRate(10)
-                        .build()
+                EntityType.Builder.<ExplosiveBarrelEntity>create(ExplosiveBarrelEntity::new, SpawnGroup.MISC)
+                        .dimensions(1.0F, 1.0F)
+                        .makeFireImmune()
+                        .maxTrackingRange(64)
+                        .trackingTickInterval(10)
+                        .build("explosive_barrel")
         );
 
         AlterEgoEntity.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
                 Identifier.of(MOD_ID, "alter_ego"),
-                FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AlterEgoEntity::new)
-                        .dimensions(EntityDimensions.fixed(0.6F, 1.8F))
-                        .trackRangeBlocks(64)
-                        .trackedUpdateRate(2)
-                        .build()
+                EntityType.Builder.create(AlterEgoEntity::new, SpawnGroup.CREATURE)
+                        .dimensions(0.6F, 1.8F)
+                        .maxTrackingRange(64)
+                        .trackingTickInterval(2)
+                        .build("alter_ego")
         );
 
         FrozenFussiladeEntity.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
                 Identifier.of(MOD_ID, "frozen_fusillade"),
-                FabricEntityTypeBuilder.<FrozenFussiladeEntity>create(SpawnGroup.MISC, FrozenFussiladeEntity::new)
-                        .dimensions(EntityDimensions.changing(6F, 0.5F))
-                        .fireImmune()
-                        .trackRangeBlocks(128)
-                        .trackedUpdateRate(20)
-                        .build()
+                EntityType.Builder.<FrozenFussiladeEntity>create(FrozenFussiladeEntity::new, SpawnGroup.MISC)
+                        .dimensions(6F, 0.5F)
+                        .makeFireImmune()
+                        .maxTrackingRange(128)
+                        .trackingTickInterval(20)
+                        .build("frozen_fusillade")
         );
 
         PoisonFlaskProjectile.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
                 Identifier.of(MOD_ID, "poison_flask"),
-                FabricEntityTypeBuilder.<PoisonFlaskProjectile>create(SpawnGroup.MISC, PoisonFlaskProjectile::new)
-                        .dimensions(EntityDimensions.fixed(0.6F, 0.6F))
-                        .trackRangeBlocks(64)
-                        .trackedUpdateRate(10)
-                        .build()
+                EntityType.Builder.<PoisonFlaskProjectile>create(PoisonFlaskProjectile::new, SpawnGroup.MISC)
+                        .dimensions(0.6F, 0.6F)
+                        .maxTrackingRange(64)
+                        .trackingTickInterval(10)
+                        .build("poison_flask")
         );
 
         PolarBearEntity.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
                 POLAR_BEAR_ID,
-                FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PolarBearEntity::new)
-                        .dimensions(EntityDimensions.changing(1.4F, 1.4F))
-                        .trackRangeBlocks(64)
-                        .trackedUpdateRate(2)
-                        .build()
+                EntityType.Builder.create(PolarBearEntity::new, SpawnGroup.CREATURE)
+                        .dimensions(1.4F, 1.4F)
+                        .maxTrackingRange(64)
+                        .trackingTickInterval(2)
+                        .build("spell_polar_bear")
         );
 
         SummonedEntities.registerAttributes(POLAR_BEAR_ID, PolarBearEntity.ENTITY_TYPE, ArchersExpansionMod.summonConfig.value::entryFor);

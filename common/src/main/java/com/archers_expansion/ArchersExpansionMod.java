@@ -11,10 +11,8 @@ import com.archers_expansion.items.Armors;
 import com.archers_expansion.sounds.Sounds;
 import com.archers_expansion.config.TweaksConfig;
 import com.archers_expansion.spell.CustomSpellImpacts;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -26,11 +24,10 @@ import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.archers_expansion.compat.CompatLoadingCheck.armoryLoadCheck;
-
 public class ArchersExpansionMod{
 	public static final String MOD_ID = "archers_expansion";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final Identifier ARMORY_COMPAT_PACK_ID = Identifier.of(MOD_ID, "archers_expansion_armory_compat");
 
 	public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
 			("effects_v3", new ConfigFile.Effects())
@@ -86,23 +83,15 @@ public class ArchersExpansionMod{
 	public static void registerItems() {
 		Items.registerModItems();
 		Group.registerItemGroups();
-		Group.ARCHERS_EXPANSION= FabricItemGroup.builder()
+		Group.ARCHERS_EXPANSION = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
 				.icon(() -> new ItemStack(Armors.war_archer_t1.armorSet().head.asItem()))
 				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
 				.build();
 		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);
 		Armors.register(itemConfig.value.armor_sets);
-		if (armoryLoadCheck()) {
-			FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer -> {
-				ResourceManagerHelper.registerBuiltinResourcePack(
-						Identifier.of(MOD_ID, "archers_expansion_armory_compat"),
-						modContainer,
-						ResourcePackActivationType.ALWAYS_ENABLED
-				);
-			});
-		}
 		itemConfig.save();
 	}
+
 	public static void registerEntities() {
 		ModEntitiesRegistry.registerEntities();
 	}

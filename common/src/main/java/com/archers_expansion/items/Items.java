@@ -1,7 +1,6 @@
 package com.archers_expansion.items;
 
 import com.archers_expansion.ArchersExpansionMod;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 
@@ -25,8 +24,6 @@ public class Items {
     }
 
     public static void registerModItems(){
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-        });
         ArchersExpansionMod.LOGGER.info("Registering Mod Items for " + MOD_ID);
     }
 }
