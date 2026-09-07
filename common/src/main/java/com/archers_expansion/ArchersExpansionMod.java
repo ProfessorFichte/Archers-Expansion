@@ -1,5 +1,6 @@
 package com.archers_expansion;
 
+import net.spell_engine.Platform;
 import com.archers_expansion.config.Default;
 import com.archers_expansion.effect.ArchersExpansionEffects;
 import com.archers_expansion.entity.ArcherExpansionSummons;
@@ -11,12 +12,6 @@ import com.archers_expansion.items.Armors;
 import com.archers_expansion.sounds.Sounds;
 import com.archers_expansion.config.TweaksConfig;
 import com.archers_expansion.spell.CustomSpellImpacts;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.config.ConfigFile;
 import net.spell_engine.api.spell.summon.SummonedEntityConfig;
@@ -69,7 +64,7 @@ public class ArchersExpansionMod{
 		itemConfig.refresh();
 		tweaksConfig.refresh();
 		summonConfig.refresh();
-		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+		if (Platform.util().isDevelopmentEnvironment()) {
 			tweaksConfig.value.ignore_items_required_mods = true;
 		}
 	}
@@ -83,11 +78,6 @@ public class ArchersExpansionMod{
 	public static void registerItems() {
 		Items.registerModItems();
 		Group.registerItemGroups();
-		Group.ARCHERS_EXPANSION = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
-				.icon(() -> new ItemStack(Armors.war_archer_t1.armorSet().head.asItem()))
-				.displayName(Text.translatable("itemGroup." + MOD_ID + ".general"))
-				.build();
-		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);
 		Armors.register(itemConfig.value.armor_sets);
 		itemConfig.save();
 	}

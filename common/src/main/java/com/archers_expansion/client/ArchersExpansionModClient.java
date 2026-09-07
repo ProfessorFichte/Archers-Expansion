@@ -7,7 +7,7 @@ import com.archers_expansion.client.effect.CrystalArrowParticles;
 import com.archers_expansion.effect.ArchersExpansionEffects;
 import com.archers_expansion.items.Armors;
 import com.archers_expansion.spell.ArchersExpansionSpells;
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 import net.rpg_foundation.armor_api.client.ArmorRenderers;
 import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
@@ -26,7 +26,7 @@ public class ArchersExpansionModClient {
         registerArmorRenderer(Armors.war_archer_t1.armorSet(), ArchersExpansionArmorRenderer.war_archer());
         registerArmorRenderer(Armors.netherite_war_archer.armorSet(), ArchersExpansionArmorRenderer.netherite_war_archer());
 
-        if (FabricLoader.getInstance().isModLoaded("armory_rpgs") || ArchersExpansionMod.tweaksConfig.value.ignore_items_required_mods) {
+        if (Platform.util().isModLoaded("armory_rpgs") || ArchersExpansionMod.tweaksConfig.value.ignore_items_required_mods) {
             registerArmorRenderer(Armors.bountyHunterArmorSet.armorSet(), ArchersExpansionArmorRenderer.bounty_hunter());
             registerArmorRenderer(Armors.polarStalkerArmorSet.armorSet(), ArchersExpansionArmorRenderer.polar_stalker());
             registerArmorRenderer(Armors.sentinelArcherArmorSet.armorSet(), ArchersExpansionArmorRenderer.sentinel_archer());

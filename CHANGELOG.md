@@ -1,3 +1,8 @@
+# 2.1.1 - 1.21.1
+- Drop Forgified Fabric API (FFAPI) as a required dependency
+- Replace AzurelibArmor with ArmorModelAPI
+- Updated All Spell Icon Textures (created by Slepykat)
+
 # 2.1.0 - 1.21.1
 - Adopt Spell Engine 1.10
 - Thanks Daedelus!
