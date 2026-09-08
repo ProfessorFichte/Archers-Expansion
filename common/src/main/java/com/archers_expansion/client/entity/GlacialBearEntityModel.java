@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
 public class GlacialBearEntityModel extends SinglePartEntityModel<PolarBearEntity> {
-    public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(Identifier.of(MOD_ID, "glacial_bear"), "main");
+    public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new Identifier(MOD_ID, "glacial_bear"), "main");
 
     private final ModelPart root;
     private final ModelPart bone6;
@@ -168,8 +168,10 @@ public class GlacialBearEntityModel extends SinglePartEntityModel<PolarBearEntit
         this.updateAnimation(entity.despawnAnimationState, GlacialBearAnimations.DEATH, ageInTicks, 1.0f);
     }
 
+    /// 1.20.1 passes four float colour channels instead of the packed `int color` of 1.21.
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-        bone6.render(matrices, vertices, light, overlay, color);
+    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay,
+                       float red, float green, float blue, float alpha) {
+        bone6.render(matrices, vertices, light, overlay, red, green, blue, alpha);
     }
 }

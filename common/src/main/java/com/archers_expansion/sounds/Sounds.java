@@ -16,7 +16,7 @@ public class Sounds {
     public static final List<Entry> entries = new ArrayList<>();
 
     private static Entry add(String name, int variants) {
-        var id = Identifier.of(MOD_ID, name);
+        var id = new Identifier(MOD_ID, name);
         var soundEvent = SoundEvent.of(id);
         var entry = new Entry(id, soundEvent, variants);
         entries.add(entry);

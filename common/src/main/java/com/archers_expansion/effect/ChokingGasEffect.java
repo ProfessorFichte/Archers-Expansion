@@ -1,10 +1,9 @@
 package com.archers_expansion.effect;
 
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.registry.tag.EntityTypeTags;
 
 public class ChokingGasEffect extends StatusEffect {
 
@@ -13,20 +12,20 @@ public class ChokingGasEffect extends StatusEffect {
     }
 
     @Override
-    public void onApplied(LivingEntity entity, int amplifier) {
-        EntityType<?> type = entity.getType();
-        if(type.isIn(EntityTypeTags.IGNORES_POISON_AND_REGEN)){
-            entity.removeStatusEffect(ArchersExpansionEffects.getEntry(ArchersExpansionEffects.CHOKING_GAS));
+    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+        // `#minecraft:ignores_poison_and_regen` is a 1.21 tag; on 1.20.1 poison immunity is the
+        // hardcoded undead check that vanilla's own poison effect uses.
+        if (entity.isUndead()) {
+            entity.removeStatusEffect(ArchersExpansionEffects.CHOKING_GAS.effect);
         }
-        super.onApplied(entity, amplifier);
+        super.onApplied(entity, attributes, amplifier);
     }
 
-    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         float damage = amplifier + 1.0F;
         entity.damage(entity.getDamageSources().magic(), damage);
         int interval = Math.max(25, 40 >> amplifier);
         entity.setAir(entity.getAir() - interval);
-        return true;
     }
 
     public boolean canApplyUpdateEffect(int duration, int amplifier) {

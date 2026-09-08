@@ -1,17 +1,14 @@
-package com.archers_expansion .fabric;
+package com.archers_expansion.fabric;
 
 import com.archers_expansion.ArchersExpansionMod;
 import com.archers_expansion.entity.ModEntitiesRegistry;
 import com.archers_expansion.items.Armors;
 import com.archers_expansion.items.Group;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
 import net.minecraft.item.ArmorItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 
 public final class FabricMod implements ModInitializer {
     @Override
@@ -20,7 +17,8 @@ public final class FabricMod implements ModInitializer {
         ArchersExpansionMod.registerEffects();
         ArchersExpansionMod.registerSounds();
         ArchersExpansionMod.registerEntities();
-        registerItemGroup();
+        // The creative tab is created and registered inside registerItems() now (loader-neutral
+        // `ItemGroup.Builder`), so both loaders share the ordering.
         ArchersExpansionMod.registerItems();
 
         ModEntitiesRegistry.registerEntityAttributes(FabricDefaultAttributeRegistry::register);
@@ -36,14 +34,5 @@ public final class FabricMod implements ModInitializer {
                 }
             });
         });
-
-    }
-
-    private void registerItemGroup() {
-        Group.ARCHERS_EXPANSION = FabricItemGroup.builder()
-                .icon(Group::icon)
-                .displayName(Group.displayName())
-                .build();
-        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ARCHERS_EXPANSION);
     }
 }

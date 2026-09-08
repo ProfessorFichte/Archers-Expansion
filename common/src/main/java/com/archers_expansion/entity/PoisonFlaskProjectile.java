@@ -11,6 +11,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
@@ -53,8 +54,8 @@ public class PoisonFlaskProjectile extends ProjectileEntity {
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        builder.add(TRACKER_SPELL_ID, "");
+    protected void initDataTracker() {
+        this.getDataTracker().startTracking(TRACKER_SPELL_ID, "");
     }
 
     @Override
@@ -63,7 +64,8 @@ public class PoisonFlaskProjectile extends ProjectileEntity {
         if (this.getWorld().isClient && data.equals(TRACKER_SPELL_ID)) {
             var spellId = this.getDataTracker().get(TRACKER_SPELL_ID);
             if (spellId != null && !spellId.isEmpty()) {
-                this.spellEntry = SpellRegistry.from(this.getWorld()).getEntry(Identifier.of(spellId)).orElse(null);
+                this.spellEntry = SpellRegistry.from(this.getWorld())
+                        .getEntry(RegistryKey.of(SpellRegistry.KEY, new Identifier(spellId))).orElse(null);
             }
         }
     }
@@ -147,8 +149,9 @@ public class PoisonFlaskProjectile extends ProjectileEntity {
         super.readCustomDataFromNbt(nbt);
         if (nbt.contains(NBT_SPELL_ID, NbtElement.STRING_TYPE)) {
             try {
-                var spellId = Identifier.of(nbt.getString(NBT_SPELL_ID));
-                this.spellEntry = SpellRegistry.from(this.getWorld()).getEntry(spellId).orElse(null);
+                var spellId = new Identifier(nbt.getString(NBT_SPELL_ID));
+                this.spellEntry = SpellRegistry.from(this.getWorld())
+                        .getEntry(RegistryKey.of(SpellRegistry.KEY, spellId)).orElse(null);
                 if (this.spellEntry != null) {
                     this.getDataTracker().set(TRACKER_SPELL_ID, spellId.toString());
                 }

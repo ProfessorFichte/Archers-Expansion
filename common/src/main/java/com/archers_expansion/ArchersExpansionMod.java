@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class ArchersExpansionMod{
 	public static final String MOD_ID = "archers_expansion";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static final Identifier ARMORY_COMPAT_PACK_ID = Identifier.of(MOD_ID, "archers_expansion_armory_compat");
+	public static final Identifier ARMORY_COMPAT_PACK_ID = new Identifier(MOD_ID, "archers_expansion_armory_compat");
 
 	public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
 			("effects_v3", new ConfigFile.Effects())
@@ -77,6 +77,7 @@ public class ArchersExpansionMod{
 	}
 	public static void registerItems() {
 		Items.registerModItems();
+		// Creates + registers `archers_expansion:generic` before the armor sets are registered into it.
 		Group.registerItemGroups();
 		Armors.register(itemConfig.value.armor_sets);
 		itemConfig.save();

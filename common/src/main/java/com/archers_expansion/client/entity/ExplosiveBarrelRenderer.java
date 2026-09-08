@@ -18,7 +18,7 @@ import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 public class ExplosiveBarrelRenderer<T extends ExplosiveBarrelEntity> extends EntityRenderer<T> {
     private final ItemRenderer itemRenderer;
 
-    public static final Identifier modelId = Identifier.of(MOD_ID, "spell_effect/explosive_barrel");
+    public static final Identifier modelId = new Identifier(MOD_ID, "spell_effect/explosive_barrel");
 
     private static final RenderLayer RENDER_LAYER = CustomLayers.spellEffect(LightEmission.GLOW, false);
 

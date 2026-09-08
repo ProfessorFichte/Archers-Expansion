@@ -11,6 +11,7 @@ import net.spell_engine.internals.SpellExecution;
 import net.spell_engine.internals.SpellParameters;
 import net.spell_engine.internals.delivery.CloudPlacer;
 import net.spell_engine.internals.delivery.LaunchGeometry;
+import net.minecraft.registry.RegistryKey;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_power.api.SpellPower;
 
@@ -78,7 +79,7 @@ public class CustomSpellImpacts {
 
     public static void registerCustomImpacts(){
         SpellHandlers.registerCustomImpact(
-                Identifier.of(MOD_ID, "venom_cask_cloud_impact"),
+                new Identifier(MOD_ID, "venom_cask_cloud_impact"),
                 (spell, powerResult, caster, target, context) ->
                         new SpellHandlers.ImpactResult(placeVenomCloud(caster, target, context.position(), context), false)
         );
@@ -86,7 +87,7 @@ public class CustomSpellImpacts {
 
     public static boolean placeVenomCloud(LivingEntity caster, Entity target, Vec3d position, SpellExecution.ImpactContext context) {
         var cloudEntryOptional = SpellRegistry.from(caster.getWorld())
-                .getEntry(Identifier.of(MOD_ID, "venom_cask_cloud"));
+                .getEntry(RegistryKey.of(SpellRegistry.KEY, new Identifier(MOD_ID, "venom_cask_cloud")));
         if (cloudEntryOptional.isEmpty()) return false;
         CloudPlacer.placeCloud(caster.getWorld(), caster, target, position, cloudEntryOptional.get(), context);
         return true;
@@ -98,7 +99,7 @@ public class CustomSpellImpacts {
 
     public static void registerCustomDeliveries() {
         SpellHandlers.registerCustomDelivery(
-                Identifier.of(MOD_ID, "venom_flask"),
+                new Identifier(MOD_ID, "venom_flask"),
                 (world, spellEntry, caster, targets, context, targetLocation) -> {
                     if (world.isClient) return false;
 

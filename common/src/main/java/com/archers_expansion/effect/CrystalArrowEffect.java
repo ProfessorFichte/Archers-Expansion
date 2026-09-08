@@ -1,6 +1,7 @@
 package com.archers_expansion.effect;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -13,19 +14,18 @@ public class CrystalArrowEffect extends StatusEffect {
     }
 
     @Override
-    public void onApplied(LivingEntity entity, int amplifier) {
-        super.onApplied(entity, amplifier);
+    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+        super.onApplied(entity, attributes, amplifier);
         int frozen_ticks = entity.getFrozenTicks();
         if(frozen_ticks < 140){
             entity.setFrozenTicks(frozen_ticks + 40);
         }
     }
-    public boolean applyUpdateEffect(LivingEntity livingEntity, int pAmplifier) {
+    public void applyUpdateEffect(LivingEntity livingEntity, int pAmplifier) {
         EntityType<?> type = livingEntity.getType();
         if(!type.isIn(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)) {
             CustomMethods.freezeDamageTicks(livingEntity);
         }
-        return true;
     }
 
     @Override

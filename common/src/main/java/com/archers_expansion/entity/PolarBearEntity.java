@@ -11,13 +11,19 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 import net.spell_engine.entity.SummonedEntity;
+import net.spell_power.api.ModifierDefinitions;
+
+import java.util.UUID;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
 public class PolarBearEntity extends SummonedEntity {
     public static EntityType<PolarBearEntity> ENTITY_TYPE;
 
-    private static final Identifier SPEED_BURST_MODIFIER_ID = Identifier.of(MOD_ID, "polar_bear_speed_burst");
+    /// 1.20.1 attribute modifiers are UUID-keyed (the `Identifier`-keyed API is 1.21+).
+    /// SpellEngine derives a stable UUID from an identifier, so the modifier survives a restart.
+    private static final Identifier SPEED_BURST_MODIFIER_ID = new Identifier(MOD_ID, "polar_bear_speed_burst");
+    private static final UUID SPEED_BURST_MODIFIER_UUID = ModifierDefinitions.uuid(SPEED_BURST_MODIFIER_ID);
     private static final int SPEED_BURST_DURATION_TICKS = 60;
     private static final int SPEED_BURST_COOLDOWN_TICKS = 200;
     private static final double SPEED_BURST_CHARGE_RANGE = 8.0;
@@ -34,9 +40,9 @@ public class PolarBearEntity extends SummonedEntity {
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        builder.add(SPEED_BURST, false);
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.getDataTracker().startTracking(SPEED_BURST, false);
     }
 
     public boolean isSpeedBursting() {
@@ -57,7 +63,7 @@ public class PolarBearEntity extends SummonedEntity {
 
         if (speedBurstEndAge >= 0) {
             if (this.age >= speedBurstEndAge) {
-                speed.removeModifier(SPEED_BURST_MODIFIER_ID);
+                speed.removeModifier(SPEED_BURST_MODIFIER_UUID);
                 speedBurstEndAge = -1;
                 this.getDataTracker().set(SPEED_BURST, false);
             }
@@ -71,7 +77,8 @@ public class PolarBearEntity extends SummonedEntity {
         if (this.squaredDistanceTo(target) < SPEED_BURST_CHARGE_RANGE * SPEED_BURST_CHARGE_RANGE) return;
 
         speed.addTemporaryModifier(new EntityAttributeModifier(
-                SPEED_BURST_MODIFIER_ID, SPEED_BURST_MULTIPLIER, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                SPEED_BURST_MODIFIER_UUID, "Polar bear speed burst",
+                SPEED_BURST_MULTIPLIER, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         speedBurstEndAge = this.age + SPEED_BURST_DURATION_TICKS;
         nextSpeedBurstAge = speedBurstEndAge + SPEED_BURST_COOLDOWN_TICKS;
         this.getDataTracker().set(SPEED_BURST, true);

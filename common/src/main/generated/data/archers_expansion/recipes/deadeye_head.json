@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "more_rpg_classes:hardened_leather"
+    },
+    "B": {
+      "item": "minecraft:spider_eye"
+    },
+    "C": {
+      "item": "minecraft:rabbit_hide"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "C C"
+  ],
+  "result": {
+    "item": "archers_expansion:deadeye_head"
+  },
+  "show_notification": true
+}

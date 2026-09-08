@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "more_rpg_classes:polar_bear_fur"
+    },
+    "C": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "C C"
+  ],
+  "result": {
+    "item": "archers_expansion:tundra_hunter_head"
+  },
+  "show_notification": true
+}

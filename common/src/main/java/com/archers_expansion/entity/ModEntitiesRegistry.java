@@ -12,14 +12,14 @@ import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
 public class ModEntitiesRegistry {
 
-    public static final Identifier POLAR_BEAR_ID = Identifier.of(MOD_ID, "spell_polar_bear");
+    public static final Identifier POLAR_BEAR_ID = new Identifier(MOD_ID, "spell_polar_bear");
 
     public static void registerEntities() {
         ExplosiveBarrelEntity.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
-                Identifier.of(MOD_ID, "explosive_barrel"),
+                new Identifier(MOD_ID, "explosive_barrel"),
                 EntityType.Builder.<ExplosiveBarrelEntity>create(ExplosiveBarrelEntity::new, SpawnGroup.MISC)
-                        .dimensions(1.0F, 1.0F)
+                        .setDimensions(1.0F, 1.0F)
                         .makeFireImmune()
                         .maxTrackingRange(64)
                         .trackingTickInterval(10)
@@ -28,9 +28,9 @@ public class ModEntitiesRegistry {
 
         AlterEgoEntity.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
-                Identifier.of(MOD_ID, "alter_ego"),
+                new Identifier(MOD_ID, "alter_ego"),
                 EntityType.Builder.create(AlterEgoEntity::new, SpawnGroup.CREATURE)
-                        .dimensions(0.6F, 1.8F)
+                        .setDimensions(0.6F, 1.8F)
                         .maxTrackingRange(64)
                         .trackingTickInterval(2)
                         .build("alter_ego")
@@ -38,9 +38,9 @@ public class ModEntitiesRegistry {
 
         FrozenFussiladeEntity.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
-                Identifier.of(MOD_ID, "frozen_fusillade"),
+                new Identifier(MOD_ID, "frozen_fusillade"),
                 EntityType.Builder.<FrozenFussiladeEntity>create(FrozenFussiladeEntity::new, SpawnGroup.MISC)
-                        .dimensions(6F, 0.5F)
+                        .setDimensions(6F, 0.5F)
                         .makeFireImmune()
                         .maxTrackingRange(128)
                         .trackingTickInterval(20)
@@ -49,9 +49,9 @@ public class ModEntitiesRegistry {
 
         PoisonFlaskProjectile.ENTITY_TYPE = Registry.register(
                 Registries.ENTITY_TYPE,
-                Identifier.of(MOD_ID, "poison_flask"),
+                new Identifier(MOD_ID, "poison_flask"),
                 EntityType.Builder.<PoisonFlaskProjectile>create(PoisonFlaskProjectile::new, SpawnGroup.MISC)
-                        .dimensions(0.6F, 0.6F)
+                        .setDimensions(0.6F, 0.6F)
                         .maxTrackingRange(64)
                         .trackingTickInterval(10)
                         .build("poison_flask")
@@ -61,7 +61,7 @@ public class ModEntitiesRegistry {
                 Registries.ENTITY_TYPE,
                 POLAR_BEAR_ID,
                 EntityType.Builder.create(PolarBearEntity::new, SpawnGroup.CREATURE)
-                        .dimensions(1.4F, 1.4F)
+                        .setDimensions(1.4F, 1.4F)
                         .maxTrackingRange(64)
                         .trackingTickInterval(2)
                         .build("spell_polar_bear")

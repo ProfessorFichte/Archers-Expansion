@@ -1,8 +1,10 @@
 package com.archers_expansion.entity;
 
 import com.archers_expansion.sounds.Sounds;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.Registries;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder.Placements;
 import net.spell_engine.api.spell.Spell.Impact.Action.Summon;
@@ -21,15 +23,20 @@ import java.util.List;
 
 public class ArcherExpansionSummons {
 
+    /// 1.20.1 `EntityAttribute` has no `getIdAsString()` - resolve through the registry instead.
+    private static String attributeId(EntityAttribute attribute) {
+        return Registries.ATTRIBUTE.getId(attribute).toString();
+    }
+
     public static SummonedEntityConfig.Entry defaults() {
         var e = new SummonedEntityConfig.Entry();
         e.common = new SummonedEntityConfig.CommonAttributes(24, 0.32, 7);
         e.common.follow_range = 16;
         e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(), 0.25));
+                attributeId(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE), 0.25));
         // GlacialBearEntityModel reads GENERIC_ATTACK_SPEED for its attack animation, but SummonedEntity.createAttributes() doesn't register it, so it must be seeded here or it throws.
         e.custom.add(new SummonedEntityConfig.CustomAttribute(
-                EntityAttributes.GENERIC_ATTACK_SPEED.getIdAsString(), 1.0));
+                attributeId(EntityAttributes.GENERIC_ATTACK_SPEED), 1.0));
         return e;
     }
 
@@ -91,12 +98,12 @@ public class ArcherExpansionSummons {
     }
 
     private static List<AttributeScaling.Entry> frostScaling() {
-        var s = MoreSpellSchools.FROST_RANGED.attributeEntry.getIdAsString();
+        var s = attributeId(MoreSpellSchools.FROST_RANGED.attributeEntry.value());
         var entries = new ArrayList<AttributeScaling.Entry>();
-        entries.add(scalingEntry(EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString(), s, 0, 0.7));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ARMOR.getIdAsString(), s, 0, 0.04));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(), s, 0, 0.55));
-        entries.add(scalingEntry(EntityAttributes.GENERIC_ATTACK_KNOCKBACK.getIdAsString(), s, 0, 0.1));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_MAX_HEALTH), s, 0, 0.7));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_ARMOR), s, 0, 0.04));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_ATTACK_DAMAGE), s, 0, 0.55));
+        entries.add(scalingEntry(attributeId(EntityAttributes.GENERIC_ATTACK_KNOCKBACK), s, 0, 0.1));
         return entries;
     }
 
@@ -105,7 +112,7 @@ public class ArcherExpansionSummons {
         var entry = new AttributeScaling.Entry();
         entry.attribute_id = targetAttribute;
         entry.modifiers = List.of(new AttributeScaling.Entry.OwnerModifier(
-                ownerAttribute, EntityAttributeModifier.Operation.ADD_VALUE, base, coefficient));
+                ownerAttribute, EntityAttributeModifier.Operation.ADDITION, base, coefficient));
         return entry;
     }
 }

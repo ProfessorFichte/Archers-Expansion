@@ -64,11 +64,12 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        builder.add(SPELL_ID_TRACKER, "");
-        builder.add(TIME_TO_LIVE_TRACKER, 0);
-        builder.add(HEALTH_TRACKER, 2.0F);
-        builder.add(EXPLOSION_COUNTDOWN_TRACKER, -1);
+    protected void initDataTracker() {
+        var tracker = this.getDataTracker();
+        tracker.startTracking(SPELL_ID_TRACKER, "");
+        tracker.startTracking(TIME_TO_LIVE_TRACKER, 0);
+        tracker.startTracking(HEALTH_TRACKER, 2.0F);
+        tracker.startTracking(EXPLOSION_COUNTDOWN_TRACKER, -1);
     }
 
     @Override
@@ -76,7 +77,7 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
         super.onTrackedDataSet(data);
         var rawSpellId = this.getDataTracker().get(SPELL_ID_TRACKER);
         if (rawSpellId != null && !rawSpellId.isEmpty()) {
-            this.spellId = Identifier.of(rawSpellId);
+            this.spellId = new Identifier(rawSpellId);
         }
         this.timeToLive = this.getDataTracker().get(TIME_TO_LIVE_TRACKER);
         this.health = this.getDataTracker().get(HEALTH_TRACKER);
@@ -86,7 +87,7 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
         if (nbt.contains("SpellId")) {
-            this.spellId = Identifier.of(nbt.getString("SpellId"));
+            this.spellId = new Identifier(nbt.getString("SpellId"));
             this.getDataTracker().set(SPELL_ID_TRACKER, this.spellId.toString());
         }
         if (nbt.containsUuid("Owner")) this.ownerUuid = nbt.getUuid("Owner");
@@ -298,7 +299,7 @@ public class ExplosiveBarrelEntity extends Entity implements SpellEntity.Spawned
     private void applyExplosionSpell() {
         var owner = this.getOwner();
         if (owner == null) return;
-        SpellAreaExplosion.trigger(this, owner, Identifier.of(MOD_ID, "explosive_barrel_explosion"));
+        SpellAreaExplosion.trigger(this, owner, new Identifier(MOD_ID, "explosive_barrel_explosion"));
     }
 
     private LivingEntity getOwner() {

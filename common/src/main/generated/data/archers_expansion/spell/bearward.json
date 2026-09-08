@@ -145,7 +145,7 @@
                 "modifiers": [
                   {
                     "attribute_id": "ranged_weapon:damage",
-                    "operation": "ADD_VALUE",
+                    "operation": "ADDITION",
                     "base": 0.0,
                     "coefficient": 0.7
                   }
@@ -156,7 +156,7 @@
                 "modifiers": [
                   {
                     "attribute_id": "ranged_weapon:damage",
-                    "operation": "ADD_VALUE",
+                    "operation": "ADDITION",
                     "base": 0.0,
                     "coefficient": 0.04
                   }
@@ -167,7 +167,7 @@
                 "modifiers": [
                   {
                     "attribute_id": "ranged_weapon:damage",
-                    "operation": "ADD_VALUE",
+                    "operation": "ADDITION",
                     "base": 0.0,
                     "coefficient": 0.55
                   }
@@ -178,7 +178,7 @@
                 "modifiers": [
                   {
                     "attribute_id": "ranged_weapon:damage",
-                    "operation": "ADD_VALUE",
+                    "operation": "ADDITION",
                     "base": 0.0,
                     "coefficient": 0.1
                   }

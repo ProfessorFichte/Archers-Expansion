@@ -41,7 +41,7 @@ public final class ArchersExpansionArmorRenderer {
 
     private static GeoArmorRenderer make(String modelName, String textureName) {
         return GeoArmorRenderer.of(
-                Identifier.of(MOD_ID, "geo/" + modelName + ".geo.json"),
-                Identifier.of(MOD_ID, "textures/armor/" + textureName + ".png"));
+                new Identifier(MOD_ID, "geo/" + modelName + ".geo.json"),
+                new Identifier(MOD_ID, "textures/armor/" + textureName + ".png"));
     }
 }
