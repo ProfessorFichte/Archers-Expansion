@@ -1,10 +1,13 @@
 package com.archers_expansion.forge;
 
 import com.archers_expansion.ArchersExpansionMod;
+import com.archers_expansion.effect.ArchersExpansionEffects;
 import com.archers_expansion.entity.ModEntitiesRegistry;
 import com.archers_expansion.forge.client.ForgeClient;
 import com.archers_expansion.items.Armors;
 import com.archers_expansion.items.Group;
+import com.archers_expansion.items.Items;
+import com.archers_expansion.sounds.Sounds;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -19,17 +22,23 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.registries.RegisterEvent;
+import net.spell_engine.api.effect.Effects;
 
 import java.util.ArrayList;
 
 /// Forge 47 entrypoint (1.20.1 port of the NeoForge entrypoint).
 ///
-/// Forge locks every vanilla registry outside its own `RegisterEvent` window, so each `registerX()`
-/// call sits inside the window of the registry it writes to. The creative tab is created inside the
-/// `ITEM` window: `ITEM_GROUP` is a plain vanilla registry (not Forge-wrapped) and stays unfrozen for
-/// the whole `RegisterEvent` phase.
+/// Forge only clears the vanilla `NamespacedWrapper`'s own lock from **47.4.0** onwards, so on Forge
+/// 47.0-47.3 (and NeoForge 1.20.1) a plain `Registry.register` throws "Can not register to a locked
+/// registry" even inside the correct `RegisterEvent` window - and `mods.toml` declares
+/// `loaderVersion = "[47,)"`, so those are supported configurations. Everything below therefore writes
+/// through the `RegisterHelper` that `RegisterEvent` hands out.
 ///
-/// The Polar Bear's summon attributes need no listener here: `ModEntitiesRegistry.registerEntities()`
+/// The loops duplicate what `common` runs on Fabric, on purpose: the workaround stays inside `forge/`
+/// and the Fabric path is untouched. Each block is declared unconditionally - Forge posts one event per
+/// registry and `event.register` is a no-op unless its key matches.
+///
+/// The Polar Bear's summon attributes need no listener here: `ModEntitiesRegistry.registerSummonAttributes()`
 /// hands them to SpellEngine's `Platform.util().registerSummonedEntityAttributes`, which buffers them
 /// until SpellEngine's own `EntityAttributeCreationEvent` listener flushes them — that event fires
 /// after the `ENTITY_TYPE` window below, so the ordering holds. The Alter Ego is a plain
@@ -59,10 +68,42 @@ public final class ForgeMod {
     }
 
     public static void register(RegisterEvent event) {
-        event.register(RegistryKeys.SOUND_EVENT, reg -> ArchersExpansionMod.registerSounds());
-        event.register(RegistryKeys.STATUS_EFFECT, reg -> ArchersExpansionMod.registerEffects());
-        event.register(RegistryKeys.ENTITY_TYPE, reg -> ArchersExpansionMod.registerEntities());
-        event.register(RegistryKeys.ITEM, reg -> ArchersExpansionMod.registerItems());
+        // No link step: `Sounds.Entry` holds the raw `SoundEvent`, never a `RegistryEntry`.
+        event.register(RegistryKeys.SOUND_EVENT, helper ->
+                Sounds.soundsToRegister().forEach(helper::register));
+
+        event.register(RegistryKeys.STATUS_EFFECT, helper -> {
+            ArchersExpansionEffects.effectsToRegister(ArchersExpansionMod.effectsConfig.value)
+                    .forEach(helper::register);
+            Effects.linkEntries(ArchersExpansionEffects.entries);
+            // Reads `Entry#effect`, so it has to follow the loop, exactly as on the vanilla path.
+            ArchersExpansionEffects.installBehaviours();
+            // The trailing side effect of `ArchersExpansionMod.registerEffects()`.
+            ArchersExpansionMod.effectsConfig.save();
+        });
+
+        event.register(RegistryKeys.ENTITY_TYPE, helper -> {
+            ModEntitiesRegistry.entityTypesToRegister().forEach(helper::register);
+            ModEntitiesRegistry.registerSummonAttributes();
+        });
+
+        event.register(RegistryKeys.ITEM, helper -> {
+            // Class-init trigger for `Items.entries`, which mirrors the base armor sets.
+            Items.registerModItems();
+            // NOT `Armor.itemsToRegister(...)`: the Armory-compat sets are appended to `Armors.entries`
+            // only by this method, and calling the Spell Engine helper directly would drop all twelve
+            // pieces with no error.
+            Armors.itemsToRegister(ArchersExpansionMod.itemConfig.value.armor_sets).forEach(helper::register);
+            // The trailing side effect of `ArchersExpansionMod.registerItems()`.
+            ArchersExpansionMod.itemConfig.save();
+        });
+
+        // `creative_mode_tab` is `RegisterEvent` 65 while `item` is 7 - registering the group from the
+        // ITEM pass writes into a registry whose event has not fired yet.
+        event.register(RegistryKeys.ITEM_GROUP, helper -> {
+            Group.createItemGroup();
+            helper.register(Group.ID, Group.ARCHERS_EXPANSION);
+        });
     }
 
     public static void registerAttributes(EntityAttributeCreationEvent event) {

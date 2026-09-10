@@ -6,7 +6,9 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
@@ -43,8 +45,18 @@ public class Sounds {
     public static final Entry VENOM_CASK_LAND = add("venom_cask_land", 1);
 
     public static void register() {
+        soundsToRegister().forEach((id, soundEvent) -> Registry.register(Registries.SOUND_EVENT, id, soundEvent));
+    }
+
+    /// Every sound event keyed by the id it registers under. Creation only - nothing is written here, so a
+    /// loader that registers sounds itself (Forge, through `RegisterEvent`'s helper) iterates this instead
+    /// of calling {@link #register}. No link step: {@link Entry} holds the raw {@link SoundEvent}, never a
+    /// `RegistryEntry`, so nothing has to be read back out of the registry.
+    public static Map<Identifier, SoundEvent> soundsToRegister() {
+        var sounds = new LinkedHashMap<Identifier, SoundEvent>();
         for (var entry : entries) {
-            Registry.register(Registries.SOUND_EVENT, entry.id(), entry.soundEvent());
+            sounds.put(entry.id(), entry.soundEvent());
         }
+        return sounds;
     }
 }

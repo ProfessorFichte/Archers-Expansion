@@ -3,6 +3,7 @@ package com.archers_expansion.items;
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -465,7 +466,22 @@ public class Armors {
     public static Identifier sentinel_archer_passive = new Identifier(MOD_ID, "sentinel_archer");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
-        if (armoryLoadCheck()) {
+        itemsToRegister(configs).forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
+    }
+
+    /// Appends the Armory-compat sets to {@link #entries} when Armory RPGs is present, then hands the whole
+    /// list to Spell Engine's creation-only helper. Nothing is written into the ITEM registry here, so a
+    /// loader that registers items itself (Forge, through `RegisterEvent`'s helper) iterates this instead of
+    /// calling {@link #register}. Calling `Armor.itemsToRegister(configs, entries, Group.KEY)` directly
+    /// would silently drop the three compat sets - they are not in `entries` until this method runs.
+    /// **Must run inside the ITEM registration window**, and is idempotent.
+    public static Map<Identifier, Item> itemsToRegister(Map<String, ArmorSetConfig> configs) {
+        createArmoryCompatSets();
+        return Armor.itemsToRegister(configs, entries, Group.KEY);
+    }
+
+    private static void createArmoryCompatSets() {
+        if (bountyHunterArmorSet == null && armoryLoadCheck()) {
             bountyHunterArmorSet = groupKey(create(
                     material_bounty_hunter,
                     new Identifier(MOD_ID, "bounty_hunter"),
@@ -602,7 +618,6 @@ public class Armors {
                     commonSettings(sentinel_archer_passive)
             ).translatedName("Sentinel Archer Helmet", "Sentinel Archer Chest", "Sentinel Archer Leggings", "Sentinel Archer Boots"), MRPGCItemGroups.ARMORY_KEY);
         }
-        Armor.register(configs, entries, Group.KEY);
     }
 
     /// Sets registered into a different creative tab (e.g. Armory RPGs compat) get added to

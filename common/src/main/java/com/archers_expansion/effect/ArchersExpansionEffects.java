@@ -7,6 +7,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.spell_engine.rpg_series.config.AttributeModifier;
@@ -20,6 +21,7 @@ import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
@@ -187,6 +189,16 @@ public class ArchersExpansionEffects {
     }
 
     public static void register(ConfigFile.Effects config) {
+        effectsToRegister(config).forEach((id, effect) -> Registry.register(Registries.STATUS_EFFECT, id, effect));
+        Effects.linkEntries(entries);
+        installBehaviours();
+    }
+
+    /// Everything {@link #register} does before writing into the registry, plus the effects that still need
+    /// registering keyed by their id. Creation only - a loader that registers status effects itself (Forge,
+    /// through `RegisterEvent`'s helper) iterates this, then calls `Effects.linkEntries(entries)` and
+    /// {@link #installBehaviours()}.
+    public static Map<Identifier, StatusEffect> effectsToRegister(ConfigFile.Effects config) {
         for (var entry : entries) {
             Synchronized.configure(entry.effect, true);
         }
@@ -194,8 +206,13 @@ public class ArchersExpansionEffects {
         ActionImpairing.configure(CHOKING_GAS.effect, EntityActionsAllowed.SILENCE);
         ActionImpairing.configure(ENCHANTED_CRYSTAL_ARROW.effect, EntityActionsAllowed.STUN);
 
-        Effects.register(entries, config.effects);
+        return Effects.effectsToRegister(entries, config.effects);
+    }
 
+    /// The gameplay hooks {@link #register} installs after the registry writes. Separate so Forge can run
+    /// them from its own `STATUS_EFFECT` window - they read `Entry#effect`, so they must follow the
+    /// registration loop exactly as they do on the vanilla path.
+    public static void installBehaviours() {
         CombatEvents.ENTITY_ANY_ATTACK.register((args) -> {
             var attacker = args.attacker();
             var entry = getEntry(INFILTRATORS_VANISH);
