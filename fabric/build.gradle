@@ -98,9 +98,9 @@ dependencies {
 
     // Archers itself: no Java reference, but this mod extends its content and its spells point at
     // `archers:` sounds/items. Dev-runtime pin so the boot resolves them.
-    modLocalRuntime("net.rpg_series:archers-${platform}:${rootProject.archers_version}") { transitive = false }
+    modLocalRuntime("maven.modrinth:archers:${rootProject.archers_version}-${platform}") { transitive = false }
     // Required by Archers at runtime (village archery-range injection); not referenced by this mod.
-    modLocalRuntime("net.foundation:structure_pool_api-${platform}:${rootProject.structure_pool_api_version}") { transitive = false }
+    modLocalRuntime("maven.modrinth:structure-pool-api:${rootProject.structure_pool_api_version}-${platform}") { transitive = false }
     // Soft dependency, dev runtime only: without it More-RPG-Library's `runes:crafting` recipes cannot be parsed.
     modLocalRuntime("maven.modrinth:runes:${rootProject.runes_version}-${platform}") { transitive = false }
     // Dev runtime only: Archers' quivers. Mandatory in its Forge `mods.toml`, recommended on Fabric.
