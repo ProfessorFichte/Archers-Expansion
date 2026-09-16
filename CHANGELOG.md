@@ -1,4 +1,17 @@
-# 2.1.1+1.20.1
+# 3.0.0+1.20.1
+
+> ### ⚠️ Read this before updating
+>
+> This release is a **major technical overhaul and is not backwards compatible.**
+>
+> - **Requires the matching Spell Engine and More RPG Library releases.** This version will not run
+>   on Spell Engine **0.9.x**, and mods built against 0.9.x will not work alongside it.
+> - **Update the whole set together.** Spell Engine, More RPG Library and every RPG Series mod must
+>   be on matching versions. Mixing in an older add-on will break at startup or misbehave in play.
+> - **Spell books must be re-obtained.** Spell books from an older world no longer carry valid
+>   spell data. Re-craft them, or re-bind their spells at the Spell Binding Table.
+>
+> **Back up your world before updating.**
 
 - Ported to Minecraft 1.20.1 (Fabric + Forge 47, no Forgified Fabric API). NeoForge is replaced by Forge on
   this line; the same Forge jar also loads on NeoForge 1.20.1.

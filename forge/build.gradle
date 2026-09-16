@@ -59,6 +59,13 @@ configurations {
 }
 
 repositories {
+    // Bundle API for 1.20.1 is vendored (as in the RPG Series Archers repo) until upstream publishes a
+    // 1.20.1 build to Modrinth. See libs/maven/README.md for the exit path.
+    maven {
+        name = 'VendoredBundleApi'
+        url = uri("${rootProject.projectDir}/libs/maven")
+        content { includeGroup 'com.github.TheRedBrain' }
+    }
     maven { url 'https://maven.kosmx.dev/' }
     maven { url 'https://maven.shedaniel.me/' }
     maven {
@@ -71,8 +78,6 @@ repositories {
     maven { url 'https://maven.fabricmc.net' }
     // Curios (Forge accessory slots), pulled in by SpellEngine's Forge artifact
     maven { url 'https://maven.theillusivec4.top/' }
-
-    mavenLocal()
 }
 
 dependencies {
@@ -87,8 +92,8 @@ dependencies {
     modImplementation("maven.modrinth:tiny-config:${rootProject.tiny_config_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-power:${rootProject.spell_power_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:spell-engine:${rootProject.spell_engine_version}-${platform}") { transitive = false }
-    // More RPG Library is not publishable on Modrinth yet (see gradle.properties): mavenLocal only.
-    modImplementation("net.more_rpg_classes:more_rpg_library-${platform}:${rootProject.more_rpg_library_version}") { transitive = false }
+    // More RPG Library resolves once its 1.20.1 release is published (Fichte release tier 1).
+    modImplementation("maven.modrinth:more-rpg-library:${rootProject.more_rpg_library_version}-${platform}") { transitive = false }
     modImplementation("maven.modrinth:ranged-weapon-api:${rootProject.ranged_weapon_api_version}-${platform}") { transitive = false }
 
     // Archers itself: no Java reference, but this mod extends its content and its spells point at
@@ -99,6 +104,7 @@ dependencies {
     // Soft dependency, dev runtime only: without it More-RPG-Library's `runes:crafting` recipes cannot be parsed.
     modLocalRuntime("maven.modrinth:runes:${rootProject.runes_version}-${platform}") { transitive = false }
     // Dev runtime only: Archers' quivers. Mandatory in its Forge `mods.toml`, recommended on Fabric.
+    // Resolved from the vendored libs/maven repository (no remote artifact exists).
     modLocalRuntime("com.github.TheRedBrain:bundle-api-${platform}:${rootProject.bundle_api_version}") { transitive = false }
 
     // Forge 47 ships plain Mixin 0.8.5; the ecosystem libraries' mixins need MixinExtras. It is JiJ'd
