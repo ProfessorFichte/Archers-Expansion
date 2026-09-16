@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
-import static com.archers_expansion.compat.CompatLoadingCheck.armoryLoadCheck;
 
 public class Armors {
     private static final Supplier<Ingredient> TUNDRA_INGREDIENTS = () -> Ingredient.ofItems(
@@ -469,7 +468,7 @@ public class Armors {
         itemsToRegister(configs).forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
     }
 
-    /// Appends the Armory-compat sets to {@link #entries} when Armory RPGs is present, then hands the whole
+    /// Appends the Armory-compat sets to {@link #entries} (always, so their `equipment_set` files resolve), then hands the whole
     /// list to Spell Engine's creation-only helper. Nothing is written into the ITEM registry here, so a
     /// loader that registers items itself (Forge, through `RegisterEvent`'s helper) iterates this instead of
     /// calling {@link #register}. Calling `Armor.itemsToRegister(configs, entries, Group.KEY)` directly
@@ -481,7 +480,7 @@ public class Armors {
     }
 
     private static void createArmoryCompatSets() {
-        if (bountyHunterArmorSet == null && armoryLoadCheck()) {
+        if (bountyHunterArmorSet == null) {
             bountyHunterArmorSet = groupKey(create(
                     material_bounty_hunter,
                     new Identifier(MOD_ID, "bounty_hunter"),

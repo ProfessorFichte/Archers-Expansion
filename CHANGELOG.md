@@ -6,6 +6,9 @@
   (2.7.2), Armor Model API (1.0.0) and Ranged Weapon API (2.3.4), plus Archers itself.
 - Every registry write goes through Forge's `RegisterEvent` window, so the mod also boots on Forge 47.0-47.3
   and on NeoForge 1.20.1, which never unlock the vanilla registries.
+- The Bounty Hunter, Polar Stalker and Sentinel Archer armor is now always registered, so a server without
+  Armory RPGs starts (their set bonuses used to fail to load and abort the startup). Crafting these sets
+  still requires Armory RPGs.
 
 ### Accepted 1.20.1 limitations
 
