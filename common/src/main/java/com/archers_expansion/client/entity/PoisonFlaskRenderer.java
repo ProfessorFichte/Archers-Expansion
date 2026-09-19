@@ -18,7 +18,7 @@ import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 public class PoisonFlaskRenderer<T extends PoisonFlaskProjectile> extends EntityRenderer<T> {
     private final ItemRenderer itemRenderer;
 
-    public static final Identifier modelId = Identifier.of(MOD_ID, "spell_projectile/venom_flask");
+    public static final Identifier modelId = new Identifier(MOD_ID, "spell_projectile/venom_flask");
 
     private static final RenderLayer RENDER_LAYER = CustomLayers.projectile(LightEmission.GLOW);
 

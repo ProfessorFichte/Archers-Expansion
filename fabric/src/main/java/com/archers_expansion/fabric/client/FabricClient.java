@@ -1,4 +1,4 @@
-package com.archers_expansion .fabric.client;
+package com.archers_expansion.fabric.client;
 
 import com.archers_expansion.client.ArchersExpansionModClient;
 import com.archers_expansion.client.entity.AlterEgoRenderer;

@@ -1,0 +1,56 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+#issueTrackerURL = "https://github.com/ProfessorFichte/Archers-Expansion/issues"
+license = "ARR"
+
+[[mods]]
+modId = "archers_expansion"
+version = "${version}"
+displayName = "Archers Expansion"
+authors = "Fichte"
+description = '''
+Extends the Archers-Mod (RPG Series)  with new content. Spell Engine Add-On
+'''
+#logoFile = "icon.png"
+
+[[dependencies.archers_expansion]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "armor_model_api"
+mandatory = true
+versionRange = "[1.0.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "spell_engine"
+mandatory = true
+versionRange = "[1.10.5,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "ranged_weapon_api"
+mandatory = true
+versionRange = "[2.3.4,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "more_rpg_classes"
+mandatory = true
+versionRange = "[2.7.2,)"
+ordering = "AFTER"
+side = "BOTH"

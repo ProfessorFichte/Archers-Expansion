@@ -113,7 +113,7 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
                         .count(20)
                         .speed(0.18F, 0.2F)
                         .verticalOrigin(ParticleGroupBuilder.Batches.FEET));
-        final Identifier LEAVE_SOUND_ID = Identifier.of(ArchersExpansionMod.MOD_ID, "infiltrator_vanish");
+        final Identifier LEAVE_SOUND_ID = new Identifier(ArchersExpansionMod.MOD_ID, "infiltrator_vanish");
         final SoundEvent LEAVE_SOUND = SoundEvent.of(LEAVE_SOUND_ID);
         if (!this.getWorld().isClient()) {
             SoundHelper.playSoundEvent(this.getWorld(), this, LEAVE_SOUND);
@@ -122,20 +122,21 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
+    protected void initDataTracker() {
+        super.initDataTracker();
+        var tracker = this.getDataTracker();
 
-        builder.add(SPELL_ID_TRACKER, "");
-        builder.add(TIME_TO_LIVE_TRACKER, 0);
-        builder.add(COPIED_HEALTH_TRACKER, 20.0F);
-        builder.add(PLAYER_UUID_TRACKER, "");
+        tracker.startTracking(SPELL_ID_TRACKER, "");
+        tracker.startTracking(TIME_TO_LIVE_TRACKER, 0);
+        tracker.startTracking(COPIED_HEALTH_TRACKER, 20.0F);
+        tracker.startTracking(PLAYER_UUID_TRACKER, "");
 
-        builder.add(HELMET_TRACKER, ItemStack.EMPTY);
-        builder.add(CHESTPLATE_TRACKER, ItemStack.EMPTY);
-        builder.add(LEGGINGS_TRACKER, ItemStack.EMPTY);
-        builder.add(BOOTS_TRACKER, ItemStack.EMPTY);
-        builder.add(MAIN_HAND_TRACKER, ItemStack.EMPTY);
-        builder.add(OFF_HAND_TRACKER, ItemStack.EMPTY);
+        tracker.startTracking(HELMET_TRACKER, ItemStack.EMPTY);
+        tracker.startTracking(CHESTPLATE_TRACKER, ItemStack.EMPTY);
+        tracker.startTracking(LEGGINGS_TRACKER, ItemStack.EMPTY);
+        tracker.startTracking(BOOTS_TRACKER, ItemStack.EMPTY);
+        tracker.startTracking(MAIN_HAND_TRACKER, ItemStack.EMPTY);
+        tracker.startTracking(OFF_HAND_TRACKER, ItemStack.EMPTY);
     }
 
     @Override
@@ -143,7 +144,7 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
         super.onTrackedDataSet(data);
         var rawSpellId = this.getDataTracker().get(SPELL_ID_TRACKER);
         if (rawSpellId != null && !rawSpellId.isEmpty()) {
-            this.spellId = Identifier.of(rawSpellId);
+            this.spellId = new Identifier(rawSpellId);
         }
         this.timeToLive = this.getDataTracker().get(TIME_TO_LIVE_TRACKER);
         this.copiedHealth = this.getDataTracker().get(COPIED_HEALTH_TRACKER);
@@ -162,7 +163,7 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
         super.readCustomDataFromNbt(nbt);
 
         if (nbt.contains("SpellId")) {
-            this.spellId = Identifier.of(nbt.getString("SpellId"));
+            this.spellId = new Identifier(nbt.getString("SpellId"));
             this.getDataTracker().set(SPELL_ID_TRACKER, this.spellId.toString());
         }
         if (nbt.containsUuid("Owner")) this.ownerUuid = nbt.getUuid("Owner");
@@ -285,7 +286,7 @@ public class AlterEgoEntity extends PathAwareEntity implements SpellEntity.Spawn
     private void applyExplosionSpell() {
         var owner = this.getOwner();
         if (owner == null) return;
-        SpellAreaExplosion.trigger(this, owner, Identifier.of(MOD_ID, "alter_ego_explosion"));
+        SpellAreaExplosion.trigger(this, owner, new Identifier(MOD_ID, "alter_ego_explosion"));
     }
 
     public LivingEntity getOwner() {

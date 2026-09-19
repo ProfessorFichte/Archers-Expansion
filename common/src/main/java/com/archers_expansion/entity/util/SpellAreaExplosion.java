@@ -12,11 +12,13 @@ import net.spell_engine.internals.impact.SpellImpacts;
 import net.spell_engine.utils.SoundHelper;
 import net.spell_engine.utils.TargetHelper;
 import net.spell_power.api.SpellPower;
+import net.minecraft.registry.RegistryKey;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 
 public class SpellAreaExplosion {
     public static void trigger(Entity source, LivingEntity owner, Identifier spellId) {
-        var spellEntry = SpellRegistry.from(owner.getWorld()).getEntry(spellId).orElse(null);
+        var spellEntry = SpellRegistry.from(owner.getWorld())
+                .getEntry(RegistryKey.of(SpellRegistry.KEY, spellId)).orElse(null);
         if (spellEntry == null) return;
         var spell = spellEntry.value();
 

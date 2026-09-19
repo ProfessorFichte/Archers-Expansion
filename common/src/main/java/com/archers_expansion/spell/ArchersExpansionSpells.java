@@ -15,6 +15,7 @@ import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.*;
+import net.minecraft.registry.RegistryKey;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.api.util.TriState;
 import net.spell_engine.api.spell.tooltip.TooltipTokens;
@@ -102,7 +103,7 @@ public class ArchersExpansionSpells {
 
     public static Entry improved_disabling_shot = add(improved_disabling_shot());
     private static Entry improved_disabling_shot() {
-        var id = Identifier.of(MOD_ID, "improved_disabling_shot");
+        var id = new Identifier(MOD_ID, "improved_disabling_shot");
         var title = "Improved Disabling Shot";
         var description = "Increases duration of Disabling Shot by {effect_duration_add} sec";
         var spell = modifierSpellBase();
@@ -117,7 +118,7 @@ public class ArchersExpansionSpells {
     }
     public static Entry improved_arctic_volley = add(improved_arctic_volley());
     private static Entry improved_arctic_volley() {
-        var id = Identifier.of(MOD_ID, "improved_arctic_volley");
+        var id = new Identifier(MOD_ID, "improved_arctic_volley");
         var title = "Improved Arctic Volley";
         var description = "Reduces cooldown of Arctic Volley by {cooldown_duration_deduct} sec";
         var spell = modifierSpellBase();
@@ -132,7 +133,7 @@ public class ArchersExpansionSpells {
     }
     public static Entry improved_point_blank_shot = add(improved_point_blank_shot());
     private static Entry improved_point_blank_shot() {
-        var id = Identifier.of(MOD_ID, "improved_point_blank_shot");
+        var id = new Identifier(MOD_ID, "improved_point_blank_shot");
         var title = "Improved Point Blank Shot";
         var description = "Increases power multiplier of Point Blank Shot by {power_multiplier}";
         var spell = modifierSpellBase();
@@ -148,7 +149,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry fast_shot = add(fast_shot());
     private static Entry fast_shot() {
-        var id = Identifier.of(MOD_ID, "fast_shot");
+        var id = new Identifier(MOD_ID, "fast_shot");
         var spell = SpellBuilder.createSpellActive();
         var title = "Fast Shot";
         var description = "With your next shots, you gain Range Haste.";
@@ -157,7 +158,7 @@ public class ArchersExpansionSpells {
         spell.tier = 2;
         spell.group = POISONER;
 
-        spell.release.sound = Sound.withVolume(Identifier.of("archers","marker_shot"),0.5F);
+        spell.release.sound = Sound.withVolume(new Identifier("archers","marker_shot"),0.5F);
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_stripe, ParticleGroup.Motion.FLOAT)
                         .color(3208659199L)
@@ -205,7 +206,7 @@ public class ArchersExpansionSpells {
 
     public static final Entry bouncing_arrow = add(bouncing_arrow());
     private static Entry bouncing_arrow() {
-        var id = Identifier.of(MOD_ID, "bouncing_arrow");
+        var id = new Identifier(MOD_ID, "bouncing_arrow");
         var spell = SpellBuilder.createSpellActive();
         var title = "Bouncing Arrow";
         var description = "Creates a bouncing arrow, that bounces of targets, deals {damage} damage.";
@@ -273,7 +274,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry disabling_shot = add(disabling_shot());
     private static Entry disabling_shot() {
-        var id = Identifier.of(MOD_ID, "disabling_shot");
+        var id = new Identifier(MOD_ID, "disabling_shot");
         var spell = SpellBuilder.createSpellActive();
         var title = "Disabling Shot";
         var description = "Jumps back after shooting a target, slows for {effect_duration} seconds and damages the target for {damage} damage.";
@@ -346,7 +347,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry choking_gas = add(choking_gas());
     private static Entry choking_gas() {
-        var id = Identifier.of(MOD_ID, "choking_gas");
+        var id = new Identifier(MOD_ID, "choking_gas");
         var spell = SpellBuilder.createSpellActive();
         var title = "Choking Gas";
         var description = "Creates a poisonous gas cloud on projectile contact and deals {damage} damage.";
@@ -446,7 +447,7 @@ public class ArchersExpansionSpells {
 
     public static final Entry venom_cask = add(venom_cask());
     private static Entry venom_cask() {
-        var id = Identifier.of(MOD_ID, "venom_cask");
+        var id = new Identifier(MOD_ID, "venom_cask");
         var spell = SpellBuilder.createSpellActive();
         var title = "Venom Cask";
         var description = "Throws a cask of venom that shatters on impact, dealing {damage} damage. Leaves a poisonous cloud for {poison_duration}s that poisons those inside.";
@@ -511,7 +512,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry VENOM_CASK_CLOUD = add(VENOM_CASK_CLOUD());
     private static Entry VENOM_CASK_CLOUD() {
-        var id = Identifier.of(MOD_ID, "venom_cask_cloud");
+        var id = new Identifier(MOD_ID, "venom_cask_cloud");
         var title = "";
         var description = "";
 
@@ -526,7 +527,7 @@ public class ArchersExpansionSpells {
         cloud.despawn_ticks = 15;
         cloud.volume.radius = 3.0F;
         cloud.volume.area = new Spell.Target.Area();
-        cloud.volume.sound = Sound.withVolume(Identifier.of("archers_expansion:poison_cloud"), 0.3F);
+        cloud.volume.sound = Sound.withVolume(new Identifier("archers_expansion:poison_cloud"), 0.3F);
         cloud.impact_tick_interval = 25;
         cloud.time_to_live_seconds = 6;
         cloud.client_data = new Spell.Delivery.Cloud.ClientData();
@@ -564,7 +565,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry ALTER_EGO = add(ALTER_EGO());
     private static Entry ALTER_EGO() {
-        var id = Identifier.of(MOD_ID, "alter_ego");
+        var id = new Identifier(MOD_ID, "alter_ego");
         var title = "Alter Ego";
         var description = "Creates decoys and grants invisibility for {effect_duration} sec. Decoys explode for {explosion_damage} damage when destroyed, their duration expires or a enemy collides with them.";
 
@@ -633,7 +634,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry ALTER_EGO_EXPLOSION = add(ALTER_EGO_EXPLOSION());
     private static Entry ALTER_EGO_EXPLOSION() {
-        var id = Identifier.of(MOD_ID, "alter_ego_explosion");
+        var id = new Identifier(MOD_ID, "alter_ego_explosion");
         var title = "";
         var description = "";
 
@@ -681,7 +682,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry frozen_shot = add(frozen_shot());
     private static Entry frozen_shot() {
-        var id = Identifier.of(MOD_ID, "frozen_shot");
+        var id = new Identifier(MOD_ID, "frozen_shot");
         var spell = SpellBuilder.createSpellActive();
         var title = "Frozen Shot";
         var description = "Your next shots stack the frosted effect on targets, slowing them and freezing";
@@ -734,7 +735,7 @@ public class ArchersExpansionSpells {
 
     public static final Entry frozen_pact = add(frozen_pact());
     private static Entry frozen_pact() {
-        var id = Identifier.of(MOD_ID, "frozen_pact");
+        var id = new Identifier(MOD_ID, "frozen_pact");
         var spell = SpellBuilder.createSpellActive();
         var title = "Frozen Pact";
         var description = "Damages the target according to their Frozen ticks and reduces its attack for {effect_duration} seconds.";
@@ -782,7 +783,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry arctic_volley = add(arctic_volley());
     private static Entry arctic_volley() {
-        var id = Identifier.of(MOD_ID, "arctic_volley");
+        var id = new Identifier(MOD_ID, "arctic_volley");
         var spell = SpellBuilder.createSpellActive();
         var title = "Arctic Volley";
         var description = "Shots 8 arctic arrows that deal {damage} damage and frosts targets.";
@@ -858,7 +859,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry enchanted_crystal_arrow = add(enchanted_crystal_arrow());
     private static Entry enchanted_crystal_arrow() {
-        var id = Identifier.of(MOD_ID, "enchanted_crystal_arrow");
+        var id = new Identifier(MOD_ID, "enchanted_crystal_arrow");
         var spell = SpellBuilder.createSpellActive();
         var title = "Enchanted Crystal Arrow";
         var description = "Deals {damage} damage, stuns and freezes the target.";
@@ -939,7 +940,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry bearward = add(bearward());
     private static Entry bearward() {
-        var id = Identifier.of(MOD_ID, "bearward");
+        var id = new Identifier(MOD_ID, "bearward");
         var spell = SpellBuilder.createSpellActive();
         var title = "Polar Bearward";
         var description = "Summons a Polar Bear to fight by your side for "
@@ -986,7 +987,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry frozen_fusillade = add(frozen_fusillade());
     private static Entry frozen_fusillade() {
-        var id = Identifier.of(MOD_ID, "frozen_fusillade");
+        var id = new Identifier(MOD_ID, "frozen_fusillade");
         var spell = SpellBuilder.createSpellActive();
         var title = "Frozen Fusillade";
         var description = "Summons a barrage of ice around you, slowing nearby enemies and speeding your allies for {effect_duration_1} seconds.";
@@ -1017,7 +1018,7 @@ public class ArchersExpansionSpells {
         cloud.despawn_ticks = 20;
         cloud.volume.radius = 6.0F;
         cloud.volume.area = new Spell.Target.Area();
-        cloud.volume.sound = Sound.withVolume(Identifier.of("spell_engine:generic_frost_charging"),0.2F);
+        cloud.volume.sound = Sound.withVolume(new Identifier("spell_engine:generic_frost_charging"),0.2F);
         cloud.impact_tick_interval = 10;
         cloud.time_to_live_seconds = 6;
         cloud.client_data = new Spell.Delivery.Cloud.ClientData();
@@ -1059,7 +1060,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry dual_shot = add(dual_shot());
     private static Entry dual_shot() {
-        var id = Identifier.of(MOD_ID, "dual_shot");
+        var id = new Identifier(MOD_ID, "dual_shot");
         var spell = SpellBuilder.createSpellActive();
         var title = "Dual Shot";
         var description = "Fires two Arrows at once.";
@@ -1096,7 +1097,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry smoldering_arrow = add(smoldering_arrow());
     private static Entry smoldering_arrow() {
-        var id = Identifier.of(MOD_ID, "smoldering_arrow");
+        var id = new Identifier(MOD_ID, "smoldering_arrow");
         var spell = SpellBuilder.createSpellActive();
         var title = "Smoldering Arrow";
         var description = "Your next shot creates a small explosion near the target, damaging and burning entities around.";
@@ -1105,7 +1106,7 @@ public class ArchersExpansionSpells {
         spell.tier = 2;
         spell.group = EXPLOSIVES;
 
-        spell.release.sound = Sound.withVolume(Identifier.of("entity.generic.extinguish_fire"), 0.5F);
+        spell.release.sound = Sound.withVolume(new Identifier("entity.generic.extinguish_fire"), 0.5F);
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.flame)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -1165,7 +1166,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry point_blank_shot = add(point_blank_shot());
     private static Entry point_blank_shot() {
-        var id = Identifier.of(MOD_ID, "point_blank_shot");
+        var id = new Identifier(MOD_ID, "point_blank_shot");
         var spell = SpellBuilder.createSpellActive();
         var title = "Point-Blank Shot";
         var description = "Deals {damage} damage, also gets knocked back more, the closer it is to the caster.";
@@ -1225,7 +1226,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry pin_down = add(pin_down());
     private static Entry pin_down() {
-        var id = Identifier.of(MOD_ID, "pin_down");
+        var id = new Identifier(MOD_ID, "pin_down");
         var spell = SpellBuilder.createSpellActive();
         var title = "Pin Down";
         var description = "Deals {damage} damage, the target cant move or jump for {effect_duration} seconds.";
@@ -1292,7 +1293,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry scorched_earth = add(scorched_earth());
     private static Entry scorched_earth() {
-        var id = Identifier.of(MOD_ID, "scorched_earth");
+        var id = new Identifier(MOD_ID, "scorched_earth");
         var spell = SpellBuilder.createSpellActive();
         var title = "Scorched Earth";
         var description = "Fires a bolt that ignites a line of ground in front of you, dealing {damage} damage.";
@@ -1368,7 +1369,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry explosive_barrel = add(explosive_barrel());
     private static Entry explosive_barrel() {
-        var id = Identifier.of(MOD_ID, "explosive_barrel");
+        var id = new Identifier(MOD_ID, "explosive_barrel");
         var spell = SpellBuilder.createSpellActive();
         var title = "Explosive Barrel";
         var description = "Places an explosive barrel that detonates when struck or approached by an enemy, creating a huge explosion dealing {explosion_damage} damage and setting enemies on fire.";
@@ -1405,7 +1406,7 @@ public class ArchersExpansionSpells {
     }
     public static final Entry EXPLOSIVE_BARREL_EXPLOSION = add(EXPLOSIVE_BARREL_EXPLOSION());
     private static Entry EXPLOSIVE_BARREL_EXPLOSION() {
-        var id = Identifier.of(MOD_ID, "explosive_barrel_explosion");
+        var id = new Identifier(MOD_ID, "explosive_barrel_explosion");
         var title = "";
         var description = "";
 
@@ -1473,7 +1474,8 @@ public class ArchersExpansionSpells {
         TooltipTokens.registerCustom(venom_cask.id(), args -> {
             var world = args.player().getWorld();
             if (world == null) return args.description();
-            var optional = SpellRegistry.from(world).getEntry(VENOM_CASK_CLOUD.id());
+            var optional = SpellRegistry.from(world)
+                    .getEntry(RegistryKey.of(SpellRegistry.KEY, VENOM_CASK_CLOUD.id()));
             if (optional.isEmpty()) return args.description();
             var cloudSpell = optional.get().value();
             if (cloudSpell.deliver.clouds == null || cloudSpell.deliver.clouds.isEmpty()) return args.description();
@@ -1486,7 +1488,8 @@ public class ArchersExpansionSpells {
         TooltipTokens.registerCustom(spellId, args -> {
             var world = args.player().getWorld();
             if (world == null) return args.description();
-            var optional = SpellRegistry.from(world).getEntry(helperId);
+            var optional = SpellRegistry.from(world)
+                    .getEntry(RegistryKey.of(SpellRegistry.KEY, helperId));
             if (optional.isEmpty()) return args.description();
             var estimated = SpellEstimation.estimate(optional.get().value(), args.player(), ItemStack.EMPTY);
             if (estimated.damage().isEmpty()) return args.description();

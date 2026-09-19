@@ -1,9 +1,9 @@
 package com.archers_expansion.items;
 
 import net.fabric_extras.ranged_weapon.api.EntityAttributes_RangedWeapon;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -22,7 +22,7 @@ import net.spell_engine.rpg_series.config.AttributeModifier;
 import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.item.Armor;
-import net.spell_engine.api.spell.SpellDataComponents;
+import net.spell_engine.api.item.SpellItemData;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
-import static com.archers_expansion.compat.CompatLoadingCheck.armoryLoadCheck;
 
 public class Armors {
     private static final Supplier<Ingredient> TUNDRA_INGREDIENTS = () -> Ingredient.ofItems(
@@ -45,23 +44,24 @@ public class Armors {
             MRPGCItems.HARDENED_LEATHER, Items.LEATHER
     );
 
+    /// 1.20.1 has no data components: the equipment set is an item-level default served by SpellEngine's
+    /// `SpellItemData` NBT facade (the `Item.Settings#component` stand-in), and rarity is a plain settings call.
     private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
         return Armor.ItemSettingsTweaker.standard(itemSettings -> {
-            itemSettings
-                    .component(SpellDataComponents.EQUIPMENT_SET, equipmentSetId)
-                    .component(DataComponentTypes.RARITY, Rarity.RARE);
+            itemSettings.rarity(Rarity.RARE);
+            SpellItemData.defaults(itemSettings).equipmentSet(equipmentSetId);
         });
     }
 
-    private static final Identifier RANGED_HASTE_ID = Identifier.of(EntityAttributes_RangedWeapon.HASTE.id.toString());
-    private static final Identifier RANGED_DAMAGE_ID = Identifier.of(EntityAttributes_RangedWeapon.DAMAGE.id.toString());
-    private static final Identifier RANGED_VELOCITY_ID = Identifier.of(EntityAttributes_RangedWeapon.VELOCITY.id.toString());
-    private static final Identifier KNOCKBACK_ID = Identifier.ofVanilla("generic.knockback_resistance");
-    private static final Identifier ARMOR_TOUGHNESS_ID = Identifier.ofVanilla("generic.armor_toughness");
+    private static final Identifier RANGED_HASTE_ID = new Identifier(EntityAttributes_RangedWeapon.HASTE.id.toString());
+    private static final Identifier RANGED_DAMAGE_ID = new Identifier(EntityAttributes_RangedWeapon.DAMAGE.id.toString());
+    private static final Identifier RANGED_VELOCITY_ID = new Identifier(EntityAttributes_RangedWeapon.VELOCITY.id.toString());
+    private static final Identifier KNOCKBACK_ID = new Identifier("generic.knockback_resistance");
+    private static final Identifier ARMOR_TOUGHNESS_ID = new Identifier("generic.armor_toughness");
 
     private static final String CRIT_MOD_ID = "critical_strike";
-    private static final Identifier CRIT_CHANCE_ID = Identifier.of(CRIT_MOD_ID, "chance");
-    private static final Identifier CRIT_DAMAGE_ID = Identifier.of(CRIT_MOD_ID, "damage");
+    private static final Identifier CRIT_CHANCE_ID = new Identifier(CRIT_MOD_ID, "chance");
+    private static final Identifier CRIT_DAMAGE_ID = new Identifier(CRIT_MOD_ID, "damage");
 
     public static final float tundra_ranged_damage_t2 = 0.06F;
     public static final float tundra_haste_t2 = 0.04F;
@@ -98,71 +98,71 @@ public class Armors {
     public static final float deadeye_haste_t5 = 0.08F;
     public static final float deadeye_t5_crit_chance = 0.03F;
 
-    public static RegistryEntry<ArmorMaterial> material(String name,
-                                                        int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
-                                                        int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredient) {
-        var material = new ArmorMaterial(
+    /// 1.20.1: `ArmorMaterial` is a plain interface - no registry, no `Layer` list. SpellEngine's
+    /// `Armor.material(...)` builds a `CustomMaterial` whose `id` doubles as the (single) layer id.
+    public static ArmorMaterial material(String name,
+                                         int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
+                                         int enchantability, SoundEvent equipSound, Supplier<Ingredient> repairIngredient) {
+        return Armor.material(
+                new Identifier(MOD_ID, name),
                 Map.of(
                         ArmorItem.Type.HELMET, protectionHead,
                         ArmorItem.Type.CHESTPLATE, protectionChest,
                         ArmorItem.Type.LEGGINGS, protectionLegs,
                         ArmorItem.Type.BOOTS, protectionFeet),
                 enchantability, equipSound, repairIngredient,
-                List.of(new ArmorMaterial.Layer(Identifier.of(MOD_ID, name))),
-                0,0
-        );
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(MOD_ID, name), material);
+                0, 0);
     }
 
-    public static RegistryEntry<ArmorMaterial> material_tundra_hunter = material(
+    public static ArmorMaterial material_tundra_hunter = material(
             "tundra_hunter",
             2, 3, 3, 2,
             10,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, TUNDRA_INGREDIENTS);
 
-    public static RegistryEntry<ArmorMaterial> material_war_archer = material(
+    public static ArmorMaterial material_war_archer = material(
             "war_archer",
             3, 5, 4, 3,
             10,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, WAT_ARCHER_INGREDIENTS);
-    public static RegistryEntry<ArmorMaterial> material_deadeye = material(
+    public static ArmorMaterial material_deadeye = material(
             "deadeye",
             2, 3, 3, 2,
             10,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, DEADEYE_INGREDIENTS);
-    public static RegistryEntry<ArmorMaterial> material_netherite_tundra_hunter = material(
+    public static ArmorMaterial material_netherite_tundra_hunter = material(
             "netherite_tundra_hunter",
             2, 3, 3, 2,
             15,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
-    public static RegistryEntry<ArmorMaterial> material_netherite_war_archer = material(
+    public static ArmorMaterial material_netherite_war_archer = material(
             "netherite_war_archer",
             3, 5, 4, 3,
             15,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
-    public static RegistryEntry<ArmorMaterial> material_netherite_deadeye = material(
+    public static ArmorMaterial material_netherite_deadeye = material(
             "netherite_deadeye",
             2, 3, 3, 2,
             15,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
-    public static RegistryEntry<ArmorMaterial> material_bounty_hunter = material(
+    public static ArmorMaterial material_bounty_hunter = material(
             "bounty_hunter",
             2, 4, 4, 2,
             18,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
-    public static RegistryEntry<ArmorMaterial> material_polar_stalker = material(
+    public static ArmorMaterial material_polar_stalker = material(
             "polar_stalker",
             2, 4, 4, 2,
             18,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
-    public static RegistryEntry<ArmorMaterial> material_sentinel_archer = material(
+    public static ArmorMaterial material_sentinel_archer = material(
             "sentinel_archer",
             3, 5, 4, 3,
             18,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability,
+    private static Armor.Entry create(ArmorMaterial material, Identifier id, int durability,
                                       Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier, Armor.ItemSettingsTweaker settings) {
         var entry = Armor.Entry.create(
                 material,
@@ -187,7 +187,7 @@ public class Armors {
     public static final Armor.Entry tundra_hunter_t1 =
             create(
                     material_tundra_hunter,
-                    Identifier.of(MOD_ID, "tundra_hunter"),
+                    new Identifier(MOD_ID, "tundra_hunter"),
                             25,
                     ArchersExpansionArmor::tundra_hunter,
                     ArmorSetConfig.with(
@@ -221,7 +221,7 @@ public class Armors {
     public static final Armor.Entry war_archer_t1 =
             create(
                     material_war_archer,
-                    Identifier.of(MOD_ID, "war_archer"),
+                    new Identifier(MOD_ID, "war_archer"),
                     25,
                     ArchersExpansionArmor::war_archer,
                     ArmorSetConfig.with(
@@ -263,7 +263,7 @@ public class Armors {
     public static final Armor.Entry deadeye_t1 =
             create(
                     material_deadeye,
-                    Identifier.of(MOD_ID, "deadeye"),
+                    new Identifier(MOD_ID, "deadeye"),
                     25,
                     ArchersExpansionArmor::deadeye,
                     ArmorSetConfig.with(
@@ -317,7 +317,7 @@ public class Armors {
     public static final Armor.Entry netherite_tundra_hunter =
             create(
                     material_netherite_tundra_hunter,
-                    Identifier.of(MOD_ID, "netherite_tundra_hunter"),
+                    new Identifier(MOD_ID, "netherite_tundra_hunter"),
                     35,
                     ArchersExpansionArmor::tundra_hunter,
                     ArmorSetConfig.with(
@@ -351,7 +351,7 @@ public class Armors {
     public static final Armor.Entry netherite_war_archer =
             create(
                     material_netherite_war_archer,
-                    Identifier.of(MOD_ID, "netherite_war_archer"),
+                    new Identifier(MOD_ID, "netherite_war_archer"),
                     35,
                     ArchersExpansionArmor::war_archer,
                     ArmorSetConfig.with(
@@ -405,7 +405,7 @@ public class Armors {
     public static final Armor.Entry netherite_deadeye =
             create(
                     material_netherite_deadeye,
-                    Identifier.of(MOD_ID, "netherite_deadeye"),
+                    new Identifier(MOD_ID, "netherite_deadeye"),
                     35,
                     ArchersExpansionArmor::deadeye,
                     ArmorSetConfig.with(
@@ -460,15 +460,30 @@ public class Armors {
     public static Armor.Entry polarStalkerArmorSet;
     public static Armor.Entry sentinelArcherArmorSet;
 
-    public static Identifier bounty_hunter_passive = Identifier.of(MOD_ID, "bounty_hunter");
-    public static Identifier polar_stalker_passive = Identifier.of(MOD_ID, "polar_stalker");
-    public static Identifier sentinel_archer_passive = Identifier.of(MOD_ID, "sentinel_archer");
+    public static Identifier bounty_hunter_passive = new Identifier(MOD_ID, "bounty_hunter");
+    public static Identifier polar_stalker_passive = new Identifier(MOD_ID, "polar_stalker");
+    public static Identifier sentinel_archer_passive = new Identifier(MOD_ID, "sentinel_archer");
 
     public static void register(Map<String, ArmorSetConfig> configs) {
-        if (armoryLoadCheck()) {
+        itemsToRegister(configs).forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
+    }
+
+    /// Appends the Armory-compat sets to {@link #entries} (always, so their `equipment_set` files resolve), then hands the whole
+    /// list to Spell Engine's creation-only helper. Nothing is written into the ITEM registry here, so a
+    /// loader that registers items itself (Forge, through `RegisterEvent`'s helper) iterates this instead of
+    /// calling {@link #register}. Calling `Armor.itemsToRegister(configs, entries, Group.KEY)` directly
+    /// would silently drop the three compat sets - they are not in `entries` until this method runs.
+    /// **Must run inside the ITEM registration window**, and is idempotent.
+    public static Map<Identifier, Item> itemsToRegister(Map<String, ArmorSetConfig> configs) {
+        createArmoryCompatSets();
+        return Armor.itemsToRegister(configs, entries, Group.KEY);
+    }
+
+    private static void createArmoryCompatSets() {
+        if (bountyHunterArmorSet == null) {
             bountyHunterArmorSet = groupKey(create(
                     material_bounty_hunter,
-                    Identifier.of(MOD_ID, "bounty_hunter"),
+                    new Identifier(MOD_ID, "bounty_hunter"),
                     40,
                     Armor.CustomItem::new,
                     ArmorSetConfig.with(
@@ -517,7 +532,7 @@ public class Armors {
             ).translatedName("Bounty Hunter Hood", "Bounty Hunter Tunic", "Bounty Hunter Leggings", "Bounty Hunter Boots"), MRPGCItemGroups.ARMORY_KEY);
             polarStalkerArmorSet = groupKey(create(
                     material_polar_stalker,
-                    Identifier.of(MOD_ID, "polar_stalker"),
+                    new Identifier(MOD_ID, "polar_stalker"),
                     40,
                     Armor.CustomItem::new,
                     ArmorSetConfig.with(
@@ -550,7 +565,7 @@ public class Armors {
             ).translatedName("Polar Stalker Hood", "Polar Stalker Tunic", "Polar Stalker Leggings", "Polar Stalker Boots"), MRPGCItemGroups.ARMORY_KEY);
             sentinelArcherArmorSet = groupKey(create(
                     material_sentinel_archer,
-                    Identifier.of(MOD_ID, "sentinel_archer"),
+                    new Identifier(MOD_ID, "sentinel_archer"),
                     40,
                     Armor.CustomItem::new,
                     ArmorSetConfig.with(
@@ -602,7 +617,6 @@ public class Armors {
                     commonSettings(sentinel_archer_passive)
             ).translatedName("Sentinel Archer Helmet", "Sentinel Archer Chest", "Sentinel Archer Leggings", "Sentinel Archer Boots"), MRPGCItemGroups.ARMORY_KEY);
         }
-        Armor.register(configs, entries, Group.KEY);
     }
 
     /// Sets registered into a different creative tab (e.g. Armory RPGs compat) get added to

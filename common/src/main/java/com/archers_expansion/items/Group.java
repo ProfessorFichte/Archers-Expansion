@@ -4,6 +4,7 @@ import com.archers_expansion.ArchersExpansionMod;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -11,8 +12,8 @@ import net.minecraft.util.Identifier;
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
 public class Group {
-    public static Identifier ID = Identifier.of(MOD_ID, "generic");
-    public static RegistryKey<ItemGroup> KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(),Identifier.of(MOD_ID,"generic"));
+    public static Identifier ID = new Identifier(MOD_ID, "generic");
+    public static RegistryKey<ItemGroup> KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), ID);
     public static ItemGroup ARCHERS_EXPANSION;
 
     public static ItemStack icon() {
@@ -23,7 +24,23 @@ public class Group {
         return Text.translatable("itemGroup." + MOD_ID + ".general");
     }
 
+    /// Loader-neutral on this line: vanilla `ItemGroup.Builder` replaces `FabricItemGroup.builder()`
+    /// (Fabric API) and NeoForge's `ItemGroup.builder()` (a NeoForge addition that Forge 47 lacks).
     public static void registerItemGroups() {
+        createItemGroup();
+        Registry.register(Registries.ITEM_GROUP, KEY, ARCHERS_EXPANSION);
+    }
+
+    /// Builds {@link #ARCHERS_EXPANSION} without registering it. Creation only - a loader that registers
+    /// item groups itself (Forge, through `RegisterEvent`'s helper) calls this from its own
+    /// `ITEM_GROUP` window. `creative_mode_tab` is `RegisterEvent` 65 while `item` is 7, so the group
+    /// cannot ride along in the ITEM pass. The icon is a supplier, so it does not need the armor items
+    /// to exist yet. Row/column are irrelevant for a separate group.
+    public static void createItemGroup() {
         ArchersExpansionMod.LOGGER.info("Registering Item Groups for " + MOD_ID);
+        ARCHERS_EXPANSION = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
+                .icon(Group::icon)
+                .displayName(displayName())
+                .build();
     }
 }
