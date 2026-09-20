@@ -20,8 +20,6 @@ import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 public class PolarBearEntity extends SummonedEntity {
     public static EntityType<PolarBearEntity> ENTITY_TYPE;
 
-    /// 1.20.1 attribute modifiers are UUID-keyed (the `Identifier`-keyed API is 1.21+).
-    /// SpellEngine derives a stable UUID from an identifier, so the modifier survives a restart.
     private static final Identifier SPEED_BURST_MODIFIER_ID = new Identifier(MOD_ID, "polar_bear_speed_burst");
     private static final UUID SPEED_BURST_MODIFIER_UUID = ModifierDefinitions.uuid(SPEED_BURST_MODIFIER_ID);
     private static final int SPEED_BURST_DURATION_TICKS = 60;

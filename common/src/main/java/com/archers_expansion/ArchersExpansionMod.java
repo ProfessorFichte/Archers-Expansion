@@ -77,7 +77,6 @@ public class ArchersExpansionMod{
 	}
 	public static void registerItems() {
 		Items.registerModItems();
-		// Creates + registers `archers_expansion:generic` before the armor sets are registered into it.
 		Group.registerItemGroups();
 		Armors.register(itemConfig.value.armor_sets);
 		itemConfig.save();

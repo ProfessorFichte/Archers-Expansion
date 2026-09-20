@@ -26,7 +26,6 @@ import java.util.Map;
 import static com.archers_expansion.ArchersExpansionMod.MOD_ID;
 
 public class ArchersExpansionEffects {
-    /// 1.20.1 `EntityAttribute` has no `getIdAsString()` - resolve through the registry instead.
     private static String attributeId(EntityAttribute attribute) {
         return Registries.ATTRIBUTE.getId(attribute).toString();
     }
@@ -183,7 +182,6 @@ public class ArchersExpansionEffects {
             new EffectConfig(List.of())
     ));
 
-    /// 1.20.1 status-effect APIs take the raw {@link StatusEffect}, not a `RegistryEntry`.
     public static StatusEffect getEntry(Effects.Entry entry) {
         return entry.effect;
     }
@@ -194,10 +192,6 @@ public class ArchersExpansionEffects {
         installBehaviours();
     }
 
-    /// Everything {@link #register} does before writing into the registry, plus the effects that still need
-    /// registering keyed by their id. Creation only - a loader that registers status effects itself (Forge,
-    /// through `RegisterEvent`'s helper) iterates this, then calls `Effects.linkEntries(entries)` and
-    /// {@link #installBehaviours()}.
     public static Map<Identifier, StatusEffect> effectsToRegister(ConfigFile.Effects config) {
         for (var entry : entries) {
             Synchronized.configure(entry.effect, true);
@@ -209,9 +203,6 @@ public class ArchersExpansionEffects {
         return Effects.effectsToRegister(entries, config.effects);
     }
 
-    /// The gameplay hooks {@link #register} installs after the registry writes. Separate so Forge can run
-    /// them from its own `STATUS_EFFECT` window - they read `Entry#effect`, so they must follow the
-    /// registration loop exactly as they do on the vanilla path.
     public static void installBehaviours() {
         CombatEvents.ENTITY_ANY_ATTACK.register((args) -> {
             var attacker = args.attacker();

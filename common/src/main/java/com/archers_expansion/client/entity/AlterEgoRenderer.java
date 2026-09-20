@@ -33,7 +33,6 @@ public class AlterEgoRenderer extends MobEntityRenderer<AlterEgoEntity, BipedEnt
             if (connection != null) {
                 var playerEntry = connection.getPlayerListEntry(playerUuid);
                 if (playerEntry != null) {
-                    // 1.20.1: a plain texture Identifier, not the 1.21 `SkinTextures` record.
                     return playerEntry.getSkinTexture();
                 }
             }

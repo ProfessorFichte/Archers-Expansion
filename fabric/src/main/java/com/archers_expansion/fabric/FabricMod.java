@@ -17,8 +17,6 @@ public final class FabricMod implements ModInitializer {
         ArchersExpansionMod.registerEffects();
         ArchersExpansionMod.registerSounds();
         ArchersExpansionMod.registerEntities();
-        // The creative tab is created and registered inside registerItems() now (loader-neutral
-        // `ItemGroup.Builder`), so both loaders share the ordering.
         ArchersExpansionMod.registerItems();
 
         ModEntitiesRegistry.registerEntityAttributes(FabricDefaultAttributeRegistry::register);

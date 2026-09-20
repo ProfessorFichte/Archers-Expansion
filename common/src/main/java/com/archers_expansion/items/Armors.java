@@ -44,8 +44,6 @@ public class Armors {
             MRPGCItems.HARDENED_LEATHER, Items.LEATHER
     );
 
-    /// 1.20.1 has no data components: the equipment set is an item-level default served by SpellEngine's
-    /// `SpellItemData` NBT facade (the `Item.Settings#component` stand-in), and rarity is a plain settings call.
     private static Armor.ItemSettingsTweaker commonSettings(Identifier equipmentSetId) {
         return Armor.ItemSettingsTweaker.standard(itemSettings -> {
             itemSettings.rarity(Rarity.RARE);
@@ -98,8 +96,6 @@ public class Armors {
     public static final float deadeye_haste_t5 = 0.08F;
     public static final float deadeye_t5_crit_chance = 0.03F;
 
-    /// 1.20.1: `ArmorMaterial` is a plain interface - no registry, no `Layer` list. SpellEngine's
-    /// `Armor.material(...)` builds a `CustomMaterial` whose `id` doubles as the (single) layer id.
     public static ArmorMaterial material(String name,
                                          int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
                                          int enchantability, SoundEvent equipSound, Supplier<Ingredient> repairIngredient) {
@@ -468,12 +464,6 @@ public class Armors {
         itemsToRegister(configs).forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
     }
 
-    /// Appends the Armory-compat sets to {@link #entries} (always, so their `equipment_set` files resolve), then hands the whole
-    /// list to Spell Engine's creation-only helper. Nothing is written into the ITEM registry here, so a
-    /// loader that registers items itself (Forge, through `RegisterEvent`'s helper) iterates this instead of
-    /// calling {@link #register}. Calling `Armor.itemsToRegister(configs, entries, Group.KEY)` directly
-    /// would silently drop the three compat sets - they are not in `entries` until this method runs.
-    /// **Must run inside the ITEM registration window**, and is idempotent.
     public static Map<Identifier, Item> itemsToRegister(Map<String, ArmorSetConfig> configs) {
         createArmoryCompatSets();
         return Armor.itemsToRegister(configs, entries, Group.KEY);

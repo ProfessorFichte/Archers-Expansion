@@ -23,7 +23,6 @@ import java.util.List;
 
 public class ArcherExpansionSummons {
 
-    /// 1.20.1 `EntityAttribute` has no `getIdAsString()` - resolve through the registry instead.
     private static String attributeId(EntityAttribute attribute) {
         return Registries.ATTRIBUTE.getId(attribute).toString();
     }

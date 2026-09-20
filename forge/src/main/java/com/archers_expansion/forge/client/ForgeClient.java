@@ -17,9 +17,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.spell_engine.client.render.SpellCloudRenderer;
 
-/// Explicit mod-bus listeners rather than `@Mod.EventBusSubscriber(Dist.CLIENT)`, so this class (and
-/// everything client-only it references) is never loaded on a dedicated server. `ForgeMod` gates the
-/// registration on `FMLEnvironment.dist`.
 public class ForgeClient {
     public static void register(IEventBus modBus) {
         modBus.addListener(EventPriority.NORMAL, false, EntityRenderersEvent.RegisterLayerDefinitions.class,

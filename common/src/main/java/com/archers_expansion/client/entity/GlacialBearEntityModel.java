@@ -168,7 +168,6 @@ public class GlacialBearEntityModel extends SinglePartEntityModel<PolarBearEntit
         this.updateAnimation(entity.despawnAnimationState, GlacialBearAnimations.DEATH, ageInTicks, 1.0f);
     }
 
-    /// 1.20.1 passes four float colour channels instead of the packed `int color` of 1.21.
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay,
                        float red, float green, float blue, float alpha) {

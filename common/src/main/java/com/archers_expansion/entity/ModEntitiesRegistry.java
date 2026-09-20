@@ -22,10 +22,6 @@ public class ModEntitiesRegistry {
         registerSummonAttributes();
     }
 
-    /// Builds every entity type and fills the `ENTITY_TYPE` static fields, returning them keyed by the id
-    /// they register under. Creation only - nothing is written here, so a loader that registers entity
-    /// types itself (Forge, through `RegisterEvent`'s helper) iterates this instead of calling
-    /// {@link #registerEntities}, then calls {@link #registerSummonAttributes()}.
     public static Map<Identifier, EntityType<?>> entityTypesToRegister() {
         var types = new LinkedHashMap<Identifier, EntityType<?>>();
 
@@ -74,8 +70,6 @@ public class ModEntitiesRegistry {
         return types;
     }
 
-    /// The trailing side effect of {@link #registerEntities}: hands the Polar Bear's summon attributes to
-    /// SpellEngine, which buffers them until its own `EntityAttributeCreationEvent` listener flushes them.
     public static void registerSummonAttributes() {
         SummonedEntities.registerAttributes(POLAR_BEAR_ID, PolarBearEntity.ENTITY_TYPE, ArchersExpansionMod.summonConfig.value::entryFor);
     }

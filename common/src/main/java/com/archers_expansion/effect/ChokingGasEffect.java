@@ -13,8 +13,6 @@ public class ChokingGasEffect extends StatusEffect {
 
     @Override
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        // `#minecraft:ignores_poison_and_regen` is a 1.21 tag; on 1.20.1 poison immunity is the
-        // hardcoded undead check that vanilla's own poison effect uses.
         if (entity.isUndead()) {
             entity.removeStatusEffect(ArchersExpansionEffects.CHOKING_GAS.effect);
         }

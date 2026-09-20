@@ -18,8 +18,6 @@ import java.util.function.Consumer;
 
 public class CraftingRecipeGenerator extends FabricRecipeProvider {
 
-    /// 1.20.1 / Fabric API 0.92: `FabricRecipeProvider` is registry-independent - a 1-arg constructor and
-    /// `generate(Consumer<RecipeJsonProvider>)`.
     public CraftingRecipeGenerator(FabricDataOutput output) {
         super(output);
     }

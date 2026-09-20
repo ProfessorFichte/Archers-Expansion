@@ -24,18 +24,11 @@ public class Group {
         return Text.translatable("itemGroup." + MOD_ID + ".general");
     }
 
-    /// Loader-neutral on this line: vanilla `ItemGroup.Builder` replaces `FabricItemGroup.builder()`
-    /// (Fabric API) and NeoForge's `ItemGroup.builder()` (a NeoForge addition that Forge 47 lacks).
     public static void registerItemGroups() {
         createItemGroup();
         Registry.register(Registries.ITEM_GROUP, KEY, ARCHERS_EXPANSION);
     }
 
-    /// Builds {@link #ARCHERS_EXPANSION} without registering it. Creation only - a loader that registers
-    /// item groups itself (Forge, through `RegisterEvent`'s helper) calls this from its own
-    /// `ITEM_GROUP` window. `creative_mode_tab` is `RegisterEvent` 65 while `item` is 7, so the group
-    /// cannot ride along in the ITEM pass. The icon is a supplier, so it does not need the armor items
-    /// to exist yet. Row/column are irrelevant for a separate group.
     public static void createItemGroup() {
         ArchersExpansionMod.LOGGER.info("Registering Item Groups for " + MOD_ID);
         ARCHERS_EXPANSION = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)

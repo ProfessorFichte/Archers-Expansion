@@ -56,18 +56,6 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ArchersExpansionAdvancementDatagen::new);
 	}
 
-	/// Terminates the datagen JVM once the run is over.
-	///
-	/// This mod's datagen runs **server-side** (`client = false` in `fabric/build.gradle`), because
-	/// More-RPG-Library `2.7.2.001+1.20.1`'s client-only `LivingEntityRenderStealth` mixin fails its
-	/// injection check and kills any run that classloads `LivingEntityRenderer`. Vanilla's server-side
-	/// data `Main` returns without calling `System.exit`, and the dev launch leaves non-daemon worker
-	/// pools behind, so the process would otherwise idle forever after the last file is written and the
-	/// Gradle task would never finish. (The client datagen run does not need this: `MinecraftClient`
-	/// exits the JVM itself.)
-	///
-	/// The exit code still reports failure: an exception out of a provider reaches the main thread's
-	/// uncaught handler, which is chained here.
 	private static void exitWhenDone() {
 		var mainThread = Thread.currentThread();
 		var failed = new AtomicBoolean(false);
@@ -146,11 +134,6 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 		public ItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
 			super(output, registriesFuture);
 		}
-		/// The armory-locked sets: everything `generateArmorTags` does except the loot-*tier* tag
-		/// (they are not part of the tiered loot pools). 1.20.1 has no `#minecraft:{head,chest,leg,foot}_armor`
-		/// item tags, so the four vanilla armor-slot tags the 1.21.1 version wrote are simply gone; SpellEngine's
-		/// `generateArmorTags` instead opts the pieces into `#minecraft:trimmable_armor`, which on this game
-		/// version is an explicit list that gates smithing-table trims.
 		public void armoryTags(List<Armor.Entry> armors) {
 			armoryTags(armors, EnumSet.noneOf(RPGSeriesItemTags.ArmorMetaType.class));
 		}
@@ -181,8 +164,6 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 	}
 
 	public static class UnsmeltGenerator extends FabricRecipeProvider {
-		/// 1.20.1 / Fabric API 0.92: `FabricRecipeProvider` is registry-independent - a 1-arg constructor and
-		/// `generate(Consumer<RecipeJsonProvider>)`.
 		public UnsmeltGenerator(FabricDataOutput output) {
 			super(output);
 		}
@@ -225,7 +206,6 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 	}
 
 	public static class LangGenerator extends FabricLanguageProvider {
-		/// 1.20.1 / Fabric API 0.92: no registry lookup - 2-arg constructor and a 1-arg `generateTranslations`.
 		public LangGenerator(FabricDataOutput dataOutput) {
 			super(dataOutput, "en_us");
 		}
