@@ -1,0 +1,36 @@
+{
+  "values": [
+    {
+      "id": "archers_expansion:deadeye_head",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:deadeye_feet",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_deadeye_head",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_deadeye_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_deadeye_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_deadeye_feet",
+      "required": false
+    }
+  ]
+}

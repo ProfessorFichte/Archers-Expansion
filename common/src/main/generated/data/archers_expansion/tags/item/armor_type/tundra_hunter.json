@@ -1,0 +1,36 @@
+{
+  "values": [
+    {
+      "id": "archers_expansion:tundra_hunter_head",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:tundra_hunter_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:tundra_hunter_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:tundra_hunter_feet",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_tundra_hunter_head",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_tundra_hunter_chest",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_tundra_hunter_legs",
+      "required": false
+    },
+    {
+      "id": "archers_expansion:netherite_tundra_hunter_feet",
+      "required": false
+    }
+  ]
+}
