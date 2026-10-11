@@ -8,7 +8,7 @@ import com.archers_expansion.sounds.Sounds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.custom.MoreSpellSchools;
+import com.mrpg_lib.compat.spell_power.MoreSpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_engine.api.render.LightEmission;
@@ -704,7 +704,7 @@ public class ArchersExpansionSpells {
         );
         spell.deliver.stash_effect.impact_mode = Spell.Delivery.StashEffect.ImpactMode.TRANSFER;
 
-        var frost = SpellBuilder.Impacts.effectAdd("more_rpg_classes:frosted", 10, 1, 4);
+        var frost = SpellBuilder.Impacts.effectAdd("mrpg_lib:frosted", 10, 1, 4);
         frost.action.status_effect.refresh_duration = true;
         freezeImmuneDeny(frost);
         frost.visuals = Fx.Visuals.of(
@@ -835,7 +835,7 @@ public class ArchersExpansionSpells {
 
         var damage = SpellBuilder.Impacts.damage(0.15F, 0F);
 
-        var frost = SpellBuilder.Impacts.effectSet("more_rpg_classes:frosted", 5, 0);
+        var frost = SpellBuilder.Impacts.effectSet("mrpg_lib:frosted", 5, 0);
         frost.action.status_effect.amplifier_power_multiplier = 0.05F;
         frost.action.status_effect.show_particles = false;
         freezeImmuneDeny(frost);
@@ -952,7 +952,7 @@ public class ArchersExpansionSpells {
         spell.group = STALKER;
 
 
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:two_handed_roar");
+        spell.release.animation = PlayerAnimation.of("mrpg_lib:two_handed_roar");
         spell.release.sound = new Sound("spell_engine:generic_frost_release");
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_frost, ParticleGroup.Motion.BURST)
@@ -1208,7 +1208,7 @@ public class ArchersExpansionSpells {
         custom.action.custom = new Spell.Impact.Action.Custom();
         custom.action.type = Spell.Impact.Action.Type.CUSTOM;
         custom.action.custom.intent = SpellTarget.Intent.HARMFUL;
-        custom.action.custom.handler = "more_rpg_classes:range_scaled_knockback";
+        custom.action.custom.handler = "mrpg_lib:range_scaled_knockback";
         custom.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of("poof")
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -1302,10 +1302,10 @@ public class ArchersExpansionSpells {
         spell.group = EXPLOSIVES;
 
         spell.active.cast.duration = 0.5F;
-        spell.active.cast.animation = PlayerAnimation.of("more_rpg_classes:archery_downwards_pull");
+        spell.active.cast.animation = PlayerAnimation.of("mrpg_lib:archery_downwards_pull");
         spell.active.cast.sound = new Sound("archers:bow_pull");
 
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:archery_downwards_release");
+        spell.release.animation = PlayerAnimation.of("mrpg_lib:archery_downwards_release");
         spell.release.sound = new Sound("minecraft:item.crossbow.shoot");
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.flame)
@@ -1378,7 +1378,7 @@ public class ArchersExpansionSpells {
         spell.secondary_archetype = Spell.ExtendedArchetype.ANY;
         spell.group = EXPLOSIVES;
 
-        spell.release.animation = PlayerAnimation.of("more_rpg_classes:place_object_instant");
+        spell.release.animation = PlayerAnimation.of("mrpg_lib:place_object_instant");
         spell.release.sound = new Sound("minecraft:block.barrel.open");
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)

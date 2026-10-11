@@ -41,6 +41,13 @@ versionRange = "[${spell_engine_version},)"
 ordering = "AFTER"
 side = "BOTH"
 
+[[dependencies.archers_expansion]]
+modId = "mrpg_lib"
+type = "required"
+versionRange = "[${more_rpg_library_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
 
 [[mixins]]
 config = "archers-expansion.mixins.json"

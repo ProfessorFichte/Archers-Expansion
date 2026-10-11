@@ -5,7 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.registry.tag.EntityTypeTags;
-import net.more_rpg_classes.util.CustomMethods;
+import com.mrpg_lib.util.CustomMethods;
 
 public class FrozenPactEffect extends StatusEffect {
     protected FrozenPactEffect(StatusEffectCategory category, int color) {

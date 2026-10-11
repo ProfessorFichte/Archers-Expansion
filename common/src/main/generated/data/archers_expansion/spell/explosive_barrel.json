@@ -8,7 +8,7 @@
   "active": {},
   "release": {
     "animation": {
-      "id": "more_rpg_classes:place_object_instant"
+      "id": "mrpg_lib:place_object_instant"
     },
     "visuals": {
       "particles": [

@@ -3,13 +3,13 @@
   "category": "equipment",
   "key": {
     "A": {
-      "tag": "more_rpg_classes:polar_bear_fur"
+      "tag": "mrpg_lib:polar_bear_fur"
     },
     "B": {
       "item": "minecraft:prismarine_shard"
     },
     "C": {
-      "item": "more_rpg_classes:hardened_leather"
+      "item": "mrpg_lib:hardened_leather"
     }
   },
   "pattern": [

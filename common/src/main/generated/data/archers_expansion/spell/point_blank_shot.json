@@ -91,7 +91,7 @@
         "type": "CUSTOM",
         "custom": {
           "intent": "HARMFUL",
-          "handler": "more_rpg_classes:range_scaled_knockback"
+          "handler": "mrpg_lib:range_scaled_knockback"
         }
       },
       "visuals": {

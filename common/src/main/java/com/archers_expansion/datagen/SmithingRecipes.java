@@ -4,7 +4,7 @@ import com.archers_expansion.items.Armors;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.datagen.SmithingRecipeGenerator;
+import com.mrpg_lib.datagen.SmithingRecipeGenerator;
 
 public class SmithingRecipes extends SmithingRecipeGenerator {
 
@@ -15,8 +15,8 @@ public class SmithingRecipes extends SmithingRecipeGenerator {
     @Override
     public void generate() {
         Identifier templateItem = Identifier.of("armory_rpgs", "epic_armor_upgrade");
-        Identifier generalCrystal = Identifier.of("more_rpg_classes", "general_upgrade_crystal");
-        Identifier ravagerCrystal = Identifier.of("more_rpg_classes", "ravager_upgrade_crystal");
+        Identifier generalCrystal = Identifier.of("mrpg_lib", "general_upgrade_crystal");
+        Identifier ravagerCrystal = Identifier.of("mrpg_lib", "ravager_upgrade_crystal");
 
         createArmorSetUpgrade(
                 "smithing_from_deadeye",

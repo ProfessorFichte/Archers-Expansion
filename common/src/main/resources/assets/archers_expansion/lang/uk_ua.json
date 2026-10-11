@@ -124,12 +124,12 @@
   "advancements.archers_expansion.war_archer_spells.title": "Зарядити, натягнути, вогонь!",
   "advancements.archers_expansion.war_archer_spells.description": "Отримайте всі заклинання Бойового лучника",
   
-  "advancements.more_rpg_content.path_choose_war_archer.title": "Шлях Бойового лучника",
-  "advancements.more_rpg_content.path_choose_war_archer.description": "Створіть Інструкції Бойового лучника",
-  "advancements.more_rpg_content.path_choose_deadeye.title": "Шлях Снайпера",
-  "advancements.more_rpg_content.path_choose_deadeye.description": "Створіть Список Снайпера",
-  "advancements.more_rpg_content.path_choose_tundra_hunter.title": "Шлях Мисливця",
-  "advancements.more_rpg_content.path_choose_tundra_hunter.description": "Створіть Полювання в Тундрі",
+  "advancements.archers_expansion.path_choose_war_archer.title": "Шлях Бойового лучника",
+  "advancements.archers_expansion.path_choose_war_archer.description": "Створіть Інструкції Бойового лучника",
+  "advancements.archers_expansion.path_choose_deadeye.title": "Шлях Снайпера",
+  "advancements.archers_expansion.path_choose_deadeye.description": "Створіть Список Снайпера",
+  "advancements.archers_expansion.path_choose_tundra_hunter.title": "Шлях Мисливця",
+  "advancements.archers_expansion.path_choose_tundra_hunter.description": "Створіть Полювання в Тундрі",
   
   "equipment_set.archers_expansion.bounty_hunter": "Полювання за головами",
   "equipment_set.archers_expansion.polar_stalker": "Полярна здобич",

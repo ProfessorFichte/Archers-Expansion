@@ -8,7 +8,7 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.DataWriter;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.datagen.SpellEngineAdvancementHelper;
+import com.mrpg_lib.datagen.SpellEngineAdvancementHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Path;
@@ -67,7 +67,7 @@ public class ArchersExpansionAdvancementDatagen implements DataProvider {
                 id("path_choose_deadeye"),
                 "Path of the Deadeye",
                 "Create the Deadeye's List",
-                Identifier.of("more_rpg_content", "root"),
+                Identifier.of("mrpg_lib", "root"),
                 MOD_ID + ":item/spell_scroll/deadeye",
                 AdvancementFrame.TASK,
                 true, true, false, null,
@@ -114,7 +114,7 @@ public class ArchersExpansionAdvancementDatagen implements DataProvider {
                 id("path_choose_tundra_hunter"),
                 "Path of the Tundra Hunter",
                 "Create the Tundric Hunting Book.",
-                Identifier.of("more_rpg_content", "root"),
+                Identifier.of("mrpg_lib", "root"),
                 MOD_ID + ":item/spell_scroll/tundra_hunter",
                 AdvancementFrame.TASK,
                 true, true, false, null,
@@ -160,7 +160,7 @@ public class ArchersExpansionAdvancementDatagen implements DataProvider {
                 id("path_choose_war_archer"),
                 "Path of the War Archer",
                 "Create the  War Archery Instructions",
-                Identifier.of("more_rpg_content", "root"),
+                Identifier.of("mrpg_lib", "root"),
                 MOD_ID + ":item/spell_scroll/war_archer",
                 AdvancementFrame.TASK,
                 true, true, false, null,

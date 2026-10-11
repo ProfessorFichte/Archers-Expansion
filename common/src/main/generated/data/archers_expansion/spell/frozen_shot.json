@@ -38,7 +38,7 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "more_rpg_classes:frosted",
+          "effect_id": "mrpg_lib:frosted",
           "amplifier": 1,
           "amplifier_cap": 4,
           "apply_mode": "ADD"

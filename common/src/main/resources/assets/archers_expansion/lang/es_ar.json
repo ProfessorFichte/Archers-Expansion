@@ -122,12 +122,12 @@
   "advancements.archers_expansion.war_archer_spells.title": "¡Carga, Apunta y Dispara!",
   "advancements.archers_expansion.war_archer_spells.description": "Obtén todos los hechizos del Arquero de Guerra.",
 
-  "advancements.more_rpg_content.path_choose_war_archer.title": "Camino del Arquero de Guerra",
-  "advancements.more_rpg_content.path_choose_war_archer.description": "Creá las Instrucciones del Arquero de Guerra",
-  "advancements.more_rpg_content.path_choose_deadeye.title": "Camino del Ojo de Águila",
-  "advancements.more_rpg_content.path_choose_deadeye.description": "Creá la Lista del Ojo de Águila",
-  "advancements.more_rpg_content.path_choose_tundra_hunter.title": "Camino del Cazador",
-  "advancements.more_rpg_content.path_choose_tundra_hunter.description": "Creá la Caza Tundrica",
+  "advancements.archers_expansion.path_choose_war_archer.title": "Camino del Arquero de Guerra",
+  "advancements.archers_expansion.path_choose_war_archer.description": "Creá las Instrucciones del Arquero de Guerra",
+  "advancements.archers_expansion.path_choose_deadeye.title": "Camino del Ojo de Águila",
+  "advancements.archers_expansion.path_choose_deadeye.description": "Creá la Lista del Ojo de Águila",
+  "advancements.archers_expansion.path_choose_tundra_hunter.title": "Camino del Cazador",
+  "advancements.archers_expansion.path_choose_tundra_hunter.description": "Creá la Caza Tundrica",
 
   "equipment_set.archers_expansion.bounty_hunter": "Cazador de Recompensas",
   "equipment_set.archers_expansion.polar_stalker": "Acechador Polar",

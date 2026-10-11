@@ -6,7 +6,7 @@
       "item": "minecraft:prismarine_shard"
     },
     "B": {
-      "tag": "more_rpg_classes:polar_bear_fur"
+      "tag": "mrpg_lib:polar_bear_fur"
     }
   },
   "pattern": [

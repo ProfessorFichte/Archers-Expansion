@@ -12,7 +12,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.item.MRPGCItems;
+import com.mrpg_lib.item.MRPGCItems;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -69,7 +69,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 "AAA",
                 "C C",
                 null,
-                'A', "more_rpg_classes:polar_bear_fur",
+                'A', "mrpg_lib:polar_bear_fur",
                 'C', net.minecraft.item.Items.PRISMARINE_SHARD
         );
 
@@ -77,7 +77,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 "A A",
                 "BAB",
                 "ACA",
-                'A', "more_rpg_classes:polar_bear_fur",
+                'A', "mrpg_lib:polar_bear_fur",
                 'B', net.minecraft.item.Items.PRISMARINE_SHARD,
                 'C', MRPGCItems.HARDENED_LEATHER
         );
@@ -86,7 +86,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 "AAA",
                 "A A",
                 "C C",
-                'A', "more_rpg_classes:polar_bear_fur",
+                'A', "mrpg_lib:polar_bear_fur",
                 'C', net.minecraft.item.Items.PRISMARINE_SHARD
         );
 
@@ -95,7 +95,7 @@ public class CraftingRecipeGenerator extends FabricRecipeProvider {
                 "B B",
                 null,
                 'A', net.minecraft.item.Items.PRISMARINE_SHARD,
-                'B', "more_rpg_classes:polar_bear_fur"
+                'B', "mrpg_lib:polar_bear_fur"
         );
 
         createShapedRecipe(exporter,Armors.war_archer_t1.armorSet().head,

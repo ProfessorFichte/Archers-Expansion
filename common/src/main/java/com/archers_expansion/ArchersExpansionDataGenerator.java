@@ -21,8 +21,10 @@ import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
@@ -30,6 +32,7 @@ import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.api.tags.SpellTags;
 import net.spell_engine.rpg_series.item.Armor;
+import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
@@ -171,6 +174,38 @@ public class ArchersExpansionDataGenerator implements DataGeneratorEntrypoint {
 					RPGSeriesItemTags.ArmorMetaType.ARCHERY,
 					armorTagOptions2
 			);
+			generateClassAffiliatedLoot();
+		}
+
+		private void generateClassAffiliatedLoot() {
+			var armorByBook = new LinkedHashMap<String, List<Armor.Entry>>();
+			armorByBook.put("deadeye", List.of(Armors.deadeye_t1, Armors.netherite_deadeye));
+			armorByBook.put("tundra_hunter", List.of(Armors.tundra_hunter_t1, Armors.netherite_tundra_hunter));
+			armorByBook.put("war_archer", List.of(Armors.war_archer_t1, Armors.netherite_war_archer));
+
+			List<Equipment.WeaponType> archerWeaponTypes = List.of(
+					Equipment.WeaponType.SHORT_BOW,
+					Equipment.WeaponType.LONG_BOW,
+					Equipment.WeaponType.RAPID_CROSSBOW,
+					Equipment.WeaponType.HEAVY_CROSSBOW,
+					Equipment.WeaponType.SPEAR
+			);
+
+			for (var book : armorByBook.keySet()) {
+				var armorTagKey = TagKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, "armor_type/" + book));
+				var armorTag = this.getOrCreateTagBuilder(armorTagKey);
+				for (var armor : armorByBook.get(book)) {
+					for (var id : armor.armorSet().pieceIds()) {
+						armorTag.addOptional((Identifier) id);
+					}
+				}
+
+				var lootTag = this.getOrCreateTagBuilder(TagKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID, "loot_affiliation/" + book)));
+				for (var type : archerWeaponTypes) {
+					lootTag.addOptionalTag(RPGSeriesItemTags.WeaponType.get(type));
+				}
+				lootTag.addOptionalTag(armorTagKey);
+			}
 		}
 	}
 
