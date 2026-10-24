@@ -530,7 +530,7 @@ public class ArchersExpansionSpells {
         cloud.impact_tick_interval = 25;
         cloud.time_to_live_seconds = 6;
         cloud.client_data = new Spell.Delivery.Cloud.ClientData();
-        int venomCaskTotalTicks = (int) (cloud.time_to_live_seconds * 20);
+        int venomCaskTotalTicks = cloud.spawn_ticks + Math.round(cloud.time_to_live_seconds * 20F) + cloud.despawn_ticks;
         float venomBlobScale = 2.0F;
         cloud.client_data.model_fx = List.of(
                 ModelEffectBuilder.create("archers_expansion:spell_effect/venom_blob")

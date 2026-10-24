@@ -1,3 +1,8 @@
+# 2.2.1 - 1.21.1
+- Fixed Barrel and Alter Ego decoy explosions ignoring range bonuses, they now use the boosted range for the actual hit area
+- Fixed the Venom Cask cloud model disappearing about a second early, it now stays visible for the whole lifetime of the cloud
+- Venom Cask and Frozen Fusillade models now shrink out smoothly at the real end of the cloud, also when skill tree nodes make the cloud last longer
+
 # 2.2.0 - 1.21.1
 - Adopt Spell Engine 1.10.9 & More RPG Library 2.8.0
 - **BREAKING for modpack/datapack developers:** More RPG Library's namespace was renamed `more_rpg_classes` -> `mrpg_lib` (and its advancement root moved to `mrpg_lib:root`). If you have any data files, loot tables, tags or advancements that reference the old `more_rpg_classes:`/`more_rpg_content:` ids from this mod or MRPGL, update them to `mrpg_lib:`

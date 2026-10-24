@@ -20,12 +20,12 @@ public class SpellAreaExplosion {
         if (spellEntry == null) return;
         var spell = spellEntry.value();
 
-        var releaseVisuals = spell.release.visuals
-                .resolved(Fx.Context.ofRange(SpellParameters.getRange(owner, spellEntry)));
+        var range = SpellParameters.getRange(owner, spellEntry);
+        var releaseVisuals = spell.release.visuals.resolved(Fx.Context.ofRange(range));
         ParticleHelper.sendBatches(source, releaseVisuals.particles);
         ModelEffectHelper.spawn(owner.getWorld(), source.getPos(), source.getYaw(), releaseVisuals.models);
         SoundHelper.playSound(owner.getWorld(),source,spell.release.sound);
-        for (var target : TargetHelper.targetsFromArea(source, spell.range, spell.target.area, e -> e != source)) {
+        for (var target : TargetHelper.targetsFromArea(source, range, spell.target.area, e -> e != source)) {
             SpellImpacts.performImpacts(owner.getWorld(), owner, target, owner, spellEntry,
                     spell.impacts, new SpellExecution.ImpactContext()
                             .power(SpellPower.getSpellPower(spell.school, owner))

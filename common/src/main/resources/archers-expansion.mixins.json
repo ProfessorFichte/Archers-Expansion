@@ -4,7 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],
+  "client": [
+    "ModelEffectOperationsMixin",
+    "SpellCloudAccessor",
+    "SpellCloudRendererMixin"
+  ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 0
   }
 }
