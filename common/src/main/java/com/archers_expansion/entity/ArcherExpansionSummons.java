@@ -3,6 +3,7 @@ package com.archers_expansion.entity;
 import com.archers_expansion.sounds.Sounds;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.sound.SoundEvents;
 import com.mrpg_lib.compat.spell_power.MoreSpellSchools;
 import net.spell_engine.api.datagen.SpellBuilder.Placements;
 import net.spell_engine.api.spell.Spell.Impact.Action.Summon;
@@ -59,11 +60,11 @@ public class ArcherExpansionSummons {
         b.actions = List.of(SummonBehaviour.Action.attack(attack));
 
         b.sounds.spawn = new Sound(Sounds.POLARBEAR_SPAWN.id());
-        b.sounds.despawn = new Sound("minecraft:entity.polar_bear.hurt");
-        b.sounds.hurt = new Sound("minecraft:entity.polar_bear.hurt");
+        b.sounds.despawn = new Sound(SoundEvents.ENTITY_POLAR_BEAR_HURT.getId());
+        b.sounds.hurt = new Sound(SoundEvents.ENTITY_POLAR_BEAR_HURT.getId());
         b.sounds.death = new Sound(Sounds.POLARBEAR_DEATH.id());
         b.sounds.ambient = new Sound(Sounds.POLARBEAR_IDLE.id());
-        b.sounds.step = new Sound("minecraft:entity.polar_bear.step");
+        b.sounds.step = new Sound(SoundEvents.ENTITY_POLAR_BEAR_STEP.getId());
 
         b.spawn_fx = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_frost, ParticleGroup.Motion.BURST, Color.BLUE)

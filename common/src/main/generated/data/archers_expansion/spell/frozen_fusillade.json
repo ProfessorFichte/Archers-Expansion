@@ -64,7 +64,7 @@
         "volume": {
           "radius": 6.0,
           "sound": {
-            "id": "spell_engine:generic_frost_charging",
+            "id": "spell_engine:generic_frost_impact",
             "volume": 0.2
           }
         },

@@ -5,7 +5,12 @@ import com.archers_expansion.entity.AlterEgoEntity;
 import com.archers_expansion.entity.ExplosiveBarrelEntity;
 import com.archers_expansion.entity.ArcherExpansionSummons;
 import com.archers_expansion.sounds.Sounds;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvents;
+import net.archers.content.ArcherSounds;
+import com.mrpg_lib.effect.MRPGCEffects;
+import net.spell_engine.fx.SpellEngineSounds;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import com.mrpg_lib.compat.spell_power.MoreSpellSchools;
@@ -157,7 +162,7 @@ public class ArchersExpansionSpells {
         spell.tier = 2;
         spell.group = POISONER;
 
-        spell.release.sound = Sound.withVolume(Identifier.of("archers","marker_shot"),0.5F);
+        spell.release.sound = Sound.withVolume(ArcherSounds.MARKER_SHOT.id(),0.5F);
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_stripe, ParticleGroup.Motion.FLOAT)
                         .color(3208659199L)
@@ -217,7 +222,7 @@ public class ArchersExpansionSpells {
         spell.active.cast.duration = 0.6F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -285,7 +290,7 @@ public class ArchersExpansionSpells {
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
         spell.release.sound = new Sound("entity.arrow.shoot");
@@ -358,7 +363,7 @@ public class ArchersExpansionSpells {
         spell.active.cast.duration = 1.25F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)
                         .color(Color.POISON_LIGHT.toRGBA())
@@ -485,7 +490,7 @@ public class ArchersExpansionSpells {
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(20).speed(0.2F, 0.5F)));
 
-        var poison = SpellBuilder.Impacts.effectSet("minecraft:poison", 6, 1);
+        var poison = SpellBuilder.Impacts.effectSet(StatusEffects.POISON.getIdAsString(), 6, 1);
         poison.action.status_effect.amplifier_power_multiplier = 0.1F;
         poison.action.status_effect.show_particles = false;
         poisonImmuneDeny(poison);
@@ -545,7 +550,7 @@ public class ArchersExpansionSpells {
         );
         spell.deliver.clouds = List.of(cloud);
 
-        var poison = SpellBuilder.Impacts.effectAdd_ScaledCap("minecraft:poison", 6, 0.1F);
+        var poison = SpellBuilder.Impacts.effectAdd_ScaledCap(StatusEffects.POISON.getIdAsString(), 6, 0.1F);
         poison.action.status_effect.show_particles = false;
         poisonImmuneDeny(poison);
         poison.visuals = Fx.Visuals.of(
@@ -690,7 +695,7 @@ public class ArchersExpansionSpells {
         spell.tier = 2;
         spell.group = STALKER;
 
-        spell.release.sound = new Sound("spell_engine:generic_frost_impact");
+        spell.release.sound = new Sound(SpellEngineSounds.GENERIC_FROST_IMPACT.id());
 
         spell.deliver.type = Spell.Delivery.Type.STASH_EFFECT;
         spell.deliver.stash_effect = new Spell.Delivery.StashEffect();
@@ -704,7 +709,7 @@ public class ArchersExpansionSpells {
         );
         spell.deliver.stash_effect.impact_mode = Spell.Delivery.StashEffect.ImpactMode.TRANSFER;
 
-        var frost = SpellBuilder.Impacts.effectAdd("mrpg_lib:frosted", 10, 1, 4);
+        var frost = SpellBuilder.Impacts.effectAdd(MRPGCEffects.FROSTED.id.toString(), 10, 1, 4);
         frost.action.status_effect.refresh_duration = true;
         freezeImmuneDeny(frost);
         frost.visuals = Fx.Visuals.of(
@@ -746,7 +751,7 @@ public class ArchersExpansionSpells {
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
-        spell.active.cast.sound = new Sound("spell_engine:generic_frost_casting");
+        spell.active.cast.sound = new Sound(SpellEngineSounds.GENERIC_FROST_CASTING.id());
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
@@ -759,7 +764,7 @@ public class ArchersExpansionSpells {
         spell.target.area.vertical_range_multiplier = 0.5F;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
-        spell.release.sound = new Sound("spell_engine:generic_frost_release");
+        spell.release.sound = new Sound(SpellEngineSounds.GENERIC_FROST_RELEASE.id());
 
         var debuff = SpellBuilder.Impacts.effectSet("archers_expansion:frozen_pact", 5, 0);
         debuff.action.status_effect.show_particles = false;
@@ -771,7 +776,7 @@ public class ArchersExpansionSpells {
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
                                 .count(25).speed(0.1F, 0.4F)));
-        debuff.sound = new Sound("spell_engine:generic_frost_impact");
+        debuff.sound = new Sound(SpellEngineSounds.GENERIC_FROST_IMPACT.id());
 
         spell.impacts = List.of(debuff);
 
@@ -794,13 +799,13 @@ public class ArchersExpansionSpells {
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
 
         spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
-        spell.release.sound = new Sound("spell_engine:generic_frost_impact");
+        spell.release.sound = new Sound(SpellEngineSounds.GENERIC_FROST_IMPACT.id());
 
         spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
         var shoot = new Spell.Delivery.ShootProjectile();
@@ -835,7 +840,7 @@ public class ArchersExpansionSpells {
 
         var damage = SpellBuilder.Impacts.damage(0.15F, 0F);
 
-        var frost = SpellBuilder.Impacts.effectSet("mrpg_lib:frosted", 5, 0);
+        var frost = SpellBuilder.Impacts.effectSet(MRPGCEffects.FROSTED.id.toString(), 5, 0);
         frost.action.status_effect.amplifier_power_multiplier = 0.05F;
         frost.action.status_effect.show_particles = false;
         freezeImmuneDeny(frost);
@@ -873,7 +878,7 @@ public class ArchersExpansionSpells {
         charge.bonus.projectile_scale_multiply = 0.75F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
@@ -953,7 +958,7 @@ public class ArchersExpansionSpells {
 
 
         spell.release.animation = PlayerAnimation.of("mrpg_lib:two_handed_roar");
-        spell.release.sound = new Sound("spell_engine:generic_frost_release");
+        spell.release.sound = new Sound(SpellEngineSounds.GENERIC_FROST_RELEASE.id());
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_frost, ParticleGroup.Motion.BURST)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -998,14 +1003,14 @@ public class ArchersExpansionSpells {
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
-        spell.active.cast.sound = new Sound("spell_engine:generic_frost_casting");
+        spell.active.cast.sound = new Sound(SpellEngineSounds.GENERIC_FROST_CASTING.id());
         spell.active.cast.particles = List.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.snowflake)
                         .batch(b -> b.shape(ParticleGroup.Shape.PIPE)
                                 .count(1F).chance(0.5F).speed(0.1F, 0.2F)));
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
-        spell.release.sound = new Sound("spell_engine:generic_frost_release");
+        spell.release.sound = new Sound(SpellEngineSounds.GENERIC_FROST_RELEASE.id());
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.magic(SpellEngineParticles.magic_frost, ParticleGroup.Motion.BURST)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -1017,7 +1022,7 @@ public class ArchersExpansionSpells {
         cloud.despawn_ticks = 20;
         cloud.volume.radius = 6.0F;
         cloud.volume.area = new Spell.Target.Area();
-        cloud.volume.sound = Sound.withVolume(Identifier.of("spell_engine:generic_frost_charging"),0.2F);
+        cloud.volume.sound = Sound.withVolume(SpellEngineSounds.GENERIC_FROST_IMPACT.id(), 0.2F);
         cloud.impact_tick_interval = 10;
         cloud.time_to_live_seconds = 6;
         cloud.client_data = new Spell.Delivery.Cloud.ClientData();
@@ -1071,7 +1076,7 @@ public class ArchersExpansionSpells {
         spell.active.cast.duration = 0.35F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
 
@@ -1177,7 +1182,7 @@ public class ArchersExpansionSpells {
         spell.active.cast.duration = 1.2F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
         spell.active.cast.animates_ranged_weapon = true;
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.release.animation = PlayerAnimation.of("spell_engine:archery_release");
         spell.release.sound = new Sound("item.crossbow.shoot");
@@ -1236,7 +1241,7 @@ public class ArchersExpansionSpells {
 
         spell.active.cast.duration = 1.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:archery_pull");
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.target.type = Spell.Target.Type.AIM;
         spell.target.aim = new Spell.Target.Aim();
@@ -1303,10 +1308,10 @@ public class ArchersExpansionSpells {
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("mrpg_lib:archery_downwards_pull");
-        spell.active.cast.sound = new Sound("archers:bow_pull");
+        spell.active.cast.sound = new Sound(ArcherSounds.BOW_PULL.id());
 
         spell.release.animation = PlayerAnimation.of("mrpg_lib:archery_downwards_release");
-        spell.release.sound = new Sound("minecraft:item.crossbow.shoot");
+        spell.release.sound = new Sound(SoundEvents.ITEM_CROSSBOW_SHOOT.getId());
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.flame)
                         .batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
@@ -1379,7 +1384,7 @@ public class ArchersExpansionSpells {
         spell.group = EXPLOSIVES;
 
         spell.release.animation = PlayerAnimation.of("mrpg_lib:place_object_instant");
-        spell.release.sound = new Sound("minecraft:block.barrel.open");
+        spell.release.sound = new Sound(SoundEvents.BLOCK_BARREL_OPEN.getId());
         spell.release.visuals = Fx.Visuals.of(
                 ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium)
                         .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
