@@ -3,13 +3,14 @@
 	"id": "archers_expansion",
 	"version": "${version}",
 	"name": "Archers Expansion",
-	"description": "Extends the Archers-Mod (RPG Series)  with new content. Spell Engine Add-On",
+	"description": "Extends the Archers-Mod (RPG Series) with new content. Spell Engine Add-On",
 	"authors": [
 		"Fichte"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/archers-expansion",
+		"sources": "https://github.com/ProfessorFichte/Archers-Expansion",
+		"issues": "https://github.com/ProfessorFichte/Archers-Expansion/issues"
 	},
 	"license": "ARR",
 	"icon": "assets/archers_expansion/icon.png",
@@ -31,7 +32,7 @@
 	"depends": {
 		"fabricloader": ">=${fabric_loader_compat_version}",
 		"minecraft": ">=${minecraft_compat_version}",
-		"java": ">=17",
+		"java": ">=21",
 		"fabric-api": "*",
 		"armor_model_api": ">=${armor_model_api_version}",
 		"spell_engine": ">=${spell_engine_version}",
@@ -39,12 +40,15 @@
 		"mrpg_lib": ">=${more_rpg_library_version}"
 	},
 	"suggests": {
-		"better_combat": "*"
+		"bettercombat": "*"
 	},
 	"custom": {
 		"modmenu": {
 			"links": {
-				"modmenu.discord": "https://discord.gg/AShKd5XrTu"
+				"modmenu.discord": "https://discord.gg/AShKd5XrTu",
+				"modmenu.kofi": "https://ko-fi.com/fichteee",
+				"modmenu.modrinth": "https://modrinth.com/mod/archers-expansion",
+				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/archers-expansion"
 			}
 		}
 	}
