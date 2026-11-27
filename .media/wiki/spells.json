@@ -1,0 +1,37 @@
+{
+  "namespace": "archers_expansion",
+  "groups": {
+    "deadeye": {
+      "tag": "spell_book/deadeye",
+      "label": "Skill"
+    },
+    "tundra_hunter": {
+      "tag": "spell_book/tundra_hunter",
+      "label": "Skill"
+    },
+    "war_archer": {
+      "tag": "spell_book/war_archer",
+      "label": "Skill"
+    }
+  },
+  "descriptions": {
+    "archers_expansion:fast_shot": "Your next shots give you ranged haste.",
+    "archers_expansion:bouncing_arrow": "An arrow that bounces from target to target.",
+    "archers_expansion:disabling_shot": "Damages and slows the target and makes you jump back.",
+    "archers_expansion:choking_gas": "Creates a poisonous gas cloud where the arrow hits.",
+    "archers_expansion:venom_cask": "Throws a cask of venom that damages on impact and leaves a poisonous cloud.",
+    "archers_expansion:alter_ego": "Creates exploding decoys and makes you invisible.",
+    "archers_expansion:frozen_shot": "Your next shots stack Frosted on targets, slowing and finally freezing them.",
+    "archers_expansion:frozen_pact": "Damages the target based on how frozen it is and reduces its attack.",
+    "archers_expansion:arctic_volley": "Shoots a volley of arctic arrows that damage and frost targets.",
+    "archers_expansion:enchanted_crystal_arrow": "Damages, stuns and freezes the target.",
+    "archers_expansion:bearward": "Summons a Polar Bear that fights by your side, empowered by your ranged damage.",
+    "archers_expansion:frozen_fusillade": "A barrage of ice around you that slows nearby enemies and speeds up allies.",
+    "archers_expansion:dual_shot": "Fires two arrows at once.",
+    "archers_expansion:smoldering_arrow": "Your next shot creates a small explosion that damages and burns nearby enemies.",
+    "archers_expansion:point_blank_shot": "Damages and knocks back the target, stronger the closer it is.",
+    "archers_expansion:pin_down": "Damages the target and stops it from moving or jumping.",
+    "archers_expansion:scorched_earth": "Fires a bolt that sets a line of ground on fire.",
+    "archers_expansion:explosive_barrel": "Places a barrel that explodes when hit or approached by an enemy and sets enemies on fire."
+  }
+}
