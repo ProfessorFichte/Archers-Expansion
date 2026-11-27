@@ -56,5 +56,19 @@ versionRange = "[${ranged_weapon_api_version},)"
 ordering = "AFTER"
 side = "BOTH"
 
+[[dependencies.archers_expansion]]
+modId = "armory_rpgs"
+type = "optional"
+versionRange = "[0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.archers_expansion]]
+modId = "mrpgc_skill_tree"
+type = "optional"
+versionRange = "[0,)"
+ordering = "NONE"
+side = "BOTH"
+
 [[mixins]]
 config = "archers-expansion.mixins.json"

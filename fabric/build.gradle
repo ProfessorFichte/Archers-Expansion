@@ -68,7 +68,6 @@ repositories {
         name = "Ladysnake Libs"
         url = 'https://maven.ladysnake.org/releases'
     }
-    maven { url 'https://maven.wispforest.io/releases' }
 
     mavenLocal {
         content { excludeModule('maven.modrinth', 'more-rpg-library') }
@@ -141,7 +140,8 @@ publishMods {
         client = true
         server = true
         changelogType = "markdown"
-        requires("spell-engine", "more-rpg-library", "archers")
+        requires("spell-engine", "more-rpg-library", "archers", "armor-model-api", "ranged-weapon-api")
+        optional("better-combat-by-daedelus", "lne-archers", "armory-rpg-series", "mrpgc-skill-tree")
     }
 
     modrinth {
@@ -152,7 +152,12 @@ publishMods {
         requires { slug = "spell-engine" }
         requires { slug = "more-rpg-library" }
         requires { slug = "archers" }
+        requires { slug = "armor-model-api" }
+        requires { slug = "ranged-weapon-api" }
+        optional { slug = "better-combat" }
         optional { slug = "lne-archers" }
+        optional { slug = "armory-rpg-series" }
+        optional { slug = "more-rpg-classes-skill-tree" }
     }
 
     github {

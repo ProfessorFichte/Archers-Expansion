@@ -40,7 +40,9 @@
 		"mrpg_lib": ">=${more_rpg_library_version}"
 	},
 	"suggests": {
-		"bettercombat": "*"
+		"bettercombat": "*",
+		"armory_rpgs": "*",
+		"mrpgc_skill_tree": "*"
 	},
 	"custom": {
 		"modmenu": {
